@@ -24,12 +24,18 @@
     <ClCompile Include="teacher.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="class.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="teacher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="student.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

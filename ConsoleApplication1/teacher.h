@@ -1,7 +1,8 @@
 #pragma once
 using namespace std;
 #include <iostream>
-#include "student.h"
+#include <string>
+//#include "student.h"
 #pragma warning(disable:4996)
 struct schoolYear
 {
