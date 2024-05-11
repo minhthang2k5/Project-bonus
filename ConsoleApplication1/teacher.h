@@ -8,6 +8,11 @@ struct schoolYear
 {
 	int beginYear;
 	int lastYear;
+	schoolYear* next;
+};
+struct listYear
+{
+	listYear* pHead;
 };
 struct nodeClass
 {

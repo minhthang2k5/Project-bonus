@@ -32,8 +32,6 @@ struct Student
     Date dateOfBirth;
     unsigned int socialID;
 };
-
-
 struct Student_Info {
 	string fullname;
 	Date birthday;

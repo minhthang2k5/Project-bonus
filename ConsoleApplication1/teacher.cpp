@@ -1,10 +1,16 @@
 #pragma once
 #include "teacher.h"
-
 void eatline()
 {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+void addTailYear(listYear* p)
+{
+
+
+
+
 }
 void addClass(nodeClass* &head)
 {
@@ -30,6 +36,7 @@ void addClass(nodeClass* &head)
 		head = temp;
 	}
 }
+
 void displayClass(nodeClass* head)
 {
 	while (head!=NULL)
