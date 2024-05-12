@@ -8,7 +8,7 @@ void eatline()
 listYear* creatListYear()
 {
 	listYear* p = new listYear();
-	if (p!=NULL)
+	if (p != NULL)
 	{
 		p->pHead = NULL;
 	}
@@ -66,14 +66,14 @@ void detachedYear(int& begin, int& last, string year)
 	begin = stoi(sBegin);
 	last = stoi(sLast);
 }
-void addHeadNewSchoolYear(listYear* &lY)
+void addHeadNewSchoolYear(listYear*& lY)
 {
 	cout << "Input the school year:";
 	string year;
 	getline(cin, year);
 	int begin, last;
 	detachedYear(begin, last, year);
-	if (lY->pHead=NULL)
+	if (lY->pHead == NULL)
 	{
 		lY->pHead = new schoolYear;
 		lY->pHead->beginYear = begin;
@@ -83,7 +83,7 @@ void addHeadNewSchoolYear(listYear* &lY)
 	}
 	else
 	{
-		schoolYear * temp = new schoolYear;
+		schoolYear* temp = new schoolYear;
 		temp->beginYear = begin;
 		temp->lastYear = last;
 		temp->listClass = NULL;
@@ -117,14 +117,14 @@ void addClass(listYear*& lY)
 		return;
 	}
 
-	nodeClass *head = new nodeClass();
+	nodeClass* head = new nodeClass();
 	cout << "Input the class name: ";
 	char name[50];
 	cin.getline(name, 50);
 	head->name = new char[strlen(name) - 1];
 	strcpy(head->name, name);
 	head->next = NULL;
-	while (4==4)
+	while (4 == 4)
 	{
 		cout << "Intput the class name next ( <enter> to quit): ";
 		cin.getline(name, 50);
@@ -143,7 +143,7 @@ void addClass(listYear*& lY)
 
 void displayClass(nodeClass* head)
 {
-	while (head!=NULL)
+	while (head != NULL)
 	{
 		cout << head->name << endl;
 		head = head->next;
