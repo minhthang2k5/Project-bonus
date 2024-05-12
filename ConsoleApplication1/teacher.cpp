@@ -5,16 +5,119 @@ void eatline()
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
-void addTailYear(listYear* p)
+listYear* creatListYear()
 {
-
-
-
-
+	listYear* p = new listYear();
+	if (p!=NULL)
+	{
+		p->pHead = NULL;
+	}
+	return p;
 }
-void addClass(nodeClass* &head)
+bool checkNumber(char a)
 {
-	head = new nodeClass();
+	if (a == '0' || a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9')
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+void detachedYear(int& begin, int& last, string year)
+{
+	string sBegin;
+	string sLast;
+	int start;
+	bool flag = true;
+	int end;
+	for (int i = 0; i < year.size(); i++)
+	{
+		if (checkNumber(year[i]) == true && flag == true)
+		{
+			start = i;
+			flag = false;
+		}
+		if (checkNumber(year[i]) == false && flag == false)
+		{
+			end = i;
+			break;
+		}
+
+	}
+	sBegin = year.substr(start, end - start);
+	flag = true;
+	for (int i = end; i < year.size(); i++)
+	{
+		if (checkNumber(year[i]) == true && flag == true)
+		{
+			start = i;
+			flag = false;
+		}
+		if (checkNumber(year[i]) == false && flag == false)
+		{
+			end = i;
+			break;
+		}
+
+	}
+	sLast = year.substr(start, end - start);
+	begin = stoi(sBegin);
+	last = stoi(sLast);
+}
+void addHeadNewSchoolYear(listYear* &lY)
+{
+	cout << "Input the school year:";
+	string year;
+	getline(cin, year);
+	int begin, last;
+	detachedYear(begin, last, year);
+	if (lY->pHead=NULL)
+	{
+		lY->pHead = new schoolYear;
+		lY->pHead->beginYear = begin;
+		lY->pHead->lastYear = last;
+		lY->pHead->next = NULL;
+		lY->pHead->listClass = NULL;
+	}
+	else
+	{
+		schoolYear * temp = new schoolYear;
+		temp->beginYear = begin;
+		temp->lastYear = last;
+		temp->listClass = NULL;
+		temp->next = lY->pHead;
+		lY->pHead = temp;
+
+	}
+}
+void addClass(listYear*& lY)
+{
+	string year;
+	int begin;
+	int last;
+	cout << "Input school year to add class: ";
+	getline(cin, year);
+	detachedYear(begin, last, year);
+	schoolYear* temp = lY->pHead;
+	bool checkExitsYear = false;
+	while (temp != NULL)
+	{
+		if (temp->beginYear == begin)
+		{
+			checkExitsYear = true;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (checkExitsYear == false)
+	{
+		cout << "The school year isn't exit";
+		return;
+	}
+
+	nodeClass *head = new nodeClass();
 	cout << "Input the class name: ";
 	char name[50];
 	cin.getline(name, 50);
@@ -35,6 +138,7 @@ void addClass(nodeClass* &head)
 		temp->next = head;
 		head = temp;
 	}
+	temp->listClass = head;
 }
 
 void displayClass(nodeClass* head)

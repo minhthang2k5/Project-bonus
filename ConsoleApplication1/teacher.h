@@ -4,25 +4,29 @@ using namespace std;
 #include <string>
 //#include "student.h"
 #pragma warning(disable:4996)
-struct schoolYear
-{
-	int beginYear;
-	int lastYear;
-	schoolYear* next;
-};
-struct listYear
-{
-	listYear* pHead;
-};
 struct nodeClass
 {
 	char* name;
 	nodeClass* next;
 };
+struct schoolYear
+{
+	int beginYear;
+	int lastYear;
+	nodeClass* listClass;
+	schoolYear* next;
+};
+struct listYear
+{
+	schoolYear* pHead;
+};
+listYear* creatListYear();
 void eatline();
-void addClass(nodeClass*& head);
+void addClass(listYear*& lY);
 void displayClass(nodeClass* head);
-
+bool checkNumber(char a);
+void detachedYear(int& begin, int& last, string year);
+void addHeadNewSchoolYear(listYear*& lY);
 struct Date {
 	int day, month, year;
 };
@@ -44,7 +48,7 @@ struct Teacher_Node {
 struct Teacher_List {
 	Teacher_Node* pHead;
 };
-
+listYear* creatListYear();
 int CheckFullName(string fullname);
 bool isLeapYear(int y);
 int CheckDate(Date d);
