@@ -162,7 +162,36 @@ int CheckEmail(string email) {
 	}
 	return 1;
 }
-Teacher_Info GetTeacherInfo() {
+bool isDifferentUsername(Teacher_List l, string username) {
+	if (l.pHead == NULL) {
+		return true;
+	}
+	else {
+		Teacher_Node* p = l.pHead;
+		while (p != NULL) {
+			if (p->teacher.username == username) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+bool isDifferentPassword(Teacher_List l, string password) {
+	if (l.pHead == NULL) {
+		return true;
+	}
+	else {
+		Teacher_Node* p = l.pHead;
+		while (p != NULL) {
+			if (p->teacher.password == password) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+Teacher_Info GetTeacherInfo(Teacher_List l) {
 	Teacher_Info info;
 	cout << "Input your infomation..." << endl;
 	cout << "Your fullname: ";
@@ -205,10 +234,18 @@ Teacher_Info GetTeacherInfo() {
 
 	cout << "Your username <Type your username without space>: ";
 	cin >> info.username;
-	while (CheckUsername(info.username) == 0) {
-		cout << "Your username is invalid. Please input again!" << endl;
-		cout << "Your username <Type your username without space>: ";
-		cin >> info.username;
+	while (true) {
+		if (CheckUsername(info.username) == 0) {
+			cout << "Your username is invalid. Please input again!" << endl;
+			cout << "Your username <Type your username without space>: ";
+			cin >> info.username;
+		}
+		if (isDifferentUsername(l, info.username) == false) {
+			cout << "Your username is invalid. Please input again!" << endl;
+			cout << "Your username <Type your username without space>: ";
+			cin >> info.username;
+		}
+		break;
 	}
 
 	cout << "  <At least 6 characters>" << endl;
@@ -216,15 +253,27 @@ Teacher_Info GetTeacherInfo() {
 	cout << "  <At least 1 digit>" << endl;
 	cout << "Your password: ";
 	cin >> info.password;
-	while (CheckPassword(info.password) == 0) {
-		cout << "Your password is invalid. Please input again!" << endl;
-		cout << "  <At least 6 characters>" << endl;
-		cout << "  <At least 1 capital character>" << endl;
-		cout << "  <At least 1 digit>" << endl;
-		cout << "Your password: ";
-		cin >> info.password;
+	while (true) {
+		if (CheckPassword(info.password) == 0) {
+			cout << "Your password is invalid. Please input again!" << endl;
+			cout << "  <At least 6 characters>" << endl;
+			cout << "  <At least 1 capital character>" << endl;
+			cout << "  <At least 1 digit>" << endl;
+			cout << "Your password: ";
+			cin >> info.password;
+		}
+		//cin.ignore();
+		if (isDifferentPassword(l, info.password) == false) {
+			cout << "Your password is invalid. Please input again!" << endl;
+			cout << "  <At least 6 characters>" << endl;
+			cout << "  <At least 1 capital character>" << endl;
+			cout << "  <At least 1 digit>" << endl;
+			cout << "Your password: ";
+			cin >> info.password;
+		}
+		cin.ignore();
+		break;
 	}
-	cin.ignore();
 
 	return info;
 }
@@ -275,8 +324,7 @@ void PrintList(Teacher_List l) {
 }
 
 int SignUp(Teacher_List& l) {
-	Init(l);
-	Teacher_Info info = GetTeacherInfo();
+	Teacher_Info info = GetTeacherInfo(l);
 	AddTail(l, info);
 	cout << "Sign up successfully!" << endl;
 	return 1;
