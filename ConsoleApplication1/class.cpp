@@ -9,15 +9,27 @@ void readStudentsOfClassFromCSVFile(string fileName, Class *newClass)
         cout << "Error while opening file\"" << fileName << "\"" << endl;
         return;
     }
-    int studentNum = 0;
-    string line;
-    getline(fileIn, newClass->className, '\n');
-    getline(fileIn, line, '\n');
-    while (getline(fileIn, line))
+    int numberOfStudents = 0;
+    string positionInClassString, idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+    Date dateOfBirth;
+    while (!fileIn.eof())
     {
-        stringstream ss(line);
-        string temp;
-        getline(ss, temp, ',');
+        getline(fileIn, positionInClassString, ',');
+        int positionInClass = stoi(positionInClassString);
+        getline(fileIn, idString, ',');
+        int id = stoi(idString);
+        getline(fileIn, firstName, ',');
+        getline(fileIn, lastName, ',');
+        getline(fileIn, gender, ',');
+        getline(fileIn, dayOfDOB, '/');
+        dateOfBirth.day = stoi(dayOfDOB);
+        getline(fileIn, monthOfDOB, '/');
+        dateOfBirth.month = stoi(monthOfDOB);
+        getline(fileIn, yearOfDOB, ',');
+        dateOfBirth.year = stoi(yearOfDOB);
+        getline(fileIn, socialIDString, '\n');
+        int socialID = stoi(socialIDString);
+        numberOfStudents++;
     }
     fileIn.close();
 }
