@@ -354,9 +354,9 @@ int getStudentAccount(Student_List l, string inUsername, string inPassword) {
 		return 0;
 	}
 	else {
-		Teacher_Node* p = l.pHead;
+		Student_Node* p = l.pHead;
 		while (p != NULL) {
-			if (p->teacher.username == inUsername && p->teacher.password == inPassword) {
+			if (p->student.username == inUsername && p->student.password == inPassword) {
 				return 1;
 			}
 			p = p->pNext;
