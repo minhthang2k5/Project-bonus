@@ -74,4 +74,7 @@ void addTail(Student_List &l, Student_Info info);
 void printStudentInfo(Student_Info info);
 void printList(Student_List l);
 int signUp(Student_List &l);
+
+int getStudentAccount(Student_List l, string inUsername, string inPassword);
+int signIn(Student_List l);
 #endif

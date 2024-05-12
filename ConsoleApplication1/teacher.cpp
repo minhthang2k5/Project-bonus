@@ -172,6 +172,7 @@ bool isDifferentUsername(Teacher_List l, string username) {
 			if (p->teacher.username == username) {
 				return false;
 			}
+			p = p->pNext;
 		}
 	}
 	return true;
@@ -187,6 +188,7 @@ bool isDifferentPassword(Teacher_List l, string password) {
 			if (p->teacher.password == password) {
 				return false;
 			}
+			p = p->pNext;
 		}
 	}
 	return true;
@@ -327,5 +329,47 @@ int SignUp(Teacher_List& l) {
 	Teacher_Info info = GetTeacherInfo(l);
 	AddTail(l, info);
 	cout << "Sign up successfully!" << endl;
+	return 1;
+}
+
+int GetTeacherAccount(Teacher_List l, string inUsername, string inPassword) {
+	
+	if (l.pHead == NULL) {
+		return 0;
+	}
+	else {
+		Teacher_Node* p = l.pHead;
+		while (p != NULL) {
+			if (p->teacher.username == inUsername && p->teacher.password == inPassword) {
+				return 1;
+			}
+			p = p->pNext;
+		}
+	}
+	return 0;
+}
+
+int SignIn(Teacher_List l) {
+	string inUsername;
+	string inPassword;
+
+	cout << "Input your username: ";
+	cin >> inUsername;
+	cout << "Input your password: ";
+	cin >> inPassword;
+	if (GetTeacherAccount(l, inUsername, inPassword) == 1) {
+		cout << "Sign in successfully!" << endl;
+	}
+	while (GetTeacherAccount(l, inUsername, inPassword) == 0) {
+		system("cls");
+		cout << "Username or password maybe incorrect! Please try again!" << endl;
+		cout << "Input your username: ";
+		cin >> inUsername;
+		cout << "Input your password: ";
+		cin >> inPassword;
+		if (GetTeacherAccount(l, inUsername, inPassword) == 1) {
+			cout << "Sign in successfully!" << endl;
+		}
+	}
 	return 1;
 }

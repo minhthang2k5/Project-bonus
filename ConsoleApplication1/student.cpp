@@ -348,3 +348,43 @@ int signUp(Student_List& l) {
 	cout << "Sign up successfully!" << endl;
 	return 1;
 }
+
+int getStudentAccount(Student_List l, string inUsername, string inPassword) {
+	if (l.pHead == NULL) {
+		return 0;
+	}
+	else {
+		Teacher_Node* p = l.pHead;
+		while (p != NULL) {
+			if (p->teacher.username == inUsername && p->teacher.password == inPassword) {
+				return 1;
+			}
+			p = p->pNext;
+		}
+	}
+	return 0;
+}
+int signIn(Student_List l) {
+	string inUsername;
+	string inPassword;
+
+	cout << "Input your username: ";
+	cin >> inUsername;
+	cout << "Input your password: ";
+	cin >> inPassword;
+	if (getStudentAccount(l, inUsername, inPassword) == 1) {
+		cout << "Sign in successfully!" << endl;
+	}
+	while (getStudentAccount(l, inUsername, inPassword) == 0) {
+		system("cls");
+		cout << "Username or password maybe incorrect! Please try again!" << endl;
+		cout << "Input your username: ";
+		cin >> inUsername;
+		cout << "Input your password: ";
+		cin >> inPassword;
+		if (getStudentAccount(l, inUsername, inPassword) == 1) {
+			cout << "Sign in successfully!" << endl;
+		}
+	}
+	return 1;
+}

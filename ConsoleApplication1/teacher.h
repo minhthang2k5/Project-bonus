@@ -60,3 +60,6 @@ void AddTail(Teacher_List& l, Teacher_Info info);
 void PrintTeacherInfo(Teacher_Info info);
 void PrintList(Teacher_List l);
 int SignUp(Teacher_List& l);
+
+int GetTeacherAccount(Teacher_List l, string inUsername, string inPassword);
+int SignIn(Teacher_List l);
