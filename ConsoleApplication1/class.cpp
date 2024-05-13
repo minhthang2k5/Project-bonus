@@ -32,7 +32,7 @@ Class *createClass(string className1, int numberOfStudents1)
     return class1;
 }
 
-ClassList *createClassList()
+ClassList *createClassList(int numberOfClasses)
 {
     ClassList *claList1 = new ClassList();
     if (!claList1)
@@ -40,6 +40,7 @@ ClassList *createClassList()
         cout << "Memory error while creating new class list!:" << endl;
         return nullptr;
     }
+    claList1->numberOfClasses = numberOfClasses;
     claList1->pHeadClass = nullptr;
     return claList1;
 }
@@ -49,6 +50,7 @@ void addStudentIntoClass(Class *class1, Student *stu1)
     if (class1->pHeadStudent == nullptr)
     {
         class1->pHeadStudent = stu1;
+        class1->numberOfStudents++;
         return;
     }
     Student *temp = class1->pHeadStudent;
@@ -57,6 +59,7 @@ void addStudentIntoClass(Class *class1, Student *stu1)
         temp = temp->pNextStudent;
     }
     temp->pNextStudent = stu1;
+    class1->numberOfStudents++;
 }
 
 void addClassIntoClassList(ClassList *claList1, Class *class1)
@@ -73,7 +76,8 @@ void addClassIntoClassList(ClassList *claList1, Class *class1)
     }
     temp->pNextClass = class1;
 }
-void readStudentsOfClassFromCSVFile(string fileName, Class *newClass)
+
+Class *readStudentsOfClassFromCSVFile(string fileName)
 {
     ifstream fileIn;
     fileIn.open(fileName);
@@ -82,27 +86,52 @@ void readStudentsOfClassFromCSVFile(string fileName, Class *newClass)
         cout << "Error while opening file\"" << fileName << "\"" << endl;
         return;
     }
-    int numberOfStudents = 0;
+
+    size_t lastDot = fileName.find_last_of(".");
+    string className = fileName.substr(0, lastDot);
+
+    Class *class1 = createClass(className, 0);
+
     string positionInClassString, idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+    FullName fullName;
     Date dateOfBirth;
+
+    string line;
+    getline(fileIn, line, '\n');
+
     while (!fileIn.eof())
     {
         getline(fileIn, positionInClassString, ',');
         int positionInClass = stoi(positionInClassString);
+
         getline(fileIn, idString, ',');
         int id = stoi(idString);
+
         getline(fileIn, firstName, ',');
+        fullName.firstName = firstName;
+
         getline(fileIn, lastName, ',');
+        fullName.lastName = lastName;
+
         getline(fileIn, gender, ',');
+
         getline(fileIn, dayOfDOB, '/');
         dateOfBirth.day = stoi(dayOfDOB);
+
         getline(fileIn, monthOfDOB, '/');
         dateOfBirth.month = stoi(monthOfDOB);
+
         getline(fileIn, yearOfDOB, ',');
         dateOfBirth.year = stoi(yearOfDOB);
+
         getline(fileIn, socialIDString, '\n');
+
         int socialID = stoi(socialIDString);
-        numberOfStudents++;
+
+        Student *stu1 = createStudent(id, fullName, gender, dateOfBirth, socialID);
+        addStudentIntoClass(class1, stu1);
+        class1->numberOfStudents++;
     }
     fileIn.close();
+    return class1;
 }
