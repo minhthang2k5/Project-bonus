@@ -84,7 +84,7 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
     if (!fileIn.is_open())
     {
         cout << "Error while opening file\"" << fileName << "\"" << endl;
-        return;
+        return nullptr;
     }
 
     size_t lastDot = fileName.find_last_of(".");
