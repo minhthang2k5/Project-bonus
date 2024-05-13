@@ -7,6 +7,7 @@ using namespace std;
 struct nodeClass
 {
 	char* name;
+	//list student
 	nodeClass* next;
 };
 struct schoolYear
@@ -27,7 +28,8 @@ void displayClass(nodeClass* head);
 bool checkNumber(char a);
 void detachedYear(int& begin, int& last, string year);
 void addHeadNewSchoolYear(listYear*& lY);
-struct Date {
+struct Date 
+{
 	int day, month, year;
 };
 

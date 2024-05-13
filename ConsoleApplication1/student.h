@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "teacher.h"
-#include "class.h"
+//#include "class.h"
 using namespace std;
 
 // struct Date

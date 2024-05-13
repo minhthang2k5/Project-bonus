@@ -2,6 +2,7 @@
 #include "student.h"
 int main()
 {
+	
 	Student_List l;
 	init(l);
 	signUp(l);
@@ -9,4 +10,5 @@ int main()
 	printList(l);
 	system("pause");
 	return 0;
+	
 }
