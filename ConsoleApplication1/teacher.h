@@ -6,7 +6,7 @@ using namespace std;
 #pragma warning(disable:4996)
 struct nodeClass
 {
-	char* name;
+	string name;
 	//list student
 	nodeClass* next;
 };
