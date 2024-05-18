@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "teacher.h"
 void eatline()
 {
@@ -66,32 +66,32 @@ void detachedYear(int& begin, int& last, string year)
 	begin = stoi(sBegin);
 	last = stoi(sLast);
 }
-void addHeadNewSchoolYear(listYear*& lY)
+void addHeadNewSchoolYear(listYear& lY)
 {
 	cout << "Input the school year:";
 	string year;
 	getline(cin, year);
 	int begin, last;
 	detachedYear(begin, last, year);
-	if (lY->pHead == NULL)
+	if (lY.pHead == NULL)
 	{
-		lY->pHead = new schoolYear;
-		lY->pHead->beginYear = begin;
-		lY->pHead->lastYear = last;
-		lY->pHead->next = NULL;
-		lY->pHead->listClass = NULL;
+		lY.pHead = new schoolYear;
+		lY.pHead->beginYear = begin;
+		lY.pHead->lastYear = last;
+		lY.pHead->listSem.head = NULL;
+		lY.pHead->next = NULL;
 	}
 	else
 	{
 		schoolYear* temp = new schoolYear;
 		temp->beginYear = begin;
 		temp->lastYear = last;
-		temp->listClass = NULL;
-		temp->next = lY->pHead;
-		lY->pHead = temp;
-
+		lY.pHead->listSem.head = NULL;
+		temp->next = lY.pHead;
+		lY.pHead = temp;
 	}
 }
+/*
 void addClass(listYear*& lY)
 {
 	string year;
@@ -147,6 +147,128 @@ void displayClass(nodeClass* head)
 		head = head->next;
 	}
 }
+
+*/
+/*
+hàm này để tách ngày tháng năm khi nhap bằng một string
+vd 
+intput:
+string a= 21-12-2005
+outputL
+int day=21
+int month=12
+int year=2005
+*/
+void inputDateInSemester(int day, int month, int year)
+{
+	string DATE;
+	getline(cin, DATE);
+	int count = 0;
+	int i = 0;
+	while (count != 3)
+	{
+		if (checkNumber(DATE[i]) == true && count == 0)
+		{
+			day = stoi(DATE.substr(i, 2));
+			i = i + 2;
+			count++;
+		}
+		else if (checkNumber(DATE[i]) == true && count == 1)
+		{
+			month = stoi(DATE.substr(i, 2));
+			i = i + 2;
+			count++;
+		}
+		else if (checkNumber(DATE[i]) == true && count == 2)
+		{
+			year = stoi(DATE.substr(i, DATE.length() - i));
+			i = i + 1;
+			count++;
+		}
+		else
+		{
+			i++;
+		}
+	}
+}
+nodeSemester *initSemester()
+{
+	nodeSemester* p = new nodeSemester;
+	p->next = NULL;
+	return p;
+}
+void addHeadSemester(listSemester &list, nodeSemester* p)
+{
+	if (list.head==NULL)
+	{
+		list.head = p;
+	}
+	else
+	{
+		p->next = list.head;
+		list.head = p;
+	}
+}
+void inputInformationSemesterAndAddSchoolYear(listYear & lY)
+{
+	string year;
+	int begin;
+	int last;
+	cout << "Input school year to add semester: ";
+	getline(cin, year);
+	detachedYear(begin, last, year);
+	schoolYear* temp = lY.pHead;
+	bool checkExitsYear = false;
+	while (temp != NULL)
+	{
+		if (temp->beginYear == begin)
+		{
+			checkExitsYear = true;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (checkExitsYear == false)
+	{
+		cout << "The school year isn't exit";
+		return;
+	}
+	nodeSemester* seme = initSemester();
+	cout << "Input the name semester 1,2 or 3:";
+	cin >> seme->name;
+	eatline();
+	cout << "Input the start date: ";
+	inputDateInSemester(seme->begin.day, seme->begin.month, seme->begin.year);
+	cout << endl;
+	cout << "Input the end date: ";
+	inputDateInSemester(seme->end.day, seme->end.month, seme->end.year);
+	cout << endl;
+	addHeadSemester(temp->listSem, seme);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int CheckFullName(string fullname) {
 	int space = 0;

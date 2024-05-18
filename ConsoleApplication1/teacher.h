@@ -4,6 +4,22 @@ using namespace std;
 #include <string>
 //#include "student.h"
 #pragma warning(disable:4996)
+struct Date
+{
+	int day, month, year;
+};
+struct nodeSemester
+{
+	//ky 1,2 hay 3
+	int name;
+	Date begin;
+	Date end;
+	nodeSemester* next;
+};
+struct listSemester
+{
+	nodeSemester* head;
+};
 struct nodeClass
 {
 	string name;
@@ -14,7 +30,7 @@ struct schoolYear
 {
 	int beginYear;
 	int lastYear;
-	nodeClass* listClass;
+	listSemester listSem;
 	schoolYear* next;
 };
 struct listYear
@@ -28,10 +44,18 @@ void displayClass(nodeClass* head);
 bool checkNumber(char a);
 void detachedYear(int& begin, int& last, string year);
 void addHeadNewSchoolYear(listYear*& lY);
-struct Date 
-{
-	int day, month, year;
-};
+void inputDateInSemester(int day, int month, int year);
+nodeSemester* initSemester();
+void addHeadSemester(listSemester& list, nodeSemester* p);
+void inputInformationSemesterAndAddSchoolYear(listYear& lY);
+
+
+
+
+
+
+
+
 
 struct Teacher_Info {
 	string fullname;
