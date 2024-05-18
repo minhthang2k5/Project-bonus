@@ -37,13 +37,13 @@ struct listYear
 {
 	schoolYear* pHead;
 };
-listYear* creatListYear();
+listYear creatListYear();
 void eatline();
 void addClass(listYear*& lY);
 void displayClass(nodeClass* head);
 bool checkNumber(char a);
 void detachedYear(int& begin, int& last, string year);
-void addHeadNewSchoolYear(listYear*& lY);
+void addHeadNewSchoolYear(listYear& lY);
 void inputDateInSemester(int day, int month, int year);
 nodeSemester* initSemester();
 void addHeadSemester(listSemester& list, nodeSemester* p);
@@ -74,7 +74,6 @@ struct Teacher_Node {
 struct Teacher_List {
 	Teacher_Node* pHead;
 };
-listYear* creatListYear();
 int CheckFullName(string fullname);
 bool isLeapYear(int y);
 int CheckDate(Date d);

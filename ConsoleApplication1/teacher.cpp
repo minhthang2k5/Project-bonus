@@ -5,13 +5,10 @@ void eatline()
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
-listYear* creatListYear()
+listYear creatListYear()
 {
-	listYear* p = new listYear();
-	if (p != NULL)
-	{
-		p->pHead = NULL;
-	}
+	listYear p;
+	p.pHead = NULL;
 	return p;
 }
 bool checkNumber(char a)

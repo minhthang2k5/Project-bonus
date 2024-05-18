@@ -2,6 +2,7 @@
 #include "student.h"
 int main()
 {
-	//listYear lY = creatListYear();
-
+	listYear p = creatListYear();
+	addHeadNewSchoolYear(p);
+	inputInformationSemesterAndAddSchoolYear(p);
 }
