@@ -127,7 +127,7 @@ void addClass(listYear*& lY)
 	{
 		cout << "Intput the class name next ( <enter> to quit): ";
 		getline(cin, name);
-		if (name[0] == '\0')
+		if (name == "")
 		{
 			break;
 		}
