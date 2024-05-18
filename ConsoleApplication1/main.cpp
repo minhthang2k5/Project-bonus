@@ -5,4 +5,5 @@ int main()
 	listYear p = creatListYear();
 	addHeadNewSchoolYear(p);
 	inputInformationSemesterAndAddSchoolYear(p);
+	inputInformationToAddCourse(p);
 }

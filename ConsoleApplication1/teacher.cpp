@@ -148,15 +148,14 @@ void displayClass(nodeClass* head)
 */
 /*
 hàm này để tách ngày tháng năm khi nhap bằng một string
-vd 
-intput:
-string a= 21-12-2005
-outputL
-int day=21
-int month=12
-int year=2005
+Input: ngày tháng năm cần được tách
+Output:Không có
+VD: nhập 21-12-2005 thì nó se tách 
+day=21
+month=12
+year=2005
 */
-void inputDateInSemester(int day, int month, int year)
+void inputDateInSemester(int& day, int& month, int& year)
 {
 	string DATE;
 	getline(cin, DATE);
@@ -188,12 +187,22 @@ void inputDateInSemester(int day, int month, int year)
 		}
 	}
 }
+/*
+hàm này để khởi tạo một kì học
+Input:Không có
+Output:Một node kì học mới 
+*/
 nodeSemester *initSemester()
 {
 	nodeSemester* p = new nodeSemester;
 	p->next = NULL;
 	return p;
 }
+/*
+hàm này để thêm kỳ học vào danh sách các kỳ học bằng cách thêm vào đầu
+Input:Danh sách kỳ hoc,node kỳ học
+Output:Không có
+*/
 void addHeadSemester(listSemester &list, nodeSemester* p)
 {
 	if (list.head==NULL)
@@ -206,8 +215,14 @@ void addHeadSemester(listSemester &list, nodeSemester* p)
 		list.head = p;
 	}
 }
+/*
+hàm này để nhập thông tìn một khóa học
+Input:Danh sách các năm học
+Output:không có
+*/
 void inputInformationSemesterAndAddSchoolYear(listYear & lY)
 {
+	//Kiểm tra năm học nào để luu vào một node: temp
 	string year;
 	int begin;
 	int last;
@@ -230,6 +245,9 @@ void inputInformationSemesterAndAddSchoolYear(listYear & lY)
 		cout << "The school year isn't exit";
 		return;
 	}
+
+
+	//Nhập năm học để thêm vào
 	nodeSemester* seme = initSemester();
 	cout << "Input the name semester 1,2 or 3:";
 	cin >> seme->name;
@@ -240,10 +258,128 @@ void inputInformationSemesterAndAddSchoolYear(listYear & lY)
 	cout << "Input the end date: ";
 	inputDateInSemester(seme->end.day, seme->end.month, seme->end.year);
 	cout << endl;
+	seme->listCour.head = NULL;
 	addHeadSemester(temp->listSem, seme);
 }
+/*
+Hàm này để khởi tạo khóa học
+Input:không có
+Output:Một khóa học mới
+*/
+nodeCourse* initCourse()
+{
+	nodeCourse* p = new nodeCourse;
+	p->next = NULL;
+	return p;
+}
+/*
+hàm này để thêm danh sách lớp học vào khóa học
+Input:Danh sách các khóa học,Node khóa học
+output:Không có
+*/
+void addHeadCourse(listCourse& listC, nodeCourse* p)
+{
+	if (listC.head==NULL)
+	{
+		listC.head = p;
+		return;
+	}
+	p->next = listC.head;
+	listC.head = p;
+}
+/*
+hàm này để nhập thông tin khóa học
+Input:Danh sách các năm học
+Output:không có
+1*/
+void inputInformationToAddCourse(listYear& lY)
+{
+	//Dò tới năm học cần thêm
+	string year;
+	int begin;
+	int last;
+	cout << "Input school year to add course: ";
+	getline(cin, year);
+	detachedYear(begin, last, year);
+	schoolYear* temp = lY.pHead;
+	bool checkExitsYear = false;
+	while (temp != NULL)
+	{
+		if (temp->beginYear == begin)
+		{
+			checkExitsYear = true;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (checkExitsYear == false)
+	{
+		cout << "The school year isn't exit";
+		return;
+	}
+	
+	//Dò tới kỳ học cần thêm
+	nodeSemester* tempSemester = temp->listSem.head;
+	int nameSemester;
+	cout << "Input the name semester(1,2 or 3): ";
+	cin >> nameSemester;
+	eatline();
+	bool checkexitsSemester = false;
+	while (tempSemester != NULL)
+	{
+		if (tempSemester->name == nameSemester)
+		{
+			checkexitsSemester = true;
+			break;
+		}
+		tempSemester = tempSemester->next;
+	}
+	if (checkexitsSemester == false)
+	{
+		cout << "The semester isn't exit";
+		return;
+	}
+	
+	//Nhập các thông tin và thêm vào kỳ học
+	nodeCourse* course = initCourse();
+	cout << "Input id course: ";
+	getline(cin, course->id);
+	cout << endl;
+	cout << "Input course name: ";
+	getline(cin, course->courseName);
+	cout << endl;
+	cout << "Input class name: ";
+	getline(cin, course->className);
+	cout << endl;
+	cout << "Input teacher name: ";
+	getline(cin, course->teacher);
+	cout << endl;
+	cout << "Input number of credits: ";
+	cin >> course->numberOfCredits;
+	cout << endl;
+	eatline();
+	cout << "Input number of student(max 50): ";
+	cin >> course->numberOfStudent;
+	while (course->numberOfStudent>50)
+	{
+		cout << "exceed the allowed number of students to enter"<<endl;
+		cout << "Input number of student(max 50):";
+		cin >> course->numberOfStudent;
+	}
+	eatline();
+	cout << "Input the day of week: ";
+	getline(cin, course->dayOfweek);
+	cout << endl;
+	cout << "Input the session" << endl;
+	cout << "Choose a seesion:"<<endl;
+	cout << "S1 (07:30)" << endl;
+	cout << "S2 (09:30)" << endl;
+	cout << "S3 (13:30)" << endl;
+	cout << "S4 (15:30)" << endl;
+	getline(cin, course->session);
+	addHeadCourse(tempSemester->listCour, course);
 
-
+}
 
 
 

@@ -8,9 +8,26 @@ struct Date
 {
 	int day, month, year;
 };
+struct nodeCourse
+{
+	string id;
+	string courseName;
+	string className;
+	string teacher;
+	int numberOfCredits;
+	int numberOfStudent;
+	string dayOfweek;
+	string session;
+	nodeCourse* next;
+};
+struct listCourse
+{
+	nodeCourse* head;
+};
 struct nodeSemester
 {
 	//ky 1,2 hay 3
+	listCourse listCour;
 	int name;
 	Date begin;
 	Date end;
@@ -37,6 +54,7 @@ struct listYear
 {
 	schoolYear* pHead;
 };
+//function List Year
 listYear creatListYear();
 void eatline();
 void addClass(listYear*& lY);
@@ -44,7 +62,7 @@ void displayClass(nodeClass* head);
 bool checkNumber(char a);
 void detachedYear(int& begin, int& last, string year);
 void addHeadNewSchoolYear(listYear& lY);
-void inputDateInSemester(int day, int month, int year);
+void inputDateInSemester(int& day, int& month, int& year);
 nodeSemester* initSemester();
 void addHeadSemester(listSemester& list, nodeSemester* p);
 void inputInformationSemesterAndAddSchoolYear(listYear& lY);
@@ -92,3 +110,12 @@ int SignUp(Teacher_List& l);
 
 int GetTeacherAccount(Teacher_List l, string inUsername, string inPassword);
 int SignIn(Teacher_List l);
+
+
+
+
+
+//function of course
+nodeCourse* initCourse();
+void addHeadCourse(listCourse& listC, nodeCourse* p);
+void inputInformationToAddCourse(listYear& lY);
