@@ -87,6 +87,7 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
         return nullptr;
     }
 
+    // lấy tên lớp học từ tên file CSV
     size_t lastDot = fileName.find_last_of(".");
     string className = fileName.substr(0, lastDot);
 
@@ -96,6 +97,7 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
     FullName fullName;
     Date dateOfBirth;
 
+    // xuống dòng đầu tiên
     string line;
     getline(fileIn, line, '\n');
 

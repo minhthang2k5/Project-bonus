@@ -13,6 +13,7 @@ struct Class
 {
     string className;
     int numberOfStudents;
+    int positionOfStudents;
     Student *pHeadStudent;
     Class *pNextClass;
 };

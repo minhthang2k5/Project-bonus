@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "teacher.h"
-//#include "class.h"
+// #include "class.h"
 using namespace std;
 
 // struct Date
@@ -25,14 +25,18 @@ struct FullName
 
 struct Student
 {
-	// string className;
-	// int positonInClass;
+	string className;
 	int studentID;
 	FullName fullName;
 	string gender;
 	Date dateOfBirth;
 	int socialID;
 	Student *pNextStudent;
+};
+
+struct StudentList
+{
+	Student *pHeadStudent;
 };
 
 struct Student_Info
