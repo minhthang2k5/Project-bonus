@@ -9,6 +9,7 @@
 #include <string>
 #include <sstream>
 
+
 struct Class
 {
     string className;
@@ -31,4 +32,7 @@ void addStudentIntoClass(Class *class1, Student *stu1);
 void addClassIntoClassList(ClassList *claList1, Class *class1);
 
 Class *readStudentsOfClassFromCSVFile(string fileName);
+
+void readStudentsOfCourseFromCSVFile(string fileName, nodeCourse *course);
+
 #endif

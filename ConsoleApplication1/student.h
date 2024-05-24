@@ -2,26 +2,13 @@
 #define _STUDENT_H_
 
 #include <iostream>
-#include "teacher.h"
-// #include "class.h"
 using namespace std;
-
-// struct Date
-//{
-//     int day, month, year;
-// };
 
 struct FullName
 {
 	string firstName;
 	string lastName;
 };
-
-// enum Gender
-// {
-// 	male,
-// 	female
-// };
 
 struct Student
 {
