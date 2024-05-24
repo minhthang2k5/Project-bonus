@@ -2,7 +2,7 @@
 using namespace std;
 #include <iostream>
 #include <string>
-// #include "student.h"
+#include "student.h"
 #pragma warning(disable : 4996)
 struct Date
 {
@@ -111,3 +111,7 @@ int SignIn(Teacher_List l);
 nodeCourse *initCourse();
 void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(listYear &lY);
+
+void viewCourseInformation(nodeCourse *course);
+void viewListOfCoursesInformation(listCourse *courseList);
+void viewStudentsOfCourse(nodeCourse *course);
