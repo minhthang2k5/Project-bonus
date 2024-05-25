@@ -9,13 +9,12 @@
 #include <string>
 #include <sstream>
 
-
 struct Class
 {
     string className;
     int numberOfStudents;
     int positionOfStudents;
-    Student *pHeadStudent;
+    StudentNode *pHeadStudent;
     Class *pNextClass;
 };
 
@@ -25,14 +24,17 @@ struct ClassList
     Class *pHeadClass;
 };
 
-Student *createStudent(int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
+Student createStudent(string className1, int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
+Student createStudent(int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
 Class *createClass(string className1, int numberOfStudents1);
 ClassList *createClassList(int numberOfClasses);
-void addStudentIntoClass(Class *class1, Student *stu1);
+StudentList *createStudentList(int numberOfStudents1);
+void addStudentIntoClass(Class *class1, Student stu1);
+void addStudentIntoStudentList(StudentList *studentList, Student stu1);
 void addClassIntoClassList(ClassList *claList1, Class *class1);
 
 Class *readStudentsOfClassFromCSVFile(string fileName);
 
-void readStudentsOfCourseFromCSVFile(string fileName, nodeCourse *course);
+StudentList *readStudentsOfCourseFromCSVFile(string fileName);
 
 #endif
