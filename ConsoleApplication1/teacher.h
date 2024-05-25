@@ -111,6 +111,8 @@ int SignIn(Teacher_List l);
 nodeCourse *initCourse();
 void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(listYear &lY);
+void updateInformationCourse(listYear& lY);
+void addStudentToCourse(nodeCourse* course);
 
 void viewCourseInformation(nodeCourse *course);
 void viewListOfCoursesInformation(listCourse *courseList);

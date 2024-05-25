@@ -389,3 +389,51 @@ int signIn(Student_List l) {
 	}
 	return 1;
 }
+
+
+// các hàm cho StudentList
+
+Student getStudentInfo() {
+	Student info;
+	cout << "Input classname: ";
+	getline(cin, info.className);
+	cout << "Input student ID: ";
+	cin >> info.studentID;
+	eatline();
+	cout << "Input firstname: ";
+	getline(cin, info.fullName.firstName);
+	cout << "Input lastname: ";
+	getline(cin, info.fullName.lastName);
+	cout << "Input gender: ";
+	getline(cin, info.gender);
+	cout << "Input date of birth: " << endl;
+	cout << "Day: ";
+	cin >> info.dateOfBirth.day;
+	cout << "Month: ";
+	cin >> info.dateOfBirth.month;
+	cout << "Year: ";
+	cin >> info.dateOfBirth.year;
+	cout << "Input social ID: ";
+	cin >> info.socialID;
+	return info;
+}
+StudentNode* createNewNode(Student info) {
+	StudentNode* node = new StudentNode;
+	node->data = info;
+	node->pNextStudent = NULL;
+
+	return node;
+}
+void addTail(StudentList*& l, Student info) {
+	StudentNode* student = createNewNode(info);
+	if (l->pHeadStudent == NULL) {
+		l->pHeadStudent = student;
+	}
+	else {
+		StudentNode* p = l->pHeadStudent;
+		while (p->pNextStudent != NULL) {
+			p = p->pNextStudent;
+		}
+		p->pNextStudent = student;
+	}
+}
