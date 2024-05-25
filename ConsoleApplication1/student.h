@@ -18,12 +18,18 @@ struct Student
 	string gender;
 	Date dateOfBirth;
 	int socialID;
-	Student *pNextStudent;
+};
+
+struct StudentNode
+{
+	Student data;
+	StudentNode *pNextStudent;
 };
 
 struct StudentList
 {
-	Student *pHeadStudent;
+	int numberOfStudents;
+	StudentNode *pHeadStudent;
 };
 
 struct Student_Info
