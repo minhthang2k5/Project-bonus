@@ -832,10 +832,18 @@ void viewListOfCoursesInformation(listCourse *courseList)
 
 void viewStudentsOfCourse(nodeCourse *course)
 {
-	Student *temp = course->studentList->pHeadStudent;
+	StudentNode *temp = course->studentList->pHeadStudent;
 	while (temp != nullptr)
 	{
-		cout << temp->studentID << " " << temp->fullName.firstName << " " << temp->fullName.lastName << endl;
+		cout << temp->data.studentID << " " << temp->data.fullName.firstName << " " << temp->data.fullName.lastName << endl;
 		temp = temp->pNextStudent;
 	}
+}
+
+void removeStudentFromCourse(nodeCourse *course)
+{
+}
+void deleteCourse(nodeCourse *course)
+{
+	delete course;
 }

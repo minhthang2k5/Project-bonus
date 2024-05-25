@@ -115,3 +115,5 @@ void inputInformationToAddCourse(listYear &lY);
 void viewCourseInformation(nodeCourse *course);
 void viewListOfCoursesInformation(listCourse *courseList);
 void viewStudentsOfCourse(nodeCourse *course);
+void removeStudentFromCourse(nodeCourse* course);
+void deleteCourse(nodeCourse* course);
