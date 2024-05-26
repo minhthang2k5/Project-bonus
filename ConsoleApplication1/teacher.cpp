@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "teacher.h"
+#include "student.h"
 void eatline()
 {
 	cin.clear();
