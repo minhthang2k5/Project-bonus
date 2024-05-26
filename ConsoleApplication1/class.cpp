@@ -195,7 +195,7 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
     if (!fileIn.is_open())
     {
         cout << "Error while opening \"" << fileName << "\"!" << endl;
-        return;
+        return NULL;
     }
     StudentList *stuList = createStudentList(0);
     string positionInClassString, idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;

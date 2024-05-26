@@ -4,10 +4,7 @@ using namespace std;
 #include <string>
 #include "student.h"
 #pragma warning(disable : 4996)
-struct Date
-{
-	int day, month, year;
-};
+
 struct nodeCourse
 {
 	string id;

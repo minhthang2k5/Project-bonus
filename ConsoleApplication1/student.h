@@ -4,6 +4,10 @@
 #include <iostream>
 using namespace std;
 
+struct Date
+{
+	int day, month, year;
+};
 struct FullName
 {
 	string firstName;

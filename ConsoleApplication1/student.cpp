@@ -1,5 +1,5 @@
 #include "student.h"
-
+#include "teacher.h"
 int checkFullName(string fullname)
 {
 	int space = 0;
