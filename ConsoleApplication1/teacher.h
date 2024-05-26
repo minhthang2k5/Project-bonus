@@ -111,11 +111,13 @@ int SignIn(Teacher_List l);
 nodeCourse *initCourse();
 void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(listYear &lY);
-void updateInformationCourse(listYear& lY);
-void addStudentToCourse(nodeCourse* course);
+void updateInformationCourse(listYear &lY);
+void addStudentToCourse(nodeCourse *course);
 
 void viewCourseInformation(nodeCourse *course);
 void viewListOfCoursesInformation(listCourse *courseList);
 void viewStudentsOfCourse(nodeCourse *course);
-void removeStudentFromCourse(nodeCourse* course);
-void deleteCourse(nodeCourse* course);
+void removeStudentFromCourse(nodeCourse *course);
+void deleteCourse(nodeCourse *course);
+
+typedef void removeOneCourseOutOfCourseList(listCourse *courseList);

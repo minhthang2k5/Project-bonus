@@ -1,156 +1,222 @@
 #include "student.h"
-#include "teacher.h"
 
-int checkFullName(string fullname) {
+int checkFullName(string fullname)
+{
 	int space = 0;
-	for (int i = 0; i < fullname.length(); i++) {
-		if (fullname[i] == ' ') {
+	for (int i = 0; i < fullname.length(); i++)
+	{
+		if (fullname[i] == ' ')
+		{
 			space = 1;
 		}
 	}
-	if (space == 0) {
+	if (space == 0)
+	{
 		return 0;
 	}
 	return 1;
 }
 
-int checkDate(Date d) {
-	if ((d.day <= 0 && d.day >= 32) || (d.month <= 0 && d.month >= 13) || d.year <= 0) {
+int checkDate(Date d)
+{
+	if ((d.day <= 0 && d.day >= 32) || (d.month <= 0 && d.month >= 13) || d.year <= 0)
+	{
 		return 0;
 	}
-	if (isLeapYear(d.year)) {
-		switch (d.month) {
-		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-			if (d.day >= 32) {
+	if (isLeapYear(d.year))
+	{
+		switch (d.month)
+		{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			if (d.day >= 32)
+			{
 				return 0;
 			}
 		case 2:
-			if (d.day >= 30) {
+			if (d.day >= 30)
+			{
 				return 0;
 			}
-		case 4: case 6: case 9: case 11:
-			if (d.day >= 31) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if (d.day >= 31)
+			{
 				return 0;
 			}
 		}
 	}
-	if (!isLeapYear(d.year)) {
-		switch (d.month) {
-		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-			if (d.day >= 32) {
+	if (!isLeapYear(d.year))
+	{
+		switch (d.month)
+		{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			if (d.day >= 32)
+			{
 				return 0;
 			}
 		case 2:
-			if (d.day >= 29) {
+			if (d.day >= 29)
+			{
 				return 0;
 			}
-		case 4: case 6: case 9: case 11:
-			if (d.day >= 31) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if (d.day >= 31)
+			{
 				return 0;
 			}
 		}
 	}
 	return 1;
 }
-int checkUsername(string username) {
+int checkUsername(string username)
+{
 	string test("admin");
 	int found = username.find(test);
-	if (found != string::npos) {
+	if (found != string::npos)
+	{
 		return 0;
 	}
-	for (int i = 0; i < username.length(); i++) {
-		if (username[i] == ' ') {
+	for (int i = 0; i < username.length(); i++)
+	{
+		if (username[i] == ' ')
+		{
 			return 0;
 		}
 	}
 	return 1;
 }
-int checkPassword(string password) {
-	if (password.length() < 6) {
+int checkPassword(string password)
+{
+	if (password.length() < 6)
+	{
 		return 0;
 	}
 	int upper = 0;
-	for (int i = 0; i < password.length(); i++) {
-		if (password[i] >= 'A' && password[i] <= 'Z') {
+	for (int i = 0; i < password.length(); i++)
+	{
+		if (password[i] >= 'A' && password[i] <= 'Z')
+		{
 			upper = 1;
 		}
 	}
-	if (upper == 0) {
+	if (upper == 0)
+	{
 		return 0;
 	}
 	int character = 0;
-	for (int i = 0; i < password.length(); i++) {
-		if (password[i] >= 'A' && password[i] <= 'Z') {
+	for (int i = 0; i < password.length(); i++)
+	{
+		if (password[i] >= 'A' && password[i] <= 'Z')
+		{
 			character = 1;
 		}
-		if (password[i] >= 'a' && password[i] <= 'z') {
+		if (password[i] >= 'a' && password[i] <= 'z')
+		{
 			character = 1;
 		}
 	}
-	if (character == 0) {
+	if (character == 0)
+	{
 		return 0;
 	}
 	int digit = 0;
-	for (int i = 0; i < password.length(); i++) {
-		if (password[i] >= '0' && password[i] <= '9') {
+	for (int i = 0; i < password.length(); i++)
+	{
+		if (password[i] >= '0' && password[i] <= '9')
+		{
 			digit = 1;
 		}
 	}
-	if (digit == 0) {
+	if (digit == 0)
+	{
 		return 0;
 	}
 	return 1;
 }
-int checkEmail(string email) {
+int checkEmail(string email)
+{
 	int at = 0;
 	int dot = 0;
-	for (int i = 0; i < email.length(); i++) {
-		if (email[i] == '.') {
+	for (int i = 0; i < email.length(); i++)
+	{
+		if (email[i] == '.')
+		{
 			dot = 1;
 		}
-		if (email[i] == '@') {
+		if (email[i] == '@')
+		{
 			at = 1;
 		}
 	}
-	if (dot == 0 && at == 0) {
+	if (dot == 0 && at == 0)
+	{
 		return 0;
 	}
 	return 1;
 }
-bool isDifferentUsername(Student_List l, string username) {
-	if (l.pHead == NULL) {
+bool isDifferentUsername(Student_List l, string username)
+{
+	if (l.pHead == NULL)
+	{
 		return true;
 	}
-	else {
-		Student_Node* p = l.pHead;
-		while (p != NULL) {
-			if (p->student.username == username) {
+	else
+	{
+		Student_Node *p = l.pHead;
+		while (p != NULL)
+		{
+			if (p->student.username == username)
+			{
 				return false;
 			}
 		}
 	}
 	return true;
 }
-bool isDifferentPassword(Student_List l, string password) {
-	if (l.pHead == NULL) {
+bool isDifferentPassword(Student_List l, string password)
+{
+	if (l.pHead == NULL)
+	{
 		return true;
 	}
-	else {
-		Student_Node* p = l.pHead;
-		while (p != NULL) {
-			if (p->student.password == password) {
+	else
+	{
+		Student_Node *p = l.pHead;
+		while (p != NULL)
+		{
+			if (p->student.password == password)
+			{
 				return false;
 			}
 		}
 	}
 	return true;
 }
-Student_Info getStudentInfo(Student_List l) {
+Student_Info getStudentInfo(Student_List l)
+{
 	Student_Info info;
 	cout << "Input your infomation..." << endl;
 	cout << "Your fullname: ";
 	getline(cin, info.fullname);
-	while (checkFullName(info.fullname) == 0) {
+	while (checkFullName(info.fullname) == 0)
+	{
 		cout << "Your fullname is invalid. Please input again!" << endl;
 		cout << "Your fullname: ";
 		getline(cin, info.fullname);
@@ -158,7 +224,8 @@ Student_Info getStudentInfo(Student_List l) {
 
 	cout << "Your email <Type your email without space>: ";
 	cin >> info.email;
-	while (checkEmail(info.email) == 0) {
+	while (checkEmail(info.email) == 0)
+	{
 		cout << "Your email is invalid. Please input again!" << endl;
 		cout << "Your email <Type your email without space>: ";
 		cin >> info.email;
@@ -171,7 +238,8 @@ Student_Info getStudentInfo(Student_List l) {
 	cin >> info.birthday.month;
 	cout << "  Year: ";
 	cin >> info.birthday.year;
-	while (checkDate(info.birthday) == 0) {
+	while (checkDate(info.birthday) == 0)
+	{
 		cout << "Your birthday is invalid. Please input again!" << endl;
 		cout << "Your birthday: ";
 		cout << "  Day: ";
@@ -199,7 +267,8 @@ Student_Info getStudentInfo(Student_List l) {
 	cout << "Your form of training <Input by number>: ";
 	cin >> info.form;
 
-	do {
+	do
+	{
 		cout << "1: Faculty of Mathematics and Computer Science" << endl;
 		cout << "2: Faculty of Information Technology" << endl;
 		cout << "3: Faculty of Physics and Engineering Physics" << endl;
@@ -217,13 +286,16 @@ Student_Info getStudentInfo(Student_List l) {
 
 	cout << "Your username <Type your username without space>: ";
 	cin >> info.username;
-	while (true) {
-		if (checkUsername(info.username) == 0) {
+	while (true)
+	{
+		if (checkUsername(info.username) == 0)
+		{
 			cout << "Your username is invalid. Please input again!" << endl;
 			cout << "Your username <Type your username without space>: ";
 			cin >> info.username;
 		}
-		if (isDifferentUsername(l, info.username) == false) {
+		if (isDifferentUsername(l, info.username) == false)
+		{
 			cout << "Your username is invalid. Please input again!" << endl;
 			cout << "Your username <Type your username without space>: ";
 			cin >> info.username;
@@ -236,8 +308,10 @@ Student_Info getStudentInfo(Student_List l) {
 	cout << "  <At least 1 digit>" << endl;
 	cout << "Your password: ";
 	cin >> info.password;
-	while (true) {
-		if (checkPassword(info.password) == 0) {
+	while (true)
+	{
+		if (checkPassword(info.password) == 0)
+		{
 			cout << "Your password is invalid. Please input again!" << endl;
 			cout << "  <At least 6 characters>" << endl;
 			cout << "  <At least 1 capital character>" << endl;
@@ -245,8 +319,9 @@ Student_Info getStudentInfo(Student_List l) {
 			cout << "Your password: ";
 			cin >> info.password;
 		}
-		//cin.ignore();
-		if (isDifferentPassword(l, info.password) == false) {
+		// cin.ignore();
+		if (isDifferentPassword(l, info.password) == false)
+		{
 			cout << "Your password is invalid. Please input again!" << endl;
 			cout << "  <At least 6 characters>" << endl;
 			cout << "  <At least 1 capital character>" << endl;
@@ -260,37 +335,46 @@ Student_Info getStudentInfo(Student_List l) {
 
 	return info;
 }
-Student_Node* createNewNode(Student_Info info) {
-	Student_Node* node = new Student_Node;
+Student_Node *createNewNode(Student_Info info)
+{
+	Student_Node *node = new Student_Node;
 	node->student = info;
 	node->pNext = NULL;
 
 	return node;
 }
-void init(Student_List& l) {
+void init(Student_List &l)
+{
 	l.pHead = NULL;
 }
-void addTail(Student_List& l, Student_Info info) {
-	Student_Node* student = createNewNode(info);
-	if (l.pHead == NULL) {
+void addTail(Student_List &l, Student_Info info)
+{
+	Student_Node *student = createNewNode(info);
+	if (l.pHead == NULL)
+	{
 		l.pHead = student;
 	}
-	else {
-		Student_Node* p = l.pHead;
-		while (p->pNext != NULL) {
+	else
+	{
+		Student_Node *p = l.pHead;
+		while (p->pNext != NULL)
+		{
 			p = p->pNext;
 		}
 		p->pNext = student;
 	}
 }
-void printStudentInfo(Student_Info info) {
+void printStudentInfo(Student_Info info)
+{
 	cout << "Fullname: " << info.fullname << endl;
 	cout << "Email: " << info.email << endl;
 	cout << "Birthday: " << info.birthday.day << "/" << info.birthday.month << "/" << info.birthday.year << endl;
-	if (info.gender == 1) {
+	if (info.gender == 1)
+	{
 		cout << "Gender: Male" << endl;
 	}
-	else if (info.gender == 0) {
+	else if (info.gender == 0)
+	{
 		cout << "Gender: Female" << endl;
 	}
 
@@ -299,65 +383,87 @@ void printStudentInfo(Student_Info info) {
 	cout << "Class: " << info.sclass << endl;
 
 	cout << "Form of training: ";
-	switch (info.form) {
-	case 1: cout << "Regular" << endl;
+	switch (info.form)
+	{
+	case 1:
+		cout << "Regular" << endl;
 		break;
-	case 2: cout << "APCS" << endl;
+	case 2:
+		cout << "APCS" << endl;
 		break;
-	case 3: cout << "CLC" << endl;
+	case 3:
+		cout << "CLC" << endl;
 		break;
 	}
 
-
 	cout << "Faculty: ";
-	switch (info.faculty) {
-	case 1: cout << "Mathematics and Computer Science" << endl;
+	switch (info.faculty)
+	{
+	case 1:
+		cout << "Mathematics and Computer Science" << endl;
 		break;
-	case 2: cout << "Information Technology" << endl;
+	case 2:
+		cout << "Information Technology" << endl;
 		break;
-	case 3: cout << "Physics and Engineering Physics" << endl;
+	case 3:
+		cout << "Physics and Engineering Physics" << endl;
 		break;
-	case 4: cout << "Chemistry" << endl;
+	case 4:
+		cout << "Chemistry" << endl;
 		break;
-	case 5: cout << "Biology and Biotechnology" << endl;
+	case 5:
+		cout << "Biology and Biotechnology" << endl;
 		break;
-	case 6: cout << "Environment" << endl;
+	case 6:
+		cout << "Environment" << endl;
 		break;
-	case 7: cout << "Geology" << endl;
+	case 7:
+		cout << "Geology" << endl;
 		break;
-	case 8: cout << "Materials Science and Technology" << endl;
+	case 8:
+		cout << "Materials Science and Technology" << endl;
 		break;
-	case 9: cout << "Electronics and Telecommunications" << endl;
+	case 9:
+		cout << "Electronics and Telecommunications" << endl;
 		break;
-	case 10: cout << "Interdisciplinary Science" << endl;
+	case 10:
+		cout << "Interdisciplinary Science" << endl;
 		break;
 	}
 	cout << "Username: " << info.username << endl;
 	cout << "Password: " << info.password << endl;
 }
-void printList(Student_List l) {
-	Student_Node* p = l.pHead;
-	while (p != NULL) {
+void printList(Student_List l)
+{
+	Student_Node *p = l.pHead;
+	while (p != NULL)
+	{
 		printStudentInfo(p->student);
 		cout << endl;
 		p = p->pNext;
 	}
 }
-int signUp(Student_List& l) {
+int signUp(Student_List &l)
+{
 	Student_Info info = getStudentInfo(l);
 	addTail(l, info);
 	cout << "Sign up successfully!" << endl;
 	return 1;
 }
 
-int getStudentAccount(Student_List l, string inUsername, string inPassword) {
-	if (l.pHead == NULL) {
+int getStudentAccount(Student_List l, string inUsername, string inPassword)
+{
+	if (l.pHead == NULL)
+	{
 		return 0;
 	}
-	else {
-		Student_Node* p = l.pHead;
-		while (p != NULL) {
-			if (p->student.username == inUsername && p->student.password == inPassword) {
+	else
+	{
+		Student_Node *p = l.pHead;
+		while (p != NULL)
+		{
+			if (p->student.username == inUsername && p->student.password == inPassword)
+			{
 				return 1;
 			}
 			p = p->pNext;
@@ -365,7 +471,8 @@ int getStudentAccount(Student_List l, string inUsername, string inPassword) {
 	}
 	return 0;
 }
-int signIn(Student_List l) {
+int signIn(Student_List l)
+{
 	string inUsername;
 	string inPassword;
 
@@ -373,27 +480,30 @@ int signIn(Student_List l) {
 	cin >> inUsername;
 	cout << "Input your password: ";
 	cin >> inPassword;
-	if (getStudentAccount(l, inUsername, inPassword) == 1) {
+	if (getStudentAccount(l, inUsername, inPassword) == 1)
+	{
 		cout << "Sign in successfully!" << endl;
 	}
-	while (getStudentAccount(l, inUsername, inPassword) == 0) {
+	while (getStudentAccount(l, inUsername, inPassword) == 0)
+	{
 		system("cls");
 		cout << "Username or password maybe incorrect! Please try again!" << endl;
 		cout << "Input your username: ";
 		cin >> inUsername;
 		cout << "Input your password: ";
 		cin >> inPassword;
-		if (getStudentAccount(l, inUsername, inPassword) == 1) {
+		if (getStudentAccount(l, inUsername, inPassword) == 1)
+		{
 			cout << "Sign in successfully!" << endl;
 		}
 	}
 	return 1;
 }
 
+// cï¿½c hï¿½m cho StudentList
 
-// các hàm cho StudentList
-
-Student getStudentInfo() {
+Student getStudentInfo()
+{
 	Student info;
 	cout << "Input classname: ";
 	getline(cin, info.className);
@@ -417,21 +527,26 @@ Student getStudentInfo() {
 	cin >> info.socialID;
 	return info;
 }
-StudentNode* createNewNode(Student info) {
-	StudentNode* node = new StudentNode;
+StudentNode *createNewNode(Student info)
+{
+	StudentNode *node = new StudentNode;
 	node->data = info;
 	node->pNextStudent = NULL;
 
 	return node;
 }
-void addTail(StudentList*& l, Student info) {
-	StudentNode* student = createNewNode(info);
-	if (l->pHeadStudent == NULL) {
+void addTail(StudentList *&l, Student info)
+{
+	StudentNode *student = createNewNode(info);
+	if (l->pHeadStudent == NULL)
+	{
 		l->pHeadStudent = student;
 	}
-	else {
-		StudentNode* p = l->pHeadStudent;
-		while (p->pNextStudent != NULL) {
+	else
+	{
+		StudentNode *p = l->pHeadStudent;
+		while (p->pNextStudent != NULL)
+		{
 			p = p->pNextStudent;
 		}
 		p->pNextStudent = student;
