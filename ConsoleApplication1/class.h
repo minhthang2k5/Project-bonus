@@ -36,5 +36,5 @@ void addClassIntoClassList(ClassList *claList1, Class *class1);
 Class *readStudentsOfClassFromCSVFile(string fileName);
 
 StudentList *readStudentsOfCourseFromCSVFile(string fileName);
-
+void importStudentInACourseIntoCSVFile(string fileName, nodeCourse *course);
 #endif

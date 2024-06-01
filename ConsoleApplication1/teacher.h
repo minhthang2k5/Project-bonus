@@ -119,5 +119,5 @@ void deleteCourse(nodeCourse *course);
 
 typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
-void viewListOfClasses(nodeClass* cl);
-void viewListOfCourses(listCourse* courseList);
+void viewListOfClasses(nodeClass *cl);
+void viewListOfCourses(listCourse *courseList);

@@ -240,3 +240,36 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
     }
     fileIn.close();
 }
+
+void importStudentInACourseIntoCSVFile(string fileName, nodeCourse *course)
+{
+    if (course == nullptr || course->studentList == nullptr)
+    {
+        cerr << "Course or student list is null." << endl;
+        return;
+    }
+
+    ofstream outFile(fileName);
+
+    if (!outFile.is_open())
+    {
+        cerr << "Could not open the file for writing." << endl;
+        return;
+    }
+
+    // Write CSV header
+    outFile << "StudentID,FirstName,LastName\n";
+
+    StudentNode *currentStudentNode = course->studentList->pHeadStudent;
+    while (currentStudentNode != nullptr)
+    {
+        Student &student = currentStudentNode->data;
+        outFile << student.studentID << ","
+                << student.fullName.firstName << ","
+                << student.fullName.lastName << "\n";
+        currentStudentNode = currentStudentNode->pNextStudent;
+    }
+
+    outFile.close();
+    cout << "Student data has been written to " << fileName << endl;
+}

@@ -79,11 +79,10 @@ int signUp(Student_List &l);
 int getStudentAccount(Student_List l, string inUsername, string inPassword);
 int signIn(Student_List l);
 
-
-// các hàm cho StudentList
+// cï¿½c hï¿½m cho StudentList
 Student getStudentInfo();
-StudentNode* createNewNode(Student info);
-void addTail(StudentList*& l, Student info);
+StudentNode *createNewNode(Student info);
+void addTail(StudentList *&l, Student info);
 
-void viewListCourseOfSpecificStudent()
+void viewListCourseOfSpecificStudent();
 #endif
