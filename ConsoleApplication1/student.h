@@ -84,4 +84,6 @@ int signIn(Student_List l);
 Student getStudentInfo();
 StudentNode* createNewNode(Student info);
 void addTail(StudentList*& l, Student info);
+
+void viewListCourseOfSpecificStudent()
 #endif

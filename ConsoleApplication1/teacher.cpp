@@ -963,3 +963,12 @@ void deleteCourse(nodeCourse *course)
 {
 	delete course;
 }
+
+
+void viewListOfClasses(nodeClass* cl) {
+	nodeClass* p = cl;
+	while (p != NULL) {
+		cout << p->name << endl;
+		p = p->next;
+	}
+}
