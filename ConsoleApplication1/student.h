@@ -100,4 +100,5 @@ struct StudentAcademicResultList
 };
 
 void printStudentResult(StudentAcademicResultList *SARList, int studentID);
+void updateStudentResult(StudentAcademicResultList *SARList, int studentID, int courseID, double newPoint);
 #endif

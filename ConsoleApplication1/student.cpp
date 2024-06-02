@@ -565,3 +565,19 @@ void printStudentResult(StudentAcademicResultList *SARList, int studentID)
 		current = current->pNextResult;
 	}
 }
+
+void updateStudentResult(StudentAcademicResultList *SARList, int studentID, int courseID, double newPoint)
+{
+	StudentAcademicResult *current = SARList->pHeadResult;
+	while (current != nullptr)
+	{
+		if (current->studentID == studentID && current->courseID == courseID)
+		{
+			current->point = newPoint;
+			cout << "Point updated!" << endl;
+			return;
+		}
+		current = current->pNextResult;
+	}
+	cout << "Not found given course or given student!" << endl;
+}
