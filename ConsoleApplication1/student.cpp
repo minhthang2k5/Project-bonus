@@ -552,3 +552,16 @@ void addTail(StudentList *&l, Student info)
 		p->pNextStudent = student;
 	}
 }
+
+void printStudentResult(StudentAcademicResultList *SARList, int studentID)
+{
+	StudentAcademicResult *current = SARList->pHeadResult;
+	while (current != nullptr)
+	{
+		if (current->studentID = studentID)
+		{
+			cout << "Course ID: " << current->courseID << " || Point: " << current->point << endl;
+		}
+		current = current->pNextResult;
+	}
+}

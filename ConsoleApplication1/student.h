@@ -85,4 +85,19 @@ StudentNode *createNewNode(Student info);
 void addTail(StudentList *&l, Student info);
 
 void viewListCourseOfSpecificStudent();
+
+struct StudentAcademicResult
+{
+	int studentID;
+	int courseID;
+	double point;
+	StudentAcademicResult *pNextResult;
+};
+
+struct StudentAcademicResultList
+{
+	StudentAcademicResult *pHeadResult;
+};
+
+void printStudentResult(StudentAcademicResultList *SARList, int studentID);
 #endif

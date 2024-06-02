@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _TEACHER_H_
+#define _TEACHER_H_
 using namespace std;
 #include <iostream>
 #include <string>
@@ -121,3 +122,4 @@ typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
 void viewListOfClasses(nodeClass *cl);
 void viewListOfCourses(listCourse *courseList);
+#endif
