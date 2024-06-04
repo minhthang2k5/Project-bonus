@@ -575,8 +575,20 @@ void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course)
 	outFile << "No, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, OtherMark" << endl;
 }
 
-void inputScoreboardOfOneCourse(courseScoreboard *scoreboard)
+void inputScoreboardOfOneCourse(nodeCourse *course)
 {
+	courseResultOfOneStudent *current = course->crsScoreboard->pHeadResult;
+	StudentNode *temp = course->studentList->pHeadStudent;
+	while (current != nullptr)
+	{
+		current->stu = temp->data;
+		cin >> current->otherMark;
+		cin >> current->midtermMark;
+		cin >> current->finalMark;
+		cin >> current->totalMark;
+		temp = temp->pNextStudent;
+		current = current->pNextResult;
+	}
 }
 void inputStudentResultOfACourse(Student stu)
 {
