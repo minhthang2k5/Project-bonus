@@ -1,4 +1,4 @@
-#ifndef _TEACHER_H_
+﻿#ifndef _TEACHER_H_
 #define _TEACHER_H_
 using namespace std;
 #include <iostream>
@@ -120,6 +120,9 @@ void deleteCourse(nodeCourse *course);
 
 typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
+
+void viewListOfStudentInClass1(Class cl); // xem của lớp sinh hoạt
+void viewListOfStudentInClass2(); // xem của lớp bộ môn 
 void viewListOfClasses(nodeClass *cl);
 void viewListOfCourses(listCourse *courseList);
 #endif
