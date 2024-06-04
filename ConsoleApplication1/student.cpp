@@ -553,31 +553,40 @@ void addTail(StudentList *&l, Student info)
 	}
 }
 
-void printStudentResult(StudentAcademicResultList *SARList, int studentID)
+void printStudentResult(Student stu)
 {
-	StudentAcademicResult *current = SARList->pHeadResult;
-	while (current != nullptr)
+	StudentAcademicResult *temp = stu.academicResult->pHeadResult;
+	while (temp != nullptr)
 	{
-		if (current->studentID = studentID)
-		{
-			cout << "Course ID: " << current->courseID << " || Point: " << current->point << endl;
-		}
-		current = current->pNextResult;
+		cout << "Course Name: " << temp->courseID->courseName << " || Total point: " << temp->point.totalMark << endl;
+		temp = temp->pNextResult;
 	}
 }
 
-void updateStudentResult(StudentAcademicResultList *SARList, int studentID, int courseID, double newPoint)
+void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course)
 {
-	StudentAcademicResult *current = SARList->pHeadResult;
+	ofstream outFile;
+	outFile.open(fileName);
+	if (!outFile.is_open())
+	{
+		cout << "Error while opening " << fileName << endl;
+		return;
+	}
+	outFile << "No, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, OtherMark" << endl;
+}
+
+void inputScoreboardOfOneCourse(courseScoreboard *scoreboard)
+{
+}
+void inputStudentResultOfACourse(Student stu)
+{
+	StudentAcademicResult *current = stu.academicResult->pHeadResult;
 	while (current != nullptr)
 	{
-		if (current->studentID == studentID && current->courseID == courseID)
-		{
-			current->point = newPoint;
-			cout << "Point updated!" << endl;
-			return;
-		}
+		cin >> current->point.otherMark;
+		cin >> current->point.midtermMark;
+		cin >> current->point.finalMark;
+		cin >> current->point.totalMark;
 		current = current->pNextResult;
 	}
-	cout << "Not found given course or given student!" << endl;
 }

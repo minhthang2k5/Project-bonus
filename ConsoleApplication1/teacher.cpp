@@ -378,7 +378,8 @@ void inputInformationToAddCourse(listYear &lY)
 	addHeadCourse(tempSemester->listCour, course);
 }
 
-void updateInformationCourse(listYear& lY) {
+void updateInformationCourse(listYear &lY)
+{
 	// Dò tới năm học chứa course cần sửa
 	string year;
 	int begin;
@@ -386,7 +387,7 @@ void updateInformationCourse(listYear& lY) {
 	cout << "Input school year to add course: ";
 	getline(cin, year);
 	detachedYear(begin, last, year);
-	schoolYear* temp = lY.pHead;
+	schoolYear *temp = lY.pHead;
 	bool checkExitsYear = false;
 	while (temp != NULL)
 	{
@@ -404,7 +405,7 @@ void updateInformationCourse(listYear& lY) {
 	}
 
 	// Dò tới kỳ học chứa course cần sửa
-	nodeSemester* tempSemester = temp->listSem.head;
+	nodeSemester *tempSemester = temp->listSem.head;
 	int nameSemester;
 	cout << "Input the name semester(1,2 or 3): ";
 	cin >> nameSemester;
@@ -425,8 +426,8 @@ void updateInformationCourse(listYear& lY) {
 		return;
 	}
 	// Dò tới course cần sửa
-	nodeCourse* tempCourse = temp->listSem.head->listCour.head;
-	string identifyCourse; // Định danh course bằng id hoặc tên -> người dùng có thể nhập 1 trong 2 
+	nodeCourse *tempCourse = temp->listSem.head->listCour.head;
+	string identifyCourse; // Định danh course bằng id hoặc tên -> người dùng có thể nhập 1 trong 2
 	cout << "Input course id or course name: ";
 	getline(cin, identifyCourse, '\n');
 	bool checkexitsCourse = false;
@@ -444,8 +445,8 @@ void updateInformationCourse(listYear& lY) {
 		cout << "The course isn't exit";
 		return;
 	}
-	// Nhập các thông tin và ghi đè vào tempCourse 
-	
+	// Nhập các thông tin và ghi đè vào tempCourse
+
 	cout << "Input id course: ";
 	getline(cin, tempCourse->id);
 	cout << endl;
@@ -481,14 +482,14 @@ void updateInformationCourse(listYear& lY) {
 	cout << "S3 (13:30)" << endl;
 	cout << "S4 (15:30)" << endl;
 	getline(cin, tempCourse->session);
-	
 }
 /*
 Truyền vào course muốn thêm
 Nhập thông tin cho sinh viên
-Thêm vào cuối của danh sách học sinh trong course 
+Thêm vào cuối của danh sách học sinh trong course
 */
-void addStudentToCourse(nodeCourse* course) {
+void addStudentToCourse(nodeCourse *course)
+{
 	Student info = getStudentInfo();
 	addTail(course->studentList, info);
 }
@@ -964,30 +965,41 @@ void deleteCourse(nodeCourse *course)
 	delete course;
 }
 
-
-void viewListOfClasses(nodeClass* cl) {
-	nodeClass* p = cl;
-	if (cl == NULL) {
+void viewListOfClasses(nodeClass *cl)
+{
+	nodeClass *p = cl;
+	if (cl == NULL)
+	{
 		cout << "Empty class!" << endl;
 	}
-	else {
-		while (p != NULL) {
+	else
+	{
+		while (p != NULL)
+		{
 			cout << p->name << endl;
 			p = p->next;
 		}
 	}
-	
 }
 
-void viewListOfCourses(listCourse* courseList) {
-	nodeCourse* p = courseList->head;
-	if (courseList->head == NULL) {
+void viewListOfCourses(listCourse *courseList)
+{
+	nodeCourse *p = courseList->head;
+	if (courseList->head == NULL)
+	{
 		cout << "Empty list of courses" << endl;
 	}
-	else {
-		while (p != NULL) {
+	else
+	{
+		while (p != NULL)
+		{
 			cout << p->courseName << endl;
 			p = p->next;
 		}
 	}
+}
+
+void exportStudentListOfCourseToCSVFile(nodeCourse *course)
+{
+	
 }

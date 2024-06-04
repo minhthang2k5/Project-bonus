@@ -6,6 +6,21 @@ using namespace std;
 #include "student.h"
 #pragma warning(disable : 4996)
 
+struct courseResultOfOneStudent
+{
+	Student stu;
+	int otherMark;
+	int midtermMark;
+	int finalMark;
+	int totalMark;
+	courseResultOfOneStudent *pNextResult;
+};
+
+struct courseScoreboard
+{
+	courseResultOfOneStudent *pHeadResult;
+};
+
 struct nodeCourse
 {
 	string id;
@@ -17,6 +32,7 @@ struct nodeCourse
 	string dayOfweek;
 	string session;
 	StudentList *studentList;
+	courseScoreboard *crsScoreboard;
 	nodeCourse *next;
 };
 struct listCourse

@@ -2,6 +2,7 @@
 #define _STUDENT_H_
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 struct Date
@@ -22,6 +23,8 @@ struct Student
 	string gender;
 	Date dateOfBirth;
 	int socialID;
+	StudentAcademicResultList *academicResult;
+	listCourse *crsListRegistered;
 };
 
 struct StudentNode
@@ -88,9 +91,8 @@ void viewListCourseOfSpecificStudent();
 
 struct StudentAcademicResult
 {
-	int studentID;
-	int courseID;
-	double point;
+	nodeCourse *courseID;
+	courseResultOfOneStudent point;
 	StudentAcademicResult *pNextResult;
 };
 
@@ -99,6 +101,6 @@ struct StudentAcademicResultList
 	StudentAcademicResult *pHeadResult;
 };
 
-void printStudentResult(StudentAcademicResultList *SARList, int studentID);
-void updateStudentResult(StudentAcademicResultList *SARList, int studentID, int courseID, double newPoint);
+void printStudentResult(Student stu);
+void inputStudentResultOfACourse(Student stu, courseResultOfOneStudent newPoint);
 #endif
