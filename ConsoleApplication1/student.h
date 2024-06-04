@@ -102,5 +102,7 @@ struct StudentAcademicResultList
 };
 
 void printStudentResult(Student stu);
-void inputStudentResultOfACourse(Student stu, courseResultOfOneStudent newPoint);
+void inputScoreboardOfOneCourse(nodeCourse *course);
+void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course);
+void inputStudentResultOfACourse(Student stu);
 #endif
