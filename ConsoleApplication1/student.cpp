@@ -573,6 +573,22 @@ void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course)
 		return;
 	}
 	outFile << "No, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, OtherMark" << endl;
+	int no = 1;
+	courseResultOfOneStudent *current = course->crsScoreboard->pHeadResult;
+	while (current != nullptr)
+	{
+		cout << no << ", ";
+		cout << current->stu.studentID << ", ";
+		cout << current->stu.fullName.firstName << ", ";
+		cout << current->stu.fullName.lastName << ", ";
+		cout << current->totalMark << ", ";
+		cout << current->finalMark << ", ";
+		cout << current->midtermMark << ", ";
+		cout << current->otherMark << endl;
+		current = current->pNextResult;
+	}
+	outFile.flush();
+	outFile.close();
 }
 
 void inputScoreboardOfOneCourse(nodeCourse *course)
