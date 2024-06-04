@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "teacher.h"
 #include "student.h"
+#include "class.h"
 void eatline()
 {
 	cin.clear();
@@ -965,11 +966,27 @@ void deleteCourse(nodeCourse *course)
 	delete course;
 }
 
+<<<<<<< HEAD
 void viewListOfClasses(nodeClass *cl)
 {
 	nodeClass *p = cl;
 	if (cl == NULL)
 	{
+=======
+
+
+void viewListOfStudentInClass1(Class cl) {
+	StudentNode* p = cl.pHeadStudent;
+	while (p != NULL) {
+		cout << p->data.fullName.firstName << " " << p->data.fullName.lastName << endl;
+	}
+	p = p->pNextStudent;
+}
+
+void viewListOfClasses(nodeClass* cl) {
+	nodeClass* p = cl;
+	if (cl == NULL) {
+>>>>>>> 7b2b80be3c6e8f5fab1fb8eaf919a1e8e3723e14
 		cout << "Empty class!" << endl;
 	}
 	else
