@@ -9,10 +9,10 @@ using namespace std;
 struct courseResultOfOneStudent
 {
 	Student stu;
-	int otherMark;
-	int midtermMark;
-	int finalMark;
-	int totalMark;
+	double otherMark;
+	double midtermMark;
+	double finalMark;
+	double totalMark;
 	courseResultOfOneStudent *pNextResult;
 };
 
@@ -136,9 +136,14 @@ void deleteCourse(nodeCourse *course);
 
 typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
-
 void viewListOfStudentInClass1(Class cl); // xem của lớp sinh hoạt
-void viewListOfStudentInClass2(); // xem của lớp bộ môn 
+void viewListOfStudentInClass2();		  // xem của lớp bộ môn
 void viewListOfClasses(nodeClass *cl);
 void viewListOfCourses(listCourse *courseList);
+
+void printStudentResult(Student stu);
+void inputScoreboardOfOneCourse(nodeCourse *course);
+void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course);
+void inputStudentResultOfACourse(Student stu);
+void updateScoreboardOfACourseFromCSVFile(string fileName, nodeCourse*course);
 #endif

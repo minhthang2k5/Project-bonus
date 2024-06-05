@@ -966,27 +966,21 @@ void deleteCourse(nodeCourse *course)
 	delete course;
 }
 
-<<<<<<< HEAD
-void viewListOfClasses(nodeClass *cl)
+void viewListOfStudentInClass1(Class cl)
 {
-	nodeClass *p = cl;
-	if (cl == NULL)
+	StudentNode *p = cl.pHeadStudent;
+	while (p != NULL)
 	{
-=======
-
-
-void viewListOfStudentInClass1(Class cl) {
-	StudentNode* p = cl.pHeadStudent;
-	while (p != NULL) {
 		cout << p->data.fullName.firstName << " " << p->data.fullName.lastName << endl;
 	}
 	p = p->pNextStudent;
 }
 
-void viewListOfClasses(nodeClass* cl) {
-	nodeClass* p = cl;
-	if (cl == NULL) {
->>>>>>> 7b2b80be3c6e8f5fab1fb8eaf919a1e8e3723e14
+void viewListOfClasses(nodeClass *cl)
+{
+	nodeClass *p = cl;
+	if (cl == NULL)
+	{
 		cout << "Empty class!" << endl;
 	}
 	else
@@ -1016,7 +1010,98 @@ void viewListOfCourses(listCourse *courseList)
 	}
 }
 
-void exportStudentListOfCourseToCSVFile(nodeCourse *course)
+void printStudentResult(Student stu)
 {
-	
+	StudentAcademicResult *temp = stu.academicResult->pHeadResult;
+	while (temp != nullptr)
+	{
+		cout << "Course Name: " << temp->courseName << " || Total point: " << temp->gpa << endl;
+		temp = temp->pNextResult;
+	}
+}
+
+void updateStudentResult(listCourse *crsList)
+{
+	nodeCourse *crsTemp = crsList->head;
+	while (crsTemp != nullptr)
+	{
+		crsTemp->
+	}
+}
+
+void updateScoreboardOfACourseFromCSVFile(string fileName, nodeCourse *course)
+{
+	ifstream inFile;
+	inFile.open(fileName);
+	if (!inFile.is_open())
+	{
+		cout << "Error while opening " << fileName << endl;
+		return;
+	}
+	string line;
+	getline(inFile, line, '\n');
+	string IDString, firstName, lastName, totalMark, finalMark, midtermMark, otherMark;
+	courseResultOfOneStudent *current = course->crsScoreboard->pHeadResult;
+	while (!inFile.eof())
+	{
+		getline(inFile, line, ',');
+		getline(inFile, IDString, ',');
+		current->stu.studentID = stod(IDString);
+		getline(inFile, lastName, ',');
+		current->stu.fullName.lastName = lastName;
+		getline(inFile, firstName, ',');
+		current->stu.fullName.firstName = firstName;
+		getline(inFile, totalMark, ',');
+		current->totalMark = stod(totalMark);
+		getline(inFile, finalMark, ',');
+		current->finalMark = stod(finalMark);
+		getline(inFile, midtermMark, ',');
+		current->midtermMark = stod(midtermMark);
+		getline(inFile, otherMark, '\n');
+		current->otherMark = stod(otherMark);
+		current = current->pNextResult;
+	}
+}
+void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course)
+{
+	ofstream outFile;
+	outFile.open(fileName);
+	if (!outFile.is_open())
+	{
+		cout << "Error while opening " << fileName << endl;
+		return;
+	}
+	outFile << "No, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, OtherMark" << endl;
+	int no = 1;
+	courseResultOfOneStudent *current = course->crsScoreboard->pHeadResult;
+	while (current != nullptr)
+	{
+		cout << no << ", ";
+		cout << current->stu.studentID << ", ";
+		cout << current->stu.fullName.firstName << ", ";
+		cout << current->stu.fullName.lastName << ", ";
+		cout << current->totalMark << ", ";
+		cout << current->finalMark << ", ";
+		cout << current->midtermMark << ", ";
+		cout << current->otherMark << endl;
+		current = current->pNextResult;
+	}
+	outFile.flush();
+	outFile.close();
+}
+
+void inputScoreboardOfOneCourse(nodeCourse *course)
+{
+	courseResultOfOneStudent *current = course->crsScoreboard->pHeadResult;
+	StudentNode *temp = course->studentList->pHeadStudent;
+	while (current != nullptr)
+	{
+		current->stu = temp->data;
+		cin >> current->otherMark;
+		cin >> current->midtermMark;
+		cin >> current->finalMark;
+		cin >> current->totalMark;
+		temp = temp->pNextStudent;
+		current = current->pNextResult;
+	}
 }
