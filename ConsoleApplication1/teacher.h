@@ -144,6 +144,6 @@ void viewListOfCourses(listCourse *courseList);
 void printStudentResult(Student stu);
 void inputScoreboardOfOneCourse(nodeCourse *course);
 void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course);
-void inputStudentResultOfACourse(Student stu);
-void updateScoreboardOfACourseFromCSVFile(string fileName, nodeCourse*course);
+void updateScoreboardOfACourseFromCSVFile(string fileName, nodeCourse *course);
+void updateStudentResult(listCourse *crsList, Student stu);
 #endif

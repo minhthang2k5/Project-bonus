@@ -1020,12 +1020,43 @@ void printStudentResult(Student stu)
 	}
 }
 
-void updateStudentResult(listCourse *crsList)
+void addStudentAcademicResultIntoList(StudentAcademicResultList *list, string id, string courseName, double gpa)
+{
+	StudentAcademicResult *result = new StudentAcademicResult();
+	result->courseID = id;
+	result->courseName = courseName;
+	result->gpa = gpa;
+	result->pNextResult = nullptr;
+	if (list->pHeadResult == nullptr)
+	{
+		list->pHeadResult = result;
+	}
+	else
+	{
+		result->pNextResult = list->pHeadResult;
+		list->pHeadResult = result;
+	}
+}
+void updateStudentResult(listCourse *crsList, Student stu)
 {
 	nodeCourse *crsTemp = crsList->head;
+	stu.academicResult = new StudentAcademicResultList();
+	stu.academicResult->pHeadResult = nullptr;
+	StudentAcademicResult *stuRstTemp = stu.academicResult->pHeadResult;
 	while (crsTemp != nullptr)
 	{
-		crsTemp->
+		courseResultOfOneStudent *rstTemp = crsTemp->crsScoreboard->pHeadResult;
+		while (rstTemp != nullptr)
+		{
+			if (rstTemp->stu.studentID == stu.studentID)
+			{
+				addStudentAcademicResultIntoList(stu.academicResult, crsTemp->id, crsTemp->courseName, rstTemp->totalMark);
+				stuRstTemp = stuRstTemp->pNextResult;
+				break;
+			}
+			rstTemp = rstTemp->pNextResult;
+		}
+		crsTemp = crsTemp->next;
 	}
 }
 
