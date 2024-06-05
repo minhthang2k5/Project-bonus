@@ -143,7 +143,7 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
 
     Class *class1 = createClass(className, 0);
 
-    string positionInClassString, idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+    string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
     FullName fullName;
     Date dateOfBirth;
 
@@ -153,17 +153,15 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
 
     while (!fileIn.eof())
     {
-        getline(fileIn, positionInClassString, ',');
-        int positionInClass = stoi(positionInClassString);
-
+        getline(fileIn, line, ',');
         getline(fileIn, idString, ',');
         int id = stoi(idString);
 
-        getline(fileIn, firstName, ',');
-        fullName.firstName = firstName;
-
         getline(fileIn, lastName, ',');
         fullName.lastName = lastName;
+
+        getline(fileIn, firstName, ',');
+        fullName.firstName = firstName;
 
         getline(fileIn, gender, ',');
 
@@ -198,7 +196,7 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
         return NULL;
     }
     StudentList *stuList = createStudentList(0);
-    string positionInClassString, idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+    string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
     FullName fullName;
     Date dateOfBirth;
 
@@ -208,17 +206,16 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
 
     while (!fileIn.eof())
     {
-        getline(fileIn, positionInClassString, ',');
-        int positionInClass = stoi(positionInClassString);
+        getline(fileIn, line, ',');
 
         getline(fileIn, idString, ',');
         int id = stoi(idString);
 
-        getline(fileIn, firstName, ',');
-        fullName.firstName = firstName;
-
         getline(fileIn, lastName, ',');
         fullName.lastName = lastName;
+
+        getline(fileIn, firstName, ',');
+        fullName.firstName = firstName;
 
         getline(fileIn, gender, ',');
 
@@ -239,6 +236,7 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
         stuList->numberOfStudents++;
     }
     fileIn.close();
+    return stuList;
 }
 
 void importStudentInACourseIntoCSVFile(string fileName, nodeCourse *course)
