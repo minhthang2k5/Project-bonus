@@ -85,7 +85,7 @@ Student getStudentInfo();
 StudentNode *createNewNode(Student info);
 void addTail(StudentList *&l, Student info);
 
-void viewListCourseOfSpecificStudent();
+void viewListCourseOfSpecificStudent(nodeSemester sem);
 
 struct StudentAcademicResult
 {
