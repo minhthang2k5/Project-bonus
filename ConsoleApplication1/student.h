@@ -1,7 +1,8 @@
 #ifndef _STUDENT_H_
 #define _STUDENT_H_
+
 #include <iostream>
-#include <fstream>
+#include "teacher.h"
 using namespace std;
 
 struct Date
@@ -14,18 +15,6 @@ struct FullName
 	string lastName;
 };
 
-struct StudentAcademicResult
-{
-	string courseID;
-	string courseName;
-	double gpa;
-	StudentAcademicResult *pNextResult;
-};
-
-struct StudentAcademicResultList
-{
-	StudentAcademicResult *pHeadResult;
-};
 struct Student
 {
 	string className;
@@ -34,7 +23,6 @@ struct Student
 	string gender;
 	Date dateOfBirth;
 	int socialID;
-	StudentAcademicResultList *academicResult;
 };
 
 struct StudentNode
@@ -99,4 +87,19 @@ void addTail(StudentList *&l, Student info);
 
 void viewListCourseOfSpecificStudent();
 
+struct StudentAcademicResult
+{
+	int studentID;
+	int courseID;
+	double point;
+	StudentAcademicResult *pNextResult;
+};
+
+struct StudentAcademicResultList
+{
+	StudentAcademicResult *pHeadResult;
+};
+
+void printStudentResult(StudentAcademicResultList *SARList, int studentID);
+void updateStudentResult(StudentAcademicResultList *SARList, int studentID, int courseID, double newPoint);
 #endif
