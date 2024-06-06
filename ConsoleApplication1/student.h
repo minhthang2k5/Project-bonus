@@ -2,7 +2,6 @@
 #define _STUDENT_H_
 
 #include <iostream>
-#include "teacher.h"
 using namespace std;
 
 struct Date
@@ -87,19 +86,4 @@ void addTail(StudentList *&l, Student info);
 
 void viewListCourseOfSpecificStudent(nodeSemester sem);
 
-struct StudentAcademicResult
-{
-	int studentID;
-	int courseID;
-	double point;
-	StudentAcademicResult *pNextResult;
-};
-
-struct StudentAcademicResultList
-{
-	StudentAcademicResult *pHeadResult;
-};
-
-void printStudentResult(StudentAcademicResultList *SARList, int studentID);
-void updateStudentResult(StudentAcademicResultList *SARList, int studentID, int courseID, double newPoint);
 #endif

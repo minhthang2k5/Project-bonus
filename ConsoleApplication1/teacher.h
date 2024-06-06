@@ -1,25 +1,8 @@
 ﻿#ifndef _TEACHER_H_
 #define _TEACHER_H_
-using namespace std;
-#include <iostream>
 #include <string>
 #include "student.h"
 #pragma warning(disable : 4996)
-
-struct courseResultOfOneStudent
-{
-	Student stu;
-	double otherMark;
-	double midtermMark;
-	double finalMark;
-	double totalMark;
-	courseResultOfOneStudent *pNextResult;
-};
-
-struct courseScoreboard
-{
-	courseResultOfOneStudent *pHeadResult;
-};
 
 struct nodeCourse
 {
@@ -32,9 +15,9 @@ struct nodeCourse
 	string dayOfweek;
 	string session;
 	StudentList *studentList;
-	courseScoreboard *crsScoreboard;
 	nodeCourse *next;
 };
+
 struct listCourse
 {
 	nodeCourse *head;
@@ -141,9 +124,4 @@ void viewListOfStudentInClass2();		  // xem của lớp bộ môn
 void viewListOfClasses(nodeClass *cl);
 void viewListOfCourses(listCourse *courseList);
 
-void printStudentResult(Student stu);
-void inputScoreboardOfOneCourse(nodeCourse *course);
-void importScoreboardOfACourseToCSVFile(string fileName, nodeCourse *course);
-void updateScoreboardOfACourseFromCSVFile(string fileName, nodeCourse *course);
-void updateStudentResult(listCourse *crsList, Student stu);
 #endif

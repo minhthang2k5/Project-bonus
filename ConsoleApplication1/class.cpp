@@ -239,35 +239,35 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
     return stuList;
 }
 
-void importStudentInACourseIntoCSVFile(string fileName, nodeCourse *course)
-{
-    if (course == nullptr || course->studentList == nullptr)
-    {
-        cerr << "Course or student list is null." << endl;
-        return;
-    }
+// void importStudentInACourseIntoCSVFile(string fileName, nodeCourse *course)
+// {
+//     if (course == nullptr || course->studentList == nullptr)
+//     {
+//         cerr << "Course or student list is null." << endl;
+//         return;
+//     }
 
-    ofstream outFile(fileName);
+//     ofstream outFile(fileName);
 
-    if (!outFile.is_open())
-    {
-        cerr << "Could not open the file for writing." << endl;
-        return;
-    }
+//     if (!outFile.is_open())
+//     {
+//         cerr << "Could not open the file for writing." << endl;
+//         return;
+//     }
 
-    // Write CSV header
-    outFile << "StudentID,FirstName,LastName\n";
+//     // Write CSV header
+//     outFile << "StudentID,FirstName,LastName\n";
 
-    StudentNode *currentStudentNode = course->studentList->pHeadStudent;
-    while (currentStudentNode != nullptr)
-    {
-        Student &student = currentStudentNode->data;
-        outFile << student.studentID << ","
-                << student.fullName.firstName << ","
-                << student.fullName.lastName << "\n";
-        currentStudentNode = currentStudentNode->pNextStudent;
-    }
+//     StudentNode *currentStudentNode = course->studentList->pHeadStudent;
+//     while (currentStudentNode != nullptr)
+//     {
+//         Student &student = currentStudentNode->data;
+//         outFile << student.studentID << ","
+//                 << student.fullName.firstName << ","
+//                 << student.fullName.lastName << "\n";
+//         currentStudentNode = currentStudentNode->pNextStudent;
+//     }
 
-    outFile.close();
-    cout << "Student data has been written to " << fileName << endl;
-}
+//     outFile.close();
+//     cout << "Student data has been written to " << fileName << endl;
+// }
