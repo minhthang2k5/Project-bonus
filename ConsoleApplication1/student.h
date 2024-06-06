@@ -8,6 +8,7 @@ struct Date
 {
 	int day, month, year;
 };
+
 struct FullName
 {
 	string firstName;
@@ -36,54 +37,20 @@ struct StudentList
 	StudentNode *pHeadStudent;
 };
 
-struct Student_Info
-{
-	string fullname;
-	Date birthday;
+struct SignInInfo {
 	string username;
 	string password;
-	string email;
-	int gender;
-	int id;
-	int form;
-	string sclass;
-	int faculty;
 };
 
-struct Student_Node
+struct NodeAccount
 {
-	Student_Info student;
-	Student_Node *pNext;
+	SignInInfo info;
+	NodeAccount* next;
 };
 
-struct Student_List
-{
-	Student_Node *pHead;
+struct ListAccount {
+	NodeAccount* head;
 };
-
-int checkFullName(string fullname);
-int checkDate(Date d);
-int checkUsername(string username);
-int checkPassword(string password);
-int checkEmail(string email);
-bool isDifferentUsername(Student_List l, string username);
-bool isDifferentPassword(Student_List l, string password);
-Student_Info getStudentInfo(Student_List l);
-Student_Node *createNewNode(Student_Info info);
-void init(Student_List &l);
-void addTail(Student_List &l, Student_Info info);
-void printStudentInfo(Student_Info info);
-void printList(Student_List l);
-int signUp(Student_List &l);
-
-int getStudentAccount(Student_List l, string inUsername, string inPassword);
-int signIn(Student_List l);
-
-// c�c h�m cho StudentList
-Student getStudentInfo();
-StudentNode *createNewNode(Student info);
-void addTail(StudentList *&l, Student info);
-
 
 
 #endif

@@ -4,6 +4,24 @@
 #include "student.h"
 #pragma warning(disable : 4996)
 
+struct ScoreboardOfCourse {
+	int studentID;
+	double otherscore;
+	double midscore;
+	double finalscore;
+	double totalscore;
+
+};
+
+struct NodeScoreboardOfCourse {
+	ScoreboardOfCourse scoreboard;
+	NodeScoreboardOfCourse* next;
+};
+
+struct ListScoreboardOfCourse {
+	NodeScoreboardOfCourse* head;
+};
+
 struct nodeCourse
 {
 	string id;
@@ -14,6 +32,7 @@ struct nodeCourse
 	int numberOfStudent;
 	string dayOfweek;
 	string session;
+	ListScoreboardOfCourse* scoreList;
 	StudentList *studentList;
 	nodeCourse *next;
 };
@@ -22,6 +41,7 @@ struct listCourse
 {
 	nodeCourse *head;
 };
+
 struct nodeSemester
 {
 	// ky 1,2 hay 3
@@ -31,16 +51,19 @@ struct nodeSemester
 	Date end;
 	nodeSemester *next;
 };
+
 struct listSemester
 {
 	nodeSemester *head;
 };
-struct nodeClass
-{
-	string name;
-	// list student
-	nodeClass *next;
-};
+
+//struct nodeClass
+//{
+//	string name;
+//	// list student
+//	nodeClass *next;
+//};
+
 struct schoolYear
 {
 	int beginYear;
@@ -48,15 +71,17 @@ struct schoolYear
 	listSemester listSem;
 	schoolYear *next;
 };
+
 struct listYear
 {
 	schoolYear *pHead;
 };
+
 // function List Year
 listYear creatListYear();
 void eatline();
-void addClass(listYear *&lY);
-void displayClass(nodeClass *head);
+//void addClass(listYear *&lY);
+//void displayClass(nodeClass *head);
 bool checkNumber(char a);
 void detachedYear(int &begin, int &last, string year);
 void addHeadNewSchoolYear(listYear &lY);
@@ -65,7 +90,7 @@ nodeSemester *initSemester();
 void addHeadSemester(listSemester &list, nodeSemester *p);
 void inputInformationSemesterAndAddSchoolYear(listYear &lY);
 
-struct Teacher_Info
+struct Staff_Info
 {
 	string fullname;
 	Date birthday;
@@ -75,34 +100,34 @@ struct Teacher_Info
 	int gender;
 };
 
-struct Teacher_Node
+struct Staff_Node
 {
-	Teacher_Info teacher;
-	Teacher_Node *pNext;
+	Staff_Info teacher;
+	Staff_Node *pNext;
 };
 
-struct Teacher_List
+struct Staff_List
 {
-	Teacher_Node *pHead;
+	Staff_Node *pHead;
 };
+
 int CheckFullName(string fullname);
 bool isLeapYear(int y);
 int CheckDate(Date d);
 int CheckUsername(string username);
 int CheckPassword(string password);
 int CheckEmail(string email);
-bool isDifferentUsername(Teacher_List l, string username);
-bool isDifferentPassword(Teacher_List l, string password);
-Teacher_Info GetTeacherInfo(Teacher_List l);
-Teacher_Node *CreateNewNode(Teacher_Info info);
-void Init(Teacher_List &l);
-void AddTail(Teacher_List &l, Teacher_Info info);
-void PrintTeacherInfo(Teacher_Info info);
-void PrintList(Teacher_List l);
-int SignUp(Teacher_List &l);
-
-int GetTeacherAccount(Teacher_List l, string inUsername, string inPassword);
-int SignIn(Teacher_List l);
+bool isDifferentUsername(Staff_List l, string username);
+bool isDifferentPassword(Staff_List l, string password);
+Staff_Info GetStaffInfo(Staff_List l);
+Staff_Node *CreateNewNode(Staff_Info info);
+void Init(Staff_List &l);
+void AddTail(Staff_List &l, Staff_Info info);
+void PrintStaffInfo(Staff_Info info);
+void PrintList(Staff_List l);
+int SignUp(Staff_List &l);
+int GetStaffAccount(Staff_List l, string inUsername, string inPassword);
+int SignIn(Staff_List l);
 
 // function of course
 nodeCourse *initCourse();
@@ -116,6 +141,5 @@ void removeStudentFromCourse(nodeCourse *course);
 void deleteCourse(nodeCourse *course);
 
 typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
-
 
 #endif
