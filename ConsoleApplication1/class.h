@@ -13,18 +13,42 @@ struct Class
 {
     string className;
     int numberOfStudents;
-    int positionOfStudents;
     StudentNode *pHeadStudent;
-    Class *pNextClass;
+};
+
+struct ClassNode
+{
+    Class data;
+    ClassNode *pNextClass;
 };
 
 struct ClassList
 {
     int numberOfClasses;
-    Class *pHeadClass;
+    ClassNode *pHeadClass;
 };
 
-Student createStudent(string className1, int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
+struct ScoreboardOfStudent
+{
+    int studentID;
+    double overallGPA;
+    // tự viết hàm, dùng biến phụ tính điểm trung bình của kì học, rồi tính overall GPA  và lưu vào overall GPA
+    listCourse *coursesRegistered;
+};
+
+struct ScoreboardOfStudentNode
+{
+    ScoreboardOfStudent data;
+    ScoreboardOfStudentNode *pNext;
+};
+
+struct ScoreboardOfClass
+{
+    ScoreboardOfStudentNode *pHead;
+};
+
+Student
+createStudent(string className1, int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
 Student createStudent(int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
 Class *createClass(string className1, int numberOfStudents1);
 ClassList *createClassList(int numberOfClasses);

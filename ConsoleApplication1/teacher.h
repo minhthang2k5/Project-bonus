@@ -4,22 +4,24 @@
 #include "student.h"
 #pragma warning(disable : 4996)
 
-struct ScoreboardOfCourse {
+struct ScoreboardOfCourse
+{
 	int studentID;
 	double otherscore;
 	double midscore;
 	double finalscore;
 	double totalscore;
-
 };
 
-struct NodeScoreboardOfCourse {
+struct NodeScoreboardOfCourse
+{
 	ScoreboardOfCourse scoreboard;
-	NodeScoreboardOfCourse* next;
+	NodeScoreboardOfCourse *next;
 };
 
-struct ListScoreboardOfCourse {
-	NodeScoreboardOfCourse* head;
+struct ListScoreboardOfCourse
+{
+	NodeScoreboardOfCourse *head;
 };
 
 struct nodeCourse
@@ -32,7 +34,7 @@ struct nodeCourse
 	int numberOfStudent;
 	string dayOfweek;
 	string session;
-	ListScoreboardOfCourse* scoreList;
+	ListScoreboardOfCourse *scoreList;
 	StudentList *studentList;
 	nodeCourse *next;
 };
@@ -57,12 +59,12 @@ struct listSemester
 	nodeSemester *head;
 };
 
-//struct nodeClass
+// struct nodeClass
 //{
 //	string name;
 //	// list student
 //	nodeClass *next;
-//};
+// };
 
 struct schoolYear
 {
@@ -80,8 +82,8 @@ struct listYear
 // function List Year
 listYear creatListYear();
 void eatline();
-//void addClass(listYear *&lY);
-//void displayClass(nodeClass *head);
+// void addClass(listYear *&lY);
+// void displayClass(nodeClass *head);
 bool checkNumber(char a);
 void detachedYear(int &begin, int &last, string year);
 void addHeadNewSchoolYear(listYear &lY);
@@ -135,7 +137,6 @@ void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(listYear &lY);
 void updateInformationCourse(listYear &lY);
 void addStudentToCourse(nodeCourse *course);
-
 
 void removeStudentFromCourse(nodeCourse *course);
 void deleteCourse(nodeCourse *course);
