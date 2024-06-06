@@ -111,17 +111,11 @@ void inputInformationToAddCourse(listYear &lY);
 void updateInformationCourse(listYear &lY);
 void addStudentToCourse(nodeCourse *course);
 
-void viewCourseInformation(nodeCourse *course);
-void viewListOfCoursesInformation(listCourse *courseList);
-void viewStudentsOfCourse(nodeCourse *course);
+
 void removeStudentFromCourse(nodeCourse *course);
 void deleteCourse(nodeCourse *course);
 
 typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
-void viewListOfStudentInClass1(Class cl); // xem của lớp sinh hoạt
-void viewListOfStudentInClass2();		  // xem của lớp bộ môn
-void viewListOfClasses(nodeClass *cl);
-void viewListOfCourses(listCourse *courseList);
 
 #endif

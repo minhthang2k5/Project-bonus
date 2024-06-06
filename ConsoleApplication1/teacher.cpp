@@ -919,44 +919,8 @@ int SignIn(Teacher_List l)
 	return 1;
 }
 
-void viewCourseInformation(nodeCourse *course)
-{
-	cout << "ID: " << course->id << endl;
-	cout << "Name: " << course->courseName << endl;
-	cout << "Class: " << course->className << endl;
-	cout << "Number of credits: " << course->numberOfCredits << endl;
-	cout << "Number of students: " << course->numberOfStudent << endl;
-	cout << "Teacher: " << course->teacher << endl;
-	cout << "Day of week: " << course->dayOfweek << endl;
-	cout << "Session: " << course->session << endl;
-}
 
-void viewListOfCoursesInformation(listCourse *courseList)
-{
-	nodeCourse *temp = courseList->head;
-	while (temp != nullptr)
-	{
-		cout << "ID: " << temp->id << endl;
-		cout << "Name: " << temp->courseName << endl;
-		cout << "Class: " << temp->className << endl;
-		cout << "Number of credits: " << temp->numberOfCredits << endl;
-		cout << "Number of students: " << temp->numberOfStudent << endl;
-		cout << "Teacher: " << temp->teacher << endl;
-		cout << "Day of week: " << temp->dayOfweek << endl;
-		cout << "Session: " << temp->session << endl;
-		temp = temp->next;
-	}
-}
 
-void viewStudentsOfCourse(nodeCourse *course)
-{
-	StudentNode *temp = course->studentList->pHeadStudent;
-	while (temp != nullptr)
-	{
-		cout << temp->data.studentID << " " << temp->data.fullName.firstName << " " << temp->data.fullName.lastName << endl;
-		temp = temp->pNextStudent;
-	}
-}
 
 void removeStudentFromCourse(nodeCourse *course)
 {
@@ -966,47 +930,6 @@ void deleteCourse(nodeCourse *course)
 	delete course;
 }
 
-void viewListOfStudentInClass1(Class cl)
-{
-	StudentNode *p = cl.pHeadStudent;
-	while (p != NULL)
-	{
-		cout << p->data.fullName.firstName << " " << p->data.fullName.lastName << endl;
-	}
-	p = p->pNextStudent;
-}
 
-void viewListOfClasses(nodeClass *cl)
-{
-	nodeClass *p = cl;
-	if (cl == NULL)
-	{
-		cout << "Empty class!" << endl;
-	}
-	else
-	{
-		while (p != NULL)
-		{
-			cout << p->name << endl;
-			p = p->next;
-		}
-	}
-}
 
-void viewListOfCourses(listCourse *courseList)
-{
-	nodeCourse *p = courseList->head;
-	if (courseList->head == NULL)
-	{
-		cout << "Empty list of courses" << endl;
-	}
-	else
-	{
-		while (p != NULL)
-		{
-			cout << p->courseName << endl;
-			p = p->next;
-		}
-	}
-}
 

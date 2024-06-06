@@ -552,11 +552,3 @@ void addTail(StudentList *&l, Student info)
 		p->pNextStudent = student;
 	}
 }
-
-
-void viewListCourseOfSpecificStudent(nodeSemester sem) {
-	nodeCourse* p = sem.listCour.head;
-	while (p != NULL) {
-		cout << p->courseName << endl;
-	}
-}
