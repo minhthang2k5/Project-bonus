@@ -52,5 +52,8 @@ struct ListAccount {
 	NodeAccount* head;
 };
 
+Student getStudentInfo();
+StudentNode* CreateNewNode(Student info);
+void AddTailToStudentList(StudentList* l, Student info);
 
 #endif

@@ -803,7 +803,10 @@ void updateInformationCourse(listYear &lY)
 	getline(cin, tempCourse->session);
 }
 
-
+void addStudentToCourse(nodeCourse* course) {
+	Student info = getStudentInfo();
+	AddTailToStudentList(course->studentList, info);
+}
 
 
 
