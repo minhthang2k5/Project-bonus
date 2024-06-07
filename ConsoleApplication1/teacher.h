@@ -104,7 +104,7 @@ struct Staff_Info
 
 struct Staff_Node
 {
-	Staff_Info teacher;
+	Staff_Info staff;
 	Staff_Node *pNext;
 };
 

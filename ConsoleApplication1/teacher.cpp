@@ -258,6 +258,326 @@ void inputInformationSemesterAndAddSchoolYear(listYear &lY)
 	seme->listCour.head = NULL;
 	addHeadSemester(temp->listSem, seme);
 }
+
+int CheckFullName(string fullname) {
+	int space = 0;
+	for (int i = 0; i < fullname.length(); i++) {
+		if (fullname[i] == ' ') {
+			space = 1;
+		}
+	}
+	if (space == 0) {
+		return 0;
+	}
+	return 1;
+}
+bool isLeapYear(int y) {
+	if ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0)) {
+		return true;
+	}
+	return false;
+}
+int CheckDate(Date d) {
+	if ((d.day <= 0 && d.day >= 32) || (d.month <= 0 && d.month >= 13) || d.year <= 0) {
+		return 0;
+	}
+	if (isLeapYear(d.year)) {
+		switch (d.month) {
+		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+			if (d.day >= 32) {
+				return 0;
+			}
+		case 2:
+			if (d.day >= 30) {
+				return 0;
+			}
+		case 4: case 6: case 9: case 11:
+			if (d.day >= 31) {
+				return 0;
+			}
+		}
+	}
+	if (!isLeapYear(d.year)) {
+		switch (d.month) {
+		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+			if (d.day >= 32) {
+				return 0;
+			}
+		case 2:
+			if (d.day >= 29) {
+				return 0;
+			}
+		case 4: case 6: case 9: case 11:
+			if (d.day >= 31) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+int CheckUsername(string username) {
+	string test("admin");
+	int found = username.find(test);
+	if (found != string::npos) {
+		return 0;
+	}
+	return 1;
+}
+int CheckPassword(string password) {
+	if (password.length() < 6) {
+		return 0;
+	}
+	int upper = 0;
+	for (int i = 0; i < password.length(); i++) {
+		if (password[i] >= 'A' && password[i] <= 'Z') {
+			upper = 1;
+		}
+	}
+	if (upper == 0) {
+		return 0;
+	}
+	int character = 0;
+	for (int i = 0; i < password.length(); i++) {
+		if (password[i] >= 'A' && password[i] <= 'Z') {
+			character = 1;
+		}
+		if (password[i] >= 'a' && password[i] <= 'z') {
+			character = 1;
+		}
+	}
+	if (character == 0) {
+		return 0;
+	}
+	int digit = 0;
+	for (int i = 0; i < password.length(); i++) {
+		if (password[i] >= '0' && password[i] <= '9') {
+			digit = 1;
+		}
+	}
+	if (digit == 0) {
+		return 0;
+	}
+	return 1;
+}
+int CheckEmail(string email) {
+	int at = 0;
+	int dot = 0;
+	for (int i = 0; i < email.length(); i++) {
+		if (email[i] == '.') {
+			dot = 1;
+		}
+		if (email[i] == '@') {
+			at = 1;
+		}
+	}
+	if (dot == 0 && at == 0) {
+		return 0;
+	}
+	return 1;
+}
+bool isDifferentUsername(Staff_List l, string username) {
+	if (l.pHead == NULL)
+	{
+		return true;
+	}
+	else
+	{
+		Staff_Node* p = l.pHead;
+		while (p != NULL)
+		{
+			if (p->staff.username == username)
+			{
+				return false;
+			}
+			p = p->pNext;
+		}
+	}
+	return true;
+}
+bool isDifferentPassword(Staff_List l, string password) {
+	if (l.pHead == NULL)
+	{
+		return true;
+	}
+	else
+	{
+		Staff_Node* p = l.pHead;
+		while (p != NULL)
+		{
+			if (p->staff.password == password)
+			{
+				return false;
+			}
+			p = p->pNext;
+		}
+	}
+	return true;
+}
+Staff_Info GetStaffInfo(Staff_List l) {
+	Staff_Info info;
+	cout << "Input your infomation..." << endl;
+	cout << "Your fullname: ";
+	getline(cin, info.fullname);
+	while (CheckFullName(info.fullname) == 0) {
+		cout << "Your fullname is invalid. Please input again!" << endl;
+		cout << "Your fullname: ";
+		getline(cin, info.fullname);
+	}
+
+	cout << "Your email <Type your email without space>: ";
+	cin >> info.email;
+	while (CheckEmail(info.email) == 0) {
+		cout << "Your email is invalid. Please input again!" << endl;
+		cout << "Your email <Type your email without space>: ";
+		cin >> info.email;
+	}
+
+	cout << "Your birthday: " << endl;
+	cout << "  Day: ";
+	cin >> info.birthday.day;
+	cout << "  Month: ";
+	cin >> info.birthday.month;
+	cout << "  Year: ";
+	cin >> info.birthday.year;
+	while (CheckDate(info.birthday) == 0) {
+		cout << "Your birthday is invalid. Please input again!" << endl;
+		cout << "Your birthday: ";
+		cout << "  Day: ";
+		cin >> info.birthday.day;
+		cout << "  Month: ";
+		cin >> info.birthday.month;
+		cout << "  Year: ";
+		cin >> info.birthday.year;
+	}
+
+	cout << "Your gender <1: male, 0: female>: ";
+	cin >> info.gender;
+	cin.ignore();
+
+	cout << "Your username <Type your username without space>: ";
+	cin >> info.username;
+	while (CheckUsername(info.username) == 0) {
+		cout << "Your username is invalid. Please input again!" << endl;
+		cout << "Your username <Type your username without space>: ";
+		cin >> info.username;
+	}
+
+	cout << "  <At least 6 characters>" << endl;
+	cout << "  <At least 1 capital character>" << endl;
+	cout << "  <At least 1 digit>" << endl;
+	cout << "Your password: ";
+	cin >> info.password;
+	while (CheckPassword(info.password) == 0) {
+		cout << "Your password is invalid. Please input again!" << endl;
+		cout << "  <At least 6 characters>" << endl;
+		cout << "  <At least 1 capital character>" << endl;
+		cout << "  <At least 1 digit>" << endl;
+		cout << "Your password: ";
+		cin >> info.password;
+	}
+	cin.ignore();
+
+	return info;
+}
+Staff_Node* CreateNewNode(Staff_Info info) {
+	Staff_Node* node = new Staff_Node;
+	node->staff = info;
+	node->pNext = NULL;
+
+	return node;
+}
+void Init(Staff_List& l) {
+	l.pHead = NULL;
+}
+void AddTail(Staff_List& l, Staff_Info info) {
+	Staff_Node* staff = CreateNewNode(info);
+	if (l.pHead == NULL) {
+		l.pHead = staff;
+	}
+	else {
+		Staff_Node* p = l.pHead;
+		while (p->pNext != NULL) {
+			p = p->pNext;
+		}
+		p->pNext = staff;
+	}
+}
+void PrintStaffInfo(Staff_Info info) {
+	cout << "Fullname: " << info.fullname << endl;
+	cout << "Email: " << info.email << endl;
+	cout << "Birthday: " << info.birthday.day << "/" << info.birthday.month << "/" << info.birthday.year << endl;
+	if (info.gender == 1) {
+		cout << "Gender: Male" << endl;
+	}
+	else if (info.gender == 0) {
+		cout << "Gender: Female" << endl;
+	}
+	cout << "Username: " << info.username << endl;
+	cout << "Password: " << info.password << endl;
+}
+void PrintList(Staff_List l) {
+	Staff_Node* p = l.pHead;
+	while (p != NULL) {
+		PrintStaffInfo(p->staff);
+		cout << endl;
+		p = p->pNext;
+	}
+}
+int SignUp(Staff_List& l) {
+	
+	Staff_Info info = GetStaffInfo(l);
+	AddTail(l, info);
+	cout << "Sign up successfully!" << endl;
+	return 1;
+}
+int GetStaffAccount(Staff_List l, string inUsername, string inPassword) {
+	if (l.pHead == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		Staff_Node* p = l.pHead;
+		while (p != NULL)
+		{
+			if (p->staff.username == inUsername && p->staff.password == inPassword)
+			{
+				return 1;
+			}
+			p = p->pNext;
+		}
+	}
+	return 0;
+}
+int SignIn(Staff_List l) {
+	string inUsername;
+	string inPassword;
+
+	cout << "Input your username: ";
+	cin >> inUsername;
+	cout << "Input your password: ";
+	cin >> inPassword;
+	if (GetStaffAccount(l, inUsername, inPassword) == 1)
+	{
+		cout << "Sign in successfully!" << endl;
+	}
+	while (GetStaffAccount(l, inUsername, inPassword) == 0)
+	{
+		system("cls");
+		cout << "Username or password maybe incorrect! Please try again!" << endl;
+		cout << "Input your username: ";
+		cin >> inUsername;
+		cout << "Input your password: ";
+		cin >> inPassword;
+		if (GetStaffAccount(l, inUsername, inPassword) == 1)
+		{
+			cout << "Sign in successfully!" << endl;
+		}
+	}
+	return 1;
+}
+
+
 /*
 Hàm này để khởi tạo khóa học
 Input:không có
