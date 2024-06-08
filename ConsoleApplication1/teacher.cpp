@@ -801,7 +801,7 @@ void updateInformationCourse(listYear &lY)
 	cout << "S4 (15:30)" << endl;
 	getline(cin, tempCourse->session);
 }
-
+void viewcourse();
 void addStudentToCourse(nodeCourse* course) {
 	Student info = getStudentInfo();
 	AddTailToStudentList(course->studentList, info);
