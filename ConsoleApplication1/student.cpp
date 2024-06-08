@@ -1,6 +1,4 @@
 #include "student.h"
-
-
 Student getStudentInfo() {
 	Student info;
 	cout << "Input classname: ";

@@ -1,84 +1,7 @@
 ﻿#ifndef _TEACHER_H_
 #define _TEACHER_H_
-#include <string>
-#include "student.h"
+#include "struct.h"
 #pragma warning(disable : 4996)
-
-struct ScoreboardOfCourse
-{
-	int studentID;
-	double otherscore;
-	double midscore;
-	double finalscore;
-	double totalscore;
-};
-
-struct NodeScoreboardOfCourse
-{
-	ScoreboardOfCourse scoreboard;
-	NodeScoreboardOfCourse *next;
-};
-
-struct ListScoreboardOfCourse
-{
-	NodeScoreboardOfCourse *head;
-};
-
-struct nodeCourse
-{
-	string id;
-	string courseName;
-	string className;
-	string teacher;
-	int numberOfCredits;
-	int numberOfStudent;
-	string dayOfweek;
-	string session;
-	ListScoreboardOfCourse *scoreList;
-	StudentList *studentList;
-	nodeCourse *next;
-};
-
-struct listCourse
-{
-	nodeCourse *head;
-};
-
-struct nodeSemester
-{
-	// ky 1,2 hay 3
-	listCourse listCour;
-	int name;
-	Date begin;
-	Date end;
-	nodeSemester *next;
-};
-
-struct listSemester
-{
-	nodeSemester *head;
-};
-
-// struct nodeClass
-//{
-//	string name;
-//	// list student
-//	nodeClass *next;
-// };
-
-struct schoolYear
-{
-	int beginYear;
-	int lastYear;
-	listSemester listSem;
-	schoolYear *next;
-};
-
-struct listYear
-{
-	schoolYear *pHead;
-};
-
 // function List Year
 listYear creatListYear();
 void eatline();
@@ -135,6 +58,7 @@ int SignIn(Staff_List l);
 nodeCourse *initCourse();
 void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(listYear &lY);
+
 void updateInformationCourse(listYear &lY);
 void addStudentToCourse(nodeCourse *course);
 

@@ -1,6 +1,5 @@
 ﻿#include "teacher.h"
 #include "student.h"
-#include "class.h"
 void eatline()
 {
 	cin.ignore();

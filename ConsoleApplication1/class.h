@@ -1,47 +1,6 @@
 #ifndef _CLASS_H_
 #define _CLASS_H_
-
-#include "student.h"
-#include "teacher.h"
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <string>
-#include <sstream>
-
-struct Class
-{
-    string className;
-    int numberOfStudents;
-    StudentNode *pHeadStudent;
-    Class *pNextClass;
-};
-
-struct ClassList
-{
-    int numberOfClasses;
-    Class *pHeadClass;
-};
-
-struct ScoreboardOfStudent
-{
-    int studentID;
-    double overallGPA;
-    // tự viết hàm, dùng biến phụ tính điểm trung bình của kì học, rồi tính overall GPA  và lưu vào overall GPA
-    listCourse *coursesRegistered;
-};
-
-struct ScoreboardOfStudentNode
-{
-    ScoreboardOfStudent data;
-    ScoreboardOfStudentNode *pNext;
-};
-
-struct ScoreboardOfClass
-{
-    ScoreboardOfStudentNode *pHead;
-};
-
+#include "struct.h"
 Student createStudent(string className1, int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
 Student createStudent(int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
 Class *createClass(string className1, int numberOfStudents1);
