@@ -114,11 +114,24 @@ struct listSemester
 //	// list student
 //	nodeClass *next;
 // };
+struct Class
+{
+	string className;
+	int numberOfStudents;
+	StudentNode* pHeadStudent=NULL;
+	Class* pNextClass=NULL;
+};
 
+struct ClassList
+{
+	int numberOfClasses;
+	Class* pHeadClass=NULL;
+};
 struct schoolYear
 {
 	int beginYear;
 	int lastYear;
+	ClassList listClass;
 	listSemester listSem;
 	schoolYear* next;
 };
@@ -128,19 +141,7 @@ struct listYear
 	schoolYear* pHead;
 };
 
-struct Class
-{
-	string className;
-	int numberOfStudents;
-	StudentNode* pHeadStudent;
-	Class* pNextClass;
-};
 
-struct ClassList
-{
-	int numberOfClasses;
-	Class* pHeadClass;
-};
 
 struct ScoreboardOfStudent
 {

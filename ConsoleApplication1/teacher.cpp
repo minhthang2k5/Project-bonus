@@ -1,5 +1,6 @@
 ﻿#include "teacher.h"
 #include "student.h"
+#include "class.h"
 void eatline()
 {
 	cin.ignore();
@@ -85,6 +86,7 @@ void addHeadNewSchoolYear(listYear &lY)
 		lY.pHead = temp;
 	}
 }
+//void addClassYear()
 /*
 void addClass(listYear*& lY)
 {
@@ -210,6 +212,50 @@ void addHeadSemester(listSemester &list, nodeSemester *p)
 	{
 		p->next = list.head;
 		list.head = p;
+	}
+}
+void inputClassToAddSchoolYear(listYear& lY)
+{
+	// Kiểm tra năm học nào để luu vào một node: temp
+	string year;
+	int begin;
+	int last;
+	cout << "Input school year to add class: ";
+	getline(cin, year);
+	detachedYear(begin, last, year);
+	schoolYear* temp = lY.pHead;
+	bool checkExitsYear = false;
+	while (temp != NULL)
+	{
+		if (temp->beginYear == begin)
+		{
+			checkExitsYear = true;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (checkExitsYear == false)
+	{
+		cout << "The school year isn't exit";
+		return;
+	}
+	Class* a = new Class;
+	cout << "Input the class name:";
+	getline(cin, a->className);
+	cout << "The number of student:";
+	cin >> a->numberOfStudents;
+	cin.ignore();
+	a->pHeadStudent = NULL;
+	a->pNextClass = NULL;
+	if (lY.pHead->listClass.pHeadClass==NULL)
+	{
+		lY.pHead->listClass.numberOfClasses = 1;
+		lY.pHead->listClass.pHeadClass = a;
+	}
+	else
+	{
+		lY.pHead->listClass.numberOfClasses++;
+		lY.pHead->listClass.pHeadClass->pNextClass = a;
 	}
 }
 /*

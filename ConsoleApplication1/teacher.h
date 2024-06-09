@@ -67,4 +67,6 @@ void deleteCourse(nodeCourse *course);
 
 typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
+void inputClassToAddSchoolYear(listYear& lY);
+
 #endif
