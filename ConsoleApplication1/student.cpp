@@ -82,3 +82,56 @@ ListAccount* CreateListAccount(ClassList* cl) {
 	}
 	return l;
 }
+void PrintListAccount(ListAccount* l) {
+	NodeAccount* p = l->head;
+	while (p != NULL) {
+		cout << p->info.username << endl;
+		cout << p->info.password << endl;
+	}
+}
+int GetStudentAccount(ListAccount* l, string inUsername, string inPassword) {
+	if (l->head == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		NodeAccount* p = l->head;
+		while (p != NULL)
+		{
+			if (p->info.username == inUsername && p->info.password == inPassword)
+			{
+				return 1;
+			}
+			p = p->next;
+		}
+	}
+	return 0;
+}
+int Login(ListAccount* l) {
+	string inUsername;
+	string inPassword;
+
+	cout << "Input your username: ";
+	cin >> inUsername;
+	cout << "Input your password: ";
+	cin >> inPassword;
+	if (GetStudentAccount(l, inUsername, inPassword) == 1)
+	{
+		cout << "Sign in successfully!" << endl;
+	}
+	while (GetStudentAccount(l, inUsername, inPassword) == 0)
+	{
+		system("cls");
+		cout << "Username or password maybe incorrect! Please try again!" << endl;
+		cout << "Input your username: ";
+		cin >> inUsername;
+		cout << "Input your password: ";
+		cin >> inPassword;
+		if (GetStudentAccount(l, inUsername, inPassword) == 1)
+		{
+			cout << "Sign in successfully!" << endl;
+		}
+	}
+	return 1;
+}
