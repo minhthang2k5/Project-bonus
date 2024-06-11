@@ -14,4 +14,17 @@ Class *readStudentsOfClassFromCSVFile(string fileName);
 
 StudentList *readStudentsOfCourseFromCSVFile(string fileName);
 
+typedef bool (*CompareFunc)(const Student &, const void *);
+bool compareByName(const Student &student, const void *name);
+bool compareByID(const Student &student, const void *id);
+void removeStudentFromCourse(nodeCourse *course, CompareFunc compare, const void *value);
+void removeLastStudentFromCourse(nodeCourse *course);
+
+//----
+typedef bool (*CompareCourseFunc)(const nodeCourse &, const void *);
+bool compareCourseByName(const nodeCourse &course, const void *name);
+bool compareCourseByID(const nodeCourse &course, const void *id);
+void deleteStudentList(StudentList *studentList);
+void deleteScoreList(ListScoreboardOfCourse *scoreList);
+void deleteCourse(nodeCourse *&head, CompareCourseFunc compare, const void *value);
 #endif

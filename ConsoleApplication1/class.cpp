@@ -239,3 +239,139 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
     fileIn.close();
     return stuList;
 }
+
+bool compareByName(const Student &student, const void *name)
+{
+    const string *studentName = static_cast<const string *>(name);
+    return student.fullName.firstName + " " + student.fullName.lastName == *studentName;
+}
+bool compareByID(const Student &student, const void *id)
+{
+    const int *studentID = static_cast<const int *>(id);
+    return student.studentID == *studentID;
+}
+void removeStudentFromCourse(nodeCourse *course, CompareFunc compare, const void *value)
+{
+    if (course->studentList == nullptr || course->studentList->pHeadStudent == nullptr)
+        return;
+
+    StudentNode *current = course->studentList->pHeadStudent;
+    StudentNode *previous = nullptr;
+
+    while (current != nullptr)
+    {
+        if (compare(current->data, value))
+        {
+            if (previous == nullptr)
+            {
+                course->studentList->pHeadStudent = current->pNextStudent;
+            }
+            else
+            {
+                previous->pNextStudent = current->pNextStudent;
+            }
+
+            delete current;
+            course->studentList->numberOfStudents--;
+            return;
+        }
+
+        previous = current;
+        current = current->pNextStudent;
+    }
+}
+
+void removeLastStudentFromCourse(nodeCourse *course)
+{
+    if (course->studentList == nullptr || course->studentList->pHeadStudent == nullptr)
+        return;
+
+    StudentNode *current = course->studentList->pHeadStudent;
+    StudentNode *previous = nullptr;
+
+    while (current->pNextStudent != nullptr)
+    {
+        previous = current;
+        current = current->pNextStudent;
+    }
+
+    if (previous == nullptr)
+    {
+        course->studentList->pHeadStudent = nullptr;
+    }
+    else
+    {
+        previous->pNextStudent = nullptr;
+    }
+
+    delete current;
+    course->studentList->numberOfStudents--;
+}
+
+//-----
+bool compareCourseByName(const nodeCourse &course, const void *name)
+{
+    const string *courseName = static_cast<const string *>(name);
+    return course.courseName == *courseName;
+}
+
+bool compareCourseByID(const nodeCourse &course, const void *id)
+{
+    const string *courseID = static_cast<const string *>(id);
+    return course.id == *courseID;
+}
+
+void deleteStudentList(StudentList *studentList)
+{
+    while (studentList && studentList->pHeadStudent)
+    {
+        StudentNode *temp = studentList->pHeadStudent;
+        studentList->pHeadStudent = studentList->pHeadStudent->pNextStudent;
+        delete temp;
+    }
+    delete studentList;
+}
+
+void deleteScoreList(ListScoreboardOfCourse *scoreList)
+{
+    while (scoreList && scoreList->head)
+    {
+        NodeScoreboardOfCourse *temp = scoreList->head;
+        scoreList->head = scoreList->head->next;
+        delete temp;
+    }
+    delete scoreList;
+}
+
+void deleteCourse(nodeCourse *&head, CompareCourseFunc compare, const void *value)
+{
+    if (head == nullptr)
+        return;
+
+    nodeCourse *current = head;
+    nodeCourse *previous = nullptr;
+
+    while (current != nullptr)
+    {
+        if (compare(*current, value))
+        {
+            if (previous == nullptr)
+            {
+                head = current->next;
+            }
+            else
+            {
+                previous->next = current->next;
+            }
+
+            deleteStudentList(current->studentList);
+            deleteScoreList(current->scoreList);
+
+            delete current;
+            return;
+        }
+
+        previous = current;
+        current = current->next;
+    }
+}
