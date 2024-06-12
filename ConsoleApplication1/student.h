@@ -15,5 +15,5 @@ int GetStudentAccount(ListAccount* l, string inUsername, string inPassword);
 int Login(ListAccount* l);
 
 
-void viewListOfCourses(listYear lY);
+void viewListOfCoursesForStudent(listYear lY);
 #endif

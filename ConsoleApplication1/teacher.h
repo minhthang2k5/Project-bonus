@@ -69,4 +69,8 @@ typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
 void inputClassToAddSchoolYear(listYear& lY);
 
+
+void viewListOfClasses(listYear lY);
+void viewListOfStudentClass(listYear lY);
+void viewListOfCourses(listYear lY);
 #endif

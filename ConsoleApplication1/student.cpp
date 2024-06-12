@@ -136,7 +136,7 @@ int Login(ListAccount* l) {
 	return 1;
 }
 
-void viewListOfCourses(listYear lY) {
+void viewListOfCoursesForStudent(listYear lY) {
 	// Dò tới năm học chứa course cần sửa
 	string year;
 	int begin;

@@ -848,10 +848,42 @@ void updateInformationCourse(listYear &lY)
 	getline(cin, tempCourse->session);
 }
 void viewcourse();
+
 void addStudentToCourse(nodeCourse* course) {
 	Student info = getStudentInfo();
 	AddTailToStudentList(course->studentList, info);
 }
+void viewListOfClasses(listYear lY) {
+	// Dò tới năm học chứa course cần sửa
+	string year;
+	int begin;
+	int last;
+	cout << "Input school year to view: ";
+	getline(cin, year);
+	detachedYear(begin, last, year);
+	schoolYear* temp = lY.pHead;
+	bool checkExitsYear = false;
+	while (temp != NULL)
+	{
+		if (temp->beginYear == begin)
+		{
+			checkExitsYear = true;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (checkExitsYear == false)
+	{
+		cout << "The school year isn't exit";
+		return;
+	}
+	Class* tempClass = temp->listClass.pHeadClass;
+	while (tempClass != NULL) {
+		cout << tempClass->className << endl;
+		tempClass = tempClass->pNextClass;
+	}
 
-
+}
+void viewListOfStudentClass(listYear lY);
+void viewListOfCourses(listYear lY);
 
