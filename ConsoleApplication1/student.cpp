@@ -1,4 +1,4 @@
-#include "student.h"
+﻿#include "student.h"
 Student getStudentInfo() {
 	Student info;
 	cout << "Input classname: ";
@@ -134,4 +134,58 @@ int Login(ListAccount* l) {
 		}
 	}
 	return 1;
+}
+
+void viewListOfCourses(listYear lY) {
+	// Dò tới năm học chứa course cần sửa
+	string year;
+	int begin;
+	int last;
+	cout << "Input school year to view: ";
+	getline(cin, year);
+	detachedYear(begin, last, year);
+	schoolYear* temp = lY.pHead;
+	bool checkExitsYear = false;
+	while (temp != NULL)
+	{
+		if (temp->beginYear == begin)
+		{
+			checkExitsYear = true;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (checkExitsYear == false)
+	{
+		cout << "The school year isn't exit";
+		return;
+	}
+
+	// Dò tới kỳ học chứa course cần sửa
+	nodeSemester* tempSemester = temp->listSem.head;
+	int nameSemester;
+	cout << "Input the name semester(1,2 or 3): ";
+	cin >> nameSemester;
+	eatline();
+	bool checkexitsSemester = false;
+	while (tempSemester != NULL)
+	{
+		if (tempSemester->name == nameSemester)
+		{
+			checkexitsSemester = true;
+
+			break;
+		}
+		tempSemester = tempSemester->next;
+	}
+	if (checkexitsSemester == false)
+	{
+		cout << "The semester isn't exit";
+		return;
+	}
+	nodeCourse* tempCourse = tempSemester->listCour.head;
+	while (tempCourse != NULL) {
+		cout << tempCourse->courseName << endl;
+		tempCourse = tempCourse->next;
+	}
 }
