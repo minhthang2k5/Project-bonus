@@ -394,7 +394,7 @@ void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course)
         fileOut << current->data.studentID << ", ";
         fileOut << current->data.fullName.lastName << ", ";
         fileOut << current->data.fullName.firstName << endl;
-        current->pNextStudent;
+        current = current->pNextStudent;
     }
     fileOut.flush();
     fileOut.close();
@@ -484,10 +484,131 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *course)
         getline(fileIn, totalMarkString, '\n');
         double totalMark = stod(totalMarkString);
 
-        StudentScoreboardOfCourse stuScore = {id, otherMark, midtermMark, finalMark, totalMark};
+        StudentScoreboardOfCourse stuScore = {id, fullName, otherMark, midtermMark, finalMark, totalMark};
         addStudentScoreboardOfCourseIntoList(stuScoreList, stuScore);
     }
 
     course->scoreList = stuScoreList;
     fileIn.close();
+}
+
+void viewCourseScoreboard(nodeCourse *course)
+{
+    cout << "Course name:" << course->courseName << endl;
+    cout << "Class: " << course->className << endl;
+    cout << "SOCREBOARD" << endl;
+    cout << "No - Student ID - Last name - First name - Other mark - Midterm mark - Final nark - Total mark" << endl;
+
+    NodeStudentScoreboardOfCourse *current = course->scoreList->head;
+    int num = 1;
+    while (current != nullptr)
+    {
+        cout << fixed << setprecision(3) << num << current->stuScoreboard.studentID << "  " << current->stuScoreboard.fullName.lastName << " "
+             << fixed << setprecision(8) << current->stuScoreboard.fullName.lastName << " " << current->stuScoreboard.otherscore << " "
+             << current->stuScoreboard.midscore << " " << current->stuScoreboard.finalscore << " " << current->stuScoreboard.totalscore;
+        cout << endl;
+        current = current->next;
+    }
+}
+
+// viet ham theo tung hoc ki
+//  void viewClassScoreboard(string &claName, string &schYear, int &semester, listYear *year)
+//  {
+//      cout << "Choose school year: ";
+//      getline(cin, claName);
+//      cout << "Choose school year: ";
+//      getline(cin, schYear);
+//      cout << "Choose semester: ";
+//      cin >> semester;
+//      schoolYear *current = year->pHead;
+//      while (current != nullptr)
+//      {
+//          if ((stoi(schYear.substr(0, 4)) == current->beginYear) && stoi(schYear.substr(5, 4)) == current->lastYear)
+//          {
+//              if (semester == current->listSem)
+//          }
+//      }
+//  }
+
+double calculateGPAInSemester(Student stu1, listCourse *course)
+{
+    double sum = 0;
+    int credits = 0;
+    nodeCourse *crsCur = course->head;
+    while (crsCur != nullptr)
+    {
+        NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
+        while (stuScrCur != nullptr)
+        {
+            if (stuScrCur->stuScoreboard.studentID == stu1.studentID)
+            {
+                sum += crsCur->numberOfCredits * stuScrCur->stuScoreboard.totalscore;
+                credits += crsCur->numberOfCredits;
+                break;
+            }
+            stuScrCur = stuScrCur->next;
+        }
+        crsCur = crsCur->next;
+    }
+
+    return sum / credits;
+}
+
+void viewClassScoreboard(Class *cla1, listCourse *course)
+{
+    StudentNode *stuCur = cla1->pHeadStudent;
+    int num = 1;
+    while (stuCur != nullptr)
+    {
+        cout << num << " " << stuCur->data.studentID << " " << stuCur->data.fullName.lastName
+             << " " << stuCur->data.fullName.firstName << " " << endl;
+        cout << "GPA in semester: " << calculateGPAInSemester(stuCur->data, course);
+        nodeCourse *crsCur = course->head;
+        while (crsCur != nullptr)
+        {
+            NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
+            while (stuScrCur != nullptr)
+            {
+                if (stuScrCur->stuScoreboard.studentID == stuCur->data.studentID)
+                {
+                    cout << "Course ID: " << crsCur->id << endl;
+                    cout << "Course name: " << crsCur->courseName << endl;
+                    cout << "Final mark: " << stuScrCur->stuScoreboard.finalscore << endl;
+                    cout << "Total score (GPA): " << stuScrCur->stuScoreboard.totalscore << endl;
+                    cout << endl;
+                    break;
+                }
+                stuScrCur = stuScrCur->next;
+            }
+            crsCur = crsCur->next;
+        }
+        num++;
+        cout << endl
+             << endl;
+        stuCur = stuCur->pNextStudent;
+    }
+}
+
+void viewStudentScoreboard(Student stu1, listCourse *course)
+{
+    nodeCourse *crsCur = course->head;
+    cout << "GPA in semester: " << calculateGPAInSemester(stu1, course);
+    while (crsCur != nullptr)
+    {
+        NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
+        while (stuScrCur != nullptr)
+        {
+            if (stuScrCur->stuScoreboard.studentID == stu1.studentID)
+            {
+                cout << "Course ID: " << crsCur->id << endl;
+                cout << "Course name: " << crsCur->courseName << endl;
+                cout << "Final mark: " << stuScrCur->stuScoreboard.finalscore << endl;
+                cout << "Total score (GPA): " << stuScrCur->stuScoreboard.totalscore << endl;
+                cout << endl;
+                break;
+            }
+            stuScrCur = stuScrCur->next;
+        }
+        crsCur = crsCur->next;
+    }
 }

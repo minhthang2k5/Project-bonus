@@ -86,7 +86,7 @@ void addHeadNewSchoolYear(listYear &lY)
 		lY.pHead = temp;
 	}
 }
-//void addClassYear()
+// void addClassYear()
 /*
 void addClass(listYear*& lY)
 {
@@ -214,7 +214,7 @@ void addHeadSemester(listSemester &list, nodeSemester *p)
 		list.head = p;
 	}
 }
-void inputClassToAddSchoolYear(listYear& lY)
+void inputClassToAddSchoolYear(listYear &lY)
 {
 	// Kiểm tra năm học nào để luu vào một node: temp
 	string year;
@@ -223,7 +223,7 @@ void inputClassToAddSchoolYear(listYear& lY)
 	cout << "Input school year to add class: ";
 	getline(cin, year);
 	detachedYear(begin, last, year);
-	schoolYear* temp = lY.pHead;
+	schoolYear *temp = lY.pHead;
 	bool checkExitsYear = false;
 	while (temp != NULL)
 	{
@@ -239,7 +239,7 @@ void inputClassToAddSchoolYear(listYear& lY)
 		cout << "The school year isn't exit";
 		return;
 	}
-	Class* a = new Class;
+	Class *a = new Class;
 	cout << "Input the class name:";
 	getline(cin, a->className);
 	cout << "The number of student:";
@@ -247,7 +247,7 @@ void inputClassToAddSchoolYear(listYear& lY)
 	cin.ignore();
 	a->pHeadStudent = NULL;
 	a->pNextClass = NULL;
-	if (lY.pHead->listClass.pHeadClass==NULL)
+	if (lY.pHead->listClass.pHeadClass == NULL)
 	{
 		lY.pHead->listClass.numberOfClasses = 1;
 		lY.pHead->listClass.pHeadClass = a;
@@ -304,130 +304,186 @@ void inputInformationSemesterAndAddSchoolYear(listYear &lY)
 	addHeadSemester(temp->listSem, seme);
 }
 
-int CheckFullName(string fullname) {
+int CheckFullName(string fullname)
+{
 	int space = 0;
-	for (int i = 0; i < fullname.length(); i++) {
-		if (fullname[i] == ' ') {
+	for (int i = 0; i < fullname.length(); i++)
+	{
+		if (fullname[i] == ' ')
+		{
 			space = 1;
 		}
 	}
-	if (space == 0) {
+	if (space == 0)
+	{
 		return 0;
 	}
 	return 1;
 }
-bool isLeapYear(int y) {
-	if ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0)) {
+bool isLeapYear(int y)
+{
+	if ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0))
+	{
 		return true;
 	}
 	return false;
 }
-int CheckDate(Date d) {
-	if ((d.day <= 0 && d.day >= 32) || (d.month <= 0 && d.month >= 13) || d.year <= 0) {
+int CheckDate(Date d)
+{
+	if ((d.day <= 0 && d.day >= 32) || (d.month <= 0 && d.month >= 13) || d.year <= 0)
+	{
 		return 0;
 	}
-	if (isLeapYear(d.year)) {
-		switch (d.month) {
-		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-			if (d.day >= 32) {
+	if (isLeapYear(d.year))
+	{
+		switch (d.month)
+		{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			if (d.day >= 32)
+			{
 				return 0;
 			}
 		case 2:
-			if (d.day >= 30) {
+			if (d.day >= 30)
+			{
 				return 0;
 			}
-		case 4: case 6: case 9: case 11:
-			if (d.day >= 31) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if (d.day >= 31)
+			{
 				return 0;
 			}
 		}
 	}
-	if (!isLeapYear(d.year)) {
-		switch (d.month) {
-		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-			if (d.day >= 32) {
+	if (!isLeapYear(d.year))
+	{
+		switch (d.month)
+		{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			if (d.day >= 32)
+			{
 				return 0;
 			}
 		case 2:
-			if (d.day >= 29) {
+			if (d.day >= 29)
+			{
 				return 0;
 			}
-		case 4: case 6: case 9: case 11:
-			if (d.day >= 31) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if (d.day >= 31)
+			{
 				return 0;
 			}
 		}
 	}
 	return 1;
 }
-int CheckUsername(string username) {
+int CheckUsername(string username)
+{
 	string test("admin");
 	int found = username.find(test);
-	if (found != string::npos) {
+	if (found != string::npos)
+	{
 		return 0;
 	}
 	return 1;
 }
-int CheckPassword(string password) {
-	if (password.length() < 6) {
+int CheckPassword(string password)
+{
+	if (password.length() < 6)
+	{
 		return 0;
 	}
 	int upper = 0;
-	for (int i = 0; i < password.length(); i++) {
-		if (password[i] >= 'A' && password[i] <= 'Z') {
+	for (int i = 0; i < password.length(); i++)
+	{
+		if (password[i] >= 'A' && password[i] <= 'Z')
+		{
 			upper = 1;
 		}
 	}
-	if (upper == 0) {
+	if (upper == 0)
+	{
 		return 0;
 	}
 	int character = 0;
-	for (int i = 0; i < password.length(); i++) {
-		if (password[i] >= 'A' && password[i] <= 'Z') {
+	for (int i = 0; i < password.length(); i++)
+	{
+		if (password[i] >= 'A' && password[i] <= 'Z')
+		{
 			character = 1;
 		}
-		if (password[i] >= 'a' && password[i] <= 'z') {
+		if (password[i] >= 'a' && password[i] <= 'z')
+		{
 			character = 1;
 		}
 	}
-	if (character == 0) {
+	if (character == 0)
+	{
 		return 0;
 	}
 	int digit = 0;
-	for (int i = 0; i < password.length(); i++) {
-		if (password[i] >= '0' && password[i] <= '9') {
+	for (int i = 0; i < password.length(); i++)
+	{
+		if (password[i] >= '0' && password[i] <= '9')
+		{
 			digit = 1;
 		}
 	}
-	if (digit == 0) {
+	if (digit == 0)
+	{
 		return 0;
 	}
 	return 1;
 }
-int CheckEmail(string email) {
+int CheckEmail(string email)
+{
 	int at = 0;
 	int dot = 0;
-	for (int i = 0; i < email.length(); i++) {
-		if (email[i] == '.') {
+	for (int i = 0; i < email.length(); i++)
+	{
+		if (email[i] == '.')
+		{
 			dot = 1;
 		}
-		if (email[i] == '@') {
+		if (email[i] == '@')
+		{
 			at = 1;
 		}
 	}
-	if (dot == 0 && at == 0) {
+	if (dot == 0 && at == 0)
+	{
 		return 0;
 	}
 	return 1;
 }
-bool isDifferentUsername(Staff_List l, string username) {
+bool isDifferentUsername(Staff_List l, string username)
+{
 	if (l.pHead == NULL)
 	{
 		return true;
 	}
 	else
 	{
-		Staff_Node* p = l.pHead;
+		Staff_Node *p = l.pHead;
 		while (p != NULL)
 		{
 			if (p->staff.username == username)
@@ -439,14 +495,15 @@ bool isDifferentUsername(Staff_List l, string username) {
 	}
 	return true;
 }
-bool isDifferentPassword(Staff_List l, string password) {
+bool isDifferentPassword(Staff_List l, string password)
+{
 	if (l.pHead == NULL)
 	{
 		return true;
 	}
 	else
 	{
-		Staff_Node* p = l.pHead;
+		Staff_Node *p = l.pHead;
 		while (p != NULL)
 		{
 			if (p->staff.password == password)
@@ -458,12 +515,14 @@ bool isDifferentPassword(Staff_List l, string password) {
 	}
 	return true;
 }
-Staff_Info GetStaffInfo(Staff_List l) {
+Staff_Info GetStaffInfo(Staff_List l)
+{
 	Staff_Info info;
 	cout << "Input your infomation..." << endl;
 	cout << "Your fullname: ";
 	getline(cin, info.fullname);
-	while (CheckFullName(info.fullname) == 0) {
+	while (CheckFullName(info.fullname) == 0)
+	{
 		cout << "Your fullname is invalid. Please input again!" << endl;
 		cout << "Your fullname: ";
 		getline(cin, info.fullname);
@@ -471,7 +530,8 @@ Staff_Info GetStaffInfo(Staff_List l) {
 
 	cout << "Your email <Type your email without space>: ";
 	cin >> info.email;
-	while (CheckEmail(info.email) == 0) {
+	while (CheckEmail(info.email) == 0)
+	{
 		cout << "Your email is invalid. Please input again!" << endl;
 		cout << "Your email <Type your email without space>: ";
 		cin >> info.email;
@@ -484,7 +544,8 @@ Staff_Info GetStaffInfo(Staff_List l) {
 	cin >> info.birthday.month;
 	cout << "  Year: ";
 	cin >> info.birthday.year;
-	while (CheckDate(info.birthday) == 0) {
+	while (CheckDate(info.birthday) == 0)
+	{
 		cout << "Your birthday is invalid. Please input again!" << endl;
 		cout << "Your birthday: ";
 		cout << "  Day: ";
@@ -501,7 +562,8 @@ Staff_Info GetStaffInfo(Staff_List l) {
 
 	cout << "Your username <Type your username without space>: ";
 	cin >> info.username;
-	while (CheckUsername(info.username) == 0) {
+	while (CheckUsername(info.username) == 0)
+	{
 		cout << "Your username is invalid. Please input again!" << endl;
 		cout << "Your username <Type your username without space>: ";
 		cin >> info.username;
@@ -512,7 +574,8 @@ Staff_Info GetStaffInfo(Staff_List l) {
 	cout << "  <At least 1 digit>" << endl;
 	cout << "Your password: ";
 	cin >> info.password;
-	while (CheckPassword(info.password) == 0) {
+	while (CheckPassword(info.password) == 0)
+	{
 		cout << "Your password is invalid. Please input again!" << endl;
 		cout << "  <At least 6 characters>" << endl;
 		cout << "  <At least 1 capital character>" << endl;
@@ -524,65 +587,78 @@ Staff_Info GetStaffInfo(Staff_List l) {
 
 	return info;
 }
-Staff_Node* CreateNewNode(Staff_Info info) {
-	Staff_Node* node = new Staff_Node;
+Staff_Node *CreateNewNode(Staff_Info info)
+{
+	Staff_Node *node = new Staff_Node;
 	node->staff = info;
 	node->pNext = NULL;
 
 	return node;
 }
-void Init(Staff_List& l) {
+void Init(Staff_List &l)
+{
 	l.pHead = NULL;
 }
-void AddTail(Staff_List& l, Staff_Info info) {
-	Staff_Node* staff = CreateNewNode(info);
-	if (l.pHead == NULL) {
+void AddTail(Staff_List &l, Staff_Info info)
+{
+	Staff_Node *staff = CreateNewNode(info);
+	if (l.pHead == NULL)
+	{
 		l.pHead = staff;
 	}
-	else {
-		Staff_Node* p = l.pHead;
-		while (p->pNext != NULL) {
+	else
+	{
+		Staff_Node *p = l.pHead;
+		while (p->pNext != NULL)
+		{
 			p = p->pNext;
 		}
 		p->pNext = staff;
 	}
 }
-void PrintStaffInfo(Staff_Info info) {
+void PrintStaffInfo(Staff_Info info)
+{
 	cout << "Fullname: " << info.fullname << endl;
 	cout << "Email: " << info.email << endl;
 	cout << "Birthday: " << info.birthday.day << "/" << info.birthday.month << "/" << info.birthday.year << endl;
-	if (info.gender == 1) {
+	if (info.gender == 1)
+	{
 		cout << "Gender: Male" << endl;
 	}
-	else if (info.gender == 0) {
+	else if (info.gender == 0)
+	{
 		cout << "Gender: Female" << endl;
 	}
 	cout << "Username: " << info.username << endl;
 	cout << "Password: " << info.password << endl;
 }
-void PrintList(Staff_List l) {
-	Staff_Node* p = l.pHead;
-	while (p != NULL) {
+void PrintList(Staff_List l)
+{
+	Staff_Node *p = l.pHead;
+	while (p != NULL)
+	{
 		PrintStaffInfo(p->staff);
 		cout << endl;
 		p = p->pNext;
 	}
 }
-int SignUp(Staff_List& l) {
-	
+int SignUp(Staff_List &l)
+{
+
 	Staff_Info info = GetStaffInfo(l);
 	AddTail(l, info);
 	cout << "Sign up successfully!" << endl;
 	return 1;
 }
-int GetStaffAccount(Staff_List l, string inUsername, string inPassword) {
+int GetStaffAccount(Staff_List l, string inUsername, string inPassword)
+{
 	if (l.pHead == NULL)
 	{
 		return 0;
 	}
 	else
 	{
-		Staff_Node* p = l.pHead;
+		Staff_Node *p = l.pHead;
 		while (p != NULL)
 		{
 			if (p->staff.username == inUsername && p->staff.password == inPassword)
@@ -594,7 +670,8 @@ int GetStaffAccount(Staff_List l, string inUsername, string inPassword) {
 	}
 	return 0;
 }
-int SignIn(Staff_List l) {
+int SignIn(Staff_List l)
+{
 	string inUsername;
 	string inPassword;
 
@@ -621,7 +698,6 @@ int SignIn(Staff_List l) {
 	}
 	return 1;
 }
-
 
 /*
 Hàm này để khởi tạo khóa học
@@ -847,13 +923,14 @@ void updateInformationCourse(listYear &lY)
 	cout << "S4 (15:30)" << endl;
 	getline(cin, tempCourse->session);
 }
-void viewcourse();
 
-void addStudentToCourse(nodeCourse* course) {
+void addStudentToCourse(nodeCourse *course)
+{
 	Student info = getStudentInfo();
 	AddTailToStudentList(course->studentList, info);
 }
-void viewListOfClasses(listYear lY) {
+void viewListOfClasses(listYear lY)
+{
 	// Dò tới năm học chứa course cần sửa
 	string year;
 	int begin;
@@ -861,7 +938,7 @@ void viewListOfClasses(listYear lY) {
 	cout << "Input school year to view: ";
 	getline(cin, year);
 	detachedYear(begin, last, year);
-	schoolYear* temp = lY.pHead;
+	schoolYear *temp = lY.pHead;
 	bool checkExitsYear = false;
 	while (temp != NULL)
 	{
@@ -877,14 +954,15 @@ void viewListOfClasses(listYear lY) {
 		cout << "The school year isn't exit";
 		return;
 	}
-	Class* tempClass = temp->listClass.pHeadClass;
-	while (tempClass != NULL) {
+	Class *tempClass = temp->listClass.pHeadClass;
+	while (tempClass != NULL)
+	{
 		cout << tempClass->className << endl;
 		tempClass = tempClass->pNextClass;
 	}
-
 }
-void viewListOfStudentClass(listYear lY) {
+void viewListOfStudentClass(listYear lY)
+{
 	// Dò tới năm học chứa course cần sửa
 	string year;
 	int begin;
@@ -892,7 +970,7 @@ void viewListOfStudentClass(listYear lY) {
 	cout << "Input school year to view: ";
 	getline(cin, year);
 	detachedYear(begin, last, year);
-	schoolYear* temp = lY.pHead;
+	schoolYear *temp = lY.pHead;
 	bool checkExitsYear = false;
 	while (temp != NULL)
 	{
@@ -908,14 +986,16 @@ void viewListOfStudentClass(listYear lY) {
 		cout << "The school year isn't exit";
 		return;
 	}
-	// Dò tới class cần xem 
+	// Dò tới class cần xem
 	string inClassName;
 	cout << "Input class to view: ";
 	getline(cin, inClassName);
 	bool checkExitsClass = false;
-	Class* tempClass = temp->listClass.pHeadClass;
-	while (tempClass != NULL) {
-		if (tempClass->className == inClassName) {
+	Class *tempClass = temp->listClass.pHeadClass;
+	while (tempClass != NULL)
+	{
+		if (tempClass->className == inClassName)
+		{
 			checkExitsClass = true;
 			break;
 		}
@@ -925,14 +1005,15 @@ void viewListOfStudentClass(listYear lY) {
 		cout << "The class isn't exit";
 		return;
 	}
-	StudentNode* tempStudent = tempClass->pHeadStudent;
-	while (tempStudent != NULL) {
+	StudentNode *tempStudent = tempClass->pHeadStudent;
+	while (tempStudent != NULL)
+	{
 		cout << tempStudent->data.fullName.firstName << " " << tempStudent->data.fullName.lastName << endl;
 		tempStudent = tempStudent->pNextStudent;
 	}
-
 }
-void viewListOfCourses(listYear lY) {
+void viewListOfCourses(listYear lY)
+{
 	// Dò tới năm học chứa course cần sửa
 	string year;
 	int begin;
@@ -940,7 +1021,7 @@ void viewListOfCourses(listYear lY) {
 	cout << "Input school year to view: ";
 	getline(cin, year);
 	detachedYear(begin, last, year);
-	schoolYear* temp = lY.pHead;
+	schoolYear *temp = lY.pHead;
 	bool checkExitsYear = false;
 	while (temp != NULL)
 	{
@@ -956,7 +1037,7 @@ void viewListOfCourses(listYear lY) {
 		cout << "The school year isn't exit";
 		return;
 	}
-	nodeSemester* tempSemester = temp->listSem.head;
+	nodeSemester *tempSemester = temp->listSem.head;
 	int nameSemester;
 	cout << "Input the name semester(1,2 or 3): ";
 	cin >> nameSemester;
@@ -977,10 +1058,10 @@ void viewListOfCourses(listYear lY) {
 		cout << "The semester isn't exit";
 		return;
 	}
-	nodeCourse* tempCourse = tempSemester->listCour.head;
-	while (tempCourse != NULL) {
+	nodeCourse *tempCourse = tempSemester->listCour.head;
+	while (tempCourse != NULL)
+	{
 		cout << tempCourse->courseName << endl;
 		tempCourse = tempCourse->next;
 	}
 }
-

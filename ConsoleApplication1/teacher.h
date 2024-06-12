@@ -62,13 +62,12 @@ void inputInformationToAddCourse(listYear &lY);
 void updateInformationCourse(listYear &lY);
 void addStudentToCourse(nodeCourse *course);
 
-void removeStudentFromCourse(nodeCourse *course);
-void deleteCourse(nodeCourse *course);
+// void removeStudentFromCourse(nodeCourse *course);
+// void deleteCourse(nodeCourse *course);
 
-typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
+// typedef void removeOneCourseOutOfCourseList(listCourse *courseList);
 
-void inputClassToAddSchoolYear(listYear& lY);
-
+void inputClassToAddSchoolYear(listYear &lY);
 
 void viewListOfClasses(listYear lY);
 void viewListOfStudentClass(listYear lY);

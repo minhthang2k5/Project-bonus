@@ -27,11 +27,24 @@ void removeLastStudentFromCourse(nodeCourse *course);
 typedef bool (*CompareCourseFunc)(const nodeCourse &, const void *);
 bool compareCourseByName(const nodeCourse &course, const void *name);
 bool compareCourseByID(const nodeCourse &course, const void *id);
+//-
 void deleteStudentList(StudentList *studentList);
 void deleteScoreList(ListStudentScoreboardOfCourse *scoreList);
 void deleteCourse(nodeCourse *&head, CompareCourseFunc compare, const void *value);
 
 //----
 void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course);
+
+//----
+void addStudentScoreboardOfCourseIntoList(ListStudentScoreboardOfCourse *list, StudentScoreboardOfCourse stuScore);
+NodeStudentScoreboardOfCourse *createNodeStudentScoreboardOfCourse(StudentScoreboardOfCourse stuScore);
+ListStudentScoreboardOfCourse *createListStudentScoreboardOfCourse();
 void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *course);
+
+//----
+void viewCourseScoreboard(nodeCourse *course);
+double calculateGPAInSemester(Student stu1, listCourse *course);
+void viewClassScoreboard(Class *cla1, listCourse *course);
+void viewStudentScoreboard(Student stu1, listCourse *course);
+
 #endif

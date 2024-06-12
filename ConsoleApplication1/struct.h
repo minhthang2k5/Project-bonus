@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstring>
 #include <sstream>
+#include <iomanip>
 using namespace std;
 struct Date
 {
@@ -58,6 +59,7 @@ struct ListAccount
 struct StudentScoreboardOfCourse
 {
 	int studentID;
+	FullName fullName;
 	double otherscore;
 	double midscore;
 	double finalscore;
@@ -103,18 +105,11 @@ struct nodeSemester
 	Date end;
 	nodeSemester *next;
 };
-
 struct listSemester
 {
 	nodeSemester *head;
 };
 
-// struct nodeClass
-//{
-//	string name;
-//	// list student
-//	nodeClass *next;
-// };
 struct Class
 {
 	string className;
@@ -128,6 +123,7 @@ struct ClassList
 	int numberOfClasses;
 	Class *pHeadClass = NULL;
 };
+
 struct schoolYear
 {
 	int beginYear;
@@ -141,22 +137,28 @@ struct listYear
 {
 	schoolYear *pHead;
 };
+// struct nodeClass
+//{
+//	string name;
+//	// list student
+//	nodeClass *next;
+// };
 
-struct ScoreboardOfStudent
-{
-	int studentID;
-	double overallGPA;
-	// tự viết hàm, dùng biến phụ tính điểm trung bình của kì học, rồi tính overall GPA  và lưu vào overall GPA
-	listCourse *coursesRegistered;
-};
+// struct ScoreboardOfStudent
+// {
+// 	int studentID;
+// 	double overallGPA;
+// 	// tự viết hàm, dùng biến phụ tính điểm trung bình của kì học, rồi tính overall GPA  và lưu vào overall GPA
+// 	listCourse *coursesRegistered;
+// };
 
-struct ScoreboardOfStudentNode
-{
-	ScoreboardOfStudent data;
-	ScoreboardOfStudentNode *pNext;
-};
+// struct ScoreboardOfStudentNode
+// {
+// 	ScoreboardOfStudent data;
+// 	ScoreboardOfStudentNode *pNext;
+// };
 
-struct ScoreboardOfClass
-{
-	ScoreboardOfStudentNode *pHead;
-};
+// struct ScoreboardOfClass
+// {
+// 	ScoreboardOfStudentNode *pHead;
+// };
