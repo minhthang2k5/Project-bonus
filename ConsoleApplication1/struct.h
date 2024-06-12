@@ -29,16 +29,17 @@ struct Student
 struct StudentNode
 {
 	Student data;
-	StudentNode* pNextStudent;
+	StudentNode *pNextStudent;
 };
 
 struct StudentList
 {
 	int numberOfStudents;
-	StudentNode* pHeadStudent;
+	StudentNode *pHeadStudent;
 };
 
-struct SignInInfo {
+struct SignInInfo
+{
 	string username;
 	string password;
 };
@@ -46,14 +47,15 @@ struct SignInInfo {
 struct NodeAccount
 {
 	SignInInfo info;
-	NodeAccount* next;
+	NodeAccount *next;
 };
 
-struct ListAccount {
-	NodeAccount* head;
+struct ListAccount
+{
+	NodeAccount *head;
 };
 
-struct ScoreboardOfCourse
+struct StudentScoreboardOfCourse
 {
 	int studentID;
 	double otherscore;
@@ -61,16 +63,15 @@ struct ScoreboardOfCourse
 	double finalscore;
 	double totalscore;
 };
-
-struct NodeScoreboardOfCourse
+struct NodeStudentScoreboardOfCourse
 {
-	ScoreboardOfCourse scoreboard;
-	NodeScoreboardOfCourse* next;
+	StudentScoreboardOfCourse stuScoreboard;
+	NodeStudentScoreboardOfCourse *next;
 };
 
-struct ListScoreboardOfCourse
+struct ListStudentScoreboardOfCourse
 {
-	NodeScoreboardOfCourse* head;
+	NodeStudentScoreboardOfCourse *head;
 };
 
 struct nodeCourse
@@ -83,14 +84,14 @@ struct nodeCourse
 	int numberOfStudent;
 	string dayOfweek;
 	string session;
-	ListScoreboardOfCourse* scoreList;
-	StudentList* studentList;
-	nodeCourse* next;
+	ListStudentScoreboardOfCourse *scoreList;
+	StudentList *studentList;
+	nodeCourse *next;
 };
 
 struct listCourse
 {
-	nodeCourse* head;
+	nodeCourse *head;
 };
 
 struct nodeSemester
@@ -100,12 +101,12 @@ struct nodeSemester
 	int name;
 	Date begin;
 	Date end;
-	nodeSemester* next;
+	nodeSemester *next;
 };
 
 struct listSemester
 {
-	nodeSemester* head;
+	nodeSemester *head;
 };
 
 // struct nodeClass
@@ -118,14 +119,14 @@ struct Class
 {
 	string className;
 	int numberOfStudents;
-	StudentNode* pHeadStudent=NULL;
-	Class* pNextClass=NULL;
+	StudentNode *pHeadStudent = NULL;
+	Class *pNextClass = NULL;
 };
 
 struct ClassList
 {
 	int numberOfClasses;
-	Class* pHeadClass=NULL;
+	Class *pHeadClass = NULL;
 };
 struct schoolYear
 {
@@ -133,31 +134,29 @@ struct schoolYear
 	int lastYear;
 	ClassList listClass;
 	listSemester listSem;
-	schoolYear* next;
+	schoolYear *next;
 };
 
 struct listYear
 {
-	schoolYear* pHead;
+	schoolYear *pHead;
 };
-
-
 
 struct ScoreboardOfStudent
 {
 	int studentID;
 	double overallGPA;
 	// tự viết hàm, dùng biến phụ tính điểm trung bình của kì học, rồi tính overall GPA  và lưu vào overall GPA
-	listCourse* coursesRegistered;
+	listCourse *coursesRegistered;
 };
 
 struct ScoreboardOfStudentNode
 {
 	ScoreboardOfStudent data;
-	ScoreboardOfStudentNode* pNext;
+	ScoreboardOfStudentNode *pNext;
 };
 
 struct ScoreboardOfClass
 {
-	ScoreboardOfStudentNode* pHead;
+	ScoreboardOfStudentNode *pHead;
 };

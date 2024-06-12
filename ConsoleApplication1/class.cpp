@@ -143,7 +143,7 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
 
     Class *class1 = createClass(className, 0);
 
-    string positionInClassString, idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+    string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
     FullName fullName;
     Date dateOfBirth;
 
@@ -332,11 +332,11 @@ void deleteStudentList(StudentList *studentList)
     delete studentList;
 }
 
-void deleteScoreList(ListScoreboardOfCourse *scoreList)
+void deleteScoreList(ListStudentScoreboardOfCourse *scoreList)
 {
     while (scoreList && scoreList->head)
     {
-        NodeScoreboardOfCourse *temp = scoreList->head;
+        NodeStudentScoreboardOfCourse *temp = scoreList->head;
         scoreList->head = scoreList->head->next;
         delete temp;
     }
@@ -374,4 +374,120 @@ void deleteCourse(nodeCourse *&head, CompareCourseFunc compare, const void *valu
         previous = current;
         current = current->next;
     }
+}
+
+void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course)
+{
+    ofstream fileOut;
+    fileOut.open(fileName);
+    if (!fileOut.is_open())
+    {
+        cout << "Error while opening " << fileName << endl;
+        return;
+    }
+
+    fileOut << "STT, MSSV, Ho, Ten" << endl;
+    StudentNode *current = course->studentList->pHeadStudent;
+    for (int num = 1; num <= course->studentList->numberOfStudents; num++)
+    {
+        fileOut << num << ", ";
+        fileOut << current->data.studentID << ", ";
+        fileOut << current->data.fullName.lastName << ", ";
+        fileOut << current->data.fullName.firstName << endl;
+        current->pNextStudent;
+    }
+    fileOut.flush();
+    fileOut.close();
+}
+
+ListStudentScoreboardOfCourse *createListStudentScoreboardOfCourse()
+{
+    ListStudentScoreboardOfCourse *list = new ListStudentScoreboardOfCourse();
+    if (!list)
+    {
+        cout << "Memory error while creating new scoreboard of course!" << endl;
+        return nullptr;
+    }
+    list->head = nullptr;
+    return list;
+}
+
+NodeStudentScoreboardOfCourse *createNodeStudentScoreboardOfCourse(StudentScoreboardOfCourse stuScore)
+{
+    NodeStudentScoreboardOfCourse *node1 = new NodeStudentScoreboardOfCourse();
+    if (!node1)
+    {
+        cout << "Memory error while creating new node student scoreboard!";
+        return nullptr;
+    }
+    node1->stuScoreboard = stuScore;
+    node1->next = nullptr;
+    return node1;
+}
+void addStudentScoreboardOfCourseIntoList(ListStudentScoreboardOfCourse *list, StudentScoreboardOfCourse stuScore)
+{
+    NodeStudentScoreboardOfCourse *node1 = createNodeStudentScoreboardOfCourse(stuScore);
+    if (list->head == nullptr)
+    {
+        list->head = node1;
+    }
+    else
+    {
+        NodeStudentScoreboardOfCourse *current = list->head;
+        while (current->next != nullptr)
+        {
+            current = current->next;
+        }
+        current->next = node1;
+    }
+}
+void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *course)
+{
+    ifstream fileIn;
+    fileIn.open(fileName);
+    if (!fileIn.is_open())
+    {
+        cout << "Error while opening " << fileName << endl;
+        return;
+    }
+    string line;
+    getline(fileIn, line, '\n');
+
+    string idString, lastName, firstName, otherMarkString, midtermMarkString, finalMarkString, totalMarkString;
+    FullName fullName;
+
+    // tạo một danh sách liên kết bảng điểm mới
+    ListStudentScoreboardOfCourse *stuScoreList = createListStudentScoreboardOfCourse();
+
+    while (!fileIn.eof())
+    {
+        getline(fileIn, line, ',');
+
+        getline(fileIn, idString, ',');
+        int id = stoi(idString);
+
+        getline(fileIn, lastName, ',');
+        fullName.lastName = lastName;
+
+        getline(fileIn, firstName, ',');
+        fullName.firstName = firstName;
+
+        getline(fileIn, otherMarkString, ',');
+        double otherMark = stod(otherMarkString);
+
+        getline(fileIn, midtermMarkString, ',');
+        double midtermMark = stod(midtermMarkString);
+
+        getline(fileIn, finalMarkString, ',');
+        double finalMark = stod(finalMarkString);
+
+        getline(fileIn, totalMarkString, '\n');
+        double totalMark = stod(totalMarkString);
+
+        StudentScoreboardOfCourse stuScore = {id, otherMark, midtermMark, finalMark, totalMark};
+        addStudentScoreboardOfCourseIntoList(stuScoreList, stuScore);
+    }
+
+    course->scoreList = stuScoreList;
+    fileIn.close();
 }
