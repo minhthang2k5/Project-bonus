@@ -29,34 +29,44 @@ int main()
 	// Login(accountList);
 
 	//// Tao nam hoc
-	listYear yearList = createListYear();
-	addHeadNewSchoolYear(yearList);
-	schoolYear* check = yearList.pHead;
-	while (check!=NULL)
-	{
-		cout << check->beginYear << "-" << check->lastYear<<endl;
-		check = check->next;
-	}
-	inputInformationSemesterAndAddSchoolYear(yearList);
-	//inputInformationSemesterAndAddSchoolYear(yearList);
-	nodeSemester* checkSemester = yearList.pHead->listSem.head;
-	while (checkSemester!=NULL)
-	{
-		cout << checkSemester->name << endl;
-		cout << "Begin: ";
-		cout << checkSemester->begin.day << "-" << checkSemester->begin.month << "_" << checkSemester->begin.year << endl;
-		cout << "End: ";
-		cout << checkSemester->end.day << "-" << checkSemester->end.month << "_" << checkSemester->end.year << endl;
-		checkSemester = checkSemester->next;
-	}
-	inputInformationToAddCourse(yearList);
-	inputInformationToAddCourse(yearList);
-	nodeCourse* checkCourse = yearList.pHead->listSem.head->listCour.head;
-	while (checkCourse != NULL)
-	{
-		cout << checkCourse->courseName << endl;
-		checkCourse = checkCourse->next;
-	}
+	// listYear yearList = createListYear();
+	// addHeadNewSchoolYear(yearList);
+	// schoolYear* check = yearList.pHead;
+	// while (check!=NULL)
+	// {
+	// 	cout << check->beginYear << "-" << check->lastYear<<endl;
+	// 	check = check->next;
+	// }
+	// inputInformationSemesterAndAddSchoolYear(yearList);
+	// //inputInformationSemesterAndAddSchoolYear(yearList);
+	// nodeSemester* checkSemester = yearList.pHead->listSem.head;
+	// while (checkSemester!=NULL)
+	// {
+	// 	cout << checkSemester->name << endl;
+	// 	cout << "Begin: ";
+	// 	cout << checkSemester->begin.day << "-" << checkSemester->begin.month << "_" << checkSemester->begin.year << endl;
+	// 	cout << "End: ";
+	// 	cout << checkSemester->end.day << "-" << checkSemester->end.month << "_" << checkSemester->end.year << endl;
+	// 	checkSemester = checkSemester->next;
+	// }
+	// inputInformationToAddCourse(yearList);
+	// inputInformationToAddCourse(yearList);
+	// nodeCourse* checkCourse = yearList.pHead->listSem.head->listCour.head;
+	// while (checkCourse != NULL)
+	// {
+	// 	cout << checkCourse->courseName << endl;
+	// 	checkCourse = checkCourse->next;
+	// }
+
+	Class *CTT523 = readStudentsOfClassFromCSVFile("23CTT5.csv");
+	cout << CTT523->pHeadStudent->pNextStudent->data.studentID << endl;
+	ClassList *classList = createClassList(1);
+	addClassIntoClassList(classList, CTT523);
+
+	Class *CTT423 = readStudentsOfClassFromCSVFile("23CTT4.csv");
+	cout << CTT423->pHeadStudent->pNextStudent->data.studentID << endl;
+	addClassIntoClassList(classList, CTT423);
+
 	system("pause");
 
 	return 0;

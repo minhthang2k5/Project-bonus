@@ -20,6 +20,7 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName);
 typedef bool (*CompareFunc)(const Student &, const void *);
 bool compareByName(const Student &student, const void *name);
 bool compareByID(const Student &student, const void *id);
+//-
 void removeStudentFromCourse(nodeCourse *course, CompareFunc compare, const void *value);
 void removeLastStudentFromCourse(nodeCourse *course);
 
