@@ -17,6 +17,27 @@ struct FullName
 	string lastName;
 };
 
+struct Staff_Info
+{
+	string fullname;
+	Date birthday;
+	string username;
+	string password;
+	string email;
+	int gender;
+};
+
+struct Staff_Node
+{
+	Staff_Info staff;
+	Staff_Node *pNext;
+};
+
+struct Staff_List
+{
+	Staff_Node *pHead;
+};
+
 struct Student
 {
 	string className;

@@ -1,5 +1,6 @@
 ﻿#include "student.h"
-Student getStudentInfo() {
+Student getStudentInfo()
+{
 	Student info;
 	cout << "Input classname: ";
 	getline(cin, info.className);
@@ -22,58 +23,72 @@ Student getStudentInfo() {
 	cin >> info.socialID;
 	return info;
 }
-StudentNode* CreateNewNode(Student info) {
-	StudentNode* s = new StudentNode;
+StudentNode *CreateNewNode(Student info)
+{
+	StudentNode *s = new StudentNode;
 	s->data = info;
 	s->pNextStudent = NULL;
 	return s;
 }
-void AddTailToStudentList(StudentList* l, Student info) {
-	StudentNode* student = CreateNewNode(info);
-	if (l->pHeadStudent == NULL) {
+void AddTailToStudentList(StudentList *l, Student info)
+{
+	StudentNode *student = CreateNewNode(info);
+	if (l->pHeadStudent == NULL)
+	{
 		l->pHeadStudent = student;
 	}
-	else {
-		StudentNode* p = l->pHeadStudent;
-		while (p->pNextStudent != NULL) {
+	else
+	{
+		StudentNode *p = l->pHeadStudent;
+		while (p->pNextStudent != NULL)
+		{
 			p = p->pNextStudent;
 		}
 		p->pNextStudent = student;
 	}
 }
 
-SignInInfo GetSignInInfo(Student stu) {
+SignInInfo GetSignInInfo(Student stu)
+{
 	SignInInfo info;
 	info.username = to_string(stu.studentID);
 	info.password = "random@#" + to_string(stu.studentID);
 	return info;
 }
-NodeAccount* CreateAccountForStudent(SignInInfo info) {
-	NodeAccount* acc = new NodeAccount;
+NodeAccount *CreateAccountForStudent(SignInInfo info)
+{
+	NodeAccount *acc = new NodeAccount;
 	acc->info = info;
 	acc->next = NULL;
 	return acc;
 }
-void AddTailToStudentAccountList(ListAccount* l, SignInInfo info) {
-	NodeAccount* acc = CreateAccountForStudent(info);
-	if (l->head == NULL) {
+void AddTailToStudentAccountList(ListAccount *l, SignInInfo info)
+{
+	NodeAccount *acc = CreateAccountForStudent(info);
+	if (l->head == NULL)
+	{
 		l->head = acc;
 	}
-	else {
-		NodeAccount* p = l->head;
-		while (p->next != NULL) {
+	else
+	{
+		NodeAccount *p = l->head;
+		while (p->next != NULL)
+		{
 			p = p->next;
 		}
 		p->next = acc;
 	}
 }
-ListAccount* CreateListAccount(ClassList* cl) {
-	ListAccount* l = new ListAccount;
+ListAccount *CreateListAccount(ClassList *cl)
+{
+	ListAccount *l = new ListAccount;
 	l->head = NULL;
-	Class* pcl = cl->pHeadClass;
-	StudentNode* pstu = cl->pHeadClass->pHeadStudent;
-	while (pcl != NULL) {
-		while (pstu != NULL) {
+	Class *pcl = cl->pHeadClass;
+	StudentNode *pstu = cl->pHeadClass->pHeadStudent;
+	while (pcl != NULL)
+	{
+		while (pstu != NULL)
+		{
 			SignInInfo temp = GetSignInInfo(pstu->data);
 			AddTailToStudentAccountList(l, temp);
 			pstu = pstu->pNextStudent;
@@ -82,21 +97,25 @@ ListAccount* CreateListAccount(ClassList* cl) {
 	}
 	return l;
 }
-void PrintListAccount(ListAccount* l) {
-	NodeAccount* p = l->head;
-	while (p != NULL) {
+void PrintListAccount(ListAccount *l)
+{
+	NodeAccount *p = l->head;
+	while (p != NULL)
+	{
 		cout << p->info.username << endl;
 		cout << p->info.password << endl;
+		p = p->next;
 	}
 }
-int GetStudentAccount(ListAccount* l, string inUsername, string inPassword) {
+int GetStudentAccount(ListAccount *l, string inUsername, string inPassword)
+{
 	if (l->head == NULL)
 	{
 		return 0;
 	}
 	else
 	{
-		NodeAccount* p = l->head;
+		NodeAccount *p = l->head;
 		while (p != NULL)
 		{
 			if (p->info.username == inUsername && p->info.password == inPassword)
@@ -108,7 +127,8 @@ int GetStudentAccount(ListAccount* l, string inUsername, string inPassword) {
 	}
 	return 0;
 }
-int Login(ListAccount* l) {
+int Login(ListAccount *l)
+{
 	string inUsername;
 	string inPassword;
 
@@ -136,7 +156,8 @@ int Login(ListAccount* l) {
 	return 1;
 }
 
-void viewListOfCoursesForStudent(listYear lY) {
+void viewListOfCoursesForStudent(listYear lY)
+{
 	// Dò tới năm học chứa course cần sửa
 	string year;
 	int begin;
@@ -144,7 +165,7 @@ void viewListOfCoursesForStudent(listYear lY) {
 	cout << "Input school year to view: ";
 	getline(cin, year);
 	detachedYear(begin, last, year);
-	schoolYear* temp = lY.pHead;
+	schoolYear *temp = lY.pHead;
 	bool checkExitsYear = false;
 	while (temp != NULL)
 	{
@@ -162,7 +183,7 @@ void viewListOfCoursesForStudent(listYear lY) {
 	}
 
 	// Dò tới kỳ học chứa course cần sửa
-	nodeSemester* tempSemester = temp->listSem.head;
+	nodeSemester *tempSemester = temp->listSem.head;
 	int nameSemester;
 	cout << "Input the name semester(1,2 or 3): ";
 	cin >> nameSemester;
@@ -183,8 +204,9 @@ void viewListOfCoursesForStudent(listYear lY) {
 		cout << "The semester isn't exit";
 		return;
 	}
-	nodeCourse* tempCourse = tempSemester->listCour.head;
-	while (tempCourse != NULL) {
+	nodeCourse *tempCourse = tempSemester->listCour.head;
+	while (tempCourse != NULL)
+	{
 		cout << tempCourse->courseName << endl;
 		tempCourse = tempCourse->next;
 	}

@@ -5,7 +5,7 @@ void eatline()
 {
 	cin.ignore();
 }
-listYear creatListYear()
+listYear createListYear()
 {
 	listYear p;
 	p.pHead = NULL;
@@ -518,7 +518,7 @@ bool isDifferentPassword(Staff_List l, string password)
 Staff_Info GetStaffInfo(Staff_List l)
 {
 	Staff_Info info;
-	cout << "Input your infomation..." << endl;
+	cout << "Input your information..." << endl;
 	cout << "Your fullname: ";
 	getline(cin, info.fullname);
 	while (CheckFullName(info.fullname) == 0)

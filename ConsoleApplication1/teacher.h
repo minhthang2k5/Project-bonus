@@ -3,7 +3,7 @@
 #include "struct.h"
 #pragma warning(disable : 4996)
 // function List Year
-listYear creatListYear();
+listYear createListYear();
 void eatline();
 // void addClass(listYear *&lY);
 // void displayClass(nodeClass *head);
@@ -14,27 +14,6 @@ void inputDateInSemester(int &day, int &month, int &year);
 nodeSemester *initSemester();
 void addHeadSemester(listSemester &list, nodeSemester *p);
 void inputInformationSemesterAndAddSchoolYear(listYear &lY);
-
-struct Staff_Info
-{
-	string fullname;
-	Date birthday;
-	string username;
-	string password;
-	string email;
-	int gender;
-};
-
-struct Staff_Node
-{
-	Staff_Info staff;
-	Staff_Node *pNext;
-};
-
-struct Staff_List
-{
-	Staff_Node *pHead;
-};
 
 int CheckFullName(string fullname);
 bool isLeapYear(int y);

@@ -10,7 +10,7 @@ SignInInfo GetSignInInfo(Student stu);
 NodeAccount* CreateAccountForStudent(SignInInfo info);
 void AddTailToStudentAccountList(ListAccount* l, SignInInfo info);
 ListAccount* CreateListAccount(ClassList* cl);
-void PrintListAccount(ListAccount* l);
+void PrintListAccount(ListAccount* l); 
 int GetStudentAccount(ListAccount* l, string inUsername, string inPassword);
 int Login(ListAccount* l);
 
