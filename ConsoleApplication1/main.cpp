@@ -58,14 +58,23 @@ int main()
 	// 	checkCourse = checkCourse->next;
 	// }
 
+	// Class *CTT523 = readStudentsOfClassFromCSVFile("23CTT5.csv");
+	// cout << CTT523->pHeadStudent->pNextStudent->data.studentID << endl;
+	// ClassList *classList = createClassList(1);
+	// addClassIntoClassList(classList, CTT523);
+
+	// Class *CTT423 = readStudentsOfClassFromCSVFile("23CTT4.csv");
+	// cout << CTT423->pHeadStudent->pNextStudent->data.studentID << endl;
+	// addClassIntoClassList(classList, CTT423);
+
 	Class *CTT523 = readStudentsOfClassFromCSVFile("23CTT5.csv");
 	cout << CTT523->pHeadStudent->pNextStudent->data.studentID << endl;
-	ClassList *classList = createClassList(1);
-	addClassIntoClassList(classList, CTT523);
+	ClassList classList = noPointerCreateClassList(1);
+	noPointerAddClassIntoClassList(classList, CTT523);
 
 	Class *CTT423 = readStudentsOfClassFromCSVFile("23CTT4.csv");
 	cout << CTT423->pHeadStudent->pNextStudent->data.studentID << endl;
-	addClassIntoClassList(classList, CTT423);
+	noPointerAddClassIntoClassList(classList, CTT423);
 
 	system("pause");
 

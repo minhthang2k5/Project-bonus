@@ -77,6 +77,29 @@ ClassList *createClassList(int numberOfClasses)
     return claList1;
 }
 
+Class noPointerCreateClass(string className1, int numberOfStudents1)
+{
+    Class class1;
+    class1.className = className1;
+    class1.numberOfStudents = numberOfStudents1;
+    class1.pHeadStudent = nullptr;
+    class1.pNextClass = nullptr;
+    return class1;
+}
+ClassList noPointerCreateClassList(int numberOfClasses)
+{
+    ClassList claList1;
+    claList1.numberOfClasses = numberOfClasses;
+    claList1.pHeadClass = nullptr;
+    return claList1;
+}
+StudentList noPointerCreateStudentList(int numberOfStudents1)
+{
+    StudentList stuList;
+    stuList.numberOfStudents = numberOfStudents1;
+    stuList.pHeadStudent = nullptr;
+    return stuList;
+}
 void addStudentIntoClass(Class *class1, Student stu1)
 {
     StudentNode *stuNode = createStudentNode(stu1);
@@ -187,6 +210,95 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
     return class1;
 }
 
+void noPointerAddStudentIntoClass(Class class1, Student stu1)
+{
+    StudentNode *stuNode = createStudentNode(stu1);
+    if (class1.pHeadStudent == nullptr)
+    {
+        class1.pHeadStudent = stuNode;
+        class1.numberOfStudents++;
+        return;
+    }
+    StudentNode *temp = class1.pHeadStudent;
+    while (temp->pNextStudent != nullptr)
+    {
+        temp = temp->pNextStudent;
+    }
+    temp->pNextStudent = stuNode;
+    class1.numberOfStudents++;
+}
+
+void noPointerAddClassIntoClassList(ClassList claList1, Class *class1)
+{
+    if (claList1.pHeadClass == nullptr)
+    {
+        claList1.pHeadClass = class1;
+        return;
+    }
+    Class *temp = claList1.pHeadClass;
+    while (temp->pNextClass != nullptr)
+    {
+        temp = temp->pNextClass;
+    }
+    temp->pNextClass = class1;
+}
+// Class noPointerReadStudentsOfClassFromCSVFile(string fileName)
+// {
+//     ifstream fileIn;
+//     fileIn.open(fileName);
+//     // lấy tên lớp học từ tên file CSV
+//     size_t lastDot = fileName.find_last_of(".");
+//     string className = fileName.substr(0, lastDot);
+//     Class class1 = noPointerCreateClass(className, 0);
+//     if (!fileIn.is_open())
+//     {
+//         cout << "Error while opening file\"" << fileName << "\"" << endl;
+//         return class1;
+//     }
+
+//     string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+//     FullName fullName;
+//     Date dateOfBirth;
+
+//     // xuống dòng đầu tiên
+//     string line;
+//     getline(fileIn, line, '\n');
+
+//     while (!fileIn.eof())
+//     {
+//         getline(fileIn, line, ',');
+
+//         getline(fileIn, idString, ',');
+//         int id = stoi(idString);
+
+//         getline(fileIn, firstName, ',');
+//         fullName.firstName = firstName;
+
+//         getline(fileIn, lastName, ',');
+//         fullName.lastName = lastName;
+
+//         getline(fileIn, gender, ',');
+
+//         getline(fileIn, dayOfDOB, '/');
+//         dateOfBirth.day = stoi(dayOfDOB);
+
+//         getline(fileIn, monthOfDOB, '/');
+//         dateOfBirth.month = stoi(monthOfDOB);
+
+//         getline(fileIn, yearOfDOB, ',');
+//         dateOfBirth.year = stoi(yearOfDOB);
+
+//         getline(fileIn, socialIDString, '\n');
+
+//         int socialID = stoi(socialIDString);
+
+//         Student stu1 = createStudent(id, fullName, gender, dateOfBirth, socialID);
+//         noPointerAddStudentIntoClass(class1, stu1);
+//         class1.numberOfStudents++;
+//     }
+//     fileIn.close();
+//     return class1;
+// }
 StudentList *readStudentsOfCourseFromCSVFile(string fileName)
 {
     ifstream fileIn;

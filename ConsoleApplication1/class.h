@@ -8,11 +8,17 @@ Student createStudent(int id1, FullName fullName1, string gender1, Date dateOfBi
 Class *createClass(string className1, int numberOfStudents1);
 ClassList *createClassList(int numberOfClasses);
 StudentList *createStudentList(int numberOfStudents1);
+Class noPointerCreateClass(string className1, int numberOfStudents1);
+ClassList noPointerCreateClassList(int numberOfClasses);
+StudentList noPointerCreateStudentList(int numberOfStudents1);
+void noPointerAddStudentIntoClass(Class class1, Student stu1);
+void noPointerAddClassIntoClassList(ClassList claList1, Class *class1);
 void addStudentIntoClass(Class *class1, Student stu1);
 void addStudentIntoStudentList(StudentList *studentList, Student stu1);
 void addClassIntoClassList(ClassList *claList1, Class *class1);
 
 Class *readStudentsOfClassFromCSVFile(string fileName);
+Class noPointerReadStudentsOfClassFromCSVFile(string fileName);
 
 StudentList *readStudentsOfCourseFromCSVFile(string fileName);
 
