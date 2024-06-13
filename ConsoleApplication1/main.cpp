@@ -31,7 +31,33 @@ int main()
 	//// Tao nam hoc
 	listYear yearList = createListYear();
 	addHeadNewSchoolYear(yearList);
-
+	schoolYear* check = yearList.pHead;
+	while (check!=NULL)
+	{
+		cout << check->beginYear << "-" << check->lastYear<<endl;
+		check = check->next;
+	}
+	inputInformationSemesterAndAddSchoolYear(yearList);
+	//inputInformationSemesterAndAddSchoolYear(yearList);
+	nodeSemester* checkSemester = yearList.pHead->listSem.head;
+	while (checkSemester!=NULL)
+	{
+		cout << checkSemester->name << endl;
+		cout << "Begin: ";
+		cout << checkSemester->begin.day << "-" << checkSemester->begin.month << "_" << checkSemester->begin.year << endl;
+		cout << "End: ";
+		cout << checkSemester->end.day << "-" << checkSemester->end.month << "_" << checkSemester->end.year << endl;
+		checkSemester = checkSemester->next;
+	}
+	inputInformationToAddCourse(yearList);
+	inputInformationToAddCourse(yearList);
+	nodeCourse* checkCourse = yearList.pHead->listSem.head->listCour.head;
+	while (checkCourse != NULL)
+	{
+		cout << checkCourse->courseName << endl;
+		checkCourse = checkCourse->next;
+	}
 	system("pause");
+
 	return 0;
 }
