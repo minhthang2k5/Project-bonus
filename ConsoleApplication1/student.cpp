@@ -79,7 +79,7 @@ void AddTailToStudentAccountList(ListAccount *l, SignInInfo info)
 		p->next = acc;
 	}
 }
-ListAccount *CreateListAccount(ClassList *cl)
+ListAccount *CreateListAccount(ClassList *cl, const char* warehousepath)
 {
 	ListAccount *l = new ListAccount;
 	l->head = NULL;
@@ -95,6 +95,8 @@ ListAccount *CreateListAccount(ClassList *cl)
 		}
 		pcl = pcl->pNextClass;
 	}
+	// +++
+	int check = StudentAccountDataWarehouse(l, warehousepath);
 	return l;
 }
 void PrintListAccount(ListAccount *l)
@@ -209,5 +211,78 @@ void viewListOfCoursesForStudent(listYear lY)
 	{
 		cout << tempCourse->courseName << endl;
 		tempCourse = tempCourse->next;
+	}
+}
+
+int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath) {
+	ofstream dout;
+	dout.open(warehousepath, ios::out);
+	dout.seekp(0, ios::beg);
+	bool flag = false;
+	NodeAccount* p = l->head;
+	while (true) {
+		while (p != NULL) {
+			dout << p->info.username;
+			dout << endl;
+			dout << p->info.password;
+			dout << endl;
+
+		}
+		if (p == NULL) {
+			flag = true;
+			break;
+		}
+	}
+
+	dout.flush();
+	dout.close();
+
+	if (flag == true) {
+		return 1;
+	}
+	return 0;
+}
+int LoadStudentAccount(ListAccount* l, const char* warehousepath) {
+	ifstream din;
+	din.open(warehousepath, ios::in);
+	bool flag = false;
+	while (true) {
+		while (din.eof() == false) {
+			SignInInfo tempInfo;
+			din >> tempInfo.username;
+			din >> tempInfo.password;
+			AddTailToStudentAccountList(l, tempInfo);
+		}
+		if (din.eof() == true) {
+			flag = true;
+		}
+	}
+	din.close();
+	if (flag == true) {
+		return 1;
+	}
+	return 0;
+}
+int ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath) {
+	string inUsername;
+	cout << "Input username to change passward: ";
+	cin >> inUsername;
+	NodeAccount* p = l->head;
+	while (p != NULL) {
+		if (p->info.username == inUsername) {
+			cout << "Input new password: ";
+			cin >> p->info.password;
+			break;
+		}
+		p = p->next;
+	}
+	int check = StudentAccountDataWarehouse(l, warehousepath);
+	if (check == 1) {
+		cout << "Change successfully!" << endl;
+		return 1;
+	}
+	else {
+		cout << "Change unsuccessfully!" << endl;
+		return 0;
 	}
 }
