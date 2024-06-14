@@ -258,6 +258,18 @@ void inputClassToAddSchoolYear(listYear &lY)
 		lY.pHead->listClass.pHeadClass->pNextClass = a;
 	}
 }
+bool checkNameSemester(nodeSemester* p, int name)
+{
+	while (p!=NULL)
+	{
+		if (p->name==name)
+		{
+			return false;
+		}
+		p = p->next;
+	}
+	return true;
+}
 /*
 hàm này để nhập thông tìn một khóa học
 Input:Danh sách các năm học
@@ -293,6 +305,11 @@ void inputInformationSemesterAndAddSchoolYear(listYear &lY)
 	nodeSemester *seme = initSemester();
 	cout << "Input the name semester 1,2 or 3:";
 	cin >> seme->name;
+	while (checkNameSemester(temp->listSem.head,seme->name)==false)
+	{
+		cout << "Name semester is exit,pleas input again:";
+		cin >> seme->name;
+	}
 	eatline();
 	cout << "Input the start date: ";
 	inputDateInSemester(seme->begin.day, seme->begin.month, seme->begin.year);

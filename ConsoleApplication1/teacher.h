@@ -7,6 +7,7 @@ listYear createListYear();
 void eatline();
 // void addClass(listYear *&lY);
 // void displayClass(nodeClass *head);
+bool checkNameSemester(nodeSemester* p, int name);
 bool checkNumber(char a);
 void detachedYear(int &begin, int &last, string year);
 void addHeadNewSchoolYear(listYear &lY);
@@ -54,6 +55,7 @@ int SignIn(Staff_List l);
 
 // function of course
 nodeCourse *initCourse();
+
 void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(listYear &lY);
 

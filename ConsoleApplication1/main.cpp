@@ -76,6 +76,19 @@ int main()
 	cout << CTT423->pHeadStudent->pNextStudent->data.studentID << endl;
 	noPointerAddClassIntoClassList(classList, CTT423);
 
+	int choice;
+	cout << "1. Staff" << endl;
+	cout << "2. Student" << endl;
+	cin >> choice;
+	if (choice == 1) {
+		// SignUp
+		
+
+	}
+	if (choice == 2) {
+
+	}
+
 	system("pause");
 
 	return 0;
