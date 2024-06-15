@@ -659,12 +659,14 @@ void PrintList(Staff_List l)
 		p = p->pNext;
 	}
 }
-int SignUp(Staff_List &l)
+int SignUp(Staff_List &l, const char* warehousepath)
 {
 
 	Staff_Info info = GetStaffInfo(l);
 	AddTail(l, info);
 	cout << "Sign up successfully!" << endl;
+	// +++
+	int check = StaffAccountDataWarehouse(l, warehousepath);
 	return 1;
 }
 int GetStaffAccount(Staff_List l, string inUsername, string inPassword)
@@ -714,6 +716,79 @@ int SignIn(Staff_List l)
 		}
 	}
 	return 1;
+}
+
+int StaffAccountDataWarehouse(Staff_List l, const char* warehousepath) {
+	ofstream dout;
+	dout.open(warehousepath, ios::out);
+	dout.seekp(0, ios::beg);
+	bool flag = false;
+	Staff_Node* p = l.pHead;
+	while (true) {
+		while (p != NULL) {
+			dout << p->staff.username;
+			dout << endl;
+			dout << p->staff.password;
+			dout << endl;
+
+		}
+		if (p == NULL) {
+			flag = true;
+			break;
+		}
+	}
+
+	dout.flush();
+	dout.close();
+
+	if (flag == true) {
+		return 1;
+	}
+	return 0;
+}
+int LoadStaffAccount(Staff_List &l, const char* warehousepath) {
+	ifstream din;
+	din.open(warehousepath, ios::in);
+	bool flag = false;
+	while (true) {
+		while (din.eof() == false) {
+			Staff_Info tempInfo;
+			din >> tempInfo.username;
+			din >> tempInfo.password;
+			AddTail(l, tempInfo);
+		}
+		if (din.eof() == true) {
+			flag = true;
+		}
+	}
+	din.close();
+	if (flag == true) {
+		return 1;
+	}
+	return 0;
+}
+int ChangePasswordOfStaff(Staff_List& l, const char* warehousepath) {
+	string inUsername;
+	cout << "Input username to change passward: ";
+	cin >> inUsername;
+	Staff_Node* p = l.pHead;
+	while (p != NULL) {
+		if (p->staff.username == inUsername) {
+			cout << "Input new password: ";
+			cin >> p->staff.password;
+			break;
+		}
+		p = p->pNext;
+	}
+	int check = StaffAccountDataWarehouse(l, warehousepath);
+	if (check == 1) {
+		cout << "Change successfully!" << endl;
+		return 1;
+	}
+	else {
+		cout << "Change unsuccessfully!" << endl;
+		return 0;
+	}
 }
 
 /*

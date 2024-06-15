@@ -49,9 +49,13 @@ void Init(Staff_List &l);
 void AddTail(Staff_List &l, Staff_Info info);
 void PrintStaffInfo(Staff_Info info);
 void PrintList(Staff_List l);
-int SignUp(Staff_List &l);
+int SignUp(Staff_List &l, const char* warehousepath);
 int GetStaffAccount(Staff_List l, string inUsername, string inPassword);
 int SignIn(Staff_List l);
+
+int StaffAccountDataWarehouse(Staff_List l, const char* warehousepath);
+int LoadStaffAccount(Staff_List &l, const char* warehousepath);
+int ChangePasswordOfStaff(Staff_List& l, const char* warehousepath);
 
 // function of course
 nodeCourse *initCourse();

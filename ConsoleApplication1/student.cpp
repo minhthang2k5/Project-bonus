@@ -242,7 +242,7 @@ int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath) {
 	}
 	return 0;
 }
-int LoadStudentAccount(ListAccount* l, const char* warehousepath) {
+int LoadStudentAccount(ListAccount*& l, const char* warehousepath) {
 	ifstream din;
 	din.open(warehousepath, ios::in);
 	bool flag = false;
