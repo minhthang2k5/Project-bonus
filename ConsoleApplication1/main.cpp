@@ -2,94 +2,87 @@
 #include "student.h"
 #include "class.h"
 
+ListAccount* accstudent;
+Staff_List accstaff;
+const char* warehousepath;
 int main()
 {
-	// Hàm hiển thị là staff hay student
-
-	// // if là staff
-	// //--
-	// Staff_List staffList;
-	// Init(staffList);
-	// SignUp(staffList);
-	// cout << endl;
-	// PrintList(staffList);
-	// //--
-	// SignIn(staffList);
-
-	// // Neu la student
-	// //--
-	// Class *CTT523 = readStudentsOfClassFromCSVFile("23CTT5.csv");
-	// cout << CTT523->pHeadStudent->pNextStudent->data.studentID << endl;
-	// ClassList *classList = createClassList(1);
-	// addClassIntoClassList(classList, CTT523);
-	// ListAccount *accountList = CreateListAccount(classList);
-	// PrintListAccount(accountList);
-	// cout << endl;
-	// //---- dang nhap student
-	// Login(accountList);
-
-	//// Tao nam hoc
-	// listYear yearList = createListYear();
-	// addHeadNewSchoolYear(yearList);
-	// schoolYear* check = yearList.pHead;
-	// while (check!=NULL)
-	// {
-	// 	cout << check->beginYear << "-" << check->lastYear<<endl;
-	// 	check = check->next;
-	// }
-	// inputInformationSemesterAndAddSchoolYear(yearList);
-	// //inputInformationSemesterAndAddSchoolYear(yearList);
-	// nodeSemester* checkSemester = yearList.pHead->listSem.head;
-	// while (checkSemester!=NULL)
-	// {
-	// 	cout << checkSemester->name << endl;
-	// 	cout << "Begin: ";
-	// 	cout << checkSemester->begin.day << "-" << checkSemester->begin.month << "_" << checkSemester->begin.year << endl;
-	// 	cout << "End: ";
-	// 	cout << checkSemester->end.day << "-" << checkSemester->end.month << "_" << checkSemester->end.year << endl;
-	// 	checkSemester = checkSemester->next;
-	// }
-	// inputInformationToAddCourse(yearList);
-	// inputInformationToAddCourse(yearList);
-	// nodeCourse* checkCourse = yearList.pHead->listSem.head->listCour.head;
-	// while (checkCourse != NULL)
-	// {
-	// 	cout << checkCourse->courseName << endl;
-	// 	checkCourse = checkCourse->next;
-	// }
-
-	// Class *CTT523 = readStudentsOfClassFromCSVFile("23CTT5.csv");
-	// cout << CTT523->pHeadStudent->pNextStudent->data.studentID << endl;
-	// ClassList *classList = createClassList(1);
-	// addClassIntoClassList(classList, CTT523);
-
-	// Class *CTT423 = readStudentsOfClassFromCSVFile("23CTT4.csv");
-	// cout << CTT423->pHeadStudent->pNextStudent->data.studentID << endl;
-	// addClassIntoClassList(classList, CTT423);
-
-	Class *CTT523 = readStudentsOfClassFromCSVFile("23CTT5.csv");
-	cout << CTT523->pHeadStudent->pNextStudent->data.studentID << endl;
-	ClassList classList = noPointerCreateClassList(1);
-	noPointerAddClassIntoClassList(classList, CTT523);
-
-	Class *CTT423 = readStudentsOfClassFromCSVFile("23CTT4.csv");
-	cout << CTT423->pHeadStudent->pNextStudent->data.studentID << endl;
-	noPointerAddClassIntoClassList(classList, CTT423);
-
 	int choice;
-	cout << "1. Staff" << endl;
-	cout << "2. Student" << endl;
-	cin >> choice;
-	if (choice == 1) {
-		// SignUp
+	do {
+		cout << "Choose type of user: " <<endl;
+		cout << "1. Student" << endl;
+		cout << "2. Staff" << endl;
+		cout << "0. Exit" << endl;
+		cout << "Your choice: ";
+		cin >> choice;
+		int choice1 = -2;
+		do {
+			// menu cho student 
+			
+			if (choice == 1) {
+				cout << "1. Sign in" << endl;
+				cout << "0. Back" << endl;
+				cout << "-1. Exit" << endl;
+				cout << "Your choice: ";
+				cin >> choice1;
+				if (choice1 == 1) {
+					int check1 = Login(accstudent);
+					int choice2;
+					do {
+						// các chức năng của sinh viên 
+						cout << "123" << endl;
+						cin >> choice2;
+					} while (choice2 != -1);
+				}
+				if (choice1 == -1) {
+					cout << "Exit successfully!" << endl;
+					return 1;
+				}
+				if (choice1 == 0) {
+					break;
+				}
+				
+			}
+
+			// menu cho staff
+			if (choice == 2) {
+					cout << "1. Sign up" << endl;
+					cout << "2. Sign in" << endl;
+					cout << "0. Back" << endl;
+					cout << "-1. Exit" << endl;
+					cout << "Your choice: ";
+					cin >> choice1;
+					if (choice1 == 1) {
+						int check1 = SignUp(accstaff, warehousepath);
+						int choice2;
+						do {
+							//các chức năng của staff
+							cout << "123" << endl;
+							cin >> choice2;
+						} while (choice2 != -1);
+					}
+
+					if (choice1 == 2) {
+						int check2 = SignIn(accstaff);
+						int choice2;
+						do {
+							// các chức của staff 
+							cout << "123" << endl;
+							cin >> choice2;
+						} while (choice2 == -1);
+					}
+			}
+			
+		} while (choice1 != -1);
+		if (choice == 0) {
+			cout << "Exit successfully!" << endl;
+			return 1;
+		}
+		if (choice < 0 || choice >2) {
+			cout << "Invalid choice" << endl;
+		}
 		
-
-	}
-	if (choice == 2) {
-
-	}
-
+	} while (choice < 0 || choice >2);
 	system("pause");
-
 	return 0;
 }
