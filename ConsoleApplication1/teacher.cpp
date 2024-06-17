@@ -534,6 +534,7 @@ bool isDifferentPassword(Staff_List l, string password)
 }
 Staff_Info GetStaffInfo(Staff_List l)
 {
+	cin.ignore();
 	Staff_Info info;
 	cout << "Input your information..." << endl;
 	cout << "Your fullname: ";
@@ -730,7 +731,7 @@ int StaffAccountDataWarehouse(Staff_List l, const char* warehousepath) {
 			dout << endl;
 			dout << p->staff.password;
 			dout << endl;
-
+			p = p->pNext;
 		}
 		if (p == NULL) {
 			flag = true;
@@ -750,21 +751,23 @@ int LoadStaffAccount(Staff_List &l, const char* warehousepath) {
 	ifstream din;
 	din.open(warehousepath, ios::in);
 	bool flag = false;
+	if (din.is_open() == false) {
+		cout << "Cannot open file!" << endl;
+		return 0;
+	}
+	
 	while (true) {
-		while (din.eof() == false) {
-			Staff_Info tempInfo;
-			din >> tempInfo.username;
-			din >> tempInfo.password;
-			AddTail(l, tempInfo);
-		}
+		Staff_Info tempInfo;
+		getline(din, tempInfo.username, '\n');
+		getline(din, tempInfo.password, '\n');
 		if (din.eof() == true) {
-			flag = true;
+			break;
 		}
+		AddTail(l, tempInfo);
 	}
+		
 	din.close();
-	if (flag == true) {
-		return 1;
-	}
+	
 	return 0;
 }
 int ChangePasswordOfStaff(Staff_List& l, const char* warehousepath) {

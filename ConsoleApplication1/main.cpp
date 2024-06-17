@@ -4,9 +4,11 @@
 
 ListAccount* accstudent;
 Staff_List accstaff;
-const char* warehousepath;
+const char* warehousepath1 = "Saveaccount/account.txt";
+
 int main()
 {
+	int check1 = LoadStaffAccount(accstaff, warehousepath1);
 	int choice;
 	do {
 		cout << "Choose type of user: " <<endl;
@@ -59,7 +61,7 @@ int main()
 					cin >> choice1;
 					system("cls");
 					if (choice1 == 1) {
-						int check1 = SignUp(accstaff, warehousepath);
+						int check1 = SignUp(accstaff, warehousepath1);
 						int choice2;
 						do {
 							//các chức năng của staff
