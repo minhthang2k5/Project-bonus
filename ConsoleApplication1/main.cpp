@@ -15,6 +15,7 @@ int main()
 		cout << "0. Exit" << endl;
 		cout << "Your choice: ";
 		cin >> choice;
+		system("cls");
 		int choice1 = -2;
 		do {
 			// menu cho student 
@@ -24,14 +25,18 @@ int main()
 				cout << "0. Back" << endl;
 				cout << "-1. Exit" << endl;
 				cout << "Your choice: ";
+				
 				cin >> choice1;
+				system("cls");
 				if (choice1 == 1) {
 					int check1 = Login(accstudent);
 					int choice2;
 					do {
 						// các chức năng của sinh viên 
 						cout << "123" << endl;
+
 						cin >> choice2;
+						system("cls");
 					} while (choice2 != -1);
 				}
 				if (choice1 == -1) {
@@ -52,6 +57,7 @@ int main()
 					cout << "-1. Exit" << endl;
 					cout << "Your choice: ";
 					cin >> choice1;
+					system("cls");
 					if (choice1 == 1) {
 						int check1 = SignUp(accstaff, warehousepath);
 						int choice2;
@@ -59,6 +65,7 @@ int main()
 							//các chức năng của staff
 							cout << "123" << endl;
 							cin >> choice2;
+							system("cls");
 						} while (choice2 != -1);
 					}
 
@@ -69,7 +76,15 @@ int main()
 							// các chức của staff 
 							cout << "123" << endl;
 							cin >> choice2;
+							system("cls");
 						} while (choice2 == -1);
+					}
+					if (choice1 == -1) {
+						cout << "Exit successfully!" << endl;
+						return 1;
+					}
+					if (choice1 == 0) {
+						break;
 					}
 			}
 			if (choice == 0) {
@@ -82,9 +97,7 @@ int main()
 			}
 			
 		} while (choice < 0 || choice >2);
-		
-		
-	} while (choice < 0 || choice >2);
+	} while (choice >= 0 && choice <=2);
 	system("pause");
 	return 0;
 }

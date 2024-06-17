@@ -5,6 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include <iomanip>
+#include <cstdlib>
 using namespace std;
 struct Date
 {
