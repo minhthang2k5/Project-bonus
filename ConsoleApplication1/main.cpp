@@ -72,15 +72,17 @@ int main()
 						} while (choice2 == -1);
 					}
 			}
+			if (choice == 0) {
+				cout << "Exit successfully!" << endl;
+				return 1;
+			}
+			if (choice < 0 || choice >2) {
+				cout << "Invalid choice" << endl;
+				break;
+			}
 			
-		} while (choice1 != -1);
-		if (choice == 0) {
-			cout << "Exit successfully!" << endl;
-			return 1;
-		}
-		if (choice < 0 || choice >2) {
-			cout << "Invalid choice" << endl;
-		}
+		} while (choice < 0 || choice >2);
+		
 		
 	} while (choice < 0 || choice >2);
 	system("pause");
