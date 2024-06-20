@@ -11,7 +11,7 @@ int main()
 	ls.pHead = NULL;
 	int check1 = LoadStaffAccount(accstaff, warehousepath1);
 	int check2 = LoadStudentAccount(accstudent, warehousepath2);
-
+	readListYear("listYear/listYear.txt",ls);
 	int choice;
 	do
 	{
@@ -106,13 +106,27 @@ int main()
 						// các chức của staff
 						cout << "1.Create a school year" << endl;
 						cout << "2.Choose school year to operate" << endl;
+						cout << "3.Back" << endl;
+						cout << "4.Exit" << endl;
 						cout << "Your choice:";
 						cin >> choice2;
-						if (choice1 == 1)
+						cin.ignore();
+						if (choice2 == 1)
 						{
+							addHeadNewSchoolYear(ls);
+							writeListYear("listYear/listYear.txt", ls);
+						}
+						if (choice2==3)
+						{
+							system("cls");
+							break;
+						}
+						if (choice2==4)
+						{
+							return 1;
 						}
 						system("cls");
-					} while (choice2 == -1);
+					} while (choice2 != -1);
 				}
 				if (choice1 == -1)
 				{

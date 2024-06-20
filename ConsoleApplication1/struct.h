@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
+#include <direct.h>
 using namespace std;
 struct Date
 {

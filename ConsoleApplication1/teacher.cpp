@@ -61,7 +61,58 @@ void detachedYear(int &begin, int &last, string year)
 	begin = stoi(sBegin);
 	last = stoi(sLast);
 }
-void addHeadNewSchoolYear(listYear &lY)
+void readListYear(const char* name, listYear& lY)
+{
+	ifstream iFile;
+	iFile.open(name);
+	if (!iFile.is_open())
+	{
+		cout << "can't open file";
+		return;
+	}
+	string nameYear;
+	while (getline(iFile, nameYear, '\n'))
+	{
+		int begin, last;
+		detachedYear(begin, last, nameYear);
+		if (lY.pHead == NULL)
+		{
+			lY.pHead = new schoolYear;
+			lY.pHead->beginYear = begin;
+			lY.pHead->lastYear = last;
+			lY.pHead->listSem.head = NULL;
+			lY.pHead->next = NULL;
+		}
+		else
+		{
+			schoolYear* temp = new schoolYear;
+			temp->beginYear = begin;
+			temp->lastYear = last;
+			lY.pHead->listSem.head = NULL;
+			temp->next = lY.pHead;
+			lY.pHead = temp;
+		}
+	}
+	iFile.close();
+}
+void writeListYear(const char* name, listYear ls)
+{
+	ofstream oFile;
+	oFile.open(name);
+	if (!oFile.is_open())
+	{
+		cout << "can't open file";
+		return;
+	}
+	schoolYear* p = ls.pHead;
+	while (p != NULL)
+	{
+		oFile << p->beginYear << "-" << p->lastYear << endl;
+		p = p->next;
+	}
+	oFile.close();
+}
+void addHeadNewSchoolYear(listYear& lY)
 {
 	cout << "Input the school year:";
 	string year;
@@ -78,13 +129,20 @@ void addHeadNewSchoolYear(listYear &lY)
 	}
 	else
 	{
-		schoolYear *temp = new schoolYear;
+		schoolYear* temp = new schoolYear;
 		temp->beginYear = begin;
 		temp->lastYear = last;
 		lY.pHead->listSem.head = NULL;
 		temp->next = lY.pHead;
 		lY.pHead = temp;
 	}
+	string nameFolder;
+	string beginN = to_string(lY.pHead->beginYear);
+	string lastN = to_string(lY.pHead->lastYear);
+	nameFolder = "listYear/" + beginN + "-" + lastN;
+	wstring a(nameFolder.begin(), nameFolder.end());
+	const char* nameChar = nameFolder.c_str();
+	_mkdir(nameChar);
 }
 // void addClassYear()
 /*
