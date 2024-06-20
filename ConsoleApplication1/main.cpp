@@ -11,7 +11,7 @@ int main()
 	ls.pHead = NULL;
 	int check1 = LoadStaffAccount(accstaff, warehousepath1);
 	int check2 = LoadStudentAccount(accstudent, warehousepath2);
-	readListYear("listYear/listYear.txt",ls);
+	readListYear("listYear/listYear.txt", ls);
 	int choice;
 	do
 	{
@@ -116,12 +116,45 @@ int main()
 							addHeadNewSchoolYear(ls);
 							writeListYear("listYear/listYear.txt", ls);
 						}
-						if (choice2==3)
+						if (choice2 == 2)
+						{
+							//--danglam
+							string yearName;
+							cout << "Input school year: ";
+							getline(cin, yearName);
+							system("cls");
+							cout << "1. Create new class" << endl;
+							cout << "2. Add a student into class" << endl;
+							cout << "3. Read all student of a class from CSV file" << endl;
+							cout << "4. Choose a semester" << endl;
+							cout << "5. View list of classes" << endl;
+							cout << "6. View list of students of a class" << endl;
+							cout << "7. View scoreboard of a class" << endl;
+							cout << "0. Back" << endl;
+							cout << "-1. Exit" << endl;
+							cout << "Your choice: ";
+							int choice3;
+							cin >> choice3;
+							cin.ignore();
+							if (choice3 == -1)
+							{
+								cout << "Exit successfully!" << endl;
+								return 1;
+							}
+							if (choice3 == 0)
+							{
+								break;
+							}
+							if (choice3 == 1)
+							{
+							}
+						}
+						if (choice2 == 3)
 						{
 							system("cls");
 							break;
 						}
-						if (choice2==4)
+						if (choice2 == 4)
 						{
 							return 1;
 						}
