@@ -226,7 +226,7 @@ int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath) {
 			dout << endl;
 			dout << p->info.password;
 			dout << endl;
-
+			p = p->next;
 		}
 		if (p == NULL) {
 			flag = true;
@@ -243,24 +243,23 @@ int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath) {
 	return 0;
 }
 int LoadStudentAccount(ListAccount*& l, const char* warehousepath) {
+	l = new ListAccount;
+	l->head = NULL;
 	ifstream din;
 	din.open(warehousepath, ios::in);
 	bool flag = false;
 	while (true) {
-		while (din.eof() == false) {
-			SignInInfo tempInfo;
-			din >> tempInfo.username;
-			din >> tempInfo.password;
-			AddTailToStudentAccountList(l, tempInfo);
-		}
+		SignInInfo tempInfo;
+		getline(din, tempInfo.username, '\n');
+		getline(din, tempInfo.password, '\n');
 		if (din.eof() == true) {
-			flag = true;
+			break;
 		}
+		AddTailToStudentAccountList(l, tempInfo);
+		
 	}
 	din.close();
-	if (flag == true) {
-		return 1;
-	}
+	
 	return 0;
 }
 int ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath) {

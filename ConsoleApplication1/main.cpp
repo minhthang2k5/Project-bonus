@@ -4,12 +4,14 @@
 listYear ls;
 ListAccount* accstudent;
 Staff_List accstaff;
-const char* warehousepath1 = "Saveaccount/account.txt";
-
+const char* warehousepath1 = "Saveaccount/accountforstaff.txt";
+const char* warehousepath2 = "Saveaccount/accountforstudent.txt";
 int main()
 {
 	ls.pHead = NULL;
 	int check1 = LoadStaffAccount(accstaff, warehousepath1);
+	int check2 = LoadStudentAccount(accstudent, warehousepath2);
+
 	int choice;
 	do {
 		cout << "Choose type of user: " <<endl;
