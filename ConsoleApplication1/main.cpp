@@ -1,13 +1,14 @@
 ﻿#include "teacher.h"
 #include "student.h"
 #include "class.h"
-
+listYear ls;
 ListAccount* accstudent;
 Staff_List accstaff;
 const char* warehousepath1 = "Saveaccount/account.txt";
 
 int main()
 {
+	ls.pHead = NULL;
 	int check1 = LoadStaffAccount(accstaff, warehousepath1);
 	int choice;
 	do {
@@ -62,13 +63,8 @@ int main()
 					system("cls");
 					if (choice1 == 1) {
 						int check1 = SignUp(accstaff, warehousepath1);
-						int choice2;
-						do {
-							//các chức năng của staff
-							cout << "123" << endl;
-							cin >> choice2;
-							system("cls");
-						} while (choice2 != -1);
+						system("cls");
+						continue;
 					}
 
 					if (choice1 == 2) {
@@ -76,8 +72,14 @@ int main()
 						int choice2;
 						do {
 							// các chức của staff 
-							cout << "123" << endl;
+							cout << "1.Creat a school year" << endl;
+							cout << "2.Choose school year to operate" << endl;
+							cout << "Your choice:";
 							cin >> choice2;
+							if (choice1==1)
+							{
+
+							}
 							system("cls");
 						} while (choice2 == -1);
 					}
