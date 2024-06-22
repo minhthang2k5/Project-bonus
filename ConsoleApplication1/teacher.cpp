@@ -140,9 +140,14 @@ void addHeadNewSchoolYear(listYear& lY)
 	string beginN = to_string(lY.pHead->beginYear);
 	string lastN = to_string(lY.pHead->lastYear);
 	nameFolder = "listYear/" + beginN + "-" + lastN;
-	wstring a(nameFolder.begin(), nameFolder.end());
 	const char* nameChar = nameFolder.c_str();
 	_mkdir(nameChar);
+	ofstream oFile;
+	//hien folde de up len git
+	string gitFile;
+	gitFile = nameFolder + "/" + "gitFile.txt";
+	oFile.open(nameFolder);
+	oFile.close();
 }
 // void addClassYear()
 /*

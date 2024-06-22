@@ -122,6 +122,7 @@ int main()
 							string yearName;
 							cout << "Input school year: ";
 							getline(cin, yearName);
+
 							system("cls");
 							cout << "1. Create new class" << endl;
 							cout << "2. Add a student into class" << endl;
