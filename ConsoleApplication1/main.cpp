@@ -12,6 +12,7 @@ int main()
 	int check1 = LoadStaffAccount(accstaff, warehousepath1);
 	int check2 = LoadStudentAccount(accstudent, warehousepath2);
 	readListYear("listYear/listYear.txt", ls);
+	readSenester(ls);
 	int choice;
 	do
 	{
@@ -42,7 +43,6 @@ int main()
 					int choice2;
 					do
 					{
-						// các chức năng của sinh viên
 						// các chức năng của sinh viên
 						cout << "1. View your profile" << endl;
 						cout << "2. Change the password" << endl;
@@ -118,19 +118,28 @@ int main()
 						}
 						if (choice2 == 2)
 						{
-							//--danglam
 							string yearName;
 							cout << "Input school year: ";
 							getline(cin, yearName);
-
+							//lấy node school year để thực hiện các chức năng dưới
+							schoolYear* current = getSchoolYear(ls, yearName);
+							while (current==NULL)
+							{
+								cout << "School year isn't exited"<<endl;
+								cout << "Input again";
+								getline(cin, yearName);
+								current = getSchoolYear(ls, yearName);
+							}
 							system("cls");
 							cout << "1. Create new class" << endl;
 							cout << "2. Add a student into class" << endl;
-							cout << "3. Read all student of a class from CSV file" << endl;
+							cout << "3. Creat a semester" << endl;
 							cout << "4. Choose a semester" << endl;
-							cout << "5. View list of classes" << endl;
-							cout << "6. View list of students of a class" << endl;
-							cout << "7. View scoreboard of a class" << endl;
+							cout << "5. Read all student of a class from CSV file" << endl;
+							cout << "6. Choose a semester" << endl;
+							cout << "7. View list of classes" << endl;
+							cout << "8. View list of students of a class" << endl;
+							cout << "9. View scoreboard of a class" << endl;
 							cout << "0. Back" << endl;
 							cout << "-1. Exit" << endl;
 							cout << "Your choice: ";
@@ -144,10 +153,11 @@ int main()
 							}
 							if (choice3 == 0)
 							{
-								break;
+								continue;
 							}
-							if (choice3 == 1)
+							if (choice3==3)
 							{
+								inputInformationSemesterAndAddSchoolYear(current);
 							}
 						}
 						if (choice2 == 3)

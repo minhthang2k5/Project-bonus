@@ -14,9 +14,12 @@ void addHeadNewSchoolYear(listYear &lY);
 void inputDateInSemester(int &day, int &month, int &year);
 nodeSemester *initSemester();
 void addHeadSemester(listSemester &list, nodeSemester *p);
-void inputInformationSemesterAndAddSchoolYear(listYear &lY);
+void inputInformationSemesterAndAddSchoolYear(schoolYear* temp);
+void writeSemester(listSemester ls, string name);
 void readListYear(const char* name, listYear& lY);
 void writeListYear(const char* name, listYear ls);
+void readSenester(listYear ls);
+schoolYear* getSchoolYear(listYear lY, string name);
 struct Staff_Info
 {
 	string fullname;

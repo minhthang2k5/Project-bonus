@@ -11,6 +11,13 @@ listYear createListYear()
 	p.pHead = NULL;
 	return p;
 }
+string changeIntToStringYear(int begin, int end)
+{
+	string beginN = to_string(begin);
+	string endN = to_string(end);
+	string year = beginN + "-" + endN;
+	return year;
+}
 bool checkNumber(char a)
 {
 	if (a == '0' || a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9')
@@ -81,6 +88,7 @@ void readListYear(const char* name, listYear& lY)
 			lY.pHead->beginYear = begin;
 			lY.pHead->lastYear = last;
 			lY.pHead->listSem.head = NULL;
+			lY.pHead->listClass.pHeadClass = NULL;
 			lY.pHead->next = NULL;
 		}
 		else
@@ -88,12 +96,29 @@ void readListYear(const char* name, listYear& lY)
 			schoolYear* temp = new schoolYear;
 			temp->beginYear = begin;
 			temp->lastYear = last;
-			lY.pHead->listSem.head = NULL;
+			temp->listClass.pHeadClass = NULL;
+			temp->listSem.head = NULL; 
 			temp->next = lY.pHead;
 			lY.pHead = temp;
 		}
 	}
 	iFile.close();
+}
+schoolYear* getSchoolYear(listYear lY, string name)
+{
+	int begin;
+	int last;
+	detachedYear(begin, last, name);
+	schoolYear* p = lY.pHead;
+	while (p!=NULL)
+	{
+		if (p->beginYear==begin)
+		{
+			return p;
+		}
+		p = p->next;
+	}
+	return NULL;
 }
 void writeListYear(const char* name, listYear ls)
 {
@@ -219,6 +244,7 @@ year=2005
 */
 void inputDateInSemester(int &day, int &month, int &year)
 {
+	cin.ignore();
 	string DATE;
 	getline(cin, DATE);
 	int count = 0;
@@ -333,37 +359,50 @@ bool checkNameSemester(nodeSemester* p, int name)
 	}
 	return true;
 }
+void readSenester(listYear ls)
+{
+	schoolYear* p = ls.pHead;
+	while (p!=NULL)
+	{
+		string nameYear = changeIntToStringYear(ls.pHead->beginYear, ls.pHead->lastYear);
+		string nameInput = "listYear/" + nameYear + "/listSemester.txt";
+		ifstream iFile;
+		iFile.open(nameInput);
+		if (!iFile.is_open())
+		{
+			cout << "can't open file";
+			return;
+		}
+		nodeSemester* q = new nodeSemester;
+		while (iFile >> q->name >> q->begin.day >> q->begin.month >> q->begin.year >> q->end.day >> q->end.month >> q->end.year)
+		{
+			q->next = NULL;
+			addHeadSemester(ls.pHead->listSem, q);
+		}
+		p = p->next;
+	}
+}
+void writeSemester(listSemester ls,string name)
+{
+	nodeSemester* p = ls.head;
+	name = name + ".txt";
+	ofstream oFile(name);
+	while (p!=NULL)
+	{
+		oFile << p->name << endl;
+		oFile << p->begin.day << " " << p->begin.month << " " << p->begin.year << endl;
+		oFile << p->end.day << " " << p->end.month << " " << p->end.year << endl;
+		p = p->next;
+	}
+	oFile.close();
+}
 /*
 hàm này để nhập thông tìn một khóa học
 Input:Danh sách các năm học
 Output:không có
 */
-void inputInformationSemesterAndAddSchoolYear(listYear &lY)
+void inputInformationSemesterAndAddSchoolYear(schoolYear *temp)
 {
-	// Kiểm tra năm học nào để luu vào một node: temp
-	string year;
-	int begin;
-	int last;
-	cout << "Input school year to add semester: ";
-	getline(cin, year);
-	detachedYear(begin, last, year);
-	schoolYear *temp = lY.pHead;
-	bool checkExitsYear = false;
-	while (temp != NULL)
-	{
-		if (temp->beginYear == begin)
-		{
-			checkExitsYear = true;
-			break;
-		}
-		temp = temp->next;
-	}
-	if (checkExitsYear == false)
-	{
-		cout << "The school year isn't exit";
-		return;
-	}
-
 	// Nhập năm học để thêm vào
 	nodeSemester *seme = initSemester();
 	cout << "Input the name semester 1,2 or 3:";
@@ -373,7 +412,6 @@ void inputInformationSemesterAndAddSchoolYear(listYear &lY)
 		cout << "Name semester is exit,pleas input again:";
 		cin >> seme->name;
 	}
-	eatline();
 	cout << "Input the start date: ";
 	inputDateInSemester(seme->begin.day, seme->begin.month, seme->begin.year);
 	cout << endl;
@@ -382,6 +420,23 @@ void inputInformationSemesterAndAddSchoolYear(listYear &lY)
 	cout << endl;
 	seme->listCour.head = NULL;
 	addHeadSemester(temp->listSem, seme);
+	
+	//tạo folder
+	string name;
+	string year = changeIntToStringYear(temp->beginYear, temp->lastYear);
+	string nameSemester = to_string(seme->name);
+	name = "listYear/" + year + "/" + nameSemester;
+	const char* nameChar = name.c_str();
+	_mkdir(nameChar);
+	//hien folde de up len git
+	string gitFile;
+	gitFile = "listYear/"+year+"/"+nameSemester + "/" + "gitFile.txt";
+	ofstream oFile(gitFile);
+	oFile << "check";
+	oFile.close();
+	//tao file txt
+	string nameTxt = "listYear/" + year + "/listSemester";
+	writeSemester(temp->listSem, nameTxt);
 }
 
 int CheckFullName(string fullname)
