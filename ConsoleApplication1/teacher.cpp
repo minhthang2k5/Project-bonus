@@ -71,7 +71,7 @@ void readListYear(const char* name, listYear& lY)
 		return;
 	}
 	string nameYear;
-	while (getline(iFile, nameYear, '\n'))
+	while (getline(iFile, nameYear))
 	{
 		int begin, last;
 		detachedYear(begin, last, nameYear);
@@ -142,11 +142,11 @@ void addHeadNewSchoolYear(listYear& lY)
 	nameFolder = "listYear/" + beginN + "-" + lastN;
 	const char* nameChar = nameFolder.c_str();
 	_mkdir(nameChar);
-	ofstream oFile;
 	//hien folde de up len git
 	string gitFile;
 	gitFile = nameFolder + "/" + "gitFile.txt";
-	oFile.open(nameFolder);
+	ofstream oFile(gitFile);
+	oFile << "check";
 	oFile.close();
 }
 // void addClassYear()
