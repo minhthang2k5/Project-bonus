@@ -72,11 +72,6 @@ void readListYear(const char* name, listYear& lY)
 {
 	ifstream iFile;
 	iFile.open(name);
-	if (!iFile.is_open())
-	{
-		cout << "can't open file";
-		return;
-	}
 	string nameYear;
 	while (getline(iFile, nameYear))
 	{
@@ -124,11 +119,6 @@ void writeListYear(const char* name, listYear ls)
 {
 	ofstream oFile;
 	oFile.open(name);
-	if (!oFile.is_open())
-	{
-		cout << "can't open file";
-		return;
-	}
 	schoolYear* p = ls.pHead;
 	while (p != NULL)
 	{
@@ -359,25 +349,21 @@ bool checkNameSemester(nodeSemester* p, int name)
 	}
 	return true;
 }
-void readSenester(listYear ls)
+void readSenester(listYear &ls)
 {
 	schoolYear* p = ls.pHead;
 	while (p!=NULL)
 	{
-		string nameYear = changeIntToStringYear(ls.pHead->beginYear, ls.pHead->lastYear);
+		string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
 		string nameInput = "listYear/" + nameYear + "/listSemester.txt";
 		ifstream iFile;
 		iFile.open(nameInput);
-		if (!iFile.is_open())
-		{
-			cout << "can't open file";
-			return;
-		}
 		nodeSemester* q = new nodeSemester;
 		while (iFile >> q->name >> q->begin.day >> q->begin.month >> q->begin.year >> q->end.day >> q->end.month >> q->end.year)
 		{
 			q->next = NULL;
-			addHeadSemester(ls.pHead->listSem, q);
+			addHeadSemester(p->listSem, q);
+			q = new nodeSemester;
 		}
 		p = p->next;
 	}
