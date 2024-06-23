@@ -13,6 +13,7 @@ int main()
 	int check2 = LoadStudentAccount(accstudent, warehousepath2);
 	readListYear("listYear/listYear.txt", ls);
 	readSenester(ls);
+	readListCourse(ls);
 	int choice;
 	do
 	{

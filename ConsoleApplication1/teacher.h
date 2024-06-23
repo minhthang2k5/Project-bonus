@@ -21,7 +21,7 @@ void writeListYear(const char* name, listYear ls);
 void readSenester(listYear &ls);
 schoolYear* getSchoolYear(listYear lY, string name);
 nodeSemester* getSemester(schoolYear* year, int name);
-void readListCourse(listCourse& lc);
+void readListCourse(listYear& ls);
 void writeListCourse(listCourse lc, string name);
 struct Staff_Info
 {

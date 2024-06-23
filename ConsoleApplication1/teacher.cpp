@@ -398,6 +398,41 @@ nodeSemester* getSemester(schoolYear* year, int name) {
 	}
 	return NULL;
 }
+void readListCourse(listYear& ls) {
+	schoolYear* p = ls.pHead;
+	while (p != NULL)
+	{
+		nodeSemester* r = p->listSem.head;
+		while (r != NULL)
+		{
+			string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
+			string nameSemester = to_string(r->name);
+			string nameInput = "listYear/" + nameYear + "/" + nameSemester + "/listCourse.txt";
+			ifstream iFile;
+			iFile.open(nameInput);
+			nodeCourse* q = new nodeCourse;
+			while (true) 
+			{
+				getline(iFile, q->courseName, '\n');
+				getline(iFile, q->className, '\n');
+				getline(iFile, q->id, '\n');
+				getline(iFile, q->teacher, '\n');
+				getline(iFile, q->dayOfweek, '\n');
+				getline(iFile, q->session, '\n');
+				iFile >> q->numberOfCredits;
+				iFile >> q->numberOfStudent;
+				q->next = NULL;
+				addHeadCourse(r->listCour, q);
+				if (iFile.eof() == true) {
+					break;
+				}
+				q = new nodeCourse;
+			}
+			r = r->next;
+		}
+		p = p->next;
+	}
+}
 
 void writeListCourse(listCourse lc, string name) {
 	nodeCourse* p = lc.head;
@@ -408,6 +443,7 @@ void writeListCourse(listCourse lc, string name) {
 		fout << p->courseName << endl;
 		fout << p->className << endl;
 		fout << p->id << endl;
+		fout << p->teacher << endl;
 		fout << p->dayOfweek << endl;
 		fout << p->session << endl;
 		fout << p->numberOfCredits << endl;
