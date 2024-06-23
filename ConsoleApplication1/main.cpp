@@ -159,6 +159,40 @@ int main()
 							{
 								inputInformationSemesterAndAddSchoolYear(current);
 							}
+							if (choice3 == 4) {
+								int semesterName;
+								cout << "Input semester: ";
+								cin >> semesterName;
+								//lấy node semester để thực hiện các chức năng dưới
+								nodeSemester* curSemester = getSemester(current, semesterName);
+								while (curSemester == NULL)
+								{
+									cout << "School year isn't exited" << endl;
+									cout << "Input again";
+									cin >> semesterName;
+									curSemester = getSemester(current, semesterName);
+								}
+								//menu các chức năng của course 
+								system("cls");
+								cout << "1. Create and add course to semester" << endl;
+								cout << "0. Back" << endl;
+								cout << "-1. Exit" << endl;
+								cout << "Your choice: ";
+								int choice4;
+								cin >> choice4;
+								if (choice4 == -1)
+								{
+									cout << "Exit successfully!" << endl;
+									return 1;
+								}
+								if (choice4 == 0)
+								{
+									continue;
+								}
+								if (choice4 == 1) {
+									inputInformationToAddCourse(curSemester, current);
+								}
+							}
 						}
 						if (choice2 == 3)
 						{

@@ -20,6 +20,9 @@ void readListYear(const char* name, listYear& lY);
 void writeListYear(const char* name, listYear ls);
 void readSenester(listYear &ls);
 schoolYear* getSchoolYear(listYear lY, string name);
+nodeSemester* getSemester(schoolYear* year, int name);
+void readListCourse(listCourse& lc);
+void writeListCourse(listCourse lc, string name);
 struct Staff_Info
 {
 	string fullname;
@@ -66,7 +69,7 @@ int ChangePasswordOfStaff(Staff_List& l, const char* warehousepath);
 nodeCourse *initCourse();
 
 void addHeadCourse(listCourse &listC, nodeCourse *p);
-void inputInformationToAddCourse(listYear &lY);
+void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* current);
 
 void updateInformationCourse(listYear &lY);
 void addStudentToCourse(nodeCourse *course);

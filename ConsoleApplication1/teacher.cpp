@@ -387,6 +387,34 @@ hàm này để nhập thông tìn một khóa học
 Input:Danh sách các năm học
 Output:không có
 */
+nodeSemester* getSemester(schoolYear* year, int name) {
+	nodeSemester* p = year->listSem.head;
+	while (p != NULL) {
+		if (p->name == name) {
+			return p;
+		}
+		p = p->next;
+	}
+	return NULL;
+}
+
+void writeListCourse(listCourse lc, string name) {
+	nodeCourse* p = lc.head;
+	name = name + ".txt";
+	ofstream fout(name);
+	while (p != NULL)
+	{
+		fout << p->courseName << endl;
+		fout << p->className << endl;
+		fout << p->id << endl;
+		fout << p->dayOfweek << endl;
+		fout << p->session << endl;
+		fout << p->numberOfCredits << endl;
+		fout << p->numberOfStudent << endl;
+		p = p->next;
+	}
+	fout.close();
+}
 void inputInformationSemesterAndAddSchoolYear(schoolYear *temp)
 {
 	// Nhập năm học để thêm vào
@@ -929,56 +957,11 @@ hàm này để nhập thông tin khóa học
 Input:Danh sách các năm học
 Output:không có
 1*/
-void inputInformationToAddCourse(listYear &lY)
+void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* current)
 {
-	// Dò tới năm học cần thêm
-	string year;
-	int begin;
-	int last;
-	cout << "Input school year to add course: ";
-	getline(cin, year);
-	detachedYear(begin, last, year);
-	schoolYear *temp = lY.pHead;
-	bool checkExitsYear = false;
-	while (temp != NULL)
-	{
-		if (temp->beginYear == begin)
-		{
-			checkExitsYear = true;
-			break;
-		}
-		temp = temp->next;
-	}
-	if (checkExitsYear == false)
-	{
-		cout << "The school year isn't exit";
-		return;
-	}
-
-	// Dò tới kỳ học cần thêm
-	nodeSemester *tempSemester = temp->listSem.head;
-	int nameSemester;
-	cout << "Input the name semester(1,2 or 3): ";
-	cin >> nameSemester;
-	eatline();
-	bool checkexitsSemester = false;
-	while (tempSemester != NULL)
-	{
-		if (tempSemester->name == nameSemester)
-		{
-			checkexitsSemester = true;
-			break;
-		}
-		tempSemester = tempSemester->next;
-	}
-	if (checkexitsSemester == false)
-	{
-		cout << "The semester isn't exit";
-		return;
-	}
-
+	cin.ignore();
 	// Nhập các thông tin và thêm vào kỳ học
-	nodeCourse *course = initCourse();
+	nodeCourse* course = initCourse();
 	cout << "Input id course: ";
 	getline(cin, course->id);
 	cout << endl;
@@ -1015,6 +998,23 @@ void inputInformationToAddCourse(listYear &lY)
 	cout << "S4 (15:30)" << endl;
 	getline(cin, course->session);
 	addHeadCourse(tempSemester->listCour, course);
+	//tạo folder
+	string name;
+	string year = changeIntToStringYear(current->beginYear, current->lastYear);
+	string nameSemester = to_string(tempSemester->name);
+	name = "listYear/" + year + "/" + nameSemester + "/" + course->courseName;
+	const char* nameChar = name.c_str();
+	_mkdir(nameChar);
+	//hien folde de up len git
+	string gitFile;
+	gitFile = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/" + "gitFile.txt";
+	ofstream oFile(gitFile);
+	oFile << "check";
+	oFile.close();
+	//tao file txt
+	string nameTxt = "listYear/" + year + "/" + nameSemester + "/listCourse";
+	//hàm write 
+	writeListCourse(tempSemester->listCour, nameTxt);
 }
 
 void updateInformationCourse(listYear &lY)
