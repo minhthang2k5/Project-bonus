@@ -14,7 +14,7 @@ void addHeadNewSchoolYear(listYear &lY);
 void inputDateInSemester(int &day, int &month, int &year);
 nodeSemester *initSemester();
 void addHeadSemester(listSemester &list, nodeSemester *p);
-void inputInformationSemesterAndAddSchoolYear(schoolYear* temp);
+void inputInformationSemesterAndAddSchoolYear(schoolYear* &temp);
 void writeSemester(listSemester ls, string name);
 void readListYear(const char* name, listYear& lY);
 void writeListYear(const char* name, listYear ls);

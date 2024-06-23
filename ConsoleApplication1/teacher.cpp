@@ -361,6 +361,7 @@ void readSenester(listYear &ls)
 		nodeSemester* q = new nodeSemester;
 		while (iFile >> q->name >> q->begin.day >> q->begin.month >> q->begin.year >> q->end.day >> q->end.month >> q->end.year)
 		{
+			q->listCour.head = NULL;
 			q->next = NULL;
 			addHeadSemester(p->listSem, q);
 			q = new nodeSemester;
@@ -415,7 +416,7 @@ void writeListCourse(listCourse lc, string name) {
 	}
 	fout.close();
 }
-void inputInformationSemesterAndAddSchoolYear(schoolYear *temp)
+void inputInformationSemesterAndAddSchoolYear(schoolYear *&temp)
 {
 	// Nhập năm học để thêm vào
 	nodeSemester *seme = initSemester();
@@ -933,7 +934,7 @@ Output:Một khóa học mới
 */
 nodeCourse *initCourse()
 {
-	nodeCourse *p = new nodeCourse;
+	nodeCourse* p = new nodeCourse;
 	p->next = NULL;
 	return p;
 }
