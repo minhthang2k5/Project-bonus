@@ -52,6 +52,7 @@ int main()
 						cout << "4. View your scoreboard" << endl;
 						cout << "5. Sign out" << endl;
 						cout << "0. Exit" << endl;
+						cout << "Your choice:";
 						cin >> choice2;
 						system("cls");
 						if (choice2 == 5)
@@ -66,6 +67,7 @@ int main()
 						}
 						if (choice2 == 3) {
 							string yearName;
+							cin.ignore();
 							cout << "Input school year: ";
 							getline(cin, yearName);
 							//lấy node school year để thực hiện các chức năng dưới
@@ -213,11 +215,16 @@ int main()
 										cout << "2. Add a student to course" << endl;
 										cout << "3.View list course" << endl;
 										cout << "4. Update information course" << endl;
+										cout << "5. View list student of course:" << endl;
 										cout << "0. Back" << endl;
 										cout << "-1. Exit" << endl;
 										cout << "Your choice: ";
 
 										cin >> choice4;
+										if (choice4 ==5)
+										{
+											viewListStudentIncourse(curSemester);
+										}
 										if (choice4 == 3)
 										{
 											viewListCourse(curSemester);

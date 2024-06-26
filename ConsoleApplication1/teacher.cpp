@@ -408,6 +408,32 @@ nodeCourse* getCourse(nodeSemester* ls, string name) {
 	}
 	return NULL;
 }
+void viewListStudentIncourse(nodeSemester*semester)
+{
+	string name;
+	cin.ignore();
+	cout << "Input the name course to view:";
+	getline(cin, name);
+	nodeCourse* p = semester->listCour.head;
+	while (p!=NULL)
+	{
+		if (p->courseName==name)
+		{
+			break;
+		}
+		p = p->next;
+	}
+	StudentNode* stu;
+	stu = p->studentList->pHeadStudent;
+	while (stu!=NULL)
+	{
+		string name = stu->data.fullName.lastName + " " + stu->data.fullName.firstName;
+		string date = to_string(stu->data.dateOfBirth.day) + "/" + to_string(stu->data.dateOfBirth.month) + "/" + to_string(stu->data.dateOfBirth.year);
+		cout << left << setw(30) << "Name" << setw(13) << "Gender" << setw(13) << "StudentId" << setw(13) << "Class name" << setw(20) << "Social Id" << setw(15) << "Date of birth" << endl;
+		cout << left << setw(30) << name << setw(13) << stu->data.gender << setw(13) << stu->data.studentID << setw(13) << stu->data.className << setw(20) << stu->data.socialID << setw(15) << date << endl;
+		stu = stu->pNextStudent;
+	}
+}
 void readListCourse(listYear& ls) {
 	schoolYear* p = ls.pHead;
 	while (p != NULL)
@@ -424,23 +450,28 @@ void readListCourse(listYear& ls) {
 			{
 				return;
 			}
-			nodeCourse* q = new nodeCourse;
-			while (true) 
+			
+			while (true)
 			{
-				getline(iFile, q->courseName, '\n');
-				getline(iFile, q->className, '\n');
-				getline(iFile, q->id, '\n');
-				getline(iFile, q->teacher, '\n');
-				getline(iFile, q->dayOfweek, '\n');
-				getline(iFile, q->session, '\n');
+				nodeCourse* q = new nodeCourse;
+				getline(iFile, q->courseName);
+				getline(iFile, q->className);
+				getline(iFile, q->id);
+				getline(iFile, q->teacher);
+				getline(iFile, q->dayOfweek);
+				getline(iFile, q->session);
 				iFile >> q->numberOfCredits;
 				iFile >> q->numberOfStudent;
+				iFile.ignore();
+				q->studentList = new StudentList;
+				q->studentList->pHeadStudent = NULL;
+				//q->scoreList = NULL;
 				q->next = NULL;
 				addHeadCourse(r->listCour, q);
-				if (iFile.eof() == true) {
+				if (iFile.eof())
+				{
 					break;
 				}
-				q = new nodeCourse;
 			}
 			r = r->next;
 		}
@@ -497,16 +528,9 @@ void readListStudentToCourse(listYear& ls) {
 				string nameInput = "listYear/" + nameYear + "/" + nameSemester + "/" + z->courseName + "/listStudent.txt";
 				ifstream iFile;
 				iFile.open(nameInput);
-				if (iFile.is_open() == false)
-				{
-					cout << "Cannot open file" << endl;
-					return;
-				}
 				Student* q = new Student;
-				z->studentList = new StudentList;
-				while (true)
+				while (getline(iFile, q->fullName.firstName, ' '))
 				{
-					getline(iFile, q->fullName.firstName, ' ');
 					getline(iFile, q->fullName.lastName, '\n');
 					iFile >> q->studentID;
 					iFile.ignore();
@@ -517,9 +541,6 @@ void readListStudentToCourse(listYear& ls) {
 					iFile >> q->socialID;
 					iFile.ignore();
 					AddTailToStudentList(z->studentList, *q);
-					if (iFile.eof() == true) {
-						break;
-					}
 					q = new Student;
 				}
 				z = z->next;
@@ -1149,7 +1170,6 @@ void viewListCourse(nodeSemester* p)
 }
 void updateInformationCourse(nodeCourse* &course, nodeSemester* curSemester, schoolYear* curYear)
 {
-	cin.ignore();
 	// Nhập các thông tin và thêm vào kỳ học
 	
 	cout << "Input id course: ";
