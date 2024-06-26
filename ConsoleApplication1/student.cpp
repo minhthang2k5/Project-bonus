@@ -159,60 +159,18 @@ int Login(ListAccount *l)
 	return 1;
 }
 
-void viewListOfCoursesForStudent(listYear lY)
+void viewListOfCoursesForStudent(nodeSemester* curSemester)
 {
-	// Dò tới năm học chứa course cần sửa
-	string year;
-	int begin;
-	int last;
-	cout << "Input school year to view: ";
-	getline(cin, year);
-	detachedYear(begin, last, year);
-	schoolYear *temp = lY.pHead;
-	bool checkExitsYear = false;
-	while (temp != NULL)
-	{
-		if (temp->beginYear == begin)
-		{
-			checkExitsYear = true;
-			break;
-		}
+	nodeCourse* temp = curSemester->listCour.head;
+	cout << endl << endl << endl << endl;
+	cout << left << setw(5) << "ID" << setw(30) << "Course name" << setw(15) << "Class name" << setw(30) << "Teacher name" << setw(30) << "Number of credits/student" << setw(20) << "Day-Sesion" << endl;
+	while (temp != NULL) {
+		string result = to_string(temp->numberOfCredits) + "/" + to_string(temp->numberOfStudent);
+		string result2 = temp->dayOfweek + "-" + temp->session;
+		cout << left << setw(5) << temp->id << setw(30) << temp->courseName << setw(15) << temp->className << setw(30) << temp->teacher << setw(30) << result << setw(20) << result2 << endl;
 		temp = temp->next;
 	}
-	if (checkExitsYear == false)
-	{
-		cout << "The school year isn't exit";
-		return;
-	}
-
-	// Dò tới kỳ học chứa course cần sửa
-	nodeSemester *tempSemester = temp->listSem.head;
-	int nameSemester;
-	cout << "Input the name semester(1,2 or 3): ";
-	cin >> nameSemester;
-	eatline();
-	bool checkexitsSemester = false;
-	while (tempSemester != NULL)
-	{
-		if (tempSemester->name == nameSemester)
-		{
-			checkexitsSemester = true;
-
-			break;
-		}
-		tempSemester = tempSemester->next;
-	}
-	if (checkexitsSemester == false)
-	{
-		cout << "The semester isn't exit";
-		return;
-	}
-	nodeCourse *tempCourse = tempSemester->listCour.head;
-	while (tempCourse != NULL)
-	{
-		cout << tempCourse->courseName << endl;
-		tempCourse = tempCourse->next;
-	}
+	cout << endl << endl << endl << endl;
 }
 
 int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath) {

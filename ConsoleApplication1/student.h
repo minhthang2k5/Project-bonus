@@ -19,5 +19,5 @@ int LoadStudentAccount(ListAccount*& l, const char* warehousepath);
 int ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath);
 
 
-void viewListOfCoursesForStudent(listYear lY);
+void viewListOfCoursesForStudent(nodeSemester* curSemester);
 #endif

@@ -64,6 +64,33 @@ int main()
 							cout << "Exit successfully!" << endl;
 							return 1;
 						}
+						if (choice2 == 3) {
+							string yearName;
+							cout << "Input school year: ";
+							getline(cin, yearName);
+							//lấy node school year để thực hiện các chức năng dưới
+							schoolYear* current = getSchoolYear(ls, yearName);
+							while (current == NULL)
+							{
+								cout << "School year isn't exited" << endl;
+								cout << "Input again";
+								getline(cin, yearName);
+								current = getSchoolYear(ls, yearName);
+							}
+							int semesterName;
+							cout << "Input semester: ";
+							cin >> semesterName;
+							//lấy node semester để thực hiện các chức năng dưới
+							nodeSemester* curSemester = getSemester(current, semesterName);
+							while (curSemester == NULL)
+							{
+								cout << "Semester isn't exited" << endl;
+								cout << "Input again";
+								cin >> semesterName;
+								curSemester = getSemester(current, semesterName);
+							}
+							viewListOfCoursesForStudent(curSemester);
+						}
 						if (choice2 < 0 || choice2 > 5)
 						{
 							cout << "Invalid choice" << endl;
