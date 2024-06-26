@@ -133,95 +133,99 @@ int main()
 								current = getSchoolYear(ls, yearName);
 							}
 							system("cls");
-							cout << "1. Create new class" << endl;
-							cout << "2. Add a student into class" << endl;
-							cout << "3. Creat a semester" << endl;
-							cout << "4. Choose a semester" << endl;
-							cout << "5. Read all student of a class from CSV file" << endl;
-							cout << "6. Choose a semester" << endl;
-							cout << "7. View list of classes" << endl;
-							cout << "8. View list of students of a class" << endl;
-							cout << "9. View scoreboard of a class" << endl;
-							cout << "0. Back" << endl;
-							cout << "-1. Exit" << endl;
-							cout << "Your choice: ";
 							int choice3;
-							cin >> choice3;
-							cin.ignore();
-							if (choice3 == -1)
+							do
 							{
-								cout << "Exit successfully!" << endl;
-								return 1;
-							}
-							if (choice3 == 0)
-							{
-								continue;
-							}
-							if (choice3==3)
-							{
-								inputInformationSemesterAndAddSchoolYear(current);
-							}
-							if (choice3 == 4) {
-								int semesterName;
-								cout << "Input semester: ";
-								cin >> semesterName;
-								//lấy node semester để thực hiện các chức năng dưới
-								nodeSemester* curSemester = getSemester(current, semesterName);
-								while (curSemester == NULL)
-								{
-									cout << "Semester isn't exited" << endl;
-									cout << "Input again";
-									cin >> semesterName;
-									curSemester = getSemester(current, semesterName);
-								}
-								system("cls");
-								int choice4;
-								//menu các chức năng của course 
-								do
-								{
-									cout << "1. Create and add course to semester" << endl;
-									cout << "2. Add a student to course" << endl;
-									cout << "3.View list course" << endl;
-									cout << "0. Back" << endl;
-									cout << "-1. Exit" << endl;
-									cout << "Your choice: ";
+								cout << "1. Create new class" << endl;
+								cout << "2. Add a student into class" << endl;
+								cout << "3. Creat a semester" << endl;
+								cout << "4. Choose a semester" << endl;
+								cout << "5. Read all student of a class from CSV file" << endl;
+								cout << "6. Choose a semester" << endl;
+								cout << "7. View list of classes" << endl;
+								cout << "8. View list of students of a class" << endl;
+								cout << "9. View scoreboard of a class" << endl;
+								cout << "0. Back" << endl;
+								cout << "-1. Exit" << endl;
+								cout << "Your choice: ";
 
-									cin >> choice4;
-									if (choice4 == 3)
+								cin >> choice3;
+								cin.ignore();
+								if (choice3 == -1)
+								{
+									cout << "Exit successfully!" << endl;
+									return 1;
+								}
+								if (choice3 == 0)
+								{
+									continue;
+								}
+								if (choice3 == 3)
+								{
+									inputInformationSemesterAndAddSchoolYear(current);
+								}
+								if (choice3 == 4) {
+									int semesterName;
+									cout << "Input semester: ";
+									cin >> semesterName;
+									//lấy node semester để thực hiện các chức năng dưới
+									nodeSemester* curSemester = getSemester(current, semesterName);
+									while (curSemester == NULL)
 									{
-										viewListCourse(curSemester);
+										cout << "Semester isn't exited" << endl;
+										cout << "Input again";
+										cin >> semesterName;
+										curSemester = getSemester(current, semesterName);
 									}
-									if (choice4 == -1)
+									system("cls");
+									int choice4;
+									//menu các chức năng của course 
+									do
 									{
-										cout << "Exit successfully!" << endl;
-										return 1;
-									}
-									if (choice4 == 0)
-									{
-										break;
-									}
-									if (choice4 == 1) {
-										inputInformationToAddCourse(curSemester, current);
-										system("cls");
-									}
-									if (choice4 == 2) {
-										cin.ignore();
-										string Coursename;
-										cout << "Input course name: ";
-										getline(cin, Coursename);
-										nodeCourse* curCourse = getCourse(curSemester, Coursename);
-										while (curCourse == NULL)
+										cout << "1. Create and add course to semester" << endl;
+										cout << "2. Add a student to course" << endl;
+										cout << "3.View list course" << endl;
+										cout << "0. Back" << endl;
+										cout << "-1. Exit" << endl;
+										cout << "Your choice: ";
+
+										cin >> choice4;
+										if (choice4 == 3)
 										{
-											cout << "Course isn't exited" << endl;
-											cout << "Input again";
-											getline(cin, Coursename);
-											curCourse = getCourse(curSemester, Coursename);
+											viewListCourse(curSemester);
 										}
-										addStudentToCourse(curCourse, curSemester, current);
-									}
-								} while (choice4!=-1);
-								
-							}
+										if (choice4 == -1)
+										{
+											cout << "Exit successfully!" << endl;
+											return 1;
+										}
+										if (choice4 == 0)
+										{
+											break;
+										}
+										if (choice4 == 1) {
+											inputInformationToAddCourse(curSemester, current);
+											system("cls");
+										}
+										if (choice4 == 2) {
+											cin.ignore();
+											string Coursename;
+											cout << "Input course name: ";
+											getline(cin, Coursename);
+											nodeCourse* curCourse = getCourse(curSemester, Coursename);
+											while (curCourse == NULL)
+											{
+												cout << "Course isn't exited" << endl;
+												cout << "Input again";
+												getline(cin, Coursename);
+												curCourse = getCourse(curSemester, Coursename);
+											}
+											addStudentToCourse(curCourse, curSemester, current);
+										}
+									} while (choice4 != -1);
+
+								}
+							} while (choice3!=-1);
 						}
 						if (choice2 == 3)
 						{
