@@ -500,7 +500,7 @@ void readListStudentToCourse(listYear& ls) {
 				if (iFile.is_open() == false)
 				{
 					cout << "Cannot open file" << endl;
-					//return;
+					return;
 				}
 				Student* q = new Student;
 				z->studentList = new StudentList;
