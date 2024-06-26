@@ -21,8 +21,10 @@ void writeListYear(const char* name, listYear ls);
 void readSenester(listYear &ls);
 schoolYear* getSchoolYear(listYear lY, string name);
 nodeSemester* getSemester(schoolYear* year, int name);
+nodeCourse* getCourse(listSemester* ls, string name);
 void readListCourse(listYear& ls);
 void writeListCourse(listCourse lc, string name);
+void writeStudentToCourse(StudentList* slist, string name);
 struct Staff_Info
 {
 	string fullname;
@@ -72,6 +74,7 @@ void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* current);
 
 void updateInformationCourse(listYear &lY);
+
 void addStudentToCourse(nodeCourse *course);
 
 // void removeStudentFromCourse(nodeCourse *course);

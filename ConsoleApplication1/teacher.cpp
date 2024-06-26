@@ -398,6 +398,16 @@ nodeSemester* getSemester(schoolYear* year, int name) {
 	}
 	return NULL;
 }
+nodeCourse* getCourse(nodeSemester* ls, string name) {
+	nodeCourse* p = ls->listCour.head;
+	while (p != NULL) {
+		if (p->courseName == name) {
+			return p;
+		}
+		p = p->next;
+	}
+	return NULL;
+}
 void readListCourse(listYear& ls) {
 	schoolYear* p = ls.pHead;
 	while (p != NULL)
@@ -449,6 +459,23 @@ void writeListCourse(listCourse lc, string name) {
 		fout << p->numberOfCredits << endl;
 		fout << p->numberOfStudent << endl;
 		p = p->next;
+	}
+	fout.close();
+}
+void writeStudentToCourse(StudentList* slist, string name) {
+	StudentNode* p = slist->pHeadStudent;
+	name = name + ".txt";
+	ofstream fout;
+	fout.open(name);
+	while (p != NULL) {
+		fout << p->data.fullName.firstName << " ";
+		fout << p->data.fullName.lastName << endl;
+		fout << p->data.studentID << endl;
+		fout << p->data.className << endl;
+		fout << p->data.dateOfBirth.day << " " << p->data.dateOfBirth.month << " " << p->data.dateOfBirth.year << endl;
+		fout << p->data.gender << endl;
+		fout << p->data.socialID << endl;
+		p = p->pNextStudent;
 	}
 	fout.close();
 }
@@ -1160,10 +1187,14 @@ void updateInformationCourse(listYear &lY)
 	getline(cin, tempCourse->session);
 }
 
-void addStudentToCourse(nodeCourse *course)
+void addStudentToCourse(nodeCourse* course, nodeSemester* curSemester, schoolYear* curYear)
 {
 	Student info = getStudentInfo();
 	AddTailToStudentList(course->studentList, info);
+	string year = changeIntToStringYear(curYear->beginYear, curYear->lastYear);
+	string nameSemester = to_string(curSemester->name);
+	string nameTxt = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/listStudent";
+	writeStudentToCourse(course->studentList, nameTxt);
 }
 void viewListOfClasses(listYear lY)
 {
