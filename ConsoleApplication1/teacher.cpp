@@ -1147,102 +1147,38 @@ void viewListCourse(nodeSemester* p)
 	}
 	cout << endl << endl << endl << endl;
 }
-void updateInformationCourse(listYear &lY)
+void updateInformationCourse(nodeCourse* &course, nodeSemester* curSemester, schoolYear* curYear)
 {
-	// Dò tới năm học chứa course cần sửa
-	string year;
-	int begin;
-	int last;
-	cout << "Input school year to add course: ";
-	getline(cin, year);
-	detachedYear(begin, last, year);
-	schoolYear *temp = lY.pHead;
-	bool checkExitsYear = false;
-	while (temp != NULL)
-	{
-		if (temp->beginYear == begin)
-		{
-			checkExitsYear = true;
-			break;
-		}
-		temp = temp->next;
-	}
-	if (checkExitsYear == false)
-	{
-		cout << "The school year isn't exit";
-		return;
-	}
-
-	// Dò tới kỳ học chứa course cần sửa
-	nodeSemester *tempSemester = temp->listSem.head;
-	int nameSemester;
-	cout << "Input the name semester(1,2 or 3): ";
-	cin >> nameSemester;
-	eatline();
-	bool checkexitsSemester = false;
-	while (tempSemester != NULL)
-	{
-		if (tempSemester->name == nameSemester)
-		{
-			checkexitsSemester = true;
-			break;
-		}
-		tempSemester = tempSemester->next;
-	}
-	if (checkexitsSemester == false)
-	{
-		cout << "The semester isn't exit";
-		return;
-	}
-	// Dò tới course cần sửa
-	nodeCourse *tempCourse = temp->listSem.head->listCour.head;
-	string identifyCourse; // Định danh course bằng id hoặc tên -> người dùng có thể nhập 1 trong 2
-	cout << "Input course id or course name: ";
-	getline(cin, identifyCourse, '\n');
-	bool checkexitsCourse = false;
-	while (tempCourse != NULL)
-	{
-		if (tempCourse->id == identifyCourse || tempCourse->courseName == identifyCourse)
-		{
-			checkexitsCourse = true;
-			break; // Sau khi break thì tempCourse sẽ là course muốn sửa
-		}
-		tempCourse = tempCourse->next;
-	}
-	if (checkexitsCourse == false)
-	{
-		cout << "The course isn't exit";
-		return;
-	}
-	// Nhập các thông tin và ghi đè vào tempCourse
-
+	cin.ignore();
+	// Nhập các thông tin và thêm vào kỳ học
+	
 	cout << "Input id course: ";
-	getline(cin, tempCourse->id);
+	getline(cin, course->id);
 	cout << endl;
 	cout << "Input course name: ";
-	getline(cin, tempCourse->courseName);
+	getline(cin, course->courseName);
 	cout << endl;
 	cout << "Input class name: ";
-	getline(cin, tempCourse->className);
+	getline(cin, course->className);
 	cout << endl;
 	cout << "Input teacher name: ";
-	getline(cin, tempCourse->teacher);
+	getline(cin, course->teacher);
 	cout << endl;
 	cout << "Input number of credits: ";
-	cin >> tempCourse->numberOfCredits;
+	cin >> course->numberOfCredits;
 	cout << endl;
 	eatline();
 	cout << "Input number of student(max 50): ";
-	cin >> tempCourse->numberOfStudent;
-	while (tempCourse->numberOfStudent > 50)
+	cin >> course->numberOfStudent;
+	while (course->numberOfStudent > 50)
 	{
 		cout << "exceed the allowed number of students to enter" << endl;
 		cout << "Input number of student(max 50):";
-		cin >> tempCourse->numberOfStudent;
+		cin >> course->numberOfStudent;
 	}
 	eatline();
 	cout << "Input the day of week: ";
-	getline(cin, tempCourse->dayOfweek);
+	getline(cin, course->dayOfweek);
 	cout << endl;
 	cout << "Input the session" << endl;
 	cout << "Choose a seesion:" << endl;
@@ -1250,7 +1186,14 @@ void updateInformationCourse(listYear &lY)
 	cout << "S2 (09:30)" << endl;
 	cout << "S3 (13:30)" << endl;
 	cout << "S4 (15:30)" << endl;
-	getline(cin, tempCourse->session);
+	getline(cin, course->session);
+	course->studentList = new StudentList;
+	course->studentList->pHeadStudent = NULL;
+	addHeadCourse(curSemester->listCour, course);
+	string year = changeIntToStringYear(curYear->beginYear, curYear->lastYear);
+	string nameSemester = to_string(curSemester->name);
+	string nameTxt = "listYear/" + year + "/" + nameSemester + "/listCourse";
+	writeListCourse(curSemester->listCour, nameTxt);
 }
 
 void addStudentToCourse(nodeCourse* course, nodeSemester* curSemester, schoolYear* curYear)

@@ -75,7 +75,7 @@ nodeCourse *initCourse();
 void addHeadCourse(listCourse &listC, nodeCourse *p);
 void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* current);
 
-void updateInformationCourse(listYear &lY);
+void updateInformationCourse(nodeCourse* &course, nodeSemester* curSemester, schoolYear* curYear);
 
 void addStudentToCourse(nodeCourse* course, nodeSemester* curSemester, schoolYear* curYear);
 

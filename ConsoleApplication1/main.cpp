@@ -185,6 +185,7 @@ int main()
 										cout << "1. Create and add course to semester" << endl;
 										cout << "2. Add a student to course" << endl;
 										cout << "3.View list course" << endl;
+										cout << "4. Update information course" << endl;
 										cout << "0. Back" << endl;
 										cout << "-1. Exit" << endl;
 										cout << "Your choice: ";
@@ -221,6 +222,21 @@ int main()
 												curCourse = getCourse(curSemester, Coursename);
 											}
 											addStudentToCourse(curCourse, curSemester, current);
+										}
+										if (choice4 == 4) {
+											cin.ignore();
+											string Coursename;
+											cout << "Input course name: ";
+											getline(cin, Coursename);
+											nodeCourse* curCourse = getCourse(curSemester, Coursename);
+											while (curCourse == NULL)
+											{
+												cout << "Course isn't exited" << endl;
+												cout << "Input again";
+												getline(cin, Coursename);
+												curCourse = getCourse(curSemester, Coursename);
+											}
+											updateInformationCourse(curCourse, curSemester, current);
 										}
 									} while (choice4 != -1);
 
