@@ -6,6 +6,7 @@ Student getStudentInfo()
 	getline(cin, info.className);
 	cout << "Input student ID: ";
 	cin >> info.studentID;
+	cin.ignore();
 	cout << "Input firstname: ";
 	getline(cin, info.fullName.firstName);
 	cout << "Input lastname: ";

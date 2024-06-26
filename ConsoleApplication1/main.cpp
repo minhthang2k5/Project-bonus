@@ -183,6 +183,7 @@ int main()
 								cout << "Your choice: ";
 								int choice4;
 								cin >> choice4;
+								
 								if (choice4 == -1)
 								{
 									cout << "Exit successfully!" << endl;
@@ -196,6 +197,7 @@ int main()
 									inputInformationToAddCourse(curSemester, current);
 								}
 								if (choice4 == 2) {
+									cin.ignore();
 									string Coursename;
 									cout << "Input course name: ";
 									getline(cin, Coursename);

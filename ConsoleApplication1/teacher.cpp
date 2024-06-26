@@ -420,6 +420,10 @@ void readListCourse(listYear& ls) {
 			string nameInput = "listYear/" + nameYear + "/" + nameSemester + "/listCourse.txt";
 			ifstream iFile;
 			iFile.open(nameInput);
+			if (!iFile.is_open())
+			{
+				return;
+			}
 			nodeCourse* q = new nodeCourse;
 			while (true) 
 			{
@@ -1061,6 +1065,8 @@ void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* curren
 	cout << "S3 (13:30)" << endl;
 	cout << "S4 (15:30)" << endl;
 	getline(cin, course->session);
+	course->studentList = new StudentList;
+	course->studentList->pHeadStudent = NULL;
 	addHeadCourse(tempSemester->listCour, course);
 	//tạo folder
 	string name;
