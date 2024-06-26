@@ -21,7 +21,7 @@ void writeListYear(const char* name, listYear ls);
 void readSenester(listYear &ls);
 schoolYear* getSchoolYear(listYear lY, string name);
 nodeSemester* getSemester(schoolYear* year, int name);
-nodeCourse* getCourse(listSemester* ls, string name);
+nodeCourse* getCourse(nodeSemester* ls, string name);
 void readListCourse(listYear& ls);
 void writeListCourse(listCourse lc, string name);
 void writeStudentToCourse(StudentList* slist, string name);
@@ -75,7 +75,7 @@ void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* curren
 
 void updateInformationCourse(listYear &lY);
 
-void addStudentToCourse(nodeCourse *course);
+void addStudentToCourse(nodeCourse* course, nodeSemester* curSemester, schoolYear* curYear);
 
 // void removeStudentFromCourse(nodeCourse *course);
 // void deleteCourse(nodeCourse *course);

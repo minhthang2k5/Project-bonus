@@ -168,14 +168,16 @@ int main()
 								nodeSemester* curSemester = getSemester(current, semesterName);
 								while (curSemester == NULL)
 								{
-									cout << "School year isn't exited" << endl;
+									cout << "Semester isn't exited" << endl;
 									cout << "Input again";
 									cin >> semesterName;
 									curSemester = getSemester(current, semesterName);
 								}
+
 								//menu các chức năng của course 
 								system("cls");
 								cout << "1. Create and add course to semester" << endl;
+								cout << "2. Add a student to course" << endl;
 								cout << "0. Back" << endl;
 								cout << "-1. Exit" << endl;
 								cout << "Your choice: ";
@@ -192,6 +194,20 @@ int main()
 								}
 								if (choice4 == 1) {
 									inputInformationToAddCourse(curSemester, current);
+								}
+								if (choice4 == 2) {
+									string Coursename;
+									cout << "Input course name: ";
+									getline(cin, Coursename);
+									nodeCourse* curCourse = getCourse(curSemester, Coursename);
+									while (curCourse == NULL)
+									{
+										cout << "Course isn't exited" << endl;
+										cout << "Input again";
+										getline(cin, Coursename);
+										curCourse = getCourse(curSemester, Coursename);
+									}
+									addStudentToCourse(curCourse, curSemester, current);
 								}
 							}
 						}
