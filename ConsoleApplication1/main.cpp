@@ -173,44 +173,53 @@ int main()
 									cin >> semesterName;
 									curSemester = getSemester(current, semesterName);
 								}
-
-								//menu các chức năng của course 
 								system("cls");
-								cout << "1. Create and add course to semester" << endl;
-								cout << "2. Add a student to course" << endl;
-								cout << "0. Back" << endl;
-								cout << "-1. Exit" << endl;
-								cout << "Your choice: ";
 								int choice4;
-								cin >> choice4;
-								
-								if (choice4 == -1)
+								//menu các chức năng của course 
+								do
 								{
-									cout << "Exit successfully!" << endl;
-									return 1;
-								}
-								if (choice4 == 0)
-								{
-									continue;
-								}
-								if (choice4 == 1) {
-									inputInformationToAddCourse(curSemester, current);
-								}
-								if (choice4 == 2) {
-									cin.ignore();
-									string Coursename;
-									cout << "Input course name: ";
-									getline(cin, Coursename);
-									nodeCourse* curCourse = getCourse(curSemester, Coursename);
-									while (curCourse == NULL)
+									cout << "1. Create and add course to semester" << endl;
+									cout << "2. Add a student to course" << endl;
+									cout << "3.View list course" << endl;
+									cout << "0. Back" << endl;
+									cout << "-1. Exit" << endl;
+									cout << "Your choice: ";
+
+									cin >> choice4;
+									if (choice4 == 3)
 									{
-										cout << "Course isn't exited" << endl;
-										cout << "Input again";
-										getline(cin, Coursename);
-										curCourse = getCourse(curSemester, Coursename);
+										viewListCourse(curSemester);
 									}
-									addStudentToCourse(curCourse, curSemester, current);
-								}
+									if (choice4 == -1)
+									{
+										cout << "Exit successfully!" << endl;
+										return 1;
+									}
+									if (choice4 == 0)
+									{
+										break;
+									}
+									if (choice4 == 1) {
+										inputInformationToAddCourse(curSemester, current);
+										system("cls");
+									}
+									if (choice4 == 2) {
+										cin.ignore();
+										string Coursename;
+										cout << "Input course name: ";
+										getline(cin, Coursename);
+										nodeCourse* curCourse = getCourse(curSemester, Coursename);
+										while (curCourse == NULL)
+										{
+											cout << "Course isn't exited" << endl;
+											cout << "Input again";
+											getline(cin, Coursename);
+											curCourse = getCourse(curSemester, Coursename);
+										}
+										addStudentToCourse(curCourse, curSemester, current);
+									}
+								} while (choice4!=-1);
+								
 							}
 						}
 						if (choice2 == 3)

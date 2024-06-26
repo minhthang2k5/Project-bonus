@@ -1086,7 +1086,20 @@ void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* curren
 	//hàm write 
 	writeListCourse(tempSemester->listCour, nameTxt);
 }
-
+void viewListCourse(nodeSemester* p)
+{
+	cout << endl << endl << endl << endl;
+	cout << left << setw(5) << "ID" << setw(30) << "Course name" << setw(15) << "Class name" << setw(30) << "Teacher name" << setw(30) << "Number of credits/student" << setw(20) << "Day-Sesion" << endl;
+	nodeCourse* temp = p->listCour.head;
+	while (temp!=NULL)
+	{
+		string result = to_string(temp->numberOfCredits) + "/" + to_string(temp->numberOfStudent);
+		string result2 = temp->dayOfweek + "-" + temp->session;
+		cout << left << setw(5) << temp->id << setw(30) << temp->courseName << setw(15) << temp->className << setw(30) << temp->teacher << setw(30) << result << setw(20) << result2 << endl;
+		temp = temp->next;
+	}
+	cout << endl << endl << endl << endl;
+}
 void updateInformationCourse(listYear &lY)
 {
 	// Dò tới năm học chứa course cần sửa

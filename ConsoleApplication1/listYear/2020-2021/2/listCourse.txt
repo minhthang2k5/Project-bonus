@@ -1,7 +1,0 @@
-VLDC
-23CTT5
-VLDC
-MON
-S1 (07:30)
-3
-39
