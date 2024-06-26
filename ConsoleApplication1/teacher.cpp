@@ -466,7 +466,7 @@ void writeListCourse(listCourse lc, string name) {
 	}
 	fout.close();
 }
-void writeStudentToCourse(StudentList* slist, string name) {
+void writeListStudentInCourse(StudentList* slist, string name) {
 	StudentNode* p = slist->pHeadStudent;
 	name = name + ".txt";
 	ofstream fout;
@@ -483,6 +483,53 @@ void writeStudentToCourse(StudentList* slist, string name) {
 	}
 	fout.close();
 }
+void readListStudentToCourse(listYear& ls) {
+	schoolYear* p = ls.pHead;
+	while (p != NULL)
+	{
+		nodeSemester* r = p->listSem.head;
+		while (r != NULL)
+		{
+			nodeCourse* z = r->listCour.head;
+			while (z != NULL) {
+				string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
+				string nameSemester = to_string(r->name);
+				string nameInput = "listYear/" + nameYear + "/" + nameSemester + "/" + z->courseName + "/listStudent.txt";
+				ifstream iFile;
+				iFile.open(nameInput);
+				if (iFile.is_open() == false)
+				{
+					cout << "Cannot open file" << endl;
+					//return;
+				}
+				Student* q = new Student;
+				z->studentList = new StudentList;
+				while (true)
+				{
+					getline(iFile, q->fullName.firstName, ' ');
+					getline(iFile, q->fullName.lastName, '\n');
+					iFile >> q->studentID;
+					iFile.ignore();
+					getline(iFile, q->className, '\n');
+					iFile >> q->dateOfBirth.day >> q->dateOfBirth.month >> q->dateOfBirth.year;
+					iFile.ignore();
+					getline(iFile, q->gender, '\n');
+					iFile >> q->socialID;
+					iFile.ignore();
+					AddTailToStudentList(z->studentList, *q);
+					if (iFile.eof() == true) {
+						break;
+					}
+					q = new Student;
+				}
+				z = z->next;
+			}
+			r = r->next;
+		}
+		p = p->next;
+	}
+}
+
 void inputInformationSemesterAndAddSchoolYear(schoolYear *&temp)
 {
 	// Nhập năm học để thêm vào
@@ -1213,7 +1260,7 @@ void addStudentToCourse(nodeCourse* course, nodeSemester* curSemester, schoolYea
 	string year = changeIntToStringYear(curYear->beginYear, curYear->lastYear);
 	string nameSemester = to_string(curSemester->name);
 	string nameTxt = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/listStudent";
-	writeStudentToCourse(course->studentList, nameTxt);
+	writeListStudentInCourse(course->studentList, nameTxt);
 }
 void viewListOfClasses(listYear lY)
 {

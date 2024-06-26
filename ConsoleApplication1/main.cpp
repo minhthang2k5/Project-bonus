@@ -14,6 +14,7 @@ int main()
 	readListYear("listYear/listYear.txt", ls);
 	readSenester(ls);
 	readListCourse(ls);
+	readListStudentToCourse(ls);
 	int choice;
 	do
 	{

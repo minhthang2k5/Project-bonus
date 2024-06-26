@@ -24,7 +24,8 @@ nodeSemester* getSemester(schoolYear* year, int name);
 nodeCourse* getCourse(nodeSemester* ls, string name);
 void readListCourse(listYear& ls);
 void writeListCourse(listCourse lc, string name);
-void writeStudentToCourse(StudentList* slist, string name);
+void writeListStudentInCourse(StudentList* slist, string name);
+void readListStudentToCourse(listYear& ls);
 void viewListCourse(nodeSemester* p);
 struct Staff_Info
 {
