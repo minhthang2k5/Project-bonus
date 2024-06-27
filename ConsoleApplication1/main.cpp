@@ -8,6 +8,7 @@ const char *warehousepath1 = "Saveaccount/accountforstaff.txt";
 const char *warehousepath2 = "Saveaccount/accountforstudent.txt";
 int main()
 {
+	// viết hàm add student list từ file csv vào cái tiếp cái student list đã có sẵn trước đó
 	ls.pHead = NULL;
 	int check1 = LoadStaffAccount(accstaff, warehousepath1);
 	int check2 = LoadStudentAccount(accstudent, warehousepath2);
@@ -270,7 +271,7 @@ int main()
 											inputInformationToAddCourse(curSemester, current);
 											system("cls");
 										}
-										
+
 										if (choice4 == 3)
 										{
 											cin.ignore();
@@ -291,18 +292,27 @@ int main()
 												cout << "1.  Add a student to course" << endl;
 												cout << "2.  Update information course" << endl;
 												cout << "3.  View list student of course:" << endl;
+												cout << "4. Upload CSV file" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
 												cin >> choice5;
+												if (choice5 == 4)
+												{
+													string studentListFileName;
+													cout << "Input file name: ";
+													getline(cin, studentListFileName);
+												}
 												if (choice5 == 3)
 												{
 													viewListStudentIncourse(curCourse);
 												}
-												if (choice5 == 2) {
+												if (choice5 == 2)
+												{
 													updateInformationCourse(curCourse, curSemester, current);
 												}
-												if (choice5 == 1) {
+												if (choice5 == 1)
+												{
 													addStudentToCourse(curCourse, curSemester, current);
 												}
 											} while (choice5 != -1);

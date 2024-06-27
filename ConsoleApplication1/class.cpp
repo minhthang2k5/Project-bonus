@@ -1,7 +1,40 @@
 #include "class.h"
 
 //---
+// void writeStudentListEnrollCourseToCSVFile(schoolYear* year, StudentList *stuList){
+//     string fileName;
+//     string beginN = to_string(year->beginYear);
+//     string lastN = to_string(year->lastYear);
+//     fileName = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop/" + class1->className + ".csv";
+//     ofstream fileOut(fileName);
+//     if (!fileOut.is_open())
+//     {
+//         cout << "Error while opening " << fileName << endl;
+//         return;
+//     }
 
+//     fileOut << "Ho, ten, ..." << endl;
+//     // fileOut << class1->numberOfStudents << endl;
+
+//     StudentNode *current = class1->pHeadStudent;
+//     int no = 1;
+//     while (current != nullptr)
+//     {
+//         fileOut << no << ",";
+//         no++;
+//         fileOut << current->data.studentID << ",";
+//         fileOut << current->data.fullName.lastName << ",";
+//         fileOut << current->data.fullName.firstName << ",";
+//         fileOut << current->data.gender << ",";
+//         fileOut << current->data.dateOfBirth.day << "/";
+//         fileOut << current->data.dateOfBirth.month << "/";
+//         fileOut << current->data.dateOfBirth.year << ",";
+//         fileOut << current->data.socialID << endl;
+//         current = current->pNextStudent;
+//     }
+//     fileOut.flush();
+//     fileOut.close();
+// }
 //---
 string changeIntToStringYear2(int begin, int end)
 {
@@ -38,7 +71,6 @@ void readClassAll(listYear &ls)
 
 void createEmptyClassCSVFile(schoolYear *year, string className)
 {
-
     string nameFolder;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);

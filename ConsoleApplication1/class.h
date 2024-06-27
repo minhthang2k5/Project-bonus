@@ -2,6 +2,11 @@
 #define _CLASS_H_
 #include "struct.h"
 
+//---
+void writeStudentListEnrollCourseToCSVFile(schoolYear *year, StudentList *stuList);
+void appendNewContent(string dest, string source)
+{
+}
 //----
 void createEmptyClassCSVFile(schoolYear *year, string className);
 
