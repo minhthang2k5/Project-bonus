@@ -49,6 +49,7 @@ void addStudentIntoStudentList(StudentList *&studentList, Student stu1);
 void addClassIntoClassList(ClassList *&claList1, Class *class1);
 
 Class *readStudentsOfClassFromCSVFile(string fileName);
+Class *readStudentsOfClassFromCSVFile(string fileName, string className);
 void readStudentsOfClassFromCSVFile(string fileName, Class *&class1);
 Class noPointerReadStudentsOfClassFromCSVFile(string fileName);
 

@@ -196,7 +196,6 @@ int main()
 									string className;
 									cout << "Input class name: ";
 									cin >> className;
-
 									Class *newClass = createClass(className, 0);
 									noPointerAddClassIntoClassList(current->listClass, newClass);
 									createEmptyClassCSVFile(current, className);
@@ -206,6 +205,7 @@ int main()
 								{
 									cout << "Input class name: ";
 									string className4;
+									cin.ignore();
 									getline(cin, className4);
 									Class *curClass = current->listClass.pHeadClass;
 									while (curClass->className != className4)

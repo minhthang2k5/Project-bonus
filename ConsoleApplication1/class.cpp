@@ -25,9 +25,8 @@ void readClassAll(listYear &ls)
         while (fileIn >> className)
         {
             fileIn >> numberOfStudents;
-            // Class *newClass = createClass(className, numberOfStudents);
             string nameFolder2 = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop/" + className + ".csv";
-            Class *newClass = readStudentsOfClassFromCSVFile(nameFolder2);
+            Class *newClass = readStudentsOfClassFromCSVFile(nameFolder2, className);
             noPointerAddClassIntoClassList(curYear->listClass, newClass);
         }
         fileIn.close();
@@ -249,6 +248,61 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
     // lấy tên lớp học từ tên file CSV
     size_t lastDot = fileName.find_last_of(".");
     string className = fileName.substr(0, lastDot);
+
+    Class *class1 = createClass(className, 0);
+
+    string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+    FullName fullName;
+    Date dateOfBirth;
+
+    // xuống dòng đầu tiên
+    string line;
+    getline(fileIn, line, '\n');
+
+    while (!fileIn.eof())
+    {
+        getline(fileIn, line, ',');
+
+        getline(fileIn, idString, ',');
+        int id = stoi(idString);
+
+        getline(fileIn, lastName, ',');
+        fullName.firstName = lastName;
+
+        getline(fileIn, firstName, ',');
+        fullName.lastName = firstName;
+
+        getline(fileIn, gender, ',');
+
+        getline(fileIn, dayOfDOB, '/');
+        dateOfBirth.day = stoi(dayOfDOB);
+
+        getline(fileIn, monthOfDOB, '/');
+        dateOfBirth.month = stoi(monthOfDOB);
+
+        getline(fileIn, yearOfDOB, ',');
+        dateOfBirth.year = stoi(yearOfDOB);
+
+        getline(fileIn, socialIDString, '\n');
+
+        int socialID = stoi(socialIDString);
+
+        Student stu1 = createStudent(id, fullName, gender, dateOfBirth, socialID);
+        addStudentIntoClass(class1, stu1);
+    }
+    fileIn.close();
+    return class1;
+}
+
+Class *readStudentsOfClassFromCSVFile(string fileName, string className)
+{
+    ifstream fileIn;
+    fileIn.open(fileName);
+    if (!fileIn.is_open())
+    {
+        cout << "Error while opening file\"" << fileName << "\"" << endl;
+        return nullptr;
+    }
 
     Class *class1 = createClass(className, 0);
 
