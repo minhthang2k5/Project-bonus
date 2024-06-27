@@ -15,6 +15,7 @@ int main()
 	readSenester(ls);
 	readListCourse(ls);
 	readListStudentToCourse(ls);
+	readClassAll(ls);
 	int choice;
 	do
 	{

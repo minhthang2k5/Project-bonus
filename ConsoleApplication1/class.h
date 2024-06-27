@@ -34,8 +34,7 @@ void writeClassIntoCSVFile(schoolYear *year, Class *class1);
 //     dest.close();
 // }
 //----
-Student
-createStudent(string className1, int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
+Student createStudent(string className1, int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
 Student createStudent(int id1, FullName fullName1, string gender1, Date dateOfBirth1, int socialID1);
 Class *createClass(string className1, int numberOfStudents1);
 ClassList *createClassList(int numberOfClasses);
@@ -96,4 +95,8 @@ ClassList noPointerReadBasicClassListInfoToFile(schoolYear *year);
 void createClassListFolder(schoolYear *year);
 
 Student inputStudentInformation();
+
+//--- doc class
+string changeIntToStringYear2(int begin, int end);
+void readClassAll(listYear &ls);
 #endif

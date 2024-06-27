@@ -19,8 +19,6 @@ struct FullName
 	string lastName;
 };
 
-
-
 struct Student
 {
 	string className;
@@ -141,6 +139,7 @@ struct listYear
 {
 	schoolYear *pHead;
 };
+
 // struct nodeClass
 //{
 //	string name;

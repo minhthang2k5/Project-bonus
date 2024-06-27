@@ -1,5 +1,40 @@
 #include "class.h"
 
+//---
+string changeIntToStringYear2(int begin, int end)
+{
+    string beginN = to_string(begin);
+    string endN = to_string(end);
+    string year = beginN + "-" + endN;
+    return year;
+}
+void readClassAll(listYear &ls)
+{
+    schoolYear *curYear = ls.pHead;
+    while (curYear != nullptr)
+    {
+        curYear->listClass = noPointerCreateClassList(0);
+        string beginN = to_string(curYear->beginYear);
+        string lastN = to_string(curYear->lastYear);
+        string nameFolder = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop.txt";
+        ifstream fileIn(nameFolder);
+        string className;
+        int numberOfStudents;
+        string temp;
+        fileIn >> temp;
+        while (fileIn >> className)
+        {
+            fileIn >> numberOfStudents;
+            // Class *newClass = createClass(className, numberOfStudents);
+            string nameFolder2 = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop/" + className + ".csv";
+            Class *newClass = readStudentsOfClassFromCSVFile(nameFolder2);
+            noPointerAddClassIntoClassList(curYear->listClass, newClass);
+        }
+        fileIn.close();
+        curYear = curYear->next;
+    }
+}
+
 void createEmptyClassCSVFile(schoolYear *year, string className)
 {
 
@@ -29,7 +64,7 @@ void writeClassIntoCSVFile(schoolYear *year, Class *class1)
     }
 
     fileOut << "Ho, ten, ..." << endl;
-    fileOut << class1->numberOfStudents << endl;
+    // fileOut << class1->numberOfStudents << endl;
 
     StudentNode *current = class1->pHeadStudent;
     int no = 1;
