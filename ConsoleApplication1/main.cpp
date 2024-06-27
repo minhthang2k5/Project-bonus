@@ -241,10 +241,8 @@ int main()
 									do
 									{
 										cout << "1. Create and add course to semester" << endl;
-
-										cout << "3. View list course" << endl;
-
-										cout << "6. Choose course to operate" << endl;
+										cout << "2. View list course" << endl;
+										cout << "3. Choose course to operate" << endl;
 										cout << "0. Back" << endl;
 										cout << "-1. Exit" << endl;
 										cout << "Your choice: ";
@@ -254,7 +252,7 @@ int main()
 										{
 											viewListStudentIncourse(curSemester);
 										}
-										if (choice4 == 3)
+										if (choice4 == 2)
 										{
 											viewListCourse(curSemester);
 										}
@@ -304,7 +302,7 @@ int main()
 											}
 											updateInformationCourse(curCourse, curSemester, current);
 										}
-										if (choice == 6)
+										if (choice4 == 3)
 										{
 											// viết hàm đọc từ file CSV danh sách học sinh đăng kí course.
 											cin.ignore();
@@ -322,12 +320,12 @@ int main()
 											int choice5;
 											do
 											{
-												cout << "1. Add a student to course" << endl;
-												cout << "2. Update information course" << endl;
-												cout << "3. View list student of course:" << endl;
-												cout << "0. Back" << endl;
+												cout << "1.  Add a student to course" << endl;
+												cout << "2.  Update information course" << endl;
+												cout << "3.  View list student of course:" << endl;
+												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
-												cout << "Input choice: ";
+												cout << "Your choice: ";
 												cin >> choice5;
 											} while (choice5 != -1);
 										}
