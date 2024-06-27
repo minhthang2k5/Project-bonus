@@ -174,7 +174,7 @@ int main()
 							{
 								cout << "1. Create new class" << endl;
 								cout << "2. Add a student into class" << endl;
-								cout << "3. Creat a semester" << endl;
+								cout << "3. Create a semester" << endl;
 								cout << "4. Choose a semester" << endl;
 								cout << "5. Read all student of a class from CSV file" << endl;
 								cout << "6. Choose a semester" << endl;
@@ -198,12 +198,15 @@ int main()
 								if (choice3 == 1)
 								{
 									string className;
+
 									cout << "Input class name: ";
-									cin >> className;
+									cin.ignore();
+									getline(cin, className);
 									Class *newClass = createClass(className, 0);
 									noPointerAddClassIntoClassList(current->listClass, newClass);
 									createEmptyClassCSVFile(current, className);
 									cout << "Add new class successfully!" << endl;
+									cout << current->listClass.pHeadClass->className << endl;
 								}
 								if (choice3 == 2)
 								{
@@ -215,12 +218,23 @@ int main()
 									while (curClass->className != className4)
 									{
 										curClass = curClass->pNextClass;
+										if (curClass == nullptr)
+										{
+											break;
+										}
 									}
-									cout << "Input student information:" << endl;
-									Student stu = inputStudentInformation();
-									addStudentIntoClass(curClass, stu);
-									noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
-									writeClassIntoCSVFile(current, curClass);
+									if (curClass == nullptr)
+									{
+										cout << "Not found class!" << endl;
+									}
+									else
+									{
+										cout << "Input student information:" << endl;
+										Student stu = inputStudentInformation();
+										addStudentIntoClass(curClass, stu);
+										noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+										writeClassIntoCSVFile(current, curClass);
+									}
 								}
 								if (choice3 == 3)
 								{
@@ -292,7 +306,7 @@ int main()
 												cout << "1.  Add a student to course" << endl;
 												cout << "2.  Update information course" << endl;
 												cout << "3.  View list student of course:" << endl;
-												cout << "4. Upload CSV file" << endl;
+												cout << "4. Add other students by uploading CSV file" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
@@ -302,6 +316,9 @@ int main()
 													string studentListFileName;
 													cout << "Input file name: ";
 													getline(cin, studentListFileName);
+													StudentList *newStudentList = readStudentsOfCourseFromCSVFile(studentListFileName);
+													appendNewStudentListToCurrentStudentList(curCourse->studentList, newStudentList);
+													writeStudentListEnrollCourseToCSVFile(curCourse, curSemester, current);
 												}
 												if (choice5 == 3)
 												{
@@ -322,14 +339,34 @@ int main()
 								}
 								if (choice3 == 5)
 								{
-									string fileName;
-									cout << "Input file name (class name + \".csv\"): ";
-									cin >> fileName;
-									Class *newClass = readStudentsOfClassFromCSVFile(fileName);
-									noPointerAddClassIntoClassList(current->listClass, newClass);
-									writeClassIntoCSVFile(current, newClass);
-									cout << endl;
-									noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+									cout << "Input class name: ";
+									string className4;
+									cin.ignore();
+									getline(cin, className4);
+									Class *curClass = current->listClass.pHeadClass;
+									while (curClass->className != className4)
+									{
+										curClass = curClass->pNextClass;
+										if (curClass == nullptr)
+										{
+											break;
+										}
+									}
+									if (curClass == nullptr)
+									{
+										cout << "Not found class!" << endl;
+									}
+									else
+									{
+										string fileName;
+										cout << "Input file name (class name + \".csv\"): ";
+										getline(cin, fileName);
+										Class *newClass = readStudentsOfClassFromCSVFile(fileName);
+										appendNewStudentsOfClassToCurrentClass(curClass, newClass);
+										writeClassIntoCSVFile(current, curClass);
+										cout << endl;
+										noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+									}
 								}
 							} while (choice3 != -1);
 						}

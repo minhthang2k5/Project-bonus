@@ -1,41 +1,67 @@
 #include "class.h"
 
-//---
-// void writeStudentListEnrollCourseToCSVFile(schoolYear* year, StudentList *stuList){
-//     string fileName;
-//     string beginN = to_string(year->beginYear);
-//     string lastN = to_string(year->lastYear);
-//     fileName = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop/" + class1->className + ".csv";
-//     ofstream fileOut(fileName);
-//     if (!fileOut.is_open())
-//     {
-//         cout << "Error while opening " << fileName << endl;
-//         return;
-//     }
+void appendNewStudentsOfClassToCurrentClass(Class *&source, Class *&newClass)
+{
+    StudentNode *curStudent = source->pHeadStudent;
+    if (curStudent == nullptr)
+    {
+        source = newClass;
+    }
+    else
+    {
+        while (curStudent->pNextStudent != nullptr)
+        {
+            curStudent = curStudent->pNextStudent;
+        }
+        curStudent->pNextStudent = newClass->pHeadStudent;
+        source->numberOfStudents += newClass->numberOfStudents;
+    }
+}
+void writeStudentListEnrollCourseToCSVFile(nodeCourse *course, nodeSemester *curSemester, schoolYear *curYear)
+{
+    string year = changeIntToStringYear2(curYear->beginYear, curYear->lastYear);
+    string nameSemester = to_string(curSemester->name);
+    string nameTxt = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/listStudent";
+    writeListStudentInCourse2(course->studentList, nameTxt);
+}
 
-//     fileOut << "Ho, ten, ..." << endl;
-//     // fileOut << class1->numberOfStudents << endl;
-
-//     StudentNode *current = class1->pHeadStudent;
-//     int no = 1;
-//     while (current != nullptr)
-//     {
-//         fileOut << no << ",";
-//         no++;
-//         fileOut << current->data.studentID << ",";
-//         fileOut << current->data.fullName.lastName << ",";
-//         fileOut << current->data.fullName.firstName << ",";
-//         fileOut << current->data.gender << ",";
-//         fileOut << current->data.dateOfBirth.day << "/";
-//         fileOut << current->data.dateOfBirth.month << "/";
-//         fileOut << current->data.dateOfBirth.year << ",";
-//         fileOut << current->data.socialID << endl;
-//         current = current->pNextStudent;
-//     }
-//     fileOut.flush();
-//     fileOut.close();
-// }
-//---
+void writeListStudentInCourse2(StudentList *slist, string name)
+{
+    StudentNode *p = slist->pHeadStudent;
+    name = name + ".txt";
+    ofstream fout;
+    fout.open(name);
+    while (p != NULL)
+    {
+        fout << p->data.fullName.firstName << " ";
+        fout << p->data.fullName.lastName << endl;
+        fout << p->data.studentID << endl;
+        fout << p->data.className << endl;
+        fout << p->data.dateOfBirth.day << " " << p->data.dateOfBirth.month << " " << p->data.dateOfBirth.year << endl;
+        fout << p->data.gender << endl;
+        fout << p->data.socialID << endl;
+        p = p->pNextStudent;
+    }
+    fout.close();
+}
+void appendNewStudentListToCurrentStudentList(StudentList *&source, StudentList *&current)
+{
+    StudentNode *curSource = source->pHeadStudent;
+    if (curSource == nullptr)
+    {
+        source->pHeadStudent = current->pHeadStudent;
+        source->numberOfStudents = current->numberOfStudents;
+    }
+    else
+    {
+        while (curSource->pNextStudent != nullptr)
+        {
+            curSource = curSource->pNextStudent;
+        }
+        curSource->pNextStudent = current->pHeadStudent;
+        source->numberOfStudents = source->numberOfStudents + current->numberOfStudents;
+    }
+}
 string changeIntToStringYear2(int begin, int end)
 {
     string beginN = to_string(begin);
@@ -51,7 +77,7 @@ void readClassAll(listYear &ls)
         curYear->listClass = noPointerCreateClassList(0);
         string beginN = to_string(curYear->beginYear);
         string lastN = to_string(curYear->lastYear);
-        string nameFolder = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop.txt";
+        string nameFolder = "listYear/" + beginN + "-" + lastN + "/listClass.txt";
         ifstream fileIn(nameFolder);
         string className;
         int numberOfStudents;
@@ -60,7 +86,7 @@ void readClassAll(listYear &ls)
         while (fileIn >> className)
         {
             fileIn >> numberOfStudents;
-            string nameFolder2 = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop/" + className + ".csv";
+            string nameFolder2 = "listYear/" + beginN + "-" + lastN + "/listClass/" + className + ".csv";
             Class *newClass = readStudentsOfClassFromCSVFile(nameFolder2, className);
             noPointerAddClassIntoClassList(curYear->listClass, newClass);
         }
@@ -74,7 +100,7 @@ void createEmptyClassCSVFile(schoolYear *year, string className)
     string nameFolder;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);
-    nameFolder = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop";
+    nameFolder = "listYear/" + beginN + "-" + lastN + "/listClass";
     ofstream oFile;
     // hien folde de up len git
     string fileName;
@@ -88,7 +114,7 @@ void writeClassIntoCSVFile(schoolYear *year, Class *class1)
     string fileName;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);
-    fileName = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop/" + class1->className + ".csv";
+    fileName = "listYear/" + beginN + "-" + lastN + "/listClass/" + class1->className + ".csv";
     ofstream fileOut(fileName);
     if (!fileOut.is_open())
     {
@@ -196,15 +222,6 @@ ClassList *createClassList(int numberOfClasses)
     return claList1;
 }
 
-Class noPointerCreateClass(string className1, int numberOfStudents1)
-{
-    Class class1;
-    class1.className = className1;
-    class1.numberOfStudents = numberOfStudents1;
-    class1.pHeadStudent = nullptr;
-    class1.pNextClass = nullptr;
-    return class1;
-}
 ClassList noPointerCreateClassList(int numberOfClasses)
 {
     ClassList claList1;
@@ -228,13 +245,16 @@ void addStudentIntoClass(Class *&class1, Student stu1)
         class1->numberOfStudents++;
         return;
     }
-    StudentNode *temp = class1->pHeadStudent;
-    while (temp->pNextStudent != nullptr)
+    else
     {
-        temp = temp->pNextStudent;
+        StudentNode *temp = class1->pHeadStudent;
+        while (temp->pNextStudent != nullptr)
+        {
+            temp = temp->pNextStudent;
+        }
+        temp->pNextStudent = stuNode;
+        class1->numberOfStudents++;
     }
-    temp->pNextStudent = stuNode;
-    class1->numberOfStudents++;
 }
 
 void addStudentIntoStudentList(StudentList *&studentList, Student stu1)
@@ -348,9 +368,8 @@ Class *readStudentsOfClassFromCSVFile(string fileName, string className)
     string line;
     getline(fileIn, line, '\n');
 
-    while (!fileIn.eof())
+    while (getline(fileIn, line, ','))
     {
-        getline(fileIn, line, ',');
 
         getline(fileIn, idString, ',');
         int id = stoi(idString);
@@ -440,22 +459,6 @@ void readStudentsOfClassFromCSVFile(string fileName, Class *&class1)
     }
     fileIn.close();
 }
-void noPointerAddStudentIntoClass(Class &class1, Student stu1)
-{
-    StudentNode *stuNode = createStudentNode(stu1);
-    if (class1.pHeadStudent == nullptr)
-    {
-        class1.pHeadStudent = stuNode;
-        class1.numberOfStudents++;
-        return;
-    }
-    StudentNode *temp = class1.pHeadStudent;
-    while (temp->pNextStudent != nullptr)
-    {
-        temp = temp->pNextStudent;
-    }
-    temp->pNextStudent = stuNode;
-}
 
 void noPointerAddClassIntoClassList(ClassList &claList1, Class *class1)
 {
@@ -465,70 +468,16 @@ void noPointerAddClassIntoClassList(ClassList &claList1, Class *class1)
         claList1.numberOfClasses++;
         return;
     }
-    Class *temp = claList1.pHeadClass;
-    while (temp->pNextClass != nullptr)
+    else
     {
-        temp = temp->pNextClass;
+        Class *temp = claList1.pHeadClass;
+        while (temp->pNextClass != nullptr)
+        {
+            temp = temp->pNextClass;
+        }
+        temp->pNextClass = class1;
+        claList1.numberOfClasses++;
     }
-    temp->pNextClass = class1;
-    claList1.numberOfClasses++;
-}
-
-Class noPointerReadStudentsOfClassFromCSVFile(string fileName)
-{
-    ifstream fileIn;
-    fileIn.open(fileName);
-    // lấy tên lớp học từ tên file CSV
-    size_t lastDot = fileName.find_last_of(".");
-    string className = fileName.substr(0, lastDot);
-    Class class1 = noPointerCreateClass(className, 0);
-    if (!fileIn.is_open())
-    {
-        cout << "Error while opening file\"" << fileName << "\"" << endl;
-        return class1;
-    }
-
-    string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
-    FullName fullName;
-    Date dateOfBirth;
-
-    // xuống dòng đầu tiên
-    string line;
-    getline(fileIn, line, '\n');
-
-    while (!fileIn.eof())
-    {
-        getline(fileIn, line, ',');
-
-        getline(fileIn, idString, ',');
-        int id = stoi(idString);
-
-        getline(fileIn, firstName, ',');
-        fullName.firstName = firstName;
-
-        getline(fileIn, lastName, ',');
-        fullName.lastName = lastName;
-
-        getline(fileIn, gender, ',');
-
-        getline(fileIn, dayOfDOB, '/');
-        dateOfBirth.day = stoi(dayOfDOB);
-
-        getline(fileIn, monthOfDOB, '/');
-        dateOfBirth.month = stoi(monthOfDOB);
-
-        getline(fileIn, yearOfDOB, ',');
-        dateOfBirth.year = stoi(yearOfDOB);
-
-        getline(fileIn, socialIDString, '\n');
-
-        int socialID = stoi(socialIDString);
-
-        Student stu1 = createStudent(id, fullName, gender, dateOfBirth, socialID);
-        noPointerAddStudentIntoClass(class1, stu1);
-    }
-    fileIn.close();
-    return class1;
 }
 
 StudentList *readStudentsOfCourseFromCSVFile(string fileName)
@@ -962,7 +911,7 @@ void writeBasicClassListInfoIntoFile(schoolYear *year)
     string fileName;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);
-    fileName = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop.txt";
+    fileName = "listYear/" + beginN + "-" + lastN + "/listClass.txt";
     ofstream fileOut(fileName);
     if (!fileOut.is_open())
     {
@@ -988,7 +937,7 @@ void noPointerWriteBasicClassListInfoIntoFile(schoolYear *year, ClassList claLis
     string fileName;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);
-    fileName = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop.txt";
+    fileName = "listYear/" + beginN + "-" + lastN + "/listClass.txt";
     ofstream fileOut(fileName);
     if (!fileOut.is_open())
     {
@@ -1014,7 +963,7 @@ ClassList *readBasicClassListInfoToFile(schoolYear *year)
     string fileName;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);
-    fileName = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop.txt";
+    fileName = "listYear/" + beginN + "-" + lastN + "/listClass.txt";
     ifstream fileIn(fileName);
     if (!fileIn.is_open())
     {
@@ -1039,7 +988,7 @@ ClassList noPointerReadBasicClassListInfoToFile(schoolYear *year)
     string fileName;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);
-    fileName = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop.txt";
+    fileName = "listYear/" + beginN + "-" + lastN + "/listClass.txt";
     ifstream fileIn(fileName);
     ClassList claList;
     if (!fileIn.is_open())
@@ -1067,7 +1016,7 @@ void createClassListFolder(schoolYear *year)
     string nameFolder;
     string beginN = to_string(year->beginYear);
     string lastN = to_string(year->lastYear);
-    nameFolder = "listYear/" + beginN + "-" + lastN + "/Danh sach cac lop";
+    nameFolder = "listYear/" + beginN + "-" + lastN + "/listClass";
     const char *nameChar = nameFolder.c_str();
     _mkdir(nameChar);
     ofstream oFile;
