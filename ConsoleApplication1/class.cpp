@@ -964,7 +964,7 @@ ClassList noPointerReadBasicClassListInfoToFile(schoolYear *year)
     claList = noPointerCreateClassList(claNum);
     while (!fileIn.eof())
     {
-        Class *cur;
+        Class *cur = new Class;
         fileIn >> cur->className >> cur->numberOfStudents;
         noPointerAddClassIntoClassList(claList, cur);
     }
