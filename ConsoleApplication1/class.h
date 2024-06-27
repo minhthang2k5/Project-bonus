@@ -4,9 +4,7 @@
 
 //---
 void writeStudentListEnrollCourseToCSVFile(schoolYear *year, StudentList *stuList);
-void appendNewContent(string dest, string source)
-{
-}
+void appendNewContent(string dest, string source);
 //----
 void createEmptyClassCSVFile(schoolYear *year, string className);
 
