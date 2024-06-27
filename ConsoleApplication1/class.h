@@ -78,4 +78,7 @@ Student inputStudentInformation();
 //--- doc class
 string changeIntToStringYear2(int begin, int end);
 void readClassAll(listYear &ls);
+
+//---
+string extractFileName(const string &filePath);
 #endif

@@ -359,13 +359,28 @@ int main()
 									else
 									{
 										string fileName;
-										cout << "Input file name (class name + \".csv\"): ";
-										getline(cin, fileName);
+										do
+										{
+											cout << "Input file name (class name + \".csv\"): ";
+											getline(cin, fileName);
+											if (className4 != extractFileName(fileName))
+											{
+												cout << "File name must be \"class name + .csv\"" << endl;
+											}
+										} while (className4 != extractFileName(fileName));
+
 										Class *newClass = readStudentsOfClassFromCSVFile(fileName);
-										appendNewStudentsOfClassToCurrentClass(curClass, newClass);
-										writeClassIntoCSVFile(current, curClass);
-										cout << endl;
-										noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+										if (newClass != nullptr)
+										{
+											appendNewStudentsOfClassToCurrentClass(curClass, newClass);
+											writeClassIntoCSVFile(current, curClass);
+											cout << endl;
+											noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+										}
+										else
+										{
+											cout << "Class is empty or error while opening file!" << endl;
+										}
 									}
 								}
 							} while (choice3 != -1);

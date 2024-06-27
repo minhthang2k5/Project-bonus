@@ -1050,3 +1050,14 @@ Student inputStudentInformation()
     cin >> info.socialID;
     return info;
 }
+
+//---
+string extractFileName(const string &filePath)
+{
+    size_t dotPosition = filePath.find('.');
+    if (dotPosition != string::npos)
+    {
+        return filePath.substr(0, dotPosition);
+    }
+    return filePath;
+}
