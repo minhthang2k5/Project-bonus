@@ -244,3 +244,33 @@ int ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath) {
 		return 0;
 	}
 }
+
+bool getNameStudent(StudentList* l, string nameStudent) {
+	StudentNode* p = l->pHeadStudent;
+	while (p != NULL) {
+		string tempName = p->data.fullName.lastName + " " + p->data.fullName.firstName;
+		if (tempName == nameStudent) {
+			return true;
+		}
+		p = p->pNextStudent;
+	}
+	return false;
+}
+
+void viewListOfCoursesForStudent(nodeSemester* curSemester, string nameStudent)
+{
+	nodeCourse* temp = curSemester->listCour.head;
+	cout << endl << endl << endl << endl;
+	cout << left << setw(5) << "ID" << setw(30) << "Course name" << setw(15) << "Class name" << setw(30) << "Teacher name" << setw(30) << "Number of credits/student" << setw(20) << "Day-Sesion" << endl;
+	while (temp != NULL) {
+		if (getNameStudent(temp->studentList, nameStudent)) {
+
+			string result = to_string(temp->numberOfCredits) + "/" + to_string(temp->numberOfStudent);
+			string result2 = temp->dayOfweek + "-" + temp->session;
+			cout << left << setw(5) << temp->id << setw(30) << temp->courseName << setw(15) << temp->className << setw(30) << temp->teacher << setw(30) << result << setw(20) << result2 << endl;
+
+		}
+		temp = temp->next;
+	}
+	cout << endl << endl << endl << endl;
+}
