@@ -7,7 +7,7 @@ listYear createListYear();
 void eatline();
 // void addClass(listYear *&lY);
 // void displayClass(nodeClass *head);
-void viewListStudentIncourse(nodeSemester* semester);
+void viewListStudentIncourse(nodeCourse*p);
 bool checkNameSemester(nodeSemester* p, int name);
 bool checkNumber(char a);
 void detachedYear(int &begin, int &last, string year);

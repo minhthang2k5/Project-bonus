@@ -415,21 +415,8 @@ nodeCourse *getCourse(nodeSemester *ls, string name)
 	}
 	return NULL;
 }
-void viewListStudentIncourse(nodeSemester *semester)
+void viewListStudentIncourse(nodeCourse *p)
 {
-	string name;
-	cin.ignore();
-	cout << "Input the name course to view:";
-	getline(cin, name);
-	nodeCourse *p = semester->listCour.head;
-	while (p != NULL)
-	{
-		if (p->courseName == name)
-		{
-			break;
-		}
-		p = p->next;
-	}
 	StudentNode *stu;
 	stu = p->studentList->pHeadStudent;
 	while (stu != NULL)

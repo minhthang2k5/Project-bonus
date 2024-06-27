@@ -248,10 +248,6 @@ int main()
 										cout << "Your choice: ";
 
 										cin >> choice4;
-										if (choice4 == 5)
-										{
-											viewListStudentIncourse(curSemester);
-										}
 										if (choice4 == 2)
 										{
 											viewListCourse(curSemester);
@@ -304,7 +300,6 @@ int main()
 										}
 										if (choice4 == 3)
 										{
-											// viết hàm đọc từ file CSV danh sách học sinh đăng kí course.
 											cin.ignore();
 											string Coursename;
 											cout << "Input course name: ";
@@ -327,6 +322,10 @@ int main()
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
 												cin >> choice5;
+												if (choice5 == 3)
+												{
+													viewListStudentIncourse(curCourse);
+												}
 											} while (choice5 != -1);
 										}
 
