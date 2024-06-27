@@ -68,7 +68,7 @@ void detachedYear(int &begin, int &last, string year)
 	begin = stoi(sBegin);
 	last = stoi(sLast);
 }
-void readListYear(const char* name, listYear& lY)
+void readListYear(const char *name, listYear &lY)
 {
 	ifstream iFile;
 	iFile.open(name);
@@ -88,26 +88,26 @@ void readListYear(const char* name, listYear& lY)
 		}
 		else
 		{
-			schoolYear* temp = new schoolYear;
+			schoolYear *temp = new schoolYear;
 			temp->beginYear = begin;
 			temp->lastYear = last;
 			temp->listClass.pHeadClass = NULL;
-			temp->listSem.head = NULL; 
+			temp->listSem.head = NULL;
 			temp->next = lY.pHead;
 			lY.pHead = temp;
 		}
 	}
 	iFile.close();
 }
-schoolYear* getSchoolYear(listYear lY, string name)
+schoolYear *getSchoolYear(listYear lY, string name)
 {
 	int begin;
 	int last;
 	detachedYear(begin, last, name);
-	schoolYear* p = lY.pHead;
-	while (p!=NULL)
+	schoolYear *p = lY.pHead;
+	while (p != NULL)
 	{
-		if (p->beginYear==begin)
+		if (p->beginYear == begin)
 		{
 			return p;
 		}
@@ -115,11 +115,11 @@ schoolYear* getSchoolYear(listYear lY, string name)
 	}
 	return NULL;
 }
-void writeListYear(const char* name, listYear ls)
+void writeListYear(const char *name, listYear ls)
 {
 	ofstream oFile;
 	oFile.open(name);
-	schoolYear* p = ls.pHead;
+	schoolYear *p = ls.pHead;
 	while (p != NULL)
 	{
 		oFile << p->beginYear << "-" << p->lastYear << endl;
@@ -127,7 +127,7 @@ void writeListYear(const char* name, listYear ls)
 	}
 	oFile.close();
 }
-void addHeadNewSchoolYear(listYear& lY)
+void addHeadNewSchoolYear(listYear &lY)
 {
 	cout << "Input the school year:";
 	string year;
@@ -144,7 +144,7 @@ void addHeadNewSchoolYear(listYear& lY)
 	}
 	else
 	{
-		schoolYear* temp = new schoolYear;
+		schoolYear *temp = new schoolYear;
 		temp->beginYear = begin;
 		temp->lastYear = last;
 		lY.pHead->listSem.head = NULL;
@@ -155,13 +155,14 @@ void addHeadNewSchoolYear(listYear& lY)
 	string beginN = to_string(lY.pHead->beginYear);
 	string lastN = to_string(lY.pHead->lastYear);
 	nameFolder = "listYear/" + beginN + "-" + lastN;
-	const char* nameChar = nameFolder.c_str();
+	const char *nameChar = nameFolder.c_str();
 	_mkdir(nameChar);
-	//hien folde de up len git
+	// hien folde de up len git
 	string gitFile;
 	gitFile = nameFolder + "/" + "gitFile.txt";
 	ofstream oFile(gitFile);
 	oFile << "check";
+	createClassListFolder(lY.pHead);
 	oFile.close();
 }
 // void addClassYear()
@@ -337,11 +338,11 @@ void inputClassToAddSchoolYear(listYear &lY)
 		lY.pHead->listClass.pHeadClass->pNextClass = a;
 	}
 }
-bool checkNameSemester(nodeSemester* p, int name)
+bool checkNameSemester(nodeSemester *p, int name)
 {
-	while (p!=NULL)
+	while (p != NULL)
 	{
-		if (p->name==name)
+		if (p->name == name)
 		{
 			return false;
 		}
@@ -351,14 +352,14 @@ bool checkNameSemester(nodeSemester* p, int name)
 }
 void readSenester(listYear &ls)
 {
-	schoolYear* p = ls.pHead;
-	while (p!=NULL)
+	schoolYear *p = ls.pHead;
+	while (p != NULL)
 	{
 		string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
 		string nameInput = "listYear/" + nameYear + "/listSemester.txt";
 		ifstream iFile;
 		iFile.open(nameInput);
-		nodeSemester* q = new nodeSemester;
+		nodeSemester *q = new nodeSemester;
 		while (iFile >> q->name >> q->begin.day >> q->begin.month >> q->begin.year >> q->end.day >> q->end.month >> q->end.year)
 		{
 			q->listCour.head = NULL;
@@ -369,12 +370,12 @@ void readSenester(listYear &ls)
 		p = p->next;
 	}
 }
-void writeSemester(listSemester ls,string name)
+void writeSemester(listSemester ls, string name)
 {
-	nodeSemester* p = ls.head;
+	nodeSemester *p = ls.head;
 	name = name + ".txt";
 	ofstream oFile(name);
-	while (p!=NULL)
+	while (p != NULL)
 	{
 		oFile << p->name << endl;
 		oFile << p->begin.day << " " << p->begin.month << " " << p->begin.year << endl;
@@ -388,44 +389,50 @@ hàm này để nhập thông tìn một khóa học
 Input:Danh sách các năm học
 Output:không có
 */
-nodeSemester* getSemester(schoolYear* year, int name) {
-	nodeSemester* p = year->listSem.head;
-	while (p != NULL) {
-		if (p->name == name) {
+nodeSemester *getSemester(schoolYear *year, int name)
+{
+	nodeSemester *p = year->listSem.head;
+	while (p != NULL)
+	{
+		if (p->name == name)
+		{
 			return p;
 		}
 		p = p->next;
 	}
 	return NULL;
 }
-nodeCourse* getCourse(nodeSemester* ls, string name) {
-	nodeCourse* p = ls->listCour.head;
-	while (p != NULL) {
-		if (p->courseName == name) {
+nodeCourse *getCourse(nodeSemester *ls, string name)
+{
+	nodeCourse *p = ls->listCour.head;
+	while (p != NULL)
+	{
+		if (p->courseName == name)
+		{
 			return p;
 		}
 		p = p->next;
 	}
 	return NULL;
 }
-void viewListStudentIncourse(nodeSemester*semester)
+void viewListStudentIncourse(nodeSemester *semester)
 {
 	string name;
 	cin.ignore();
 	cout << "Input the name course to view:";
 	getline(cin, name);
-	nodeCourse* p = semester->listCour.head;
-	while (p!=NULL)
+	nodeCourse *p = semester->listCour.head;
+	while (p != NULL)
 	{
-		if (p->courseName==name)
+		if (p->courseName == name)
 		{
 			break;
 		}
 		p = p->next;
 	}
-	StudentNode* stu;
+	StudentNode *stu;
 	stu = p->studentList->pHeadStudent;
-	while (stu!=NULL)
+	while (stu != NULL)
 	{
 		string name = stu->data.fullName.lastName + " " + stu->data.fullName.firstName;
 		string date = to_string(stu->data.dateOfBirth.day) + "/" + to_string(stu->data.dateOfBirth.month) + "/" + to_string(stu->data.dateOfBirth.year);
@@ -434,11 +441,12 @@ void viewListStudentIncourse(nodeSemester*semester)
 		stu = stu->pNextStudent;
 	}
 }
-void readListCourse(listYear& ls) {
-	schoolYear* p = ls.pHead;
+void readListCourse(listYear &ls)
+{
+	schoolYear *p = ls.pHead;
 	while (p != NULL)
 	{
-		nodeSemester* r = p->listSem.head;
+		nodeSemester *r = p->listSem.head;
 		while (r != NULL)
 		{
 			string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
@@ -450,10 +458,10 @@ void readListCourse(listYear& ls) {
 			{
 				return;
 			}
-			
+
 			while (true)
 			{
-				nodeCourse* q = new nodeCourse;
+				nodeCourse *q = new nodeCourse;
 				getline(iFile, q->courseName);
 				getline(iFile, q->className);
 				getline(iFile, q->id);
@@ -465,7 +473,7 @@ void readListCourse(listYear& ls) {
 				iFile.ignore();
 				q->studentList = new StudentList;
 				q->studentList->pHeadStudent = NULL;
-				//q->scoreList = NULL;
+				// q->scoreList = NULL;
 				q->next = NULL;
 				addHeadCourse(r->listCour, q);
 				if (iFile.eof())
@@ -479,8 +487,9 @@ void readListCourse(listYear& ls) {
 	}
 }
 
-void writeListCourse(listCourse lc, string name) {
-	nodeCourse* p = lc.head;
+void writeListCourse(listCourse lc, string name)
+{
+	nodeCourse *p = lc.head;
 	name = name + ".txt";
 	ofstream fout(name);
 	while (p != NULL)
@@ -497,12 +506,14 @@ void writeListCourse(listCourse lc, string name) {
 	}
 	fout.close();
 }
-void writeListStudentInCourse(StudentList* slist, string name) {
-	StudentNode* p = slist->pHeadStudent;
+void writeListStudentInCourse(StudentList *slist, string name)
+{
+	StudentNode *p = slist->pHeadStudent;
 	name = name + ".txt";
 	ofstream fout;
 	fout.open(name);
-	while (p != NULL) {
+	while (p != NULL)
+	{
 		fout << p->data.fullName.firstName << " ";
 		fout << p->data.fullName.lastName << endl;
 		fout << p->data.studentID << endl;
@@ -514,21 +525,23 @@ void writeListStudentInCourse(StudentList* slist, string name) {
 	}
 	fout.close();
 }
-void readListStudentToCourse(listYear& ls) {
-	schoolYear* p = ls.pHead;
+void readListStudentToCourse(listYear &ls)
+{
+	schoolYear *p = ls.pHead;
 	while (p != NULL)
 	{
-		nodeSemester* r = p->listSem.head;
+		nodeSemester *r = p->listSem.head;
 		while (r != NULL)
 		{
-			nodeCourse* z = r->listCour.head;
-			while (z != NULL) {
+			nodeCourse *z = r->listCour.head;
+			while (z != NULL)
+			{
 				string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
 				string nameSemester = to_string(r->name);
 				string nameInput = "listYear/" + nameYear + "/" + nameSemester + "/" + z->courseName + "/listStudent.txt";
 				ifstream iFile;
 				iFile.open(nameInput);
-				Student* q = new Student;
+				Student *q = new Student;
 				while (getline(iFile, q->fullName.firstName, ' '))
 				{
 					getline(iFile, q->fullName.lastName, '\n');
@@ -557,7 +570,7 @@ void inputInformationSemesterAndAddSchoolYear(schoolYear *&temp)
 	nodeSemester *seme = initSemester();
 	cout << "Input the name semester 1,2 or 3:";
 	cin >> seme->name;
-	while (checkNameSemester(temp->listSem.head,seme->name)==false)
+	while (checkNameSemester(temp->listSem.head, seme->name) == false)
 	{
 		cout << "Name semester is exit,pleas input again:";
 		cin >> seme->name;
@@ -570,21 +583,21 @@ void inputInformationSemesterAndAddSchoolYear(schoolYear *&temp)
 	cout << endl;
 	seme->listCour.head = NULL;
 	addHeadSemester(temp->listSem, seme);
-	
-	//tạo folder
+
+	// tạo folder
 	string name;
 	string year = changeIntToStringYear(temp->beginYear, temp->lastYear);
 	string nameSemester = to_string(seme->name);
 	name = "listYear/" + year + "/" + nameSemester;
-	const char* nameChar = name.c_str();
+	const char *nameChar = name.c_str();
 	_mkdir(nameChar);
-	//hien folde de up len git
+	// hien folde de up len git
 	string gitFile;
-	gitFile = "listYear/"+year+"/"+nameSemester + "/" + "gitFile.txt";
+	gitFile = "listYear/" + year + "/" + nameSemester + "/" + "gitFile.txt";
 	ofstream oFile(gitFile);
 	oFile << "check";
 	oFile.close();
-	//tao file txt
+	// tao file txt
 	string nameTxt = "listYear/" + year + "/listSemester";
 	writeSemester(temp->listSem, nameTxt);
 }
@@ -928,7 +941,7 @@ void PrintList(Staff_List l)
 		p = p->pNext;
 	}
 }
-int SignUp(Staff_List &l, const char* warehousepath)
+int SignUp(Staff_List &l, const char *warehousepath)
 {
 
 	Staff_Info info = GetStaffInfo(l);
@@ -987,21 +1000,25 @@ int SignIn(Staff_List l)
 	return 1;
 }
 
-int StaffAccountDataWarehouse(Staff_List l, const char* warehousepath) {
+int StaffAccountDataWarehouse(Staff_List l, const char *warehousepath)
+{
 	ofstream dout;
 	dout.open(warehousepath, ios::out);
 	dout.seekp(0, ios::beg);
 	bool flag = false;
-	Staff_Node* p = l.pHead;
-	while (true) {
-		while (p != NULL) {
+	Staff_Node *p = l.pHead;
+	while (true)
+	{
+		while (p != NULL)
+		{
 			dout << p->staff.username;
 			dout << endl;
 			dout << p->staff.password;
 			dout << endl;
 			p = p->pNext;
 		}
-		if (p == NULL) {
+		if (p == NULL)
+		{
 			flag = true;
 			break;
 		}
@@ -1010,41 +1027,49 @@ int StaffAccountDataWarehouse(Staff_List l, const char* warehousepath) {
 	dout.flush();
 	dout.close();
 
-	if (flag == true) {
+	if (flag == true)
+	{
 		return 1;
 	}
 	return 0;
 }
-int LoadStaffAccount(Staff_List &l, const char* warehousepath) {
+int LoadStaffAccount(Staff_List &l, const char *warehousepath)
+{
 	ifstream din;
 	din.open(warehousepath, ios::in);
 	bool flag = false;
-	if (din.is_open() == false) {
+	if (din.is_open() == false)
+	{
 		cout << "Cannot open file!" << endl;
 		return 0;
 	}
-	
-	while (true) {
+
+	while (true)
+	{
 		Staff_Info tempInfo;
 		getline(din, tempInfo.username, '\n');
 		getline(din, tempInfo.password, '\n');
-		if (din.eof() == true) {
+		if (din.eof() == true)
+		{
 			break;
 		}
 		AddTail(l, tempInfo);
 	}
-		
+
 	din.close();
-	
+
 	return 0;
 }
-int ChangePasswordOfStaff(Staff_List& l, const char* warehousepath) {
+int ChangePasswordOfStaff(Staff_List &l, const char *warehousepath)
+{
 	string inUsername;
 	cout << "Input username to change passward: ";
 	cin >> inUsername;
-	Staff_Node* p = l.pHead;
-	while (p != NULL) {
-		if (p->staff.username == inUsername) {
+	Staff_Node *p = l.pHead;
+	while (p != NULL)
+	{
+		if (p->staff.username == inUsername)
+		{
 			cout << "Input new password: ";
 			cin >> p->staff.password;
 			break;
@@ -1052,11 +1077,13 @@ int ChangePasswordOfStaff(Staff_List& l, const char* warehousepath) {
 		p = p->pNext;
 	}
 	int check = StaffAccountDataWarehouse(l, warehousepath);
-	if (check == 1) {
+	if (check == 1)
+	{
 		cout << "Change successfully!" << endl;
 		return 1;
 	}
-	else {
+	else
+	{
 		cout << "Change unsuccessfully!" << endl;
 		return 0;
 	}
@@ -1069,7 +1096,7 @@ Output:Một khóa học mới
 */
 nodeCourse *initCourse()
 {
-	nodeCourse* p = new nodeCourse;
+	nodeCourse *p = new nodeCourse;
 	p->next = NULL;
 	return p;
 }
@@ -1093,11 +1120,11 @@ hàm này để nhập thông tin khóa học
 Input:Danh sách các năm học
 Output:không có
 1*/
-void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* current)
+void inputInformationToAddCourse(nodeSemester *&tempSemester, schoolYear *current)
 {
 	cin.ignore();
 	// Nhập các thông tin và thêm vào kỳ học
-	nodeCourse* course = initCourse();
+	nodeCourse *course = initCourse();
 	cout << "Input id course: ";
 	getline(cin, course->id);
 	cout << endl;
@@ -1136,42 +1163,48 @@ void inputInformationToAddCourse(nodeSemester*& tempSemester, schoolYear* curren
 	course->studentList = new StudentList;
 	course->studentList->pHeadStudent = NULL;
 	addHeadCourse(tempSemester->listCour, course);
-	//tạo folder
+	// tạo folder
 	string name;
 	string year = changeIntToStringYear(current->beginYear, current->lastYear);
 	string nameSemester = to_string(tempSemester->name);
 	name = "listYear/" + year + "/" + nameSemester + "/" + course->courseName;
-	const char* nameChar = name.c_str();
+	const char *nameChar = name.c_str();
 	_mkdir(nameChar);
-	//hien folde de up len git
+	// hien folde de up len git
 	string gitFile;
 	gitFile = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/" + "gitFile.txt";
 	ofstream oFile(gitFile);
 	oFile << "check";
 	oFile.close();
-	//tao file txt
+	// tao file txt
 	string nameTxt = "listYear/" + year + "/" + nameSemester + "/listCourse";
-	//hàm write 
+	// hàm write
 	writeListCourse(tempSemester->listCour, nameTxt);
 }
-void viewListCourse(nodeSemester* p)
+void viewListCourse(nodeSemester *p)
 {
-	cout << endl << endl << endl << endl;
+	cout << endl
+		 << endl
+		 << endl
+		 << endl;
 	cout << left << setw(5) << "ID" << setw(30) << "Course name" << setw(15) << "Class name" << setw(30) << "Teacher name" << setw(30) << "Number of credits/student" << setw(20) << "Day-Sesion" << endl;
-	nodeCourse* temp = p->listCour.head;
-	while (temp!=NULL)
+	nodeCourse *temp = p->listCour.head;
+	while (temp != NULL)
 	{
 		string result = to_string(temp->numberOfCredits) + "/" + to_string(temp->numberOfStudent);
 		string result2 = temp->dayOfweek + "-" + temp->session;
 		cout << left << setw(5) << temp->id << setw(30) << temp->courseName << setw(15) << temp->className << setw(30) << temp->teacher << setw(30) << result << setw(20) << result2 << endl;
 		temp = temp->next;
 	}
-	cout << endl << endl << endl << endl;
+	cout << endl
+		 << endl
+		 << endl
+		 << endl;
 }
-void updateInformationCourse(nodeCourse* &course, nodeSemester* curSemester, schoolYear* curYear)
+void updateInformationCourse(nodeCourse *&course, nodeSemester *curSemester, schoolYear *curYear)
 {
 	// Nhập các thông tin và thêm vào kỳ học
-	
+
 	cout << "Input id course: ";
 	getline(cin, course->id);
 	cout << endl;
@@ -1216,7 +1249,7 @@ void updateInformationCourse(nodeCourse* &course, nodeSemester* curSemester, sch
 	writeListCourse(curSemester->listCour, nameTxt);
 }
 
-void addStudentToCourse(nodeCourse* course, nodeSemester* curSemester, schoolYear* curYear)
+void addStudentToCourse(nodeCourse *course, nodeSemester *curSemester, schoolYear *curYear)
 {
 	Student info = getStudentInfo();
 	AddTailToStudentList(course->studentList, info);

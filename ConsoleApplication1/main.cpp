@@ -65,13 +65,14 @@ int main()
 							cout << "Exit successfully!" << endl;
 							return 1;
 						}
-						if (choice2 == 3) {
+						if (choice2 == 3)
+						{
 							string yearName;
 							cin.ignore();
 							cout << "Input school year: ";
 							getline(cin, yearName);
-							//lấy node school year để thực hiện các chức năng dưới
-							schoolYear* current = getSchoolYear(ls, yearName);
+							// lấy node school year để thực hiện các chức năng dưới
+							schoolYear *current = getSchoolYear(ls, yearName);
 							while (current == NULL)
 							{
 								cout << "School year isn't exited" << endl;
@@ -82,8 +83,8 @@ int main()
 							int semesterName;
 							cout << "Input semester: ";
 							cin >> semesterName;
-							//lấy node semester để thực hiện các chức năng dưới
-							nodeSemester* curSemester = getSemester(current, semesterName);
+							// lấy node semester để thực hiện các chức năng dưới
+							nodeSemester *curSemester = getSemester(current, semesterName);
 							while (curSemester == NULL)
 							{
 								cout << "Semester isn't exited" << endl;
@@ -152,11 +153,11 @@ int main()
 							string yearName;
 							cout << "Input school year: ";
 							getline(cin, yearName);
-							//lấy node school year để thực hiện các chức năng dưới
-							schoolYear* current = getSchoolYear(ls, yearName);
-							while (current==NULL)
+							// lấy node school year để thực hiện các chức năng dưới
+							schoolYear *current = getSchoolYear(ls, yearName);
+							while (current == NULL)
 							{
-								cout << "School year isn't exited"<<endl;
+								cout << "School year isn't exited" << endl;
 								cout << "Input again";
 								getline(cin, yearName);
 								current = getSchoolYear(ls, yearName);
@@ -189,16 +190,78 @@ int main()
 								{
 									continue;
 								}
+								if (choice3 == 1)
+								{
+									string className;
+									cout << "Input class name: ";
+									cin >> className;
+
+									Class *newClass = createClass(className, 0);
+									noPointerAddClassIntoClassList(current->listClass, newClass);
+									createEmptyClassCSVFile(current, className);
+									cout << "Add new class successfully!" << endl;
+								}
+								if (choice3 == 2)
+								{
+									cout << "Input class name: ";
+									string className4;
+									getline(cin, className4);
+									Class *curClass = current->listClass.pHeadClass;
+									while (curClass->className != className4)
+									{
+										curClass = curClass->pNextClass;
+									}
+									cout << "Input student information:" << endl;
+									Student stu = inputStudentInformation();
+
+									int opt1;
+									cout << "1. Save this student" << endl;
+									cout << "2. Don't save this student" << endl;
+									cout << "0. Back" << endl;
+									cout << "-1. Exit" << endl;
+									do
+									{
+										cout << "Input choice: ";
+										cin >> opt1;
+										if (opt1 != 1 && opt1 != 2 && opt1 != -1 && opt1 != 0)
+										{
+											cout << "Invalid choice!" << endl;
+										}
+									} while (opt1 != 1 && opt1 != 2 && opt1 != -1 && opt1 != 0);
+									if (opt1 == 1)
+									{
+										addStudentIntoClass(curClass, stu);
+										noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+										writeClassIntoCSVFile(current, curClass);
+									}
+									else if (opt1 == 2)
+									{
+										break;
+									}
+									else if (opt1 == 0)
+									{
+										break;
+									}
+									else if (opt1 == -1)
+									{
+										return 0;
+									}
+									else
+									{
+										cout << "Invalid choice!" << endl;
+									}
+								}
 								if (choice3 == 3)
 								{
 									inputInformationSemesterAndAddSchoolYear(current);
 								}
-								if (choice3 == 4) {
+								if (choice3 == 4)
+								{
 									int semesterName;
 									cout << "Input semester: ";
 									cin >> semesterName;
-									//lấy node semester để thực hiện các chức năng dưới
-									nodeSemester* curSemester = getSemester(current, semesterName);
+									// lấy node semester để thực hiện các chức năng dưới
+									nodeSemester *curSemester = getSemester(current, semesterName);
 									while (curSemester == NULL)
 									{
 										cout << "Semester isn't exited" << endl;
@@ -208,7 +271,7 @@ int main()
 									}
 									system("cls");
 									int choice4;
-									//menu các chức năng của course 
+									// menu các chức năng của course
 									do
 									{
 										cout << "1. Create and add course to semester" << endl;
@@ -221,7 +284,7 @@ int main()
 										cout << "Your choice: ";
 
 										cin >> choice4;
-										if (choice4 ==5)
+										if (choice4 == 5)
 										{
 											viewListStudentIncourse(curSemester);
 										}
@@ -238,16 +301,18 @@ int main()
 										{
 											break;
 										}
-										if (choice4 == 1) {
+										if (choice4 == 1)
+										{
 											inputInformationToAddCourse(curSemester, current);
 											system("cls");
 										}
-										if (choice4 == 2) {
+										if (choice4 == 2)
+										{
 											cin.ignore();
 											string Coursename;
 											cout << "Input course name: ";
 											getline(cin, Coursename);
-											nodeCourse* curCourse = getCourse(curSemester, Coursename);
+											nodeCourse *curCourse = getCourse(curSemester, Coursename);
 											while (curCourse == NULL)
 											{
 												cout << "Course isn't exited" << endl;
@@ -257,12 +322,13 @@ int main()
 											}
 											addStudentToCourse(curCourse, curSemester, current);
 										}
-										if (choice4 == 4) {
+										if (choice4 == 4)
+										{
 											cin.ignore();
 											string Coursename;
 											cout << "Input course name: ";
 											getline(cin, Coursename);
-											nodeCourse* curCourse = getCourse(curSemester, Coursename);
+											nodeCourse *curCourse = getCourse(curSemester, Coursename);
 											while (curCourse == NULL)
 											{
 												cout << "Course isn't exited" << endl;
@@ -273,9 +339,26 @@ int main()
 											updateInformationCourse(curCourse, curSemester, current);
 										}
 									} while (choice4 != -1);
-
 								}
-							} while (choice3!=-1);
+								if (choice3 == 5)
+								{
+									string fileName;
+									cout << "Input file name (class name + \".csv\"): ";
+									cin >> fileName;
+									Class *newClass = readStudentsOfClassFromCSVFile(fileName);
+									cout << "sl" << newClass->numberOfStudents << endl;
+									noPointerAddClassIntoClassList(current->listClass, newClass);
+									cout << endl;
+									cout << "Input file name (class name + \".csv\"): ";
+									cin >> fileName;
+									Class *newClass1 = readStudentsOfClassFromCSVFile(fileName);
+									cout << "sl" << newClass1->numberOfStudents << endl;
+									noPointerAddClassIntoClassList(current->listClass, newClass1);
+									noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+									int n;
+									cin >> n;
+								}
+							} while (choice3 != -1);
 						}
 						if (choice2 == 3)
 						{
@@ -309,7 +392,6 @@ int main()
 				cout << "Invalid choice" << endl;
 				break;
 			}
-
 		} while (choice < 0 || choice > 2);
 	} while (choice >= 0 && choice <= 2);
 	system("pause");
