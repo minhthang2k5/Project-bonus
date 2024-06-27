@@ -348,15 +348,15 @@ int main()
 									Class *newClass = readStudentsOfClassFromCSVFile(fileName);
 									cout << "sl" << newClass->numberOfStudents << endl;
 									noPointerAddClassIntoClassList(current->listClass, newClass);
+									writeClassIntoCSVFile(current, newClass);
 									cout << endl;
 									cout << "Input file name (class name + \".csv\"): ";
 									cin >> fileName;
 									Class *newClass1 = readStudentsOfClassFromCSVFile(fileName);
 									cout << "sl" << newClass1->numberOfStudents << endl;
 									noPointerAddClassIntoClassList(current->listClass, newClass1);
+									writeClassIntoCSVFile(current, newClass1);
 									noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
-									int n;
-									cin >> n;
 								}
 							} while (choice3 != -1);
 						}

@@ -903,7 +903,7 @@ ClassList *readBasicClassListInfoToFile(schoolYear *year)
     ClassList *claList = createClassList(claNum);
     while (!fileIn.eof())
     {
-        Class *cur;
+        Class *cur = new Class;
         fileIn >> cur->className >> cur->numberOfStudents;
         addClassIntoClassList(claList, cur);
     }
