@@ -1,6 +1,8 @@
 #include "class.h"
 
 //---
+
+//---
 string changeIntToStringYear2(int begin, int end)
 {
     string beginN = to_string(begin);

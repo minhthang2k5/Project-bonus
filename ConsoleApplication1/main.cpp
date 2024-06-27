@@ -16,7 +16,6 @@ int main()
 	readListCourse(ls);
 	readListStudentToCourse(ls);
 	readClassAll(ls);
-	cout << ls.pHead->listClass.pHeadClass->className << endl;
 	int choice;
 	do
 	{
@@ -242,10 +241,10 @@ int main()
 									do
 									{
 										cout << "1. Create and add course to semester" << endl;
-										cout << "2. Add a student to course" << endl;
-										cout << "3.View list course" << endl;
-										cout << "4. Update information course" << endl;
-										cout << "5. View list student of course:" << endl;
+
+										cout << "3. View list course" << endl;
+
+										cout << "6. Choose course to operate" << endl;
 										cout << "0. Back" << endl;
 										cout << "-1. Exit" << endl;
 										cout << "Your choice: ";
@@ -305,6 +304,34 @@ int main()
 											}
 											updateInformationCourse(curCourse, curSemester, current);
 										}
+										if (choice == 6)
+										{
+											// viết hàm đọc từ file CSV danh sách học sinh đăng kí course.
+											cin.ignore();
+											string Coursename;
+											cout << "Input course name: ";
+											getline(cin, Coursename);
+											nodeCourse *curCourse = getCourse(curSemester, Coursename);
+											while (curCourse == NULL)
+											{
+												cout << "Course isn't exited" << endl;
+												cout << "Input again";
+												getline(cin, Coursename);
+												curCourse = getCourse(curSemester, Coursename);
+											}
+											int choice5;
+											do
+											{
+												cout << "1. Add a student to course" << endl;
+												cout << "2. Update information course" << endl;
+												cout << "3. View list student of course:" << endl;
+												cout << "0. Back" << endl;
+												cout << "-1. Exit" << endl;
+												cout << "Input choice: ";
+												cin >> choice5;
+											} while (choice5 != -1);
+										}
+
 									} while (choice4 != -1);
 								}
 								if (choice3 == 5)
