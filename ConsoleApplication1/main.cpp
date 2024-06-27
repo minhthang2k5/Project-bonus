@@ -266,38 +266,7 @@ int main()
 											inputInformationToAddCourse(curSemester, current);
 											system("cls");
 										}
-										if (choice4 == 2)
-										{
-											cin.ignore();
-											string Coursename;
-											cout << "Input course name: ";
-											getline(cin, Coursename);
-											nodeCourse *curCourse = getCourse(curSemester, Coursename);
-											while (curCourse == NULL)
-											{
-												cout << "Course isn't exited" << endl;
-												cout << "Input again";
-												getline(cin, Coursename);
-												curCourse = getCourse(curSemester, Coursename);
-											}
-											addStudentToCourse(curCourse, curSemester, current);
-										}
-										if (choice4 == 4)
-										{
-											cin.ignore();
-											string Coursename;
-											cout << "Input course name: ";
-											getline(cin, Coursename);
-											nodeCourse *curCourse = getCourse(curSemester, Coursename);
-											while (curCourse == NULL)
-											{
-												cout << "Course isn't exited" << endl;
-												cout << "Input again";
-												getline(cin, Coursename);
-												curCourse = getCourse(curSemester, Coursename);
-											}
-											updateInformationCourse(curCourse, curSemester, current);
-										}
+										
 										if (choice4 == 3)
 										{
 											cin.ignore();
@@ -325,6 +294,12 @@ int main()
 												if (choice5 == 3)
 												{
 													viewListStudentIncourse(curCourse);
+												}
+												if (choice5 == 2) {
+													updateInformationCourse(curCourse, curSemester, current);
+												}
+												if (choice5 == 1) {
+													addStudentToCourse(curCourse, curSemester, current);
 												}
 											} while (choice5 != -1);
 										}
