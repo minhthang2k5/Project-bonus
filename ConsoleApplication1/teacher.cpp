@@ -445,11 +445,9 @@ void readListCourse(listYear &ls)
 			{
 				return;
 			}
-
-			while (true)
+			nodeCourse* q = new nodeCourse;
+			while (getline(iFile, q->courseName))
 			{
-				nodeCourse *q = new nodeCourse;
-				getline(iFile, q->courseName);
 				getline(iFile, q->className);
 				getline(iFile, q->id);
 				getline(iFile, q->teacher);
@@ -467,6 +465,7 @@ void readListCourse(listYear &ls)
 				{
 					break;
 				}
+				q = new nodeCourse;
 			}
 			r = r->next;
 		}
@@ -1380,4 +1379,36 @@ void viewListOfCourses(listYear lY)
 		cout << tempCourse->courseName << endl;
 		tempCourse = tempCourse->next;
 	}
+}
+void removeNodeCourse(listCourse& ls, nodeCourse* p)
+{
+	if (ls.head == p)
+	{
+		nodeCourse* temp = p;
+		ls.head = ls.head->next;
+		delete p;
+		return;
+	}
+	nodeCourse* prev = ls.head;
+	nodeCourse* curr = ls.head->next;
+	while (curr != NULL)
+	{
+		if (curr == p)
+		{
+			curr = curr->next;
+			prev->next = curr;
+			delete p;
+			return;
+		}
+		curr = curr->next;
+	}
+}
+void deleteCourse(nodeSemester* tempSemester, schoolYear* current, nodeCourse* course)
+{
+	string dir = "listYear/" + to_string(current->beginYear) + "-" + to_string(current->lastYear) + "/" + to_string(tempSemester->name) + "/" + course->courseName;
+	removeNodeCourse(tempSemester->listCour, course);
+	string command = "rd /s /q \"" + dir + "\"";
+	system(command.c_str());
+	string nameTxt = "listYear/" + to_string(current->beginYear) + "-" + to_string(current->lastYear) + "/" + to_string(tempSemester->name) + "/listCourse";
+	writeListCourse(tempSemester->listCour, nameTxt);
 }

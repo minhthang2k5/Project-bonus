@@ -306,11 +306,16 @@ int main()
 												cout << "1.  Add a student to course" << endl;
 												cout << "2.  Update information course" << endl;
 												cout << "3.  View list student of course:" << endl;
-												cout << "4. Add other students by uploading CSV file" << endl;
+												cout << "4.  Add other students by uploading CSV file" << endl;
+												cout << "5. Delete this course" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
 												cin >> choice5;
+												if (choice5==5)
+												{
+													deleteCourse(curSemester, current, curCourse);
+												}
 												if (choice5 == 4)
 												{
 													string studentListFileName;

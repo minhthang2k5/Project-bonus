@@ -90,4 +90,6 @@ void inputClassToAddSchoolYear(listYear &lY);
 void viewListOfClasses(listYear lY);
 void viewListOfStudentClass(listYear lY);
 void viewListOfCourses(listYear lY);
+void removeNodeCourse(listCourse& ls, nodeCourse* p);
+void deleteCourse(nodeSemester* tempSemester, schoolYear* current, nodeCourse* course);
 #endif
