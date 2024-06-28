@@ -161,6 +161,8 @@ int main()
 						cin.ignore();
 						if (choice2 == 4) {
 							ChangePasswordOfStaff(accstaff, warehousepath1);
+							
+							break;
 
 						}
 						if (choice2 == 3) {
