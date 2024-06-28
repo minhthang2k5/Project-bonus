@@ -193,6 +193,34 @@ int main()
 								if (choice3 == 9)
 								{
 								}
+								if (choice3 == 7)
+								{
+									viewClassListBasicInfo(current->listClass);
+								}
+								if (choice3 == 8)
+								{
+									cin.ignore();
+									cout << "Input class name: ";
+									string className2;
+									getline(cin, className2);
+									Class *curClass = current->listClass.pHeadClass;
+									while (curClass->className != className2)
+									{
+										curClass = curClass->pNextClass;
+										if (curClass == nullptr)
+										{
+											break;
+										}
+									}
+									if (curClass == nullptr)
+									{
+										cout << "Not found class!" << endl;
+									}
+									else
+									{
+										viewAllStudentsOfClassInfo(curClass);
+									}
+								}
 								if (choice3 == -1)
 								{
 									cout << "Exit successfully!" << endl;

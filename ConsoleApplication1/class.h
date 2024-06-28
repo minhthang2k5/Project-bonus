@@ -2,6 +2,9 @@
 #define _CLASS_H_
 #include "struct.h"
 
+//--
+void viewClassListBasicInfo(ClassList claList);
+void viewAllStudentsOfClassInfo(Class *cla);
 //---
 void viewProfile(listYear year, int studentID);
 //---

@@ -1,5 +1,31 @@
 #include "class.h"
 
+void viewClassListBasicInfo(ClassList claList)
+{
+    Class *cur = claList.pHeadClass;
+    cout << "Basic class list infomation:" << endl;
+    cout << left << setw(15) << "Class name" << setw(15) << "Number of students" << endl;
+    while (cur != nullptr)
+    {
+
+        cout << left << setw(15) << cur->className << setw(15) << cur->numberOfStudents << endl;
+        cur = cur->pNextClass;
+    }
+}
+
+void viewAllStudentsOfClassInfo(Class *cla)
+{
+    int no = 1;
+    StudentNode *cur = cla->pHeadStudent;
+    cout << "Students infomation in class " << cla->className << endl;
+    cout << left << setw(5) << "STT" << setw(10) << "Student ID" << setw(30) << "Full name" << setw(8) << "Gender" << setw(12) << "Date of birth" << setw(10) << "Social ID" << endl;
+    while (cur != nullptr)
+    {
+        string fullname = cur->data.fullName.lastName + " " + cur->data.fullName.firstName;
+        string dob = to_string(cur->data.dateOfBirth.day) + "/" + to_string(cur->data.dateOfBirth.month) + "/" + to_string(cur->data.dateOfBirth.year);
+        cout << left << setw(5) << no << setw(10) << cur->data.studentID << setw(30) << fullname << setw(8) << cur->data.gender << setw(12) << dob << setw(10) << cur->data.socialID << endl;
+    }
+}
 void viewProfile(listYear year, int studentID)
 {
     schoolYear *curYear = year.pHead;
