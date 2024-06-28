@@ -165,7 +165,7 @@ int main()
 						}
 						if (choice2 == 3) {
 							ListAccount* l = CreateListAccount(ls, warehousepath2);
-							int check = StudentAccountDataWarehouse(l, warehousepath2);
+							StudentAccountDataWarehouse(l, warehousepath2);
 							
 						}
 						if (choice2 == 1)

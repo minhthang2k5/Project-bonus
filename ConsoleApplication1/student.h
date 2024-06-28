@@ -14,7 +14,7 @@ void PrintListAccount(ListAccount* l);
 int GetStudentAccount(ListAccount* l, string inUsername, string inPassword);
 int Login(ListAccount* l);
 
-int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath);
+void StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath);
 int LoadStudentAccount(ListAccount*& l, const char* warehousepath);
 void ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath);
 

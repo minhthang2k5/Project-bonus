@@ -186,7 +186,7 @@ void viewListOfCoursesForStudent(nodeSemester *curSemester)
 		 << endl;
 }
 
-int StudentAccountDataWarehouse(ListAccount *l, const char *warehousepath)
+void StudentAccountDataWarehouse(ListAccount *l, const char *warehousepath)
 {
 	ofstream dout;
 	dout.open(warehousepath, ios::out);
@@ -212,12 +212,6 @@ int StudentAccountDataWarehouse(ListAccount *l, const char *warehousepath)
 
 	dout.flush();
 	dout.close();
-
-	if (flag == true)
-	{
-		return 1;
-	}
-	return 0;
 }
 int LoadStudentAccount(ListAccount *&l, const char *warehousepath)
 {
@@ -257,17 +251,8 @@ void ChangePasswordOfStudent(ListAccount *&l, const char *warehousepath)
 		}
 		p = p->next;
 	}
-	int check = StudentAccountDataWarehouse(l, warehousepath);
-	if (check == 1)
-	{
-		cout << "Change successfully!" << endl;
-		
-	}
-	else
-	{
-		cout << "Change unsuccessfully!" << endl;
-		
-	}
+	StudentAccountDataWarehouse(l, warehousepath);
+	cout << "Change successfully!" << endl;
 }
 
 bool getNameStudent(StudentList *l, string nameStudent)

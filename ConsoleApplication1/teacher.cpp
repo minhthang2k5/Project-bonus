@@ -1006,7 +1006,7 @@ int SignUp(Staff_List &l, const char *warehousepath)
 	AddTail(l, info);
 	cout << "Sign up successfully!" << endl;
 	// +++
-	int check = StaffAccountDataWarehouse(l, warehousepath);
+	StaffAccountDataWarehouse(l, warehousepath);
 	return 1;
 }
 int GetStaffAccount(Staff_List l, string inUsername, string inPassword)
@@ -1058,7 +1058,7 @@ int SignIn(Staff_List l)
 	return 1;
 }
 
-int StaffAccountDataWarehouse(Staff_List l, const char *warehousepath)
+void StaffAccountDataWarehouse(Staff_List l, const char *warehousepath)
 {
 	ofstream dout;
 	dout.open(warehousepath, ios::out);
@@ -1085,11 +1085,7 @@ int StaffAccountDataWarehouse(Staff_List l, const char *warehousepath)
 	dout.flush();
 	dout.close();
 
-	if (flag == true)
-	{
-		return 1;
-	}
-	return 0;
+	
 }
 int LoadStaffAccount(Staff_List &l, const char *warehousepath)
 {
@@ -1134,17 +1130,9 @@ void ChangePasswordOfStaff(Staff_List &l, const char *warehousepath)
 		}
 		p = p->pNext;
 	}
-	int check = StaffAccountDataWarehouse(l, warehousepath);
-	if (check == 1)
-	{
-		cout << "Change successfully!" << endl;
-		
-	}
-	else
-	{
-		cout << "Change unsuccessfully!" << endl;
-		
-	}
+	StaffAccountDataWarehouse(l, warehousepath);
+	cout << "Change successfully!" << endl;
+	
 }
 
 /*
