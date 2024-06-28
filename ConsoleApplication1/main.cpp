@@ -404,6 +404,7 @@ int main()
 												}
 												if (choice5 == 4)
 												{
+													cin.ignore();
 													string studentListFileName;
 													cout << "Input file name: ";
 													getline(cin, studentListFileName);

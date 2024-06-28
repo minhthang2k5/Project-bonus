@@ -419,11 +419,11 @@ void viewListStudentIncourse(nodeCourse *p)
 {
 	StudentNode *stu;
 	stu = p->studentList->pHeadStudent;
+	cout << left << setw(30) << "Name" << setw(13) << "Gender" << setw(13) << "StudentId" << setw(13) << "Class name" << setw(20) << "Social Id" << setw(15) << "Date of birth" << endl;
 	while (stu != NULL)
 	{
 		string name = stu->data.fullName.lastName + " " + stu->data.fullName.firstName;
 		string date = to_string(stu->data.dateOfBirth.day) + "/" + to_string(stu->data.dateOfBirth.month) + "/" + to_string(stu->data.dateOfBirth.year);
-		cout << left << setw(30) << "Name" << setw(13) << "Gender" << setw(13) << "StudentId" << setw(13) << "Class name" << setw(20) << "Social Id" << setw(15) << "Date of birth" << endl;
 		cout << left << setw(30) << name << setw(13) << stu->data.gender << setw(13) << stu->data.studentID << setw(13) << stu->data.className << setw(20) << stu->data.socialID << setw(15) << date << endl;
 		stu = stu->pNextStudent;
 	}
@@ -445,7 +445,7 @@ void readListCourse(listYear &ls)
 			{
 				return;
 			}
-			nodeCourse* q = new nodeCourse;
+			nodeCourse *q = new nodeCourse;
 			while (getline(iFile, q->courseName))
 			{
 				getline(iFile, q->className);
@@ -1380,17 +1380,17 @@ void viewListOfCourses(listYear lY)
 		tempCourse = tempCourse->next;
 	}
 }
-void removeNodeCourse(listCourse& ls, nodeCourse* p)
+void removeNodeCourse(listCourse &ls, nodeCourse *p)
 {
 	if (ls.head == p)
 	{
-		nodeCourse* temp = p;
+		nodeCourse *temp = p;
 		ls.head = ls.head->next;
 		delete p;
 		return;
 	}
-	nodeCourse* prev = ls.head;
-	nodeCourse* curr = ls.head->next;
+	nodeCourse *prev = ls.head;
+	nodeCourse *curr = ls.head->next;
 	while (curr != NULL)
 	{
 		if (curr == p)
@@ -1403,7 +1403,7 @@ void removeNodeCourse(listCourse& ls, nodeCourse* p)
 		curr = curr->next;
 	}
 }
-void deleteCourse(nodeSemester* tempSemester, schoolYear* current, nodeCourse* course)
+void deleteCourse(nodeSemester *tempSemester, schoolYear *current, nodeCourse *course)
 {
 	string dir = "listYear/" + to_string(current->beginYear) + "-" + to_string(current->lastYear) + "/" + to_string(tempSemester->name) + "/" + course->courseName;
 	removeNodeCourse(tempSemester->listCour, course);
