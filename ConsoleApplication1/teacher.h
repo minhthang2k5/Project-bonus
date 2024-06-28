@@ -27,7 +27,11 @@ void readListCourse(listYear& ls);
 void writeListCourse(listCourse lc, string name);
 void writeListStudentInCourse(StudentList* slist, string name);
 void readListStudentToCourse(listYear& ls);
+NodeStudentScoreboardOfCourse* CreateScoreboard(StudentScoreboardOfCourse sb);
+void AddTailScoreboardToScoreList(ListStudentScoreboardOfCourse* l, StudentScoreboardOfCourse sb);
+void readScoreboard(listYear& ls);
 void viewListCourse(nodeSemester* p);
+
 struct Staff_Info
 {
 	string fullname;

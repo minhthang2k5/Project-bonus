@@ -17,6 +17,7 @@ int main()
 	readListCourse(ls);
 	readListStudentToCourse(ls);
 	readClassAll(ls);
+	readScoreboard(ls);
 	int choice;
 	do
 	{

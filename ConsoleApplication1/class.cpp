@@ -845,7 +845,7 @@ void addStudentScoreboardOfCourseIntoList(ListStudentScoreboardOfCourse *list, S
         current->next = node1;
     }
 }
-void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course)
+void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, schoolYear * curYear, nodeSemester* curSemester)
 {
     ifstream fileIn;
     fileIn.open(fileName);
@@ -896,7 +896,23 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course)
 
     course->scoreList = stuScoreList;
     fileIn.close();
+
+    // Ghi vào file txt
+    ofstream fout;
+    string year = to_string(curYear->beginYear) + "-" + to_string(curYear->lastYear);
+    string nameSemester = to_string(curSemester->name);
+    string path = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/scoreboard.txt";
+    fout.open(path);
+    NodeStudentScoreboardOfCourse* p = stuScoreList->head;
+    while (p!=NULL) {
+        fout << p->stuScoreboard.studentID << endl;
+        fout << p->stuScoreboard.fullName.lastName << " " << p->stuScoreboard.fullName.firstName << endl;
+        fout << p->stuScoreboard.otherscore << " " << p->stuScoreboard.midscore << " " << p->stuScoreboard.finalscore << " " << p->stuScoreboard.totalscore << endl;
+        p = p->next;
+    }
 }
+
+
 
 void viewCourseScoreboard(nodeCourse *course)
 {

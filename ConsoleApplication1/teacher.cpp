@@ -549,6 +549,71 @@ void readListStudentToCourse(listYear &ls)
 		p = p->next;
 	}
 }
+NodeStudentScoreboardOfCourse* CreateScoreboard(StudentScoreboardOfCourse sb) {
+	NodeStudentScoreboardOfCourse* p = new NodeStudentScoreboardOfCourse;
+	p->stuScoreboard.studentID = sb.studentID;
+	p->stuScoreboard.fullName.lastName = sb.fullName.lastName;
+	p->stuScoreboard.fullName.firstName = sb.fullName.firstName;
+	p->stuScoreboard.otherscore = sb.otherscore;
+	p->stuScoreboard.midscore = sb.midscore;
+	p->stuScoreboard.finalscore = sb.finalscore;
+	p->stuScoreboard.totalscore = sb.totalscore;
+	p->next = NULL;
+	return p;
+}
+void AddTailScoreboardToScoreList(ListStudentScoreboardOfCourse* l, StudentScoreboardOfCourse sb) {
+	NodeStudentScoreboardOfCourse* nodeSB = CreateScoreboard(sb);
+	if (l->head == NULL)
+	{
+		l->head = nodeSB;
+	}
+	else
+	{
+		NodeStudentScoreboardOfCourse* p = l->head;
+		while (l->head != NULL)
+		{
+			p = p->next;
+		}
+		p->next = nodeSB;
+	}
+}
+void readScoreboard(listYear& ls) {
+	schoolYear* p = ls.pHead;
+	while (p != NULL)
+	{
+		nodeSemester* r = p->listSem.head;
+		while (r != NULL)
+		{
+			nodeCourse* z = r->listCour.head;
+			while (z != NULL)
+			{
+				string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
+				string nameSemester = to_string(r->name);
+				string nameInput = "listYear/" + nameYear + "/" + nameSemester + "/" + z->courseName + "/scoreboard.txt";
+				ifstream iFile;
+				iFile.open(nameInput);
+				StudentScoreboardOfCourse* q = new StudentScoreboardOfCourse;
+				while (iFile >> q->studentID)
+				{
+					iFile.ignore();
+					getline(iFile, q->fullName.lastName, ' ');
+					getline(iFile, q->fullName.firstName, '\n');
+					iFile >> q->otherscore;
+					iFile >> q->midscore;
+					iFile >> q->finalscore;
+					iFile >> q->totalscore;
+					AddTailScoreboardToScoreList(z->scoreList, *q);
+					q = new StudentScoreboardOfCourse;
+				}
+				z = z->next;
+			}
+			r = r->next;
+		}
+		p = p->next;
+	}
+}
+
+
 
 void inputInformationSemesterAndAddSchoolYear(schoolYear *&temp)
 {
