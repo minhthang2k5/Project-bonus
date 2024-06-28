@@ -162,6 +162,10 @@ void addHeadNewSchoolYear(listYear &lY)
 	gitFile = nameFolder + "/" + "gitFile.txt";
 	ofstream oFile(gitFile);
 	oFile << "check";
+
+	string nameFile2 = "listYear/" + beginN + "-" + lastN + "/listClass.txt";
+	ofstream fileOut(nameFile2);
+	fileOut.close();
 	lY.pHead->listClass = noPointerCreateClassList(0);
 	createClassListFolder(lY.pHead);
 	oFile.close();

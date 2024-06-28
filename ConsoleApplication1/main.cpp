@@ -274,7 +274,7 @@ int main()
 									noPointerAddClassIntoClassList(current->listClass, newClass);
 									createEmptyClassCSVFile(current, className);
 									cout << "Add new class successfully!" << endl;
-									cout << current->listClass.pHeadClass->className << endl;
+									// readClassAll(ls);
 									system("cls");
 								}
 								if (choice3 == 2)
@@ -456,7 +456,7 @@ int main()
 													addStudentToCourse(curCourse, curSemester, current);
 													system("cls");
 												}
-												if (choice5==-1)
+												if (choice5 == -1)
 												{
 													return 1;
 												}
