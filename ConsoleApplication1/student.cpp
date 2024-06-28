@@ -80,24 +80,30 @@ void AddTailToStudentAccountList(ListAccount *l, SignInInfo info)
 		p->next = acc;
 	}
 }
-ListAccount *CreateListAccount(ClassList *cl, const char *warehousepath)
+ListAccount* CreateListAccount(listYear ls, const char* warehousepath)
 {
-	ListAccount *l = new ListAccount;
+	ListAccount* l = new ListAccount;
 	l->head = NULL;
-	Class *pcl = cl->pHeadClass;
-	StudentNode *pstu = cl->pHeadClass->pHeadStudent;
-	while (pcl != NULL)
+	schoolYear* pyear = ls.pHead;
+	while (pyear != NULL) 
 	{
-		while (pstu != NULL)
+		Class* pcl = pyear->listClass.pHeadClass;
+		while (pcl != NULL)
 		{
-			SignInInfo temp = GetSignInInfo(pstu->data);
-			AddTailToStudentAccountList(l, temp);
-			pstu = pstu->pNextStudent;
+			StudentNode* pstu = pcl->pHeadStudent;
+			while (pstu != NULL)
+			{
+				SignInInfo temp = GetSignInInfo(pstu->data);
+				AddTailToStudentAccountList(l, temp);
+				pstu = pstu->pNextStudent;
+			}
+			pcl = pcl->pNextClass;
 		}
-		pcl = pcl->pNextClass;
+		pyear = pyear->next;
 	}
+	
 	// +++
-	int check = StudentAccountDataWarehouse(l, warehousepath);
+	//int check = StudentAccountDataWarehouse(l, warehousepath);
 	return l;
 }
 void PrintListAccount(ListAccount *l)
@@ -184,7 +190,7 @@ int StudentAccountDataWarehouse(ListAccount *l, const char *warehousepath)
 {
 	ofstream dout;
 	dout.open(warehousepath, ios::out);
-	dout.seekp(0, ios::beg);
+	//dout.seekp(0, ios::beg);
 	bool flag = false;
 	NodeAccount *p = l->head;
 	while (true)

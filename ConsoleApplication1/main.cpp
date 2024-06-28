@@ -149,11 +149,17 @@ int main()
 						// các chức của staff
 						cout << "1.  Create a school year" << endl;
 						cout << "2.  Choose school year to operate" << endl;
+						cout << "3.  Create list account for student" << endl;
 						cout << "0.  Back" << endl;
 						cout << "-1. Exit" << endl;
 						cout << "Your choice:";
 						cin >> choice2;
 						cin.ignore();
+						if (choice2 == 3) {
+							ListAccount* l = CreateListAccount(ls, warehousepath2);
+							int check = StudentAccountDataWarehouse(l, warehousepath2);
+							//cout << accstudent->head->next->next->next->next->next->next->next->next->next->next->info.password;
+						}
 						if (choice2 == 1)
 						{
 							addHeadNewSchoolYear(ls);

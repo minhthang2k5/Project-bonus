@@ -9,7 +9,7 @@ void AddTailToStudentList(StudentList* l, Student info);
 SignInInfo GetSignInInfo(Student stu);
 NodeAccount* CreateAccountForStudent(SignInInfo info);
 void AddTailToStudentAccountList(ListAccount* l, SignInInfo info);
-ListAccount* CreateListAccount(ClassList* cl, const char* warehousepath);
+ListAccount* CreateListAccount(listYear ls, const char* warehousepath);
 void PrintListAccount(ListAccount* l); 
 int GetStudentAccount(ListAccount* l, string inUsername, string inPassword);
 int Login(ListAccount* l);
