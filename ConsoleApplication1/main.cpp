@@ -58,12 +58,26 @@ int main()
 						cout << "Your choice:";
 						cin >> choice2;
 						system("cls");
-						if (choice2 == 2) {
+						if (choice2 == 2)
+						{
 							ChangePasswordOfStudent(accstudent, warehousepath2);
+						}
+						if (choice2 == 4)
+						{
+							cout << endl
+								 << endl;
+							viewProfileWhenViewingScoreboard(ls, check1);
+							viewStudentScoreboard2(ls, check1);
+							cout << endl
+								 << endl;
 						}
 						if (choice2 == 1)
 						{
+							cout << endl
+								 << endl;
 							viewProfile(ls, check1);
+							cout << endl
+								 << endl;
 						}
 						if (choice2 == 5)
 						{
@@ -159,16 +173,16 @@ int main()
 						cout << "Your choice:";
 						cin >> choice2;
 						cin.ignore();
-						if (choice2 == 4) {
+						if (choice2 == 4)
+						{
 							ChangePasswordOfStaff(accstaff, warehousepath1);
-							
-							break;
 
+							break;
 						}
-						if (choice2 == 3) {
-							ListAccount* l = CreateListAccount(ls, warehousepath2);
+						if (choice2 == 3)
+						{
+							ListAccount *l = CreateListAccount(ls, warehousepath2);
 							StudentAccountDataWarehouse(l, warehousepath2);
-							
 						}
 						if (choice2 == 1)
 						{
@@ -558,17 +572,17 @@ int main()
 					break;
 				}
 			}
-		} while (choice1!=-1);
-			if (choice == 0)
-			{
-				cout << "Exit successfully!" << endl;
-				return 1;
-			}
-			if (choice == -1)
-			{
-				return 1;
-			}
-	} while (choice !=-1);
+		} while (choice1 != -1);
+		if (choice == 0)
+		{
+			cout << "Exit successfully!" << endl;
+			return 1;
+		}
+		if (choice == -1)
+		{
+			return 1;
+		}
+	} while (choice != -1);
 	system("pause");
 	return 0;
 }

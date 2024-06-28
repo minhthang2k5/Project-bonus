@@ -2,6 +2,11 @@
 #define _CLASS_H_
 #include "struct.h"
 
+//--
+void viewProfileWhenViewingScoreboard(listYear year, int studentID);
+//--
+void viewStudentScoreboard2(listYear yearList, int studentID);
+//--
 void updateStudentResultOfCourse(nodeCourse *&course, nodeSemester *curSemester, schoolYear *curYear);
 
 //--

@@ -1,5 +1,64 @@
 #include "class.h"
 
+void viewProfileWhenViewingScoreboard(listYear year, int studentID)
+{
+    schoolYear *curYear = year.pHead;
+    while (curYear != nullptr)
+    {
+        Class *curClass = curYear->listClass.pHeadClass;
+        while (curClass != nullptr)
+        {
+            StudentNode *curStu = curClass->pHeadStudent;
+            while (curStu != nullptr)
+            {
+                if (curStu->data.studentID == studentID)
+                {
+                    cout << "Student ID: " << curStu->data.studentID << endl;
+                    cout << "Full name: " << curStu->data.fullName.lastName << " " << curStu->data.fullName.firstName << endl;
+                    cout << "Class name: " << curStu->data.className << endl;
+                    return;
+                }
+                curStu = curStu->pNextStudent;
+            }
+            curClass = curClass->pNextClass;
+        }
+        curYear = curYear->next;
+    }
+}
+void viewStudentScoreboard2(listYear yearList, int studentID)
+{
+    schoolYear *curYear = yearList.pHead;
+    int no = 1;
+    cout << left << setw(5) << "No" << setw(15) << "School year" << setw(10) << "Semester" << setw(35) << "Course name" << setw(15) << "Final mark" << setw(15) << "Total mark" << endl;
+
+    while (curYear != nullptr)
+    {
+        nodeSemester *curSem = curYear->listSem.head;
+        while (curSem != nullptr)
+        {
+            nodeCourse *curCourse = curSem->listCour.head;
+            while (curCourse != nullptr)
+            {
+                NodeStudentScoreboardOfCourse *curStuScore = curCourse->scoreList->head;
+                while (curStuScore != nullptr)
+                {
+                    if (curStuScore->stuScoreboard.studentID == studentID)
+                    {
+                        string yearname = to_string(curYear->beginYear) + "-" + to_string(curYear->lastYear);
+                        cout << left << setw(5) << no << setw(15) << yearname << setw(10) << curSem->name << setw(35) << curCourse->courseName << setw(15) << curStuScore->stuScoreboard.finalscore << setw(15) << curStuScore->stuScoreboard.totalscore << endl;
+                        no++;
+                        break;
+                    }
+                    curStuScore = curStuScore->next;
+                }
+                curCourse = curCourse->next;
+            }
+            curSem = curSem->next;
+        }
+        curYear = curYear->next;
+    }
+}
+
 void updateStudentResultOfCourse(nodeCourse *&course, nodeSemester *curSemester, schoolYear *curYear)
 {
     int studentID;
@@ -242,7 +301,7 @@ void writeClassIntoCSVFile(schoolYear *year, Class *class1)
         return;
     }
 
-    fileOut << "Ho, ten, ..." << endl;
+    fileOut << "No, Student ID, Last name, First name, Gender, Date of Birth, Social ID" << endl;
     // fileOut << class1->numberOfStudents << endl;
 
     StudentNode *current = class1->pHeadStudent;
@@ -520,7 +579,7 @@ Class *readStudentsOfClassFromCSVFile(string fileName, string className)
 
         int socialID = stoi(socialIDString);
 
-        Student stu1 = createStudent(id, fullName, gender, dateOfBirth, socialID);
+        Student stu1 = createStudent(className, id, fullName, gender, dateOfBirth, socialID);
         addStudentIntoClass(class1, stu1);
     }
     fileIn.close();
@@ -989,14 +1048,14 @@ void viewCourseScoreboard(nodeCourse *course)
     cout << "Course name:" << course->courseName << endl;
     cout << "Class: " << course->className << endl;
     cout << "SOCREBOARD" << endl;
-    cout << left << setw(5) << "No" << setw(10) << "Student ID" << setw(30) << "Full name" << setw(15) << "Other mark" << setw(15) << "Midter mark" << setw(15) << "Final mark" << setw(15) << "Total mark" << endl;
+    cout << left << setw(5) << "No" << setw(15) << "Student ID" << setw(30) << "Full name" << setw(15) << "Other mark" << setw(15) << "Midter mark" << setw(15) << "Final mark" << setw(15) << "Total mark" << endl;
 
     NodeStudentScoreboardOfCourse *current = course->scoreList->head;
     int num = 1;
     while (current != nullptr)
     {
         string fullname = current->stuScoreboard.fullName.lastName + " " + current->stuScoreboard.fullName.firstName;
-        cout << left << setw(5) << num << setw(10) << current->stuScoreboard.studentID << setw(30) << fullname << setw(15) << current->stuScoreboard.otherscore << setw(15) << current->stuScoreboard.midscore << setw(15) << current->stuScoreboard.finalscore << setw(15) << current->stuScoreboard.totalscore << endl;
+        cout << left << setw(5) << num << setw(15) << current->stuScoreboard.studentID << setw(30) << fullname << setw(15) << current->stuScoreboard.otherscore << setw(15) << current->stuScoreboard.midscore << setw(15) << current->stuScoreboard.finalscore << setw(15) << current->stuScoreboard.totalscore << endl;
         num++;
         current = current->next;
     }
