@@ -34,8 +34,8 @@ int main()
 
 			if (choice == 1)
 			{
-				cout << "1. Sign in" << endl;
-				cout << "0. Back" << endl;
+				cout << "1.  Sign in" << endl;
+				cout << "0.  Back" << endl;
 				cout << "-1. Exit" << endl;
 				cout << "Your choice: ";
 
@@ -125,9 +125,9 @@ int main()
 			// menu cho staff
 			if (choice == 2)
 			{
-				cout << "1. Sign up" << endl;
-				cout << "2. Sign in" << endl;
-				cout << "0. Back" << endl;
+				cout << "1.  Sign up" << endl;
+				cout << "2.  Sign in" << endl;
+				cout << "0.  Back" << endl;
 				cout << "-1. Exit" << endl;
 				cout << "Your choice: ";
 				cin >> choice1;
@@ -146,10 +146,10 @@ int main()
 					do
 					{
 						// các chức của staff
-						cout << "1.Create a school year" << endl;
-						cout << "2.Choose school year to operate" << endl;
-						cout << "3.Back" << endl;
-						cout << "4.Exit" << endl;
+						cout << "1.  Create a school year" << endl;
+						cout << "2.  Choose school year to operate" << endl;
+						cout << "0.  Back" << endl;
+						cout << "-1. Exit" << endl;
 						cout << "Your choice:";
 						cin >> choice2;
 						cin.ignore();
@@ -327,10 +327,10 @@ int main()
 									// menu các chức năng của course
 									do
 									{
-										cout << "1. Create and add course to semester" << endl;
-										cout << "2. View list course" << endl;
-										cout << "3. Choose course to operate" << endl;
-										cout << "0. Back" << endl;
+										cout << "1.  Create and add course to semester" << endl;
+										cout << "2.  View list course" << endl;
+										cout << "3.  Choose course to operate" << endl;
+										cout << "0.  Back" << endl;
 										cout << "-1. Exit" << endl;
 										cout << "Your choice: ";
 
@@ -373,11 +373,11 @@ int main()
 											{
 												cout << "1.  Add a student to course" << endl;
 												cout << "2.  Update information course" << endl;
-												cout << "3.  View list student of course:" << endl;
+												cout << "3.  View list student of course" << endl;
 												cout << "4.  Add other students by uploading CSV file" << endl;
-												cout << "5. Delete this course" << endl;
-												cout << "6. Remove a student from course" << endl;
-												cout << "7. Upload scoreboard of course" << endl;
+												cout << "5.  Delete this course" << endl;
+												cout << "6.  Remove a student from course" << endl;
+												cout << "7.  Upload scoreboard of course" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
