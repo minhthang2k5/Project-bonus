@@ -3,6 +3,8 @@
 #include "struct.h"
 
 //---
+void viewProfile(listYear year, int studentID);
+//---
 void appendNewStudentsOfClassToCurrentClass(Class *&source, Class *&newClass);
 //---
 void writeStudentListEnrollCourseToCSVFile(nodeCourse *course, nodeSemester *curSemester, schoolYear *curYear);

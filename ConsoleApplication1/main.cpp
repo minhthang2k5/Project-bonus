@@ -57,6 +57,10 @@ int main()
 						cout << "Your choice:";
 						cin >> choice2;
 						system("cls");
+						if (choice2 == 1)
+						{
+							viewProfile(ls, check1);
+						}
 						if (choice2 == 5)
 						{
 							cout << "Sign out successfully" << endl;

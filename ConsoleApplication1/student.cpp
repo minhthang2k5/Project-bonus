@@ -80,7 +80,7 @@ void AddTailToStudentAccountList(ListAccount *l, SignInInfo info)
 		p->next = acc;
 	}
 }
-ListAccount *CreateListAccount(ClassList *cl, const char* warehousepath)
+ListAccount *CreateListAccount(ClassList *cl, const char *warehousepath)
 {
 	ListAccount *l = new ListAccount;
 	l->head = NULL;
@@ -156,38 +156,49 @@ int Login(ListAccount *l)
 			cout << "Sign in successfully!" << endl;
 		}
 	}
-	return 1;
+	return stoi(inUsername);
 }
 
-void viewListOfCoursesForStudent(nodeSemester* curSemester)
+void viewListOfCoursesForStudent(nodeSemester *curSemester)
 {
-	nodeCourse* temp = curSemester->listCour.head;
-	cout << endl << endl << endl << endl;
+	nodeCourse *temp = curSemester->listCour.head;
+	cout << endl
+		 << endl
+		 << endl
+		 << endl;
 	cout << left << setw(5) << "ID" << setw(30) << "Course name" << setw(15) << "Class name" << setw(30) << "Teacher name" << setw(30) << "Number of credits/student" << setw(20) << "Day-Sesion" << endl;
-	while (temp != NULL) {
+	while (temp != NULL)
+	{
 		string result = to_string(temp->numberOfCredits) + "/" + to_string(temp->numberOfStudent);
 		string result2 = temp->dayOfweek + "-" + temp->session;
 		cout << left << setw(5) << temp->id << setw(30) << temp->courseName << setw(15) << temp->className << setw(30) << temp->teacher << setw(30) << result << setw(20) << result2 << endl;
 		temp = temp->next;
 	}
-	cout << endl << endl << endl << endl;
+	cout << endl
+		 << endl
+		 << endl
+		 << endl;
 }
 
-int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath) {
+int StudentAccountDataWarehouse(ListAccount *l, const char *warehousepath)
+{
 	ofstream dout;
 	dout.open(warehousepath, ios::out);
 	dout.seekp(0, ios::beg);
 	bool flag = false;
-	NodeAccount* p = l->head;
-	while (true) {
-		while (p != NULL) {
+	NodeAccount *p = l->head;
+	while (true)
+	{
+		while (p != NULL)
+		{
 			dout << p->info.username;
 			dout << endl;
 			dout << p->info.password;
 			dout << endl;
 			p = p->next;
 		}
-		if (p == NULL) {
+		if (p == NULL)
+		{
 			flag = true;
 			break;
 		}
@@ -196,38 +207,44 @@ int StudentAccountDataWarehouse(ListAccount* l, const char* warehousepath) {
 	dout.flush();
 	dout.close();
 
-	if (flag == true) {
+	if (flag == true)
+	{
 		return 1;
 	}
 	return 0;
 }
-int LoadStudentAccount(ListAccount*& l, const char* warehousepath) {
+int LoadStudentAccount(ListAccount *&l, const char *warehousepath)
+{
 	l = new ListAccount;
 	l->head = NULL;
 	ifstream din;
 	din.open(warehousepath, ios::in);
 	bool flag = false;
-	while (true) {
+	while (true)
+	{
 		SignInInfo tempInfo;
 		getline(din, tempInfo.username, '\n');
 		getline(din, tempInfo.password, '\n');
-		if (din.eof() == true) {
+		if (din.eof() == true)
+		{
 			break;
 		}
 		AddTailToStudentAccountList(l, tempInfo);
-		
 	}
 	din.close();
-	
+
 	return 0;
 }
-int ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath) {
+int ChangePasswordOfStudent(ListAccount *&l, const char *warehousepath)
+{
 	string inUsername;
 	cout << "Input username to change passward: ";
 	cin >> inUsername;
-	NodeAccount* p = l->head;
-	while (p != NULL) {
-		if (p->info.username == inUsername) {
+	NodeAccount *p = l->head;
+	while (p != NULL)
+	{
+		if (p->info.username == inUsername)
+		{
 			cout << "Input new password: ";
 			cin >> p->info.password;
 			break;
@@ -235,21 +252,26 @@ int ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath) {
 		p = p->next;
 	}
 	int check = StudentAccountDataWarehouse(l, warehousepath);
-	if (check == 1) {
+	if (check == 1)
+	{
 		cout << "Change successfully!" << endl;
 		return 1;
 	}
-	else {
+	else
+	{
 		cout << "Change unsuccessfully!" << endl;
 		return 0;
 	}
 }
 
-bool getNameStudent(StudentList* l, string nameStudent) {
-	StudentNode* p = l->pHeadStudent;
-	while (p != NULL) {
+bool getNameStudent(StudentList *l, string nameStudent)
+{
+	StudentNode *p = l->pHeadStudent;
+	while (p != NULL)
+	{
 		string tempName = p->data.fullName.lastName + " " + p->data.fullName.firstName;
-		if (tempName == nameStudent) {
+		if (tempName == nameStudent)
+		{
 			return true;
 		}
 		p = p->pNextStudent;
@@ -257,20 +279,27 @@ bool getNameStudent(StudentList* l, string nameStudent) {
 	return false;
 }
 
-void viewListOfCoursesForStudent(nodeSemester* curSemester, string nameStudent)
+void viewListOfCoursesForStudent(nodeSemester *curSemester, string nameStudent)
 {
-	nodeCourse* temp = curSemester->listCour.head;
-	cout << endl << endl << endl << endl;
+	nodeCourse *temp = curSemester->listCour.head;
+	cout << endl
+		 << endl
+		 << endl
+		 << endl;
 	cout << left << setw(5) << "ID" << setw(30) << "Course name" << setw(15) << "Class name" << setw(30) << "Teacher name" << setw(30) << "Number of credits/student" << setw(20) << "Day-Sesion" << endl;
-	while (temp != NULL) {
-		if (getNameStudent(temp->studentList, nameStudent)) {
+	while (temp != NULL)
+	{
+		if (getNameStudent(temp->studentList, nameStudent))
+		{
 
 			string result = to_string(temp->numberOfCredits) + "/" + to_string(temp->numberOfStudent);
 			string result2 = temp->dayOfweek + "-" + temp->session;
 			cout << left << setw(5) << temp->id << setw(30) << temp->courseName << setw(15) << temp->className << setw(30) << temp->teacher << setw(30) << result << setw(20) << result2 << endl;
-
 		}
 		temp = temp->next;
 	}
-	cout << endl << endl << endl << endl;
+	cout << endl
+		 << endl
+		 << endl
+		 << endl;
 }

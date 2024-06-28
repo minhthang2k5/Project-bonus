@@ -1,5 +1,34 @@
 #include "class.h"
 
+void viewProfile(listYear year, int studentID)
+{
+    schoolYear *curYear = year.pHead;
+    while (curYear != nullptr)
+    {
+        Class *curClass = curYear->listClass.pHeadClass;
+        while (curClass != nullptr)
+        {
+            StudentNode *curStu = curClass->pHeadStudent;
+            while (curStu != nullptr)
+            {
+                if (curStu->data.studentID == studentID)
+                {
+                    cout << "Profile:" << endl;
+                    cout << "Student ID: " << curStu->data.studentID << endl;
+                    cout << "Full name: " << curStu->data.fullName.lastName << " " << curStu->data.fullName.firstName << endl;
+                    cout << "Gender: " << curStu->data.gender << endl;
+                    cout << "Date of birth: " << curStu->data.dateOfBirth.day << "/" << curStu->data.dateOfBirth.month << "/" << curStu->data.dateOfBirth.year << endl;
+                    cout << "Social ID: " << curStu->data.socialID << endl;
+                    cout << "Class name: " << curStu->data.className << endl;
+                    return;
+                }
+                curStu = curStu->pNextStudent;
+            }
+            curClass = curClass->pNextClass;
+        }
+        curYear = curYear->next;
+    }
+}
 void appendNewStudentsOfClassToCurrentClass(Class *&source, Class *&newClass)
 {
     StudentNode *curStudent = source->pHeadStudent;
