@@ -241,7 +241,7 @@ int LoadStudentAccount(ListAccount *&l, const char *warehousepath)
 
 	return 0;
 }
-int ChangePasswordOfStudent(ListAccount *&l, const char *warehousepath)
+void ChangePasswordOfStudent(ListAccount *&l, const char *warehousepath)
 {
 	string inUsername;
 	cout << "Input username to change passward: ";
@@ -261,12 +261,12 @@ int ChangePasswordOfStudent(ListAccount *&l, const char *warehousepath)
 	if (check == 1)
 	{
 		cout << "Change successfully!" << endl;
-		return 1;
+		
 	}
 	else
 	{
 		cout << "Change unsuccessfully!" << endl;
-		return 0;
+		
 	}
 }
 

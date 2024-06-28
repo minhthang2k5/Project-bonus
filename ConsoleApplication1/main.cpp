@@ -58,6 +58,9 @@ int main()
 						cout << "Your choice:";
 						cin >> choice2;
 						system("cls");
+						if (choice2 == 2) {
+							ChangePasswordOfStudent(accstudent, warehousepath2);
+						}
 						if (choice2 == 1)
 						{
 							viewProfile(ls, check1);
@@ -150,15 +153,20 @@ int main()
 						cout << "1.  Create a school year" << endl;
 						cout << "2.  Choose school year to operate" << endl;
 						cout << "3.  Create list account for student" << endl;
+						cout << "4.  Change password" << endl;
 						cout << "0.  Back" << endl;
 						cout << "-1. Exit" << endl;
 						cout << "Your choice:";
 						cin >> choice2;
 						cin.ignore();
+						if (choice2 == 4) {
+							ChangePasswordOfStaff(accstaff, warehousepath1);
+
+						}
 						if (choice2 == 3) {
 							ListAccount* l = CreateListAccount(ls, warehousepath2);
 							int check = StudentAccountDataWarehouse(l, warehousepath2);
-							//cout << accstudent->head->next->next->next->next->next->next->next->next->next->next->info.password;
+							
 						}
 						if (choice2 == 1)
 						{

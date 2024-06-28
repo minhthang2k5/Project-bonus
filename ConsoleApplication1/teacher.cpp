@@ -1118,7 +1118,7 @@ int LoadStaffAccount(Staff_List &l, const char *warehousepath)
 
 	return 0;
 }
-int ChangePasswordOfStaff(Staff_List &l, const char *warehousepath)
+void ChangePasswordOfStaff(Staff_List &l, const char *warehousepath)
 {
 	string inUsername;
 	cout << "Input username to change passward: ";
@@ -1138,12 +1138,12 @@ int ChangePasswordOfStaff(Staff_List &l, const char *warehousepath)
 	if (check == 1)
 	{
 		cout << "Change successfully!" << endl;
-		return 1;
+		
 	}
 	else
 	{
 		cout << "Change unsuccessfully!" << endl;
-		return 0;
+		
 	}
 }
 

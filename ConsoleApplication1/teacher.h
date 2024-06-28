@@ -72,7 +72,7 @@ int SignIn(Staff_List l);
 
 int StaffAccountDataWarehouse(Staff_List l, const char* warehousepath);
 int LoadStaffAccount(Staff_List &l, const char* warehousepath);
-int ChangePasswordOfStaff(Staff_List& l, const char* warehousepath);
+void ChangePasswordOfStaff(Staff_List& l, const char* warehousepath);
 
 // function of course
 nodeCourse *initCourse();
