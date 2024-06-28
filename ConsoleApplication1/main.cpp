@@ -308,11 +308,20 @@ int main()
 												cout << "3.  View list student of course:" << endl;
 												cout << "4.  Add other students by uploading CSV file" << endl;
 												cout << "5. Delete this course" << endl;
+												cout << "6. Remove a student from course" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
 												cin >> choice5;
-												if (choice5==5)
+												if (choice == 6)
+												{
+													cout << "Input student ID to remove: ";
+													int stuID;
+													cin >> stuID;
+													removeStudentFromCourseByID(curCourse, stuID);
+													writeStudentListEnrollCourseToCSVFile(curCourse, curSemester, current);
+												}
+												if (choice5 == 5)
 												{
 													deleteCourse(curSemester, current, curCourse);
 												}
