@@ -33,22 +33,25 @@ void readStudentsOfClassFromCSVFile(string fileName, Class *&class1);
 
 StudentList *readStudentsOfCourseFromCSVFile(string fileName);
 
+//---
+void removeStudentFromCourseByID(nodeCourse *course, int studentID);
+void removeCourseByID(listCourse &course, int courseID);
 //----
-typedef bool (*CompareFunc)(const Student &, const void *);
-bool compareByName(const Student &student, const void *name);
-bool compareByID(const Student &student, const void *id);
-//-
-void removeStudentFromCourse(nodeCourse *course, CompareFunc compare, const void *value);
-void removeLastStudentFromCourse(nodeCourse *course);
+// typedef bool (*CompareFunc)(const Student &, const void *);
+// bool compareByName(const Student &student, const void *name);
+// bool compareByID(const Student &student, const void *id);
+// //-
+// void removeStudentFromCourse(nodeCourse *course, CompareFunc compare, const void *value);
+// void removeLastStudentFromCourse(nodeCourse *course);
 
-//----
-typedef bool (*CompareCourseFunc)(const nodeCourse &, const void *);
-bool compareCourseByName(const nodeCourse &course, const void *name);
-bool compareCourseByID(const nodeCourse &course, const void *id);
+// //----
+// typedef bool (*CompareCourseFunc)(const nodeCourse &, const void *);
+// bool compareCourseByName(const nodeCourse &course, const void *name);
+// bool compareCourseByID(const nodeCourse &course, const void *id);
 //-
 void deleteStudentList(StudentList *studentList);
 void deleteScoreList(ListStudentScoreboardOfCourse *scoreList);
-void deleteCourse(nodeCourse *&head, CompareCourseFunc compare, const void *value);
+// void deleteCourse(nodeCourse *&head, CompareCourseFunc compare, const void *value);
 
 //----
 void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course);
