@@ -46,7 +46,7 @@ void appendNewStudentsOfClassToCurrentClass(Class *&source, Class *&newClass)
         source->numberOfStudents += newClass->numberOfStudents;
     }
 }
-void writeStudentListEnrollCourseToCSVFile(nodeCourse *course, nodeSemester *curSemester, schoolYear *curYear)
+void writeStudentListEnrollCourseToTxtFile(nodeCourse *course, nodeSemester *curSemester, schoolYear *curYear)
 {
     string year = changeIntToStringYear2(curYear->beginYear, curYear->lastYear);
     string nameSemester = to_string(curSemester->name);
@@ -809,7 +809,7 @@ void addStudentScoreboardOfCourseIntoList(ListStudentScoreboardOfCourse *list, S
         current->next = node1;
     }
 }
-void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *course)
+void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course)
 {
     ifstream fileIn;
     fileIn.open(fileName);

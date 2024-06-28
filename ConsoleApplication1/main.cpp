@@ -190,6 +190,9 @@ int main()
 								cout << "Your choice: ";
 
 								cin >> choice3;
+								if (choice3 == 9)
+								{
+								}
 								if (choice3 == -1)
 								{
 									cout << "Exit successfully!" << endl;
@@ -313,17 +316,26 @@ int main()
 												cout << "4.  Add other students by uploading CSV file" << endl;
 												cout << "5. Delete this course" << endl;
 												cout << "6. Remove a student from course" << endl;
+												cout << "7. Upload scoreboard of course" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
 												cin >> choice5;
-												if (choice == 6)
+												if (choice5 == 7)
+												{
+													cin.ignore();
+													string fileName10;
+													cout << "Input file name: ";
+													getline(cin, fileName10);
+													importCourseScoreboardFromCSVFile(fileName10, curCourse);
+												}
+												if (choice5 == 6)
 												{
 													cout << "Input student ID to remove: ";
 													int stuID;
 													cin >> stuID;
 													removeStudentFromCourseByID(curCourse, stuID);
-													writeStudentListEnrollCourseToCSVFile(curCourse, curSemester, current);
+													writeStudentListEnrollCourseToTxtFile(curCourse, curSemester, current);
 												}
 												if (choice5 == 5)
 												{
@@ -336,7 +348,7 @@ int main()
 													getline(cin, studentListFileName);
 													StudentList *newStudentList = readStudentsOfCourseFromCSVFile(studentListFileName);
 													appendNewStudentListToCurrentStudentList(curCourse->studentList, newStudentList);
-													writeStudentListEnrollCourseToCSVFile(curCourse, curSemester, current);
+													writeStudentListEnrollCourseToTxtFile(curCourse, curSemester, current);
 												}
 												if (choice5 == 3)
 												{

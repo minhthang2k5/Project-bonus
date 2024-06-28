@@ -7,7 +7,7 @@ void viewProfile(listYear year, int studentID);
 //---
 void appendNewStudentsOfClassToCurrentClass(Class *&source, Class *&newClass);
 //---
-void writeStudentListEnrollCourseToCSVFile(nodeCourse *course, nodeSemester *curSemester, schoolYear *curYear);
+void writeStudentListEnrollCourseToTxtFile(nodeCourse *course, nodeSemester *curSemester, schoolYear *curYear);
 void writeListStudentInCourse2(StudentList *slist, string name);
 
 void appendNewStudentListToCurrentStudentList(StudentList *&source, StudentList *&current);
@@ -62,7 +62,7 @@ void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course);
 void addStudentScoreboardOfCourseIntoList(ListStudentScoreboardOfCourse *list, StudentScoreboardOfCourse stuScore);
 NodeStudentScoreboardOfCourse *createNodeStudentScoreboardOfCourse(StudentScoreboardOfCourse stuScore);
 ListStudentScoreboardOfCourse *createListStudentScoreboardOfCourse();
-void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *course);
+void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course);
 
 //----
 void viewCourseScoreboard(nodeCourse *course);
