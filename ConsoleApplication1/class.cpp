@@ -136,12 +136,12 @@ void viewAllStudentsOfClassInfo(Class *cla)
     int no = 1;
     StudentNode *cur = cla->pHeadStudent;
     cout << "Students infomation in class " << cla->className << endl;
-    cout << left << setw(5) << "No" << setw(10) << "Student ID" << setw(30) << "Full name" << setw(8) << "Gender" << setw(12) << "Date of birth" << setw(10) << "Social ID" << endl;
+    cout << left << setw(5) << "No" << setw(15) << "Student ID" << setw(30) << "Full name" << setw(8) << "Gender" << setw(18) << "Date of birth" << setw(10) << "Social ID" << endl;
     while (cur != nullptr)
     {
         string fullname = cur->data.fullName.lastName + " " + cur->data.fullName.firstName;
         string dob = to_string(cur->data.dateOfBirth.day) + "/" + to_string(cur->data.dateOfBirth.month) + "/" + to_string(cur->data.dateOfBirth.year);
-        cout << left << setw(5) << no << setw(10) << cur->data.studentID << setw(30) << fullname << setw(8) << cur->data.gender << setw(12) << dob << setw(10) << cur->data.socialID << endl;
+        cout << left << setw(5) << no << setw(15) << cur->data.studentID << setw(30) << fullname << setw(8) << cur->data.gender << setw(18) << dob << setw(10) << cur->data.socialID << endl;
         no++;
         cur = cur->pNextStudent;
     }
@@ -184,7 +184,7 @@ void appendNewStudentsOfClassToCurrentClass(Class *&source, Class *&newClass)
     StudentNode *curStudent = source->pHeadStudent;
     if (curStudent == nullptr)
     {
-        source = newClass;
+        source->pHeadStudent = newClass->pHeadStudent;
     }
     else
     {
