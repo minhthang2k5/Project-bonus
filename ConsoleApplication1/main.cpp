@@ -543,10 +543,6 @@ int main()
 							system("cls");
 							break;
 						}
-						if (choice2 == 4)
-						{
-							return 1;
-						}
 						system("cls");
 					} while (choice2 != -1);
 				}
@@ -560,18 +556,17 @@ int main()
 					break;
 				}
 			}
+		} while (choice1!=-1);
 			if (choice == 0)
 			{
 				cout << "Exit successfully!" << endl;
 				return 1;
 			}
-			if (choice < 0 || choice > 2)
+			if (choice == -1)
 			{
-				cout << "Invalid choice" << endl;
-				break;
+				return 1;
 			}
-		} while (choice < 0 || choice > 2);
-	} while (choice >= 0 && choice <= 2);
+	} while (choice !=-1);
 	system("pause");
 	return 0;
 }
