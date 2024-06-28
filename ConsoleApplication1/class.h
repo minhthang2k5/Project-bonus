@@ -69,10 +69,14 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course);
 
 //----
 void viewCourseScoreboard(nodeCourse *course);
-double calculateGPAInSemester(Student stu1, listCourse *course);
-void viewClassScoreboard(Class *cla1, listCourse *course);
-void viewStudentScoreboard(Student stu1, listCourse *course);
+// double calculateGPAInSemester(Student stu1, listCourse *course);
+// void viewClassScoreboard(Class *cla1, listCourse *course);
+// void viewStudentScoreboard(Student stu1, listCourse *course);
+//////
 
+double calculateGPAInSemester(Student stu1, listCourse course);
+void viewClassScoreboard(Class *cla1, listCourse course);
+void viewStudentScoreboard(Student stu1, listCourse course);
 //----
 void writeBasicClassListInfoIntoFile(schoolYear *year);
 void noPointerWriteBasicClassListInfoIntoFile(schoolYear *year, ClassList claList);

@@ -192,6 +192,39 @@ int main()
 								cin >> choice3;
 								if (choice3 == 9)
 								{
+									cin.ignore();
+									cout << "Input class name: ";
+									string className2;
+									getline(cin, className2);
+									Class *curClass = current->listClass.pHeadClass;
+									while (curClass->className != className2)
+									{
+										curClass = curClass->pNextClass;
+										if (curClass == nullptr)
+										{
+											break;
+										}
+									}
+									if (curClass == nullptr)
+									{
+										cout << "Not found class!" << endl;
+									}
+									else
+									{
+										int semesterName;
+										cout << "Input semester: ";
+										cin >> semesterName;
+										// lấy node semester để thực hiện các chức năng dưới
+										nodeSemester *curSemester = getSemester(current, semesterName);
+										if (curSemester == nullptr)
+										{
+											cout << "Not found semester" << endl;
+										}
+										else
+										{
+											viewClassScoreboard(curClass, curSemester->listCour);
+										}
+									}
 								}
 								if (choice3 == 7)
 								{

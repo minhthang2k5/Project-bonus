@@ -621,7 +621,7 @@ void removeCourseByID(listCourse &course, int courseID)
         {
             if (prev == nullptr)
             {
-                course.head->next;
+                course.head = course.head->next;
             }
             else
             {
@@ -891,16 +891,15 @@ void viewCourseScoreboard(nodeCourse *course)
     cout << "Course name:" << course->courseName << endl;
     cout << "Class: " << course->className << endl;
     cout << "SOCREBOARD" << endl;
-    cout << "No - Student ID - Last name - First name - Other mark - Midterm mark - Final nark - Total mark" << endl;
+    cout << left << setw(5) << "No" << setw(10) << "Student ID" << setw(30) << "Full name" << setw(15) << "Other mark" << setw(15) << "Midter mark" << setw(15) << "Final mark" << setw(15) << "Total mark" << endl;
 
     NodeStudentScoreboardOfCourse *current = course->scoreList->head;
     int num = 1;
     while (current != nullptr)
     {
-        cout << fixed << setprecision(3) << num << current->stuScoreboard.studentID << "  " << current->stuScoreboard.fullName.lastName << " "
-             << fixed << setprecision(8) << current->stuScoreboard.fullName.lastName << " " << current->stuScoreboard.otherscore << " "
-             << current->stuScoreboard.midscore << " " << current->stuScoreboard.finalscore << " " << current->stuScoreboard.totalscore;
-        cout << endl;
+        string fullname = current->stuScoreboard.fullName.lastName + " " + current->stuScoreboard.fullName.firstName;
+        cout << left << setw(5) << num << setw(10) << current->stuScoreboard.studentID << setw(30) << fullname << setw(15) << current->stuScoreboard.otherscore << setw(15) << current->stuScoreboard.midscore << setw(15) << current->stuScoreboard.finalscore << setw(15) << current->stuScoreboard.totalscore << endl;
+        num++;
         current = current->next;
     }
 }
@@ -924,11 +923,35 @@ void viewCourseScoreboard(nodeCourse *course)
 //      }
 //  }
 
-double calculateGPAInSemester(Student stu1, listCourse *course)
+// double calculateGPAInSemester(Student stu1, listCourse *course)
+// {
+//     double sum = 0;
+//     int credits = 0;
+//     nodeCourse *crsCur = course->head;
+//     while (crsCur != nullptr)
+//     {
+//         NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
+//         while (stuScrCur != nullptr)
+//         {
+//             if (stuScrCur->stuScoreboard.studentID == stu1.studentID)
+//             {
+//                 sum += crsCur->numberOfCredits * stuScrCur->stuScoreboard.totalscore;
+//                 credits += crsCur->numberOfCredits;
+//                 break;
+//             }
+//             stuScrCur = stuScrCur->next;
+//         }
+//         crsCur = crsCur->next;
+//     }
+
+//     return sum / credits;
+// }
+
+double calculateGPAInSemester(Student stu1, listCourse courseList)
 {
     double sum = 0;
     int credits = 0;
-    nodeCourse *crsCur = course->head;
+    nodeCourse *crsCur = courseList.head;
     while (crsCur != nullptr)
     {
         NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
@@ -948,7 +971,42 @@ double calculateGPAInSemester(Student stu1, listCourse *course)
     return sum / credits;
 }
 
-void viewClassScoreboard(Class *cla1, listCourse *course)
+// void viewClassScoreboard(Class *cla1, listCourse *course)
+// {
+//     StudentNode *stuCur = cla1->pHeadStudent;
+//     int num = 1;
+//     while (stuCur != nullptr)
+//     {
+//         cout << num << " " << stuCur->data.studentID << " " << stuCur->data.fullName.lastName
+//              << " " << stuCur->data.fullName.firstName << " " << endl;
+//         cout << "GPA in semester: " << calculateGPAInSemester(stuCur->data, course);
+//         nodeCourse *crsCur = course->head;
+//         while (crsCur != nullptr)
+//         {
+//             NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
+//             while (stuScrCur != nullptr)
+//             {
+//                 if (stuScrCur->stuScoreboard.studentID == stuCur->data.studentID)
+//                 {
+//                     cout << "Course ID: " << crsCur->id << endl;
+//                     cout << "Course name: " << crsCur->courseName << endl;
+//                     cout << "Final mark: " << stuScrCur->stuScoreboard.finalscore << endl;
+//                     cout << "Total score (GPA): " << stuScrCur->stuScoreboard.totalscore << endl;
+//                     cout << endl;
+//                     break;
+//                 }
+//                 stuScrCur = stuScrCur->next;
+//             }
+//             crsCur = crsCur->next;
+//         }
+//         num++;
+//         cout << endl
+//              << endl;
+//         stuCur = stuCur->pNextStudent;
+//     }
+// }
+
+void viewClassScoreboard(Class *cla1, listCourse courseList)
 {
     StudentNode *stuCur = cla1->pHeadStudent;
     int num = 1;
@@ -956,19 +1014,23 @@ void viewClassScoreboard(Class *cla1, listCourse *course)
     {
         cout << num << " " << stuCur->data.studentID << " " << stuCur->data.fullName.lastName
              << " " << stuCur->data.fullName.firstName << " " << endl;
-        cout << "GPA in semester: " << calculateGPAInSemester(stuCur->data, course);
-        nodeCourse *crsCur = course->head;
+        cout << "GPA in semester: " << calculateGPAInSemester(stuCur->data, courseList) << endl;
+        cout << "List of courses" << endl;
+        cout << left << setw(5) << "No " << setw(15) << "Course ID" << setw(35) << "Course name" << setw(15) << "Final mark" << setw(15) << "Total mark" << endl;
+        nodeCourse *crsCur = courseList.head;
         while (crsCur != nullptr)
         {
+            int num2 = 1;
             NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
             while (stuScrCur != nullptr)
             {
                 if (stuScrCur->stuScoreboard.studentID == stuCur->data.studentID)
                 {
-                    cout << "Course ID: " << crsCur->id << endl;
-                    cout << "Course name: " << crsCur->courseName << endl;
-                    cout << "Final mark: " << stuScrCur->stuScoreboard.finalscore << endl;
-                    cout << "Total score (GPA): " << stuScrCur->stuScoreboard.totalscore << endl;
+                    cout << left << setw(5) << num2 << setw(15) << crsCur->id;
+                    num2++;
+                    cout << setw(35) << crsCur->courseName;
+                    cout << setw(15) << stuScrCur->stuScoreboard.finalscore;
+                    cout << setw(15) << stuScrCur->stuScoreboard.totalscore;
                     cout << endl;
                     break;
                 }
@@ -983,10 +1045,39 @@ void viewClassScoreboard(Class *cla1, listCourse *course)
     }
 }
 
-void viewStudentScoreboard(Student stu1, listCourse *course)
+// void viewStudentScoreboard(Student stu1, listCourse *course)
+// {
+//     nodeCourse *crsCur = course->head;
+//     cout << "GPA in semester: " << calculateGPAInSemester(stu1, course);
+//     while (crsCur != nullptr)
+//     {
+//         NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
+//         while (stuScrCur != nullptr)
+//         {
+//             if (stuScrCur->stuScoreboard.studentID == stu1.studentID)
+//             {
+//                 cout << "Course ID: " << crsCur->id << endl;
+//                 cout << "Course name: " << crsCur->courseName << endl;
+//                 cout << "Final mark: " << stuScrCur->stuScoreboard.finalscore << endl;
+//                 cout << "Total score (GPA): " << stuScrCur->stuScoreboard.totalscore << endl;
+//                 cout << endl;
+//                 break;
+//             }
+//             stuScrCur = stuScrCur->next;
+//         }
+//         crsCur = crsCur->next;
+//     }
+// }
+
+void viewStudentScoreboard(Student stu1, listCourse courseList)
 {
-    nodeCourse *crsCur = course->head;
-    cout << "GPA in semester: " << calculateGPAInSemester(stu1, course);
+    nodeCourse *crsCur = courseList.head;
+    cout << "Student ID: " << stu1.studentID << endl;
+    cout << "Full name: " << stu1.fullName.lastName << " " << stu1.fullName.firstName << endl;
+    cout << "GPA in semester: " << calculateGPAInSemester(stu1, courseList) << endl;
+    cout << "List of courses:" << endl;
+    cout << left << setw(5) << "No" << setw(10) << "Course ID" << setw(35) << "Course name" << setw(15) << "Final mark" << setw(15) << "Total mark" << endl;
+    int no = 1;
     while (crsCur != nullptr)
     {
         NodeStudentScoreboardOfCourse *stuScrCur = crsCur->scoreList->head;
@@ -994,11 +1085,12 @@ void viewStudentScoreboard(Student stu1, listCourse *course)
         {
             if (stuScrCur->stuScoreboard.studentID == stu1.studentID)
             {
-                cout << "Course ID: " << crsCur->id << endl;
-                cout << "Course name: " << crsCur->courseName << endl;
-                cout << "Final mark: " << stuScrCur->stuScoreboard.finalscore << endl;
-                cout << "Total score (GPA): " << stuScrCur->stuScoreboard.totalscore << endl;
-                cout << endl;
+                cout << left << setw(5) << no;
+                no++;
+                cout << setw(10) << crsCur->id;
+                cout << setw(35) << crsCur->courseName;
+                cout << setw(15) << stuScrCur->stuScoreboard.finalscore;
+                cout << setw(15) << stuScrCur->stuScoreboard.totalscore << endl;
                 break;
             }
             stuScrCur = stuScrCur->next;
@@ -1006,7 +1098,6 @@ void viewStudentScoreboard(Student stu1, listCourse *course)
         crsCur = crsCur->next;
     }
 }
-
 void writeBasicClassListInfoIntoFile(schoolYear *year)
 {
     string fileName;
