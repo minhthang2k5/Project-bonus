@@ -459,7 +459,8 @@ void readListCourse(listYear &ls)
 				iFile.ignore();
 				q->studentList = new StudentList;
 				q->studentList->pHeadStudent = NULL;
-				// q->scoreList = NULL;
+				q->scoreList = new ListStudentScoreboardOfCourse;
+				q->scoreList->head = NULL;
 				q->next = NULL;
 				addHeadCourse(r->listCour, q);
 				if (iFile.eof())
@@ -573,7 +574,7 @@ void AddTailScoreboardToScoreList(ListStudentScoreboardOfCourse *l, StudentScore
 	else
 	{
 		NodeStudentScoreboardOfCourse *p = l->head;
-		while (l->head != NULL)
+		while (p->next != NULL)
 		{
 			p = p->next;
 		}

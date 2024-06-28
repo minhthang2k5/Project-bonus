@@ -189,7 +189,6 @@ int main()
 								cout << "0. Back" << endl;
 								cout << "-1. Exit" << endl;
 								cout << "Your choice: ";
-
 								cin >> choice3;
 								if (choice3 == 9)
 								{
@@ -276,6 +275,7 @@ int main()
 									createEmptyClassCSVFile(current, className);
 									cout << "Add new class successfully!" << endl;
 									cout << current->listClass.pHeadClass->className << endl;
+									system("cls");
 								}
 								if (choice3 == 2)
 								{
@@ -304,10 +304,12 @@ int main()
 										noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
 										writeClassIntoCSVFile(current, curClass);
 									}
+									system("cls");
 								}
 								if (choice3 == 3)
 								{
 									inputInformationSemesterAndAddSchoolYear(current);
+									system("cls");
 								}
 								if (choice3 == 4)
 								{
@@ -396,6 +398,7 @@ int main()
 													cout << "Input file name (.csv) to export: ";
 													getline(cin, fileName6);
 													exportStudentListFromCourseToCSVFile(fileName6, curCourse);
+													system("cls");
 												}
 												if (choice5 == 7)
 												{
@@ -404,6 +407,7 @@ int main()
 													cout << "Input file name: ";
 													getline(cin, fileName10);
 													importCourseScoreboardFromCSVFile(fileName10, curCourse, current, curSemester);
+													system("cls");
 												}
 												if (choice5 == 6)
 												{
@@ -412,10 +416,12 @@ int main()
 													cin >> stuID;
 													removeStudentFromCourseByID(curCourse, stuID);
 													writeStudentListEnrollCourseToTxtFile(curCourse, curSemester, current);
+													system("cls");
 												}
 												if (choice5 == 5)
 												{
 													deleteCourse(curSemester, current, curCourse);
+													system("cls");
 												}
 												if (choice5 == 4)
 												{
@@ -433,6 +439,7 @@ int main()
 														appendNewStudentListToCurrentStudentList(curCourse->studentList, newStudentList);
 														writeStudentListEnrollCourseToTxtFile(curCourse, curSemester, current);
 													}
+													system("cls");
 												}
 												if (choice5 == 3)
 												{
@@ -441,11 +448,17 @@ int main()
 												if (choice5 == 2)
 												{
 													updateInformationCourse(curCourse, curSemester, current);
+													system("cls");
 												}
 												if (choice5 == 1)
 												{
 													cin.ignore();
 													addStudentToCourse(curCourse, curSemester, current);
+													system("cls");
+												}
+												if (choice5==-1)
+												{
+													return 1;
 												}
 											} while (choice5 != -1);
 										}
