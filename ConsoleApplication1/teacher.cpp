@@ -162,6 +162,7 @@ void addHeadNewSchoolYear(listYear &lY)
 	gitFile = nameFolder + "/" + "gitFile.txt";
 	ofstream oFile(gitFile);
 	oFile << "check";
+	lY.pHead->listClass = noPointerCreateClassList(0);
 	createClassListFolder(lY.pHead);
 	oFile.close();
 }
@@ -549,8 +550,9 @@ void readListStudentToCourse(listYear &ls)
 		p = p->next;
 	}
 }
-NodeStudentScoreboardOfCourse* CreateScoreboard(StudentScoreboardOfCourse sb) {
-	NodeStudentScoreboardOfCourse* p = new NodeStudentScoreboardOfCourse;
+NodeStudentScoreboardOfCourse *CreateScoreboard(StudentScoreboardOfCourse sb)
+{
+	NodeStudentScoreboardOfCourse *p = new NodeStudentScoreboardOfCourse;
 	p->stuScoreboard.studentID = sb.studentID;
 	p->stuScoreboard.fullName.lastName = sb.fullName.lastName;
 	p->stuScoreboard.fullName.firstName = sb.fullName.firstName;
@@ -561,15 +563,16 @@ NodeStudentScoreboardOfCourse* CreateScoreboard(StudentScoreboardOfCourse sb) {
 	p->next = NULL;
 	return p;
 }
-void AddTailScoreboardToScoreList(ListStudentScoreboardOfCourse* l, StudentScoreboardOfCourse sb) {
-	NodeStudentScoreboardOfCourse* nodeSB = CreateScoreboard(sb);
+void AddTailScoreboardToScoreList(ListStudentScoreboardOfCourse *l, StudentScoreboardOfCourse sb)
+{
+	NodeStudentScoreboardOfCourse *nodeSB = CreateScoreboard(sb);
 	if (l->head == NULL)
 	{
 		l->head = nodeSB;
 	}
 	else
 	{
-		NodeStudentScoreboardOfCourse* p = l->head;
+		NodeStudentScoreboardOfCourse *p = l->head;
 		while (l->head != NULL)
 		{
 			p = p->next;
@@ -577,14 +580,15 @@ void AddTailScoreboardToScoreList(ListStudentScoreboardOfCourse* l, StudentScore
 		p->next = nodeSB;
 	}
 }
-void readScoreboard(listYear& ls) {
-	schoolYear* p = ls.pHead;
+void readScoreboard(listYear &ls)
+{
+	schoolYear *p = ls.pHead;
 	while (p != NULL)
 	{
-		nodeSemester* r = p->listSem.head;
+		nodeSemester *r = p->listSem.head;
 		while (r != NULL)
 		{
-			nodeCourse* z = r->listCour.head;
+			nodeCourse *z = r->listCour.head;
 			while (z != NULL)
 			{
 				string nameYear = changeIntToStringYear(p->beginYear, p->lastYear);
@@ -592,7 +596,7 @@ void readScoreboard(listYear& ls) {
 				string nameInput = "listYear/" + nameYear + "/" + nameSemester + "/" + z->courseName + "/scoreboard.txt";
 				ifstream iFile;
 				iFile.open(nameInput);
-				StudentScoreboardOfCourse* q = new StudentScoreboardOfCourse;
+				StudentScoreboardOfCourse *q = new StudentScoreboardOfCourse;
 				while (iFile >> q->studentID)
 				{
 					iFile.ignore();
@@ -612,8 +616,6 @@ void readScoreboard(listYear& ls) {
 		p = p->next;
 	}
 }
-
-
 
 void inputInformationSemesterAndAddSchoolYear(schoolYear *&temp)
 {

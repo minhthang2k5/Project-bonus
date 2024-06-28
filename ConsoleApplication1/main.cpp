@@ -379,17 +379,31 @@ int main()
 												cout << "5.  Delete this course" << endl;
 												cout << "6.  Remove a student from course" << endl;
 												cout << "7.  Upload scoreboard of course" << endl;
+												cout << "8.  Export list student in course to CSV File" << endl;
+												cout << "9.  View scoreboard of course" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
 												cin >> choice5;
+												if (choice5 == 9)
+												{
+													viewCourseScoreboard(curCourse);
+												}
+												if (choice5 == 8)
+												{
+													cin.ignore();
+													string fileName6;
+													cout << "Input file name (.csv) to export: ";
+													getline(cin, fileName6);
+													exportStudentListFromCourseToCSVFile(fileName6, curCourse);
+												}
 												if (choice5 == 7)
 												{
 													cin.ignore();
 													string fileName10;
 													cout << "Input file name: ";
 													getline(cin, fileName10);
-													importCourseScoreboardFromCSVFile(fileName10, curCourse);
+													importCourseScoreboardFromCSVFile(fileName10, curCourse, current, curSemester);
 												}
 												if (choice5 == 6)
 												{
@@ -410,8 +424,15 @@ int main()
 													cout << "Input file name: ";
 													getline(cin, studentListFileName);
 													StudentList *newStudentList = readStudentsOfCourseFromCSVFile(studentListFileName);
-													appendNewStudentListToCurrentStudentList(curCourse->studentList, newStudentList);
-													writeStudentListEnrollCourseToTxtFile(curCourse, curSemester, current);
+													if (newStudentList == NULL)
+													{
+														cout << "Error" << endl;
+													}
+													else
+													{
+														appendNewStudentListToCurrentStudentList(curCourse->studentList, newStudentList);
+														writeStudentListEnrollCourseToTxtFile(curCourse, curSemester, current);
+													}
 												}
 												if (choice5 == 3)
 												{
@@ -423,6 +444,7 @@ int main()
 												}
 												if (choice5 == 1)
 												{
+													cin.ignore();
 													addStudentToCourse(curCourse, curSemester, current);
 												}
 											} while (choice5 != -1);

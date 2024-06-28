@@ -400,7 +400,7 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
 
         int socialID = stoi(socialIDString);
 
-        Student stu1 = createStudent(id, fullName, gender, dateOfBirth, socialID);
+        Student stu1 = createStudent(className, id, fullName, gender, dateOfBirth, socialID);
         addStudentIntoClass(class1, stu1);
     }
     fileIn.close();
@@ -554,7 +554,7 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
         return NULL;
     }
     StudentList *stuList = createStudentList(0);
-    string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString;
+    string idString, firstName, lastName, gender, dayOfDOB, monthOfDOB, yearOfDOB, socialIDString, className;
     FullName fullName;
     Date dateOfBirth;
 
@@ -570,7 +570,7 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
         }
         getline(fileIn, idString, ',');
         int id = stoi(idString);
-
+        getline(fileIn, className, ',');
         getline(fileIn, lastName, ',');
         fullName.lastName = lastName;
 
@@ -590,7 +590,7 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
         getline(fileIn, socialIDString, '\n');
 
         int socialID = stoi(socialIDString);
-        Student stu1 = createStudent(id, fullName, gender, dateOfBirth, socialID);
+        Student stu1 = createStudent(className, id, fullName, gender, dateOfBirth, socialID);
         addStudentIntoStudentList(stuList, stu1);
         stuList->numberOfStudents++;
     }
@@ -790,11 +790,15 @@ void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course)
         return;
     }
 
-    fileOut << "STT, MSSV, Ho, Ten" << endl;
+    fileOut << "No, Student ID, Class name, Ho, Ten" << endl;
     StudentNode *current = course->studentList->pHeadStudent;
-    for (int num = 1; num <= course->studentList->numberOfStudents; num++)
+    int num = 1;
+    while (current != nullptr)
     {
         fileOut << num << ", ";
+        num++;
+        fileOut << current->data.studentID << ",";
+        fileOut << current->data.className << ",";
         fileOut << current->data.studentID << ", ";
         fileOut << current->data.fullName.lastName << ", ";
         fileOut << current->data.fullName.firstName << endl;
@@ -845,7 +849,7 @@ void addStudentScoreboardOfCourseIntoList(ListStudentScoreboardOfCourse *list, S
         current->next = node1;
     }
 }
-void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, schoolYear * curYear, nodeSemester* curSemester)
+void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, schoolYear *curYear, nodeSemester *curSemester)
 {
     ifstream fileIn;
     fileIn.open(fileName);
@@ -903,16 +907,16 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, sch
     string nameSemester = to_string(curSemester->name);
     string path = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/scoreboard.txt";
     fout.open(path);
-    NodeStudentScoreboardOfCourse* p = stuScoreList->head;
-    while (p!=NULL) {
+    NodeStudentScoreboardOfCourse *p = stuScoreList->head;
+    while (p != NULL)
+    {
         fout << p->stuScoreboard.studentID << endl;
         fout << p->stuScoreboard.fullName.lastName << " " << p->stuScoreboard.fullName.firstName << endl;
         fout << p->stuScoreboard.otherscore << " " << p->stuScoreboard.midscore << " " << p->stuScoreboard.finalscore << " " << p->stuScoreboard.totalscore << endl;
         p = p->next;
     }
+    fout.close();
 }
-
-
 
 void viewCourseScoreboard(nodeCourse *course)
 {

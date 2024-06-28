@@ -65,7 +65,7 @@ void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course);
 void addStudentScoreboardOfCourseIntoList(ListStudentScoreboardOfCourse *list, StudentScoreboardOfCourse stuScore);
 NodeStudentScoreboardOfCourse *createNodeStudentScoreboardOfCourse(StudentScoreboardOfCourse stuScore);
 ListStudentScoreboardOfCourse *createListStudentScoreboardOfCourse();
-void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course);
+void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, schoolYear *curYear, nodeSemester *curSemester);
 
 //----
 void viewCourseScoreboard(nodeCourse *course);
