@@ -2,6 +2,10 @@
 
 void viewClassListBasicInfo(ClassList claList)
 {
+    cout << endl
+        << endl
+        << endl
+        << endl;
     Class *cur = claList.pHeadClass;
     cout << "Basic class list infomation:" << endl;
     cout << left << setw(15) << "Class name" << setw(15) << "Number of students" << endl;
@@ -11,10 +15,18 @@ void viewClassListBasicInfo(ClassList claList)
         cout << left << setw(15) << cur->className << setw(15) << cur->numberOfStudents << endl;
         cur = cur->pNextClass;
     }
+    cout << endl
+        << endl
+        << endl
+        << endl;
 }
 
 void viewAllStudentsOfClassInfo(Class *cla)
 {
+    cout << endl
+        << endl
+        << endl
+        << endl;
     int no = 1;
     StudentNode *cur = cla->pHeadStudent;
     cout << "Students infomation in class " << cla->className << endl;
@@ -27,6 +39,10 @@ void viewAllStudentsOfClassInfo(Class *cla)
         no++;
         cur = cur->pNextStudent;
     }
+    cout << endl
+        << endl
+        << endl
+        << endl;
 }
 void viewProfile(listYear year, int studentID)
 {
@@ -920,6 +936,7 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, sch
 
 void viewCourseScoreboard(nodeCourse *course)
 {
+    cout << endl << endl << endl;
     cout << "Course name:" << course->courseName << endl;
     cout << "Class: " << course->className << endl;
     cout << "SOCREBOARD" << endl;
@@ -934,6 +951,7 @@ void viewCourseScoreboard(nodeCourse *course)
         num++;
         current = current->next;
     }
+    cout << endl << endl << endl;
 }
 
 // viet ham theo tung hoc ki
@@ -1040,6 +1058,10 @@ double calculateGPAInSemester(Student stu1, listCourse courseList)
 
 void viewClassScoreboard(Class *cla1, listCourse courseList)
 {
+    cout << endl
+        << endl
+        << endl
+        << endl;
     StudentNode *stuCur = cla1->pHeadStudent;
     int num = 1;
     while (stuCur != nullptr)
@@ -1075,6 +1097,10 @@ void viewClassScoreboard(Class *cla1, listCourse courseList)
              << endl;
         stuCur = stuCur->pNextStudent;
     }
+    cout << endl
+        << endl
+        << endl
+        << endl;
 }
 
 // void viewStudentScoreboard(Student stu1, listCourse *course)

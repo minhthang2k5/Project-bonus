@@ -349,6 +349,7 @@ int main()
 										}
 										if (choice4 == 0)
 										{
+											system("cls");
 											break;
 										}
 										if (choice4 == 1)
@@ -459,6 +460,11 @@ int main()
 												if (choice5 == -1)
 												{
 													return 1;
+												}
+												if (choice5==0)
+												{
+													system("cls");
+													break;
 												}
 											} while (choice5 != -1);
 										}
