@@ -368,18 +368,20 @@ Class *readStudentsOfClassFromCSVFile(string fileName)
     string line;
     getline(fileIn, line, '\n');
 
-    while (!fileIn.eof())
+    while (getline(fileIn, line, ','))
     {
-        getline(fileIn, line, ',');
-
+        if (fileIn.eof())
+        {
+            break;
+        }
         getline(fileIn, idString, ',');
         int id = stoi(idString);
 
         getline(fileIn, lastName, ',');
-        fullName.firstName = lastName;
+        fullName.lastName = lastName;
 
         getline(fileIn, firstName, ',');
-        fullName.lastName = firstName;
+        fullName.firstName = firstName;
 
         getline(fileIn, gender, ',');
 
@@ -425,15 +427,18 @@ Class *readStudentsOfClassFromCSVFile(string fileName, string className)
 
     while (getline(fileIn, line, ','))
     {
-
+        if (fileIn.eof())
+        {
+            break;
+        }
         getline(fileIn, idString, ',');
         int id = stoi(idString);
 
         getline(fileIn, lastName, ',');
-        fullName.firstName = lastName;
+        fullName.lastName = lastName;
 
         getline(fileIn, firstName, ',');
-        fullName.lastName = firstName;
+        fullName.firstName = firstName;
 
         getline(fileIn, gender, ',');
 
@@ -481,18 +486,20 @@ void readStudentsOfClassFromCSVFile(string fileName, Class *&class1)
     string line;
     getline(fileIn, line, '\n');
 
-    while (!fileIn.eof())
+    while (getline(fileIn, line, ','))
     {
-        getline(fileIn, line, ',');
-
+        if (fileIn.eof())
+        {
+            break;
+        }
         getline(fileIn, idString, ',');
         int id = stoi(idString);
 
         getline(fileIn, lastName, ',');
-        fullName.firstName = lastName;
+        fullName.lastName = lastName;
 
         getline(fileIn, firstName, ',');
-        fullName.lastName = firstName;
+        fullName.firstName = firstName;
 
         getline(fileIn, gender, ',');
 
@@ -553,19 +560,20 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName)
     string line;
     getline(fileIn, line, '\n');
 
-    while (!fileIn.eof())
+    while (getline(fileIn, line, ','))
     {
-        getline(fileIn, line, ',');
-
+        if (fileIn.eof())
+        {
+            break;
+        }
         getline(fileIn, idString, ',');
         int id = stoi(idString);
-
-        getline(fileIn, firstName, ',');
-        fullName.firstName = firstName;
 
         getline(fileIn, lastName, ',');
         fullName.lastName = lastName;
 
+        getline(fileIn, firstName, ',');
+        fullName.firstName = firstName;
         getline(fileIn, gender, ',');
 
         getline(fileIn, dayOfDOB, '/');
@@ -853,10 +861,12 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course)
     // tạo một danh sách liên kết bảng điểm mới
     ListStudentScoreboardOfCourse *stuScoreList = createListStudentScoreboardOfCourse();
 
-    while (!fileIn.eof())
+    while (getline(fileIn, line, ','))
     {
-        getline(fileIn, line, ',');
-
+        if (fileIn.eof())
+        {
+            break;
+        }
         getline(fileIn, idString, ',');
         int id = stoi(idString);
 
