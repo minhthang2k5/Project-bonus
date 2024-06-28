@@ -1,6 +1,5 @@
-Ho, ten, ...
-1,23120444,Kieu,Tinh,Male,2/2/2005,456
-2,231324, Xoai, Non, Nam,12/2/2005,5444
-3,23453232, Ha Thi, Tram, Nam,12/3/2000,54324
-4,25643, Coa Xuan, Tien, Nam,12/3/2000,57393
-5,102456, An Phat, Minh, Nữ,12/4/2005,43454
+No, Student ID, Last name, First name, Gender, Date of Birth, Social ID
+1,231324, Xoai, Non,Male,12/2/2005,5444
+2,23453232, Ha Thi, Tram,Male,12/3/2000,54324
+3,25643, Coa Xuan, Tien,Male,12/3/2000,57393
+4,102456, An Phat, Minh,Male,12/4/2005,43454

@@ -173,6 +173,15 @@ int main()
 						cout << "Your choice:";
 						cin >> choice2;
 						cin.ignore();
+						if (choice2==-1)
+						{
+							return 1;
+						}
+						if (choice2==0)
+						{
+							break;
+							system("cls");
+						}
 						if (choice2 == 4)
 						{
 							ChangePasswordOfStaff(accstaff, warehousepath1);
@@ -291,7 +300,7 @@ int main()
 								}
 								if (choice3 == 0)
 								{
-									continue;
+									break;
 								}
 								if (choice3 == 1)
 								{

@@ -1,15 +1,15 @@
 Toan
-23CTT4
-Toan
-Hop
-TUE
-S2 (09:30)
-4
-49
-VLDC
 23CTT5
+2
+THang
+TUE
+S2 (07:30)
+4
+35
+VLDC
+23CTT
 1
-Thuy
+Dung
 MON
 S1 (07:30)
 4
