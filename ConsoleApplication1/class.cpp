@@ -1,11 +1,58 @@
 #include "class.h"
 
+void updateStudentResultOfCourse(nodeCourse *&course, nodeSemester *curSemester, schoolYear *curYear)
+{
+    int studentID;
+    cout << "Input student ID to update result: ";
+    cin >> studentID;
+    NodeStudentScoreboardOfCourse *curStu = course->scoreList->head;
+    while (curStu != nullptr)
+    {
+        if (curStu->stuScoreboard.studentID == studentID)
+        {
+            cout << "Update result: " << endl;
+            cout << "Full name: " << curStu->stuScoreboard.fullName.lastName << " " << curStu->stuScoreboard.fullName.firstName << endl;
+            cout << "Other mark: ";
+            cin >> curStu->stuScoreboard.otherscore;
+            cout << "Midterm mark: ";
+            cin >> curStu->stuScoreboard.midscore;
+            cout << "Final mark: ";
+            cin >> curStu->stuScoreboard.finalscore;
+            cout << "Total mark: ";
+            cin >> curStu->stuScoreboard.totalscore;
+            cout << endl;
+            break;
+        }
+        curStu = curStu->next;
+    }
+    if (curStu == nullptr)
+    {
+        cout << "Not found student ID: " << studentID << endl;
+    }
+    else
+    {
+        ofstream fout;
+        string year = to_string(curYear->beginYear) + "-" + to_string(curYear->lastYear);
+        string nameSemester = to_string(curSemester->name);
+        string path = "listYear/" + year + "/" + nameSemester + "/" + course->courseName + "/scoreboard.txt";
+        fout.open(path);
+        NodeStudentScoreboardOfCourse *p = course->scoreList->head;
+        while (p != NULL)
+        {
+            fout << p->stuScoreboard.studentID << endl;
+            fout << p->stuScoreboard.fullName.lastName << " " << p->stuScoreboard.fullName.firstName << endl;
+            fout << p->stuScoreboard.otherscore << " " << p->stuScoreboard.midscore << " " << p->stuScoreboard.finalscore << " " << p->stuScoreboard.totalscore << endl;
+            p = p->next;
+        }
+        fout.close();
+    }
+}
 void viewClassListBasicInfo(ClassList claList)
 {
     cout << endl
-        << endl
-        << endl
-        << endl;
+         << endl
+         << endl
+         << endl;
     Class *cur = claList.pHeadClass;
     cout << "Basic class list infomation:" << endl;
     cout << left << setw(15) << "Class name" << setw(15) << "Number of students" << endl;
@@ -16,17 +63,17 @@ void viewClassListBasicInfo(ClassList claList)
         cur = cur->pNextClass;
     }
     cout << endl
-        << endl
-        << endl
-        << endl;
+         << endl
+         << endl
+         << endl;
 }
 
 void viewAllStudentsOfClassInfo(Class *cla)
 {
     cout << endl
-        << endl
-        << endl
-        << endl;
+         << endl
+         << endl
+         << endl;
     int no = 1;
     StudentNode *cur = cla->pHeadStudent;
     cout << "Students infomation in class " << cla->className << endl;
@@ -40,9 +87,9 @@ void viewAllStudentsOfClassInfo(Class *cla)
         cur = cur->pNextStudent;
     }
     cout << endl
-        << endl
-        << endl
-        << endl;
+         << endl
+         << endl
+         << endl;
 }
 void viewProfile(listYear year, int studentID)
 {
@@ -936,7 +983,9 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, sch
 
 void viewCourseScoreboard(nodeCourse *course)
 {
-    cout << endl << endl << endl;
+    cout << endl
+         << endl
+         << endl;
     cout << "Course name:" << course->courseName << endl;
     cout << "Class: " << course->className << endl;
     cout << "SOCREBOARD" << endl;
@@ -951,7 +1000,9 @@ void viewCourseScoreboard(nodeCourse *course)
         num++;
         current = current->next;
     }
-    cout << endl << endl << endl;
+    cout << endl
+         << endl
+         << endl;
 }
 
 // viet ham theo tung hoc ki
@@ -1059,9 +1110,9 @@ double calculateGPAInSemester(Student stu1, listCourse courseList)
 void viewClassScoreboard(Class *cla1, listCourse courseList)
 {
     cout << endl
-        << endl
-        << endl
-        << endl;
+         << endl
+         << endl
+         << endl;
     StudentNode *stuCur = cla1->pHeadStudent;
     int num = 1;
     while (stuCur != nullptr)
@@ -1098,9 +1149,9 @@ void viewClassScoreboard(Class *cla1, listCourse courseList)
         stuCur = stuCur->pNextStudent;
     }
     cout << endl
-        << endl
-        << endl
-        << endl;
+         << endl
+         << endl
+         << endl;
 }
 
 // void viewStudentScoreboard(Student stu1, listCourse *course)

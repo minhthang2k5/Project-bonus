@@ -2,6 +2,8 @@
 #define _CLASS_H_
 #include "struct.h"
 
+void updateStudentResultOfCourse(nodeCourse *&course, nodeSemester *curSemester, schoolYear *curYear);
+
 //--
 void viewClassListBasicInfo(ClassList claList);
 void viewAllStudentsOfClassInfo(Class *cla);

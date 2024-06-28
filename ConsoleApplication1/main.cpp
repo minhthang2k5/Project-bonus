@@ -384,10 +384,15 @@ int main()
 												cout << "7.  Upload scoreboard of course" << endl;
 												cout << "8.  Export list student in course to CSV File" << endl;
 												cout << "9.  View scoreboard of course" << endl;
+												cout << "10. Update a student's result in course scoreboard" << endl;
 												cout << "0.  Back" << endl;
 												cout << "-1. Exit" << endl;
 												cout << "Your choice: ";
 												cin >> choice5;
+												if (choice5 == 10)
+												{
+													updateStudentResultOfCourse(curCourse, curSemester, current);
+												}
 												if (choice5 == 9)
 												{
 													viewCourseScoreboard(curCourse);
@@ -461,7 +466,7 @@ int main()
 												{
 													return 1;
 												}
-												if (choice5==0)
+												if (choice5 == 0)
 												{
 													system("cls");
 													break;
