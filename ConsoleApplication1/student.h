@@ -19,6 +19,6 @@ int LoadStudentAccount(ListAccount*& l, const char* warehousepath);
 void ChangePasswordOfStudent(ListAccount*& l, const char* warehousepath);
 
 
-bool getNameStudent(StudentList* l, string nameStudent);
-void viewListOfCoursesForStudent(nodeSemester* curSemester, string nameStudent);
+bool getIdStudent(StudentList* l, int idStudent);
+void viewListOfCoursesForStudent(nodeSemester* curSemester, int idStudent);
 #endif

@@ -255,13 +255,12 @@ void ChangePasswordOfStudent(ListAccount *&l, const char *warehousepath)
 	cout << "Change successfully!" << endl;
 }
 
-bool getNameStudent(StudentList *l, string nameStudent)
+bool getIdStudent(StudentList *l, int idStudent)
 {
 	StudentNode *p = l->pHeadStudent;
 	while (p != NULL)
 	{
-		string tempName = p->data.fullName.lastName + " " + p->data.fullName.firstName;
-		if (tempName == nameStudent)
+		if (p->data.studentID == idStudent)
 		{
 			return true;
 		}
@@ -270,7 +269,7 @@ bool getNameStudent(StudentList *l, string nameStudent)
 	return false;
 }
 
-void viewListOfCoursesForStudent(nodeSemester *curSemester, string nameStudent)
+void viewListOfCoursesForStudent(nodeSemester *curSemester, int idStudent)
 {
 	nodeCourse *temp = curSemester->listCour.head;
 	cout << endl
@@ -280,7 +279,7 @@ void viewListOfCoursesForStudent(nodeSemester *curSemester, string nameStudent)
 	cout << left << setw(5) << "ID" << setw(30) << "Course name" << setw(15) << "Class name" << setw(30) << "Teacher name" << setw(30) << "Number of credits/student" << setw(20) << "Day-Sesion" << endl;
 	while (temp != NULL)
 	{
-		if (getNameStudent(temp->studentList, nameStudent))
+		if (getIdStudent(temp->studentList, idStudent))
 		{
 
 			string result = to_string(temp->numberOfCredits) + "/" + to_string(temp->numberOfStudent);

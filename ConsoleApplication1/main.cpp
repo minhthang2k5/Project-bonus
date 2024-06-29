@@ -144,11 +144,8 @@ int main()
 								cin >> semesterName;
 								curSemester = getSemester(current, semesterName);
 							}
-							string nameStudent;
-							cout << "Input your name: ";
-							cin.ignore();
-							getline(cin, nameStudent);
-							viewListOfCoursesForStudent(curSemester, nameStudent);
+							
+							viewListOfCoursesForStudent(curSemester, check1);
 						}
 						if (choice2 < 0 || choice2 > 5)
 						{
