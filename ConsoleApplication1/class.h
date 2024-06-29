@@ -3,6 +3,8 @@
 #include "struct.h"
 
 //--
+void viewStudentScoreboard2(listYear yearList, int studentID, schoolYear *year, nodeSemester *sem);
+//--
 void viewProfileWhenViewingScoreboard(listYear year, int studentID);
 //--
 void viewStudentScoreboard2(listYear yearList, int studentID);
@@ -48,22 +50,6 @@ StudentList *readStudentsOfCourseFromCSVFile(string fileName);
 //---
 void removeStudentFromCourseByID(nodeCourse *course, int studentID);
 void removeCourseByID(listCourse &course, int courseID);
-//----
-// typedef bool (*CompareFunc)(const Student &, const void *);
-// bool compareByName(const Student &student, const void *name);
-// bool compareByID(const Student &student, const void *id);
-// //-
-// void removeStudentFromCourse(nodeCourse *course, CompareFunc compare, const void *value);
-// void removeLastStudentFromCourse(nodeCourse *course);
-
-// //----
-// typedef bool (*CompareCourseFunc)(const nodeCourse &, const void *);
-// bool compareCourseByName(const nodeCourse &course, const void *name);
-// bool compareCourseByID(const nodeCourse &course, const void *id);
-//-
-void deleteStudentList(StudentList *studentList);
-void deleteScoreList(ListStudentScoreboardOfCourse *scoreList);
-// void deleteCourse(nodeCourse *&head, CompareCourseFunc compare, const void *value);
 
 //----
 void exportStudentListFromCourseToCSVFile(string fileName, nodeCourse *course);
@@ -76,12 +62,9 @@ void importCourseScoreboardFromCSVFile(string fileName, nodeCourse *&course, sch
 
 //----
 void viewCourseScoreboard(nodeCourse *course);
-// double calculateGPAInSemester(Student stu1, listCourse *course);
-// void viewClassScoreboard(Class *cla1, listCourse *course);
-// void viewStudentScoreboard(Student stu1, listCourse *course);
-//////
 
 double calculateGPAInSemester(Student stu1, listCourse course);
+double calculateGPAInSemester(int studentID, listCourse courseList);
 void viewClassScoreboard(Class *cla1, listCourse course);
 void viewStudentScoreboard(Student stu1, listCourse course);
 //----

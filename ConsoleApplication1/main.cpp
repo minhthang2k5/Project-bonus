@@ -21,6 +21,7 @@ int main()
 	int choice;
 	do
 	{
+
 		cout << "Choose type of user: " << endl;
 		cout << "1. Student" << endl;
 		cout << "2. Staff" << endl;
@@ -55,7 +56,7 @@ int main()
 						cout << "4. View your scoreboard" << endl;
 						cout << "5. Sign out" << endl;
 						cout << "0. Exit" << endl;
-						cout << "Your choice:";
+						cout << "Your choice: ";
 						cin >> choice2;
 						system("cls");
 						if (choice2 == 2)
@@ -64,12 +65,39 @@ int main()
 						}
 						if (choice2 == 4)
 						{
-							cout << endl
-								 << endl;
-							viewProfileWhenViewingScoreboard(ls, check1);
-							viewStudentScoreboard2(ls, check1);
-							cout << endl
-								 << endl;
+							cout << "Input school year: ";
+							string yearName;
+							cin.ignore();
+							getline(cin, yearName);
+							schoolYear *curYear = getSchoolYear(ls, yearName);
+							if (curYear == nullptr)
+							{
+								cout << "School year does not exist." << endl
+									 << endl;
+							}
+							else
+							{
+								cout << "Input semester: ";
+								int semName;
+								cin >> semName;
+								nodeSemester *curSem = getSemester(curYear, semName);
+								if (curSem == nullptr)
+								{
+									cout << "Semester does not exist." << endl
+										 << endl;
+								}
+								else
+								{
+									system("cls");
+									viewProfileWhenViewingScoreboard(ls, check1);
+									cout << endl
+										 << endl;
+									viewStudentScoreboard2(ls, check1, curYear, curSem);
+									cout << endl
+										 << endl
+										 << endl;
+								}
+							}
 						}
 						if (choice2 == 1)
 						{
@@ -170,14 +198,14 @@ int main()
 						cout << "4.  Change password" << endl;
 						cout << "0.  Back" << endl;
 						cout << "-1. Exit" << endl;
-						cout << "Your choice:";
+						cout << "Your choice: ";
 						cin >> choice2;
 						cin.ignore();
-						if (choice2==-1)
+						if (choice2 == -1)
 						{
 							return 1;
 						}
-						if (choice2==0)
+						if (choice2 == 0)
 						{
 							break;
 							system("cls");
@@ -246,7 +274,8 @@ int main()
 									}
 									if (curClass == nullptr)
 									{
-										cout << "Not found class!" << endl;
+										cout << "Not found class!" << endl
+											 << endl;
 									}
 									else
 									{
@@ -257,7 +286,8 @@ int main()
 										nodeSemester *curSemester = getSemester(current, semesterName);
 										if (curSemester == nullptr)
 										{
-											cout << "Not found semester" << endl;
+											cout << "Not found semester" << endl
+												 << endl;
 										}
 										else
 										{
@@ -312,38 +342,47 @@ int main()
 									Class *newClass = createClass(className, 0);
 									noPointerAddClassIntoClassList(current->listClass, newClass);
 									createEmptyClassCSVFile(current, className);
-									cout << "Add new class successfully!" << endl;
-									// readClassAll(ls);
 									system("cls");
+									cout << "Add class " << className << " successfully!" << endl
+										 << endl;
 								}
 								if (choice3 == 2)
 								{
-									cout << "Input class name: ";
-									string className4;
-									cin.ignore();
-									getline(cin, className4);
-									Class *curClass = current->listClass.pHeadClass;
-									while (curClass->className != className4)
+									if (current->listClass.pHeadClass == nullptr)
 									{
-										curClass = curClass->pNextClass;
-										if (curClass == nullptr)
-										{
-											break;
-										}
-									}
-									if (curClass == nullptr)
-									{
-										cout << "Not found class!" << endl;
+										cout << "School year " << current->beginYear << "-" << current->lastYear << " has no class. Please create 1 class first!" << endl
+											 << endl;
 									}
 									else
 									{
-										cout << "Input student information:" << endl;
-										Student stu = inputStudentInformation();
-										addStudentIntoClass(curClass, stu);
-										noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
-										writeClassIntoCSVFile(current, curClass);
+										cout << "Input class name: ";
+										string className4;
+										cin.ignore();
+										getline(cin, className4);
+										Class *curClass = current->listClass.pHeadClass;
+										while (curClass->className != className4)
+										{
+											curClass = curClass->pNextClass;
+											if (curClass == nullptr)
+											{
+												break;
+											}
+										}
+										if (curClass == nullptr)
+										{
+											cout << "Not found class!" << endl;
+										}
+										else
+										{
+											cout << "Input student information:" << endl;
+											Student stu = inputStudentInformation();
+											addStudentIntoClass(curClass, stu);
+											noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+											writeClassIntoCSVFile(current, curClass);
+											system("cls");
+											cout << "Add new student to the class " << className4 << " successfully!" << endl;
+										}
 									}
-									system("cls");
 								}
 								if (choice3 == 3)
 								{
@@ -517,47 +556,56 @@ int main()
 								}
 								if (choice3 == 5)
 								{
-									cout << "Input class name: ";
-									string className4;
-									cin.ignore();
-									getline(cin, className4);
-									Class *curClass = current->listClass.pHeadClass;
-									while (curClass->className != className4)
+									if (current->listClass.pHeadClass == nullptr)
 									{
-										curClass = curClass->pNextClass;
-										if (curClass == nullptr)
-										{
-											break;
-										}
-									}
-									if (curClass == nullptr)
-									{
-										cout << "Not found class!" << endl;
+										cout << current->beginYear << "-" << current->lastYear << " has no class. Please create 1 class first!" << endl
+											 << endl;
 									}
 									else
 									{
-										string fileName;
-										do
-										{
-											cout << "Input file name (class name + \".csv\"): ";
-											getline(cin, fileName);
-											if (className4 != extractFileName(fileName))
-											{
-												cout << "File name must be \"class name + .csv\"" << endl;
-											}
-										} while (className4 != extractFileName(fileName));
 
-										Class *newClass = readStudentsOfClassFromCSVFile(fileName);
-										if (newClass != nullptr)
+										cout << "Input class name: ";
+										string className4;
+										cin.ignore();
+										getline(cin, className4);
+										Class *curClass = current->listClass.pHeadClass;
+										while (curClass->className != className4)
 										{
-											appendNewStudentsOfClassToCurrentClass(curClass, newClass);
-											writeClassIntoCSVFile(current, curClass);
-											cout << endl;
-											noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+											curClass = curClass->pNextClass;
+											if (curClass == nullptr)
+											{
+												break;
+											}
+										}
+										if (curClass == nullptr)
+										{
+											cout << "Not found class!" << endl;
 										}
 										else
 										{
-											cout << "Class is empty or error while opening file!" << endl;
+											string fileName;
+											do
+											{
+												cout << "Input file name (class name + \".csv\"): ";
+												getline(cin, fileName);
+												if (className4 != extractFileName(fileName))
+												{
+													cout << "File name must be \"class name + .csv\"" << endl;
+												}
+											} while (className4 != extractFileName(fileName));
+
+											Class *newClass = readStudentsOfClassFromCSVFile(fileName);
+											if (newClass != nullptr)
+											{
+												appendNewStudentsOfClassToCurrentClass(curClass, newClass);
+												writeClassIntoCSVFile(current, curClass);
+												cout << endl;
+												noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
+											}
+											else
+											{
+												cout << "Class is empty or error while opening file!" << endl;
+											}
 										}
 									}
 								}
