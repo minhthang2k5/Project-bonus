@@ -422,6 +422,7 @@ nodeCourse *getCourse(nodeSemester *ls, string name)
 }
 void viewListStudentIncourse(nodeCourse *p)
 {
+	cout << endl << endl << endl;
 	StudentNode *stu;
 	stu = p->studentList->pHeadStudent;
 	cout << left << setw(30) << "Name" << setw(13) << "Gender" << setw(13) << "StudentId" << setw(13) << "Class name" << setw(20) << "Social Id" << setw(15) << "Date of birth" << endl;
@@ -432,6 +433,7 @@ void viewListStudentIncourse(nodeCourse *p)
 		cout << left << setw(30) << name << setw(13) << stu->data.gender << setw(13) << stu->data.studentID << setw(13) << stu->data.className << setw(20) << stu->data.socialID << setw(15) << date << endl;
 		stu = stu->pNextStudent;
 	}
+	cout << endl << endl << endl;
 }
 void readListCourse(listYear &ls)
 {
