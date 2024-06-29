@@ -357,7 +357,8 @@ int main()
 										string className4;
 										cin.ignore();
 										getline(cin, className4);
-										Class *curClass = current->listClass.pHeadClass;
+										Class *curClass = new Class();
+										curClass = current->listClass.pHeadClass;
 										while (curClass->className != className4)
 										{
 											curClass = curClass->pNextClass;
@@ -517,7 +518,8 @@ int main()
 													string studentListFileName;
 													cout << "Input file name (.csv): ";
 													getline(cin, studentListFileName);
-													StudentList *newStudentList = readStudentsOfCourseFromCSVFile(studentListFileName);
+													StudentList *newStudentList = new StudentList();
+													newStudentList = readStudentsOfCourseFromCSVFile(studentListFileName);
 													if (newStudentList == NULL)
 													{
 														cout << "Error" << endl;
@@ -599,7 +601,8 @@ int main()
 												}
 											} while (className4 != extractFileName(fileName));
 
-											Class *newClass = readStudentsOfClassFromCSVFile(fileName);
+											Class *newClass = new Class();
+											newClass = readStudentsOfClassFromCSVFile(fileName);
 											if (newClass != nullptr)
 											{
 												appendNewStudentsOfClassToCurrentClass(curClass, newClass);
