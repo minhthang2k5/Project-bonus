@@ -387,6 +387,7 @@ int main()
 											cout << "Add new student to the class " << className4 << " successfully!" << endl;
 										}
 									}
+									system("cls");
 								}
 								if (choice3 == 3)
 								{
@@ -624,6 +625,7 @@ int main()
 											}
 										}
 									}
+									system("cls");
 								}
 							} while (choice3 != -1);
 						}
