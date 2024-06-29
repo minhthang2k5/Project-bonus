@@ -1,4 +1,4 @@
-﻿#include "teacher.h"
+﻿#include "staff.h"
 #include "student.h"
 #include "class.h"
 listYear ls;

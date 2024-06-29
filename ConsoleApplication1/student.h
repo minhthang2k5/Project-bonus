@@ -1,7 +1,7 @@
 #ifndef _STUDENT_H_
 #define _STUDENT_H_
 #include "struct.h"
-#include "teacher.h"
+#include "staff.h"
 Student getStudentInfo();
 StudentNode* CreateNewNode(Student info);
 void AddTailToStudentList(StudentList* l, Student info);

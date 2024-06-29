@@ -21,7 +21,7 @@
     <ClCompile Include="student.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="teacher.cpp">
+    <ClCompile Include="staff.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="class.cpp">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="teacher.h">
+    <ClInclude Include="staff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="student.h">
