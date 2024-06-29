@@ -1,0 +1,105 @@
+22120001
+Nguyen Ngoc Binh
+9.2 4.6 1.4 3.92
+22120002
+Hoang Duc Huy
+2.1 1.4 6.1 3.89
+22120003
+Nguyen Phu Khoi
+0.5 6.7 6.5 5.36
+22120004
+Phan Nhat Quang
+7.2 7.2 4.8 6
+22120005
+Nguyen Trung Tin
+8.6 9.9 4.5 6.94
+22120006
+Vo Thanh Binh
+8.1 0.9 6.5 5.14
+22120007
+Tran Dinh Hiep
+9.5 2.1 3.5 4.28
+22120008
+Nguyen Dang Khoa
+2.8 6.4 5.5 5.23
+22120009
+Huynh Thanh Nhon Luat
+4.5 2.4 5.3 4.27
+22120010
+Vo Hoai Nam
+7.3 6.1 1.3 3.94
+22120011
+Nguyen Dinh Toan Thien
+7.2 5.7 4.7 5.5
+22120012
+Nguyen Van Trong
+2.5 9.9 0.5 3.72
+22120013
+Kieu Bao Trung
+4.7 9.9 5.6 6.71
+22120014
+Nguyen Thanh Binh
+6.2 3.2 0.1 2.25
+22120015
+Le Nguyen Dang Khoa
+2.5 7.4 3.9 4.67
+22120016
+Huynh Duc Minh Nhut
+2.1 4.5 4.6 4.07
+22120017
+Bui Anh Ninh
+3.5 3.6 7.9 5.73
+22120018
+Nguyen Xuan Phuc
+9.3 5.5 4.2 5.61
+22120019
+Pham Huu Phuoc
+7.5 9.4 0.5 4.57
+22120020
+Tran Trung Phuoc
+8.1 9.8 5.7 7.41
+22120027
+Tran Bao Cuong
+3.2 5.6 10 7.32
+22120028
+Nguyen Quoc Cuong
+5.5 6.6 8.7 7.43
+22120029
+Nguyen Van Cuong
+8.9 5.9 7.1 7.1
+22120030
+Le Thanh Danh
+4.5 3.7 0.2 2.11
+22120031
+Tran Khac Doanh
+4.3 1 3.2 2.76
+22120109
+Nguyen Thi Huyen
+9.8 8.3 4.1 6.5
+22120110
+Nguyen Van Huu
+5.3 4.2 1.5 3.07
+22120111
+Do Nguyen Minh Luan
+4 3.7 5.8 4.81
+22120112
+Vo Tan Manh
+4.9 0.2 4.5 3.29
+22120113
+Luu Sung Mau
+1.8 6.4 3.4 3.98
+22120114
+Nguyen Khanh Minh
+2.3 7.6 9.1 7.29
+22120115
+Le Dang Hoai male
+7 9.3 8.8 8.59
+22120116
+Nguyen Tran Hoang male
+3.8 8.5 9.2 7.91
+22120117
+Dien Phuong male
+8.5 2.3 6.8 5.79
+22120118
+Huynh Trung Nghia
+1.7 7.6 6.6 5.92

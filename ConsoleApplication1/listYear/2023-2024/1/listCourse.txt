@@ -1,0 +1,24 @@
+MacLenin
+23CTT3
+789
+Tran Duc Trong
+THUR
+S3 (13:30)
+4
+49
+KTCT
+23CTT2
+456
+Kieu Do Song Tinh
+TUE
+S2 (09:30)
+4
+49
+KTLT
+23CTT5
+123
+Nguyen Le Hoang Dung
+MON
+S1 (07:30)
+4
+39

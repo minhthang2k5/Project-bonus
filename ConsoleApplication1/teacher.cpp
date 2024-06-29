@@ -1190,14 +1190,8 @@ void inputInformationToAddCourse(nodeSemester *&tempSemester, schoolYear *curren
 	cin >> course->numberOfCredits;
 	cout << endl;
 	eatline();
-	cout << "Input number of student(max 50): ";
+	cout << "Input number of student: ";
 	cin >> course->numberOfStudent;
-	while (course->numberOfStudent > 50)
-	{
-		cout << "exceed the allowed number of students to enter" << endl;
-		cout << "Input number of student(max 50):";
-		cin >> course->numberOfStudent;
-	}
 	eatline();
 	cout << "Input the day of week: ";
 	getline(cin, course->dayOfweek);
