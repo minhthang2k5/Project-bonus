@@ -234,6 +234,7 @@ void appendNewStudentsOfClassToCurrentClass(Class *&source, Class *&newClass)
     if (curStudent == nullptr)
     {
         source->pHeadStudent = newClass->pHeadStudent;
+        source->numberOfStudents = newClass->numberOfStudents;
     }
     else
     {
