@@ -163,11 +163,13 @@ void viewClassListBasicInfo(ClassList claList)
     Class *cur = claList.pHeadClass;
     cout << "Basic class list infomation:" << endl;
     cout << "Number of classes: " << claList.numberOfClasses << endl;
-    cout << left << setw(15) << "Class name" << setw(15) << "Number of students" << endl;
+    cout << left << setw(5) << "No" << setw(15) << "Class name" << setw(15) << "Number of students" << endl;
+    int no = 1;
     while (cur != nullptr)
     {
 
-        cout << left << setw(15) << cur->className << setw(15) << cur->numberOfStudents << endl;
+        cout << left << setw(5) << no << setw(15) << cur->className << setw(15) << cur->numberOfStudents << endl;
+        no++;
         cur = cur->pNextClass;
     }
     cout << endl

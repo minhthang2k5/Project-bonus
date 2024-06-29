@@ -478,7 +478,14 @@ int main()
 												}
 												if (choice5 == 9)
 												{
-													viewCourseScoreboard(curCourse);
+													if (curCourse->scoreList == nullptr || curCourse->scoreList->head == nullptr)
+													{
+														cout << "Not found scoreboard!" << endl;
+													}
+													else
+													{
+														viewCourseScoreboard(curCourse);
+													}
 												}
 												if (choice5 == 8)
 												{

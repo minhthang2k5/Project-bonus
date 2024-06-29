@@ -427,18 +427,21 @@ void viewListStudentIncourse(nodeCourse *p)
 		 << endl;
 	StudentNode *stu;
 	stu = p->studentList->pHeadStudent;
-	cout << left << setw(30) << "Name" << setw(13) << "Gender" << setw(13) << "StudentId" << setw(13) << "Class name" << setw(20) << "Social Id" << setw(15) << "Date of birth" << endl;
+	cout << left << setw(5) << "No" << setw(30) << "Name" << setw(13) << "Gender" << setw(13) << "StudentId" << setw(13) << "Class name" << setw(20) << "Social Id" << setw(15) << "Date of birth" << endl;
+	int no = 1;
 	while (stu != NULL)
 	{
 		string name = stu->data.fullName.lastName + " " + stu->data.fullName.firstName;
 		string date = to_string(stu->data.dateOfBirth.day) + "/" + to_string(stu->data.dateOfBirth.month) + "/" + to_string(stu->data.dateOfBirth.year);
-		cout << left << setw(30) << name << setw(13) << stu->data.gender << setw(13) << stu->data.studentID << setw(13) << stu->data.className << setw(20) << stu->data.socialID << setw(15) << date << endl;
+		cout << left << setw(5) << no << setw(30) << name << setw(13) << stu->data.gender << setw(13) << stu->data.studentID << setw(13) << stu->data.className << setw(20) << stu->data.socialID << setw(15) << date << endl;
 		stu = stu->pNextStudent;
+		no++;
 	}
 	cout << endl
 		 << endl
 		 << endl;
 }
+
 void readListCourse(listYear &ls)
 {
 	schoolYear *p = ls.pHead;
@@ -1285,7 +1288,7 @@ void updateInformationCourse(nodeCourse *&course, nodeSemester *curSemester, sch
 	getline(cin, course->session);
 	course->studentList = new StudentList;
 	course->studentList->pHeadStudent = NULL;
-	//addHeadCourse(curSemester->listCour, course);
+	// addHeadCourse(curSemester->listCour, course);
 	string year = changeIntToStringYear(curYear->beginYear, curYear->lastYear);
 	string nameSemester = to_string(curSemester->name);
 	string nameTxt = "listYear/" + year + "/" + nameSemester + "/listCourse";
