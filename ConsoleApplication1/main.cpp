@@ -218,6 +218,7 @@ int main()
 						{
 							ListAccount *l = CreateListAccount(ls, warehousepath2);
 							StudentAccountDataWarehouse(l, warehousepath2);
+							int check3 = LoadStudentAccount(accstudent, warehousepath2);
 						}
 						if (choice2 == 1)
 						{
