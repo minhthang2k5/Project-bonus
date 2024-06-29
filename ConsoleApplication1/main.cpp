@@ -441,6 +441,7 @@ int main()
 											cout << "Input course name: ";
 											getline(cin, Coursename);
 											nodeCourse *curCourse = getCourse(curSemester, Coursename);
+											system("cls");
 											while (curCourse == NULL)
 											{
 												cout << "Course does not exist!" << endl;
@@ -503,6 +504,7 @@ int main()
 												if (choice5 == 5)
 												{
 													deleteCourse(curSemester, current, curCourse);
+													break;
 													system("cls");
 												}
 												if (choice5 == 4)
