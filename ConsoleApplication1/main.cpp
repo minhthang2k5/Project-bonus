@@ -535,6 +535,7 @@ int main()
 												}
 												if (choice5 == 2)
 												{
+													cin.ignore();
 													updateInformationCourse(curCourse, curSemester, current);
 													system("cls");
 												}

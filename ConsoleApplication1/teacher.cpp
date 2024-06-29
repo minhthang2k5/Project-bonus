@@ -1291,7 +1291,7 @@ void updateInformationCourse(nodeCourse *&course, nodeSemester *curSemester, sch
 	getline(cin, course->session);
 	course->studentList = new StudentList;
 	course->studentList->pHeadStudent = NULL;
-	addHeadCourse(curSemester->listCour, course);
+	//addHeadCourse(curSemester->listCour, course);
 	string year = changeIntToStringYear(curYear->beginYear, curYear->lastYear);
 	string nameSemester = to_string(curSemester->name);
 	string nameTxt = "listYear/" + year + "/" + nameSemester + "/listCourse";
