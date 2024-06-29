@@ -247,15 +247,14 @@ int main()
 								cout << "3. Create a semester" << endl;
 								cout << "4. Choose a semester" << endl;
 								cout << "5. Read all student of a class from CSV file" << endl;
-								cout << "6. Choose a semester" << endl;
-								cout << "7. View list of classes" << endl;
-								cout << "8. View list of students of a class" << endl;
-								cout << "9. View scoreboard of a class" << endl;
+								cout << "6. View list of classes" << endl;
+								cout << "7. View list of students of a class" << endl;
+								cout << "8. View scoreboard of a class" << endl;
 								cout << "0. Back" << endl;
 								cout << "-1. Exit" << endl;
 								cout << "Your choice: ";
 								cin >> choice3;
-								if (choice3 == 9)
+								if (choice3 == 8)
 								{
 									cin.ignore();
 									cout << "Input class name: ";
@@ -293,11 +292,11 @@ int main()
 										}
 									}
 								}
-								if (choice3 == 7)
+								if (choice3 == 6)
 								{
 									viewClassListBasicInfo(current->listClass);
 								}
-								if (choice3 == 8)
+								if (choice3 == 7)
 								{
 									cin.ignore();
 									cout << "Input class name: ";
