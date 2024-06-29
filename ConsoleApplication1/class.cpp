@@ -162,7 +162,7 @@ void viewClassListBasicInfo(ClassList claList)
          << endl;
     Class *cur = claList.pHeadClass;
     cout << "Basic class list infomation:" << endl;
-    cout << "Number of classes: " << claList.numberOfClasses;
+    cout << "Number of classes: " << claList.numberOfClasses << endl;
     cout << left << setw(15) << "Class name" << setw(15) << "Number of students" << endl;
     while (cur != nullptr)
     {
@@ -274,6 +274,10 @@ void writeListStudentInCourse2(StudentList *slist, string name)
 }
 void appendNewStudentListToCurrentStudentList(StudentList *&source, StudentList *&current)
 {
+    if (!source)
+    {
+        source = new StudentList();
+    }
     StudentNode *curSource = source->pHeadStudent;
     if (curSource == nullptr)
     {

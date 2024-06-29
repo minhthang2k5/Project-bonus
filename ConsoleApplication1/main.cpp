@@ -372,6 +372,10 @@ int main()
 										}
 										else
 										{
+											// cin.ignore();
+											// cout << "Input any keys to start inputing student information: ";
+											// string temp;
+											// getline(cin, temp);
 											cout << "Input student information:" << endl;
 											Student stu = inputStudentInformation();
 											addStudentIntoClass(curClass, stu);
@@ -487,7 +491,7 @@ int main()
 												{
 													cin.ignore();
 													string fileName10;
-													cout << "Input file name: ";
+													cout << "Input file name (.csv): ";
 													getline(cin, fileName10);
 													importCourseScoreboardFromCSVFile(fileName10, curCourse, current, curSemester);
 													system("cls");
@@ -511,7 +515,7 @@ int main()
 												{
 													cin.ignore();
 													string studentListFileName;
-													cout << "Input file name: ";
+													cout << "Input file name (.csv): ";
 													getline(cin, studentListFileName);
 													StudentList *newStudentList = readStudentsOfCourseFromCSVFile(studentListFileName);
 													if (newStudentList == NULL)
