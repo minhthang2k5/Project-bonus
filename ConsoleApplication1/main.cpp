@@ -343,6 +343,7 @@ int main()
 									system("cls");
 									cout << "Add class " << className << " successfully!" << endl
 										 << endl;
+									noPointerWriteBasicClassListInfoIntoFile(current, current->listClass);
 								}
 								if (choice3 == 2)
 								{
