@@ -46,6 +46,7 @@ int main()
 				if (choice1 == 1)
 				{
 					int check1 = Login(accstudent);
+					cout << endl;
 					int choice2;
 					do
 					{
@@ -65,39 +66,39 @@ int main()
 						}
 						if (choice2 == 4)
 						{
-							cout << "Input school year: ";
 							string yearName;
 							cin.ignore();
+							cout << "Input school year: ";
 							getline(cin, yearName);
+							// lấy node school year để thực hiện các chức năng dưới
 							schoolYear *curYear = getSchoolYear(ls, yearName);
-							if (curYear == nullptr)
+							while (curYear == NULL)
 							{
-								cout << "School year does not exist." << endl
-									 << endl;
+								cout << "School year does not exist!" << endl;
+								cout << "Input again: ";
+								getline(cin, yearName);
+								curYear = getSchoolYear(ls, yearName);
 							}
-							else
+							int semesterName;
+							cout << "Input semester: ";
+							cin >> semesterName;
+							// lấy node semester để thực hiện các chức năng dưới
+							nodeSemester *curSem = getSemester(curYear, semesterName);
+							while (curSem == NULL)
 							{
-								cout << "Input semester: ";
-								int semName;
-								cin >> semName;
-								nodeSemester *curSem = getSemester(curYear, semName);
-								if (curSem == nullptr)
-								{
-									cout << "Semester does not exist." << endl
-										 << endl;
-								}
-								else
-								{
-									system("cls");
-									viewProfileWhenViewingScoreboard(ls, check1);
-									cout << endl
-										 << endl;
-									viewStudentScoreboard2(ls, check1, curYear, curSem);
-									cout << endl
-										 << endl
-										 << endl;
-								}
+								cout << "Semester does not exist!" << endl;
+								cout << "Input again: ";
+								cin >> semesterName;
+								curSem = getSemester(curYear, semesterName);
 							}
+
+							system("cls");
+							viewProfileWhenViewingScoreboard(ls, check1);
+							cout << endl;
+							viewStudentScoreboard2(ls, check1, curYear, curSem);
+							cout << endl
+								 << endl
+								 << endl;
 						}
 						if (choice2 == 1)
 						{
@@ -127,8 +128,8 @@ int main()
 							schoolYear *current = getSchoolYear(ls, yearName);
 							while (current == NULL)
 							{
-								cout << "School year isn't exited" << endl;
-								cout << "Input again";
+								cout << "School year does not exist!" << endl;
+								cout << "Input again: ";
 								getline(cin, yearName);
 								current = getSchoolYear(ls, yearName);
 							}
@@ -139,12 +140,12 @@ int main()
 							nodeSemester *curSemester = getSemester(current, semesterName);
 							while (curSemester == NULL)
 							{
-								cout << "Semester isn't exited" << endl;
-								cout << "Input again";
+								cout << "Semester does not exist!" << endl;
+								cout << "Input again: ";
 								cin >> semesterName;
 								curSemester = getSemester(current, semesterName);
 							}
-							
+
 							viewListOfCoursesForStudent(curSemester, check1);
 						}
 						if (choice2 < 0 || choice2 > 5)
@@ -232,8 +233,8 @@ int main()
 							schoolYear *current = getSchoolYear(ls, yearName);
 							while (current == NULL)
 							{
-								cout << "School year isn't exited" << endl;
-								cout << "Input again";
+								cout << "School year does not exist!" << endl;
+								cout << "Input again: ";
 								getline(cin, yearName);
 								current = getSchoolYear(ls, yearName);
 							}
@@ -395,8 +396,8 @@ int main()
 									nodeSemester *curSemester = getSemester(current, semesterName);
 									while (curSemester == NULL)
 									{
-										cout << "Semester isn't exited" << endl;
-										cout << "Input again";
+										cout << "Semester does not exist!" << endl;
+										cout << "Input again: ";
 										cin >> semesterName;
 										curSemester = getSemester(current, semesterName);
 									}
@@ -442,8 +443,8 @@ int main()
 											nodeCourse *curCourse = getCourse(curSemester, Coursename);
 											while (curCourse == NULL)
 											{
-												cout << "Course isn't exited" << endl;
-												cout << "Input again";
+												cout << "Course does not exist!" << endl;
+												cout << "Input again: ";
 												getline(cin, Coursename);
 												curCourse = getCourse(curSemester, Coursename);
 											}
